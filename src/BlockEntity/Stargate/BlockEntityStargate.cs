@@ -19,7 +19,7 @@ using Vintagestory.Server;
 
 namespace AstriaPorta.Content
 {
-	public abstract class BlockEntityStargate : BlockEntity, IStargate, IBlockEntityInteractable
+	public class BlockEntityStargate : BlockEntity, IStargate, IBlockEntityInteractable
 	{
 		protected const float ROT_DEG_PER_S = 80f;
 
@@ -1256,7 +1256,9 @@ namespace AstriaPorta.Content
 
 		protected void InitializeClient(ICoreClientAPI capi)
 		{
-			InitializeRenderers(capi);
+			// InitializeRenderers(capi);
+			// TODO: move some things to attributes per type
+			InitializeClientMilkyWay(capi);
 			InitializeSounds(capi);
 			UpdateChevronGlow(activeChevrons);
 			UpdateRendererState();
@@ -1270,6 +1272,35 @@ namespace AstriaPorta.Content
 			}
 
 			inventory.SlotModified += OnCamoSlotModified;
+		}
+
+		/// <summary>
+		/// Initializes and registers the main gate renderer. Should also call the
+		/// event horizon renderer initializer
+		/// </summary>
+		/// <remarks>
+		/// client side
+		/// </remarks>
+		/// <param name="capi"></param>
+		protected void InitializeClientMilkyWay(ICoreClientAPI capi)
+		{
+			if (!rendererInitialized || renderer == null)
+			{
+				renderer = new MilkywayGateRenderer(capi, Pos);
+				renderer.orientation = Block.Shape.rotateY;
+				horizonlight = new LightiningPointLight(new Vec3f(0.9f, 0.5f, 0.5f), Pos.AddCopy(0, 3, 0).ToVec3d());
+
+				animUtil.InitializeAnimator("milkyway_chevron_animation", null, null, new Vec3f(0, Block.Shape.rotateY, 0));
+
+				capi.Event.RegisterRenderer(renderer, EnumRenderStage.Opaque);
+				UpdateRendererState();
+				UpdateChevronGlow(activeChevrons);
+			}
+
+			if (!horizonInitialized)
+			{
+				InitializeHorizonRenderer(capi);
+			}
 		}
 
 		protected void OnTickClient(float delta)
@@ -1528,16 +1559,6 @@ namespace AstriaPorta.Content
 
 			return base.OnTesselation(mesher, tessThreadTesselator);
 		}
-
-		/// <summary>
-		/// Initializes and registers the main gate renderer. Should also call the
-		/// event horizon renderer initializer
-		/// </summary>
-		/// <remarks>
-		/// client side
-		/// </remarks>
-		/// <param name="capi"></param>
-		protected abstract void InitializeRenderers(ICoreClientAPI capi);
 
 		/// <summary>
 		/// Initializes the event horizon renderer. Registers the renderer

@@ -70,6 +70,7 @@
       ],
       "offsety": -1,
       "suppressTrees": true,
+      "postPass": true,
       "rockTypeRemapGroup": "astriaportastandard"
     },
     "file": "game:worldgen/structures.json",
@@ -91,6 +92,7 @@
       "buildProtectionName": "Trader",
       "buildProtectionDesc": "Trader Perimeter",
       "suppressTrees": true,
+      "postPass": true,
       "offsety": -1,
       "rockTypeRemapGroup": "astriaportastandard"
     },
@@ -126,7 +128,8 @@
       "schematics": [
         "astriaporta:underground/gates/milkyway/undergroundgate-2"
       ],
-      "rockTypeRemapGroup": "underground"
+      "rockTypeRemapGroup": "underground",
+      "postPass": true
     },
     "file": "game:worldgen/structures.json",
     "side": "Server"
@@ -138,12 +141,13 @@
       "code": "ruinmilkyway",
       "group": "stargatesurface",
       "minGroupDistance": 600,
-      "chance": 0.5,
+      "chance": 0.7,
       "placement": "surface",
       "schematics": [
         "astriaporta:surface/gates/mwruins/*"
       ],
       "rockTypeRemapGroup": "astriaportastandard",
+      "postPass": true,
       "suppressTrees": true,
       "offsety": -1
     },

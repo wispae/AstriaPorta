@@ -106,7 +106,7 @@ namespace AstriaPorta
 			api.RegisterBlockClass("BlockMultiblockStargate", typeof(BlockMultiblockStargate));
 
 			api.RegisterBlockEntityClass("BERandomizerOrientable", typeof(BlockEntityBlockRandomizerOrientable));
-			api.RegisterBlockEntityClass("BEStargateMilkyway", typeof(BlockEntityStargateMilkyway));
+			api.RegisterBlockEntityClass("BEStargate", typeof(BlockEntityStargate));
 			api.RegisterBlockEntityClass("BEDialHomeDevice", typeof(BlockEntityDialHomeDevice));
 
 			api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));

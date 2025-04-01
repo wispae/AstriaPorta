@@ -1,7 +1,7 @@
 ﻿{
   "code": "stargate",
   "class": "BlockStargate",
-  "entityClass": "BEStargateMilkyway",
+  "entityClass": "BEStargate",
   "behaviors": [
     { "name": "HorizontalOrientable" },
     {
