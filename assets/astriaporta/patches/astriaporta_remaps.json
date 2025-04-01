@@ -1,0 +1,12 @@
+﻿[
+  {
+    "op": "add",
+    "path": "/astriaporta:v0.0.1",
+    "value": [
+      "/bir remapq astriaporta:coordinatecartouche-surfacegates astriaporta:coordinatecartouche-surface",
+      "/bir remapq astriaporta:coordinatecartouche-buriedgates astriaporta:coordinatecartouche-underground"
+    ],
+    "file": "game:config/remaps",
+    "side": "server"
+  }
+]

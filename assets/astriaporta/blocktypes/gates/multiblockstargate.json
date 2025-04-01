@@ -1,0 +1,70 @@
+﻿{
+  "code": "multiblockstargate",
+  "class": "BlockMultiblockStargate",
+  "handbook": { "exclude": true },
+  "variantgroups": [
+    {
+      "code": "dx",
+      "states": [ "n3", "n2", "n1", "0", "p1", "p2", "p3" ]
+    },
+    {
+      "code": "dy",
+      "states": [ "0", "p1", "p2", "p3", "p4", "p5", "p6" ]
+    },
+    {
+      "code": "dz",
+      "states": [ "n3", "n2", "n1", "0", "p1", "p2", "p3" ]
+    }
+  ],
+  "shape": { "base": "game:block/basic/nothing" },
+  "drawtype": "json",
+  "sidesolid": { "all": false },
+  "sideopaque": { "all": false },
+  "materialdensity": 11500,
+  "replaceable": 0,
+  "blockMaterial": "Mantle",
+  "lightAbsorption": 0,
+  "drops": [],
+  "skipVariants": [
+    // four corners x
+    "multiblockstargate-n3-0-0",
+    "multiblockstargate-p3-0-0",
+    "multiblockstargate-n3-p6-0",
+    "multiblockstargate-p3-p6-0",
+    // bottom
+    "multiblockstargate-p2-0-0",
+    "multiblockstargate-n2-0-0",
+    // top
+    "multiblockstargate-p2-p6-0",
+    "multiblockstargate-n2-p6-0",
+    // four corners z
+    "multiblockstargate-0-0-n3",
+    "multiblockstargate-0-0-p3",
+    "multiblockstargate-0-p6-n3",
+    "multiblockstargate-0-p6-p3",
+    // bottom
+    "multiblockstargate-0-0-n2",
+    "multiblockstargate-0-0-p2",
+    // top
+    "multiblockstargate-0-p6-n2",
+    "multiblockstargate-0-p6-p2"
+  ],
+  "allowedVariants": [
+    "multiblockstargate-*-0-0",
+    "multiblockstargate-0-0-*",
+    "multiblockstargate-*-p6-0",
+    "multiblockstargate-0-p6-*",
+    "multiblockstargate-n3-*-0",
+    "multiblockstargate-p3-*-0",
+    "multiblockstargate-0-*-n3",
+    "multiblockstargate-0-*-p3",
+    "multiblockstargate-n2-p1-0",
+    "multiblockstargate-p2-p1-0",
+    "multiblockstargate-n2-p5-0",
+    "multiblockstargate-p2-p5-0",
+    "multiblockstargate-0-p1-n2",
+    "multiblockstargate-0-p1-p2",
+    "multiblockstargate-0-p5-n2",
+    "multiblockstargate-0-p5-p2"
+  ]
+}

@@ -1,0 +1,4664 @@
+{
+  "editor": {
+    "collapsedPaths": "Root/glyph_base,Root/glyph_ring/glyph_separator,Root/glyph_back_base,Root/chevron_base/chevron_1/activation_segment,Root/chevron_filler_base,Root/glyph_ring,Root/outer_base,Root/inner_base,Root/glyph_ring_base,Root/chevron_base/chevron_7,Root/chevron_base/chevron_8,Root/chevron_base/chevron_5,Root/chevron_base,Root/chevron_base/chevron_6,Root/chevron_base/chevron_3,Root/chevron_base/chevron_4,Root/glyph_ring/glyph_base,Root/chevron_base/chevron_2,Root/glyph_ring_base/glyph_base,Root/glyph_ring_base/glyph_separator,Root/chevron_base/chevron_9",
+    "allAngles": false,
+    "entityTextureMode": false
+  },
+  "textureWidth": 16,
+  "textureHeight": 16,
+  "textureSizes": {
+  },
+  "textures": {
+    "glyph_sheet": "glyph_sheet"
+  },
+  "elements": [
+    {
+      "name": "glyph_ring_base",
+      "from": [
+        8,
+        8,
+        8
+      ],
+      "to": [
+        8,
+        8,
+        8
+      ],
+      "rotationOrigin": [
+        8,
+        8.3213,
+        8
+      ],
+      "faces": {
+        "east": {
+          "texture": "#glyph_sheet",
+          "uv": [
+            0,
+            0.5,
+            0.125,
+            0.625
+          ],
+          "autoUv": false
+        },
+        "south": {
+          "texture": "#glyph_sheet",
+          "uv": [
+            0.5,
+            0.5,
+            0.625,
+            0.625
+          ],
+          "autoUv": false
+        },
+        "west": {
+          "texture": "#glyph_sheet",
+          "uv": [
+            1,
+            0.5,
+            1.125,
+            0.625
+          ],
+          "autoUv": false
+        },
+        "up": {
+          "texture": "#glyph_sheet",
+          "uv": [
+            0,
+            0,
+            0.125,
+            0.125
+          ],
+          "autoUv": false
+        },
+        "down": {
+          "texture": "#glyph_sheet",
+          "uv": [
+            0.5,
+            0,
+            0.625,
+            0.125
+          ],
+          "autoUv": false
+        }
+      },
+      "children": [
+        {
+          "name": "glyph_base",
+          "from": [
+            0,
+            -14.8631,
+            0
+          ],
+          "to": [
+            0,
+            -14.8631,
+            0
+          ],
+          "rotationOrigin": [
+            0,
+            0,
+            0
+          ],
+          "rotationY": 1.5,
+          "faces": {
+            "east": {
+              "texture": "#null",
+              "uv": [
+                0.5,
+                0.5,
+                1,
+                1
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#null",
+              "uv": [
+                1,
+                0.5,
+                1.5,
+                1
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#null",
+              "uv": [
+                1.5,
+                0.5,
+                2,
+                1
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#null",
+              "uv": [
+                0,
+                0,
+                0.5,
+                0.5
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#null",
+              "uv": [
+                0.5,
+                0,
+                1,
+                0.5
+              ],
+              "autoUv": false
+            }
+          },
+          "children": [
+            {
+              "name": "glyph_1",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    2,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    2,
+                    2
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_2",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -9.23,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    2,
+                    0,
+                    4,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    2,
+                    2
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_3",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -18.46,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    4,
+                    0,
+                    6,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    2,
+                    2
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_4",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -27.69,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    6,
+                    0,
+                    8,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_5",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -36.92,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    8,
+                    0,
+                    10,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_6",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -46.15,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    10,
+                    0,
+                    12,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_7",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -55.38,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    12,
+                    0,
+                    14,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_8",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -64.62,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    2,
+                    2,
+                    4
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    0,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_9",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -73.85,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    2,
+                    2,
+                    4,
+                    4
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    0,
+                    0,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_10",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -83.08,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    4,
+                    2,
+                    6,
+                    4
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_11",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -92.31,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    6,
+                    2,
+                    8,
+                    4
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_12",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -101.54,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    8,
+                    2,
+                    10,
+                    4
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_13",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -110.77,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    10,
+                    2,
+                    12,
+                    4
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_14",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -120,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    12,
+                    2,
+                    14,
+                    4
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_15",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -129.23,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    4,
+                    2,
+                    6
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_16",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -138.46,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    2,
+                    4,
+                    4,
+                    6
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_17",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -147.69,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    4,
+                    4,
+                    6,
+                    6
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_18",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -156.92,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    6,
+                    4,
+                    8,
+                    6
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    0,
+                    0,
+                    -1,
+                    0
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_19",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -166.15,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    8,
+                    4,
+                    10,
+                    6
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    0,
+                    0,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_20",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -175.38,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    10,
+                    4,
+                    12,
+                    6
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    0,
+                    0,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_21",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -184.62,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    12,
+                    4,
+                    14,
+                    6
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    0,
+                    0,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_22",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -193.85,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    6,
+                    2,
+                    8
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    0,
+                    0,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_23",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -203.08,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    2,
+                    6,
+                    4,
+                    8
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    0,
+                    0,
+                    0,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_24",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -212.31,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    4,
+                    6,
+                    6,
+                    8
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_25",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -221.54,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    6,
+                    6,
+                    8,
+                    8
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_26",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -230.77,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    8,
+                    6,
+                    10,
+                    8
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_27",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -240,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    10,
+                    6,
+                    12,
+                    8
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_28",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -249.23,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    12,
+                    6,
+                    14,
+                    8
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_29",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -258.46,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    8,
+                    2,
+                    10
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_30",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -267.69,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    2,
+                    8,
+                    4,
+                    10
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_31",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -276.92,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    4,
+                    8,
+                    6,
+                    10
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_32",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -286.15,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    6,
+                    8,
+                    8,
+                    10
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    0,
+                    1,
+                    1,
+                    0
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_33",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -295.38,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    8,
+                    8,
+                    10,
+                    10
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    0,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_34",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -304.62,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    10,
+                    8,
+                    12,
+                    10
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_35",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -313.85,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    12,
+                    8,
+                    14,
+                    10
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_36",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -323.08,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    10,
+                    2,
+                    12
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_37",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -332.31,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    2,
+                    10,
+                    4,
+                    12
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_38",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -341.54,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    4,
+                    10,
+                    6,
+                    12
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    2,
+                    2
+                  ]
+                }
+              }
+            },
+            {
+              "name": "glyph_39",
+              "from": [
+                -3.7158,
+                55.7365,
+                -0.9289
+              ],
+              "to": [
+                3.7158,
+                63.1681,
+                0.9289
+              ],
+              "rotationOrigin": [
+                0,
+                14.8631,
+                0
+              ],
+              "rotationY": -1.5,
+              "rotationZ": -350.77,
+              "faces": {
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    6,
+                    10,
+                    8,
+                    12
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    2,
+                    2
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "glyph_separator",
+          "from": [
+            0,
+            0,
+            0
+          ],
+          "to": [
+            0,
+            0,
+            0
+          ],
+          "faces": {
+            "east": {
+              "texture": "#glyph_sheet",
+              "uv": [
+                0.125,
+                0.125,
+                0.25,
+                0.25
+              ],
+              "autoUv": false
+            },
+            "south": {
+              "texture": "#glyph_sheet",
+              "uv": [
+                0.25,
+                0.125,
+                0.375,
+                0.25
+              ],
+              "autoUv": false
+            },
+            "west": {
+              "texture": "#glyph_sheet",
+              "uv": [
+                0.375,
+                0.125,
+                0.5,
+                0.25
+              ],
+              "autoUv": false
+            },
+            "up": {
+              "texture": "#glyph_sheet",
+              "uv": [
+                0,
+                0,
+                0.125,
+                0.125
+              ],
+              "autoUv": false
+            },
+            "down": {
+              "texture": "#glyph_sheet",
+              "uv": [
+                0.125,
+                0,
+                0.25,
+                0.125
+              ],
+              "autoUv": false
+            }
+          },
+          "children": [
+            {
+              "name": "separator_1",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -4.62,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    2,
+                    2,
+                    1
+                  ]
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    2,
+                    2,
+                    1
+                  ]
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    2,
+                    2
+                  ]
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false,
+                  "windMode": [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "windData": [
+                    1,
+                    1,
+                    2,
+                    2
+                  ]
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_2",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -13.85,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_3",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -23.08,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_4",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -32.31,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_5",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -41.54,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_6",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -50.77,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_7",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -60,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_8",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -69.23,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_9",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -78.46,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_10",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -87.69,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_11",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -96.92,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_12",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -106.15,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_13",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -115.38,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_14",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -124.62,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_15",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -133.85,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_16",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -143.08,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_17",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -152.31,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_18",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -161.54,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_19",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -170.77,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_20",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -180,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_21",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -189.23,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_22",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -198.46,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_23",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -207.69,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_24",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -216.92,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_25",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -226.15,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_26",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -235.38,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_27",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -244.62,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_28",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -253.85,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_29",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -263.08,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_30",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -272.31,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_31",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -281.54,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_32",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -290.77,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_33",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -300,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_34",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -309.23,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_35",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -318.46,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_36",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -327.69,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_37",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -336.92,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_38",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -346.15,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            },
+            {
+              "name": "separator_39",
+              "from": [
+                -0.5574,
+                40.8735,
+                0.5574
+              ],
+              "to": [
+                0.5574,
+                48.305,
+                1.3005
+              ],
+              "rotationOrigin": [
+                0,
+                0,
+                0.5574
+              ],
+              "rotationZ": -355.38,
+              "faces": {
+                "north": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "east": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "south": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "west": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    14,
+                    0,
+                    14.4,
+                    2
+                  ],
+                  "autoUv": false
+                },
+                "up": {
+                  "texture": "#glyph_sheet",
+                  "uv": [
+                    0,
+                    0,
+                    0.5,
+                    0.375
+                  ],
+                  "autoUv": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

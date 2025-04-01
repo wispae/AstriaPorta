@@ -1,0 +1,183 @@
+[
+  {
+    "op": "add",
+    "path": "/rocktypeRemapGroups/astriaportastandard",
+    "value": {
+      "cobblestone-granite": "cobblestone-{rock}",
+      "cobblestoneslab-granite-down-free": "cobblestoneslab-{rock}-down-free",
+      "cobblestonestairs-granite-up-south-free": "cobblestonestairs-{rock}-up-south-free",
+      "cobblestonestairs-granite-up-north-free": "cobblestonestairs-{rock}-up-north-free",
+      "cobblestonestairs-granite-up-west-free": "cobblestonestairs-{rock}-up-west-free",
+      "cobblestonestairs-granite-up-east-free": "cobblestonestairs-{rock}-up-east-free",
+      "rock-granite": "rock-{rock}",
+      "crackedrock-granite": "rock-{rock}",
+      "gravel-granite": "gravel-{rock}",
+      "sand-granite": "sand-{rock}",
+      "stonebricks-granite": "stonebricks-{rock}",
+      "agedstonebricks-granite": "agedstonebricks-{rock}",
+      "crackedstonebricks-granite": "crackedstonebricks-{rock}",
+      "cobblestonestairs-granite-down-south-free": "cobblestonestairs-{rock}-down-south-free",
+      "cobblestonestairs-granite-down-north-free": "cobblestonestairs-{rock}-down-north-free",
+      "cobblestonestairs-granite-down-west-free": "cobblestonestairs-{rock}-down-west-free",
+      "cobblestonestairs-granite-down-east-free": "cobblestonestairs-{rock}-down-east-free",
+      "cobbleskull-granite": "cobbleskull-{rock}",
+      "cobblestoneslab-granite-up-free": "cobblestoneslab-{rock}-up-free",
+      "loosestones-granite-free": "loosestones-{rock}-free",
+      "cobblestoneslab-granite-east-free": "cobblestoneslab-{rock}-east-free",
+      "cobblestoneslab-granite-south-free": "cobblestoneslab-{rock}-south-free",
+      "looseflints-granite-free": "looseflints-{rock}-free",
+      "cobblestoneslab-granite-west-free": "cobblestoneslab-{rock}-west-free",
+      "cobblestoneslab-granite-north-free": "cobblestoneslab-{rock}-north-free",
+      "polishedrockslab-granite-west-free": "polishedrockslab-{rock}-west-free",
+      "polishedrockslab-granite-east-free": "polishedrockslab-{rock}-east-free",
+      "polishedrockslab-granite-down-free": "polishedrockslab-{rock}-down-free",
+      "polishedrockslab-granite-south-free": "polishedrockslab-{rock}-south-free",
+      "polishedrockslab-granite-north-free": "polishedrockslab-{rock}-north-free",
+      "stonebrickstairs-granite-down-north-free": "stonebrickstairs-{rock}-down-north-free",
+      "stonebrickstairs-granite-down-south-free": "stonebrickstairs-{rock}-down-south-free",
+      "stonebrickslab-granite-north-free": "stonebrickslab-{rock}-north-free",
+      "stonebrickstairs-granite-down-west-free": "stonebrickstairs-{rock}-down-west-free",
+      "rockpolished-granite": "rockpolished-{rock}",
+      "stonebrickslab-granite-up-free": "stonebrickslab-{rock}-up-free",
+      "stonebrickstairs-granite-down-east-free": "stonebrickstairs-{rock}-down-east-free",
+      "stonebrickstairs-granite-up-south-free": "stonebrickstairs-{rock}-up-south-free",
+      "stonebrickslab-granite-east-free": "stonebrickslab-{rock}-east-free",
+      "drystone-granite": "drystone-{rock}",
+      "polishedrockold-full-granite": "polishedrockold-full-{rock}",
+      "polishedrockold-cobbled-granite": "polishedrockold-cobbled-{rock}",
+      "looseboulders-granite-free": "looseboulders-{rock}-free",
+      "stalagsection-granite-04": "stalagsection-{rock}-04",
+      "stalagsection-granite-06": "stalagsection-{rock}-06",
+      "stalagsection-granite-08": "stalagsection-{rock}-08",
+      "stalagsection-granite-10": "stalagsection-{rock}-10",
+      "stalagsection-granite-12": "stalagsection-{rock}-12",
+      "stalagsection-granite-14": "stalagsection-{rock}-14"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "surfacemilkyway",
+      "group": "stargatesurface",
+      "minGroupDistance": 600,
+      "chance": 10,
+      "placement": "surface",
+      "schematics": [
+        "astriaporta:surface/gates/milkyway/*"
+      ],
+      "offsety": -1,
+      "suppressTrees": true,
+      "rockTypeRemapGroup": "astriaportastandard"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "tradergatessurface",
+      "chance": 1,
+      "group": "trader",
+      "minGroupDistance": 600,
+      "placement": "surface",
+      "schematics": [
+        "astriaporta:surface/traders/*"
+      ],
+      "buildProtected": true,
+      "buildProtectionName": "Trader",
+      "buildProtectionDesc": "Trader Perimeter",
+      "suppressTrees": true,
+      "offsety": -1,
+      "rockTypeRemapGroup": "astriaportastandard"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "undergroundmilkyway",
+      "group": "stargateunderground",
+      "minGroupDistance": 600,
+      "chance": 1,
+      "placement": "underground",
+      "schematics": [
+        "astriaporta:underground/gates/milkyway/undergroundgate-1"
+      ],
+      "rockTypeRemapGroup": "underground"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "undergroundmilkywayrare",
+      "group": "stargateunderground",
+      "minGroupDistance": 600,
+      "chance": 0.1,
+      "placement": "underground",
+      "schematics": [
+        "astriaporta:underground/gates/milkyway/undergroundgate-2"
+      ],
+      "rockTypeRemapGroup": "underground"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "ruinmilkyway",
+      "group": "stargatesurface",
+      "minGroupDistance": 600,
+      "chance": 0.5,
+      "placement": "surface",
+      "schematics": [
+        "astriaporta:surface/gates/mwruins/*"
+      ],
+      "rockTypeRemapGroup": "astriaportastandard",
+      "suppressTrees": true,
+      "offsety": -1
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "ancientstudy",
+      "chance": 50,
+      "placement": "underground",
+      "schematics": [
+        "astriaporta:underground/ancients/*"
+      ],
+      "rockTypeRemapGroup": "underground"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "asgarddecoration",
+      "chance": 0.01,
+      "placement": "surface",
+      "schematics": [
+        "astriaporta:surface/asgard/decoration/*"
+      ],
+      "rockTypeRemapGroup": "standard"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  }
+]

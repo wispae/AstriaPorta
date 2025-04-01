@@ -1,0 +1,141 @@
+﻿{
+  "code": "coordinatecartouche",
+  "class": "ItemCartoucheLocator",
+  "behaviors": [
+    { "name": "GateAddressHolder" }
+  ],
+  "maxstacksize": 1,
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [ "mwruinrandom", "surface", "underground" ]
+    }
+  ],
+  "attributes": {
+    "stargateLocatorPropsbyType": {
+      "*-mwruinrandom": {
+        "schematics": [
+          {
+            "schematic": "surfacemilkyway",
+            "weight": 6
+          },
+          {
+            "schematic": "undergroundmilkyway",
+            "weight": 3
+          },
+          {
+            "schematic": "undergroundmilkywayrare",
+            "weight": 1
+          },
+          {
+            "schematic": "ruinmilkyway",
+            "weight": 1
+          }
+        ]
+      },
+      "*-surface": {
+        "schematics": [
+          {
+            "schematic": "surfacemilkyway",
+            "weight": 1
+          }
+        ]
+      },
+      "*-underground": {
+        "schematics": [
+          {
+            "schematic": "undergroundmilkyway",
+            "weight": 1
+          }
+        ]
+      }
+    },
+    "handbook": {
+      "groupBy": [ "coordinatecartouche-*" ]
+    }
+  },
+  "shape": { "base": "item/utility/cartouche" },
+  "textures": {
+    "cartouche_sandstone": { "base": "item/utility/cartouche_sandstone" },
+    "sandstone3": { "base": "game:block/stone/rock/sandstone3" }
+  },
+  "creativeinventory": {
+    "general": [ "*-mwruinrandom", "*-surface", "*-underground" ],
+    "astriaporta": [ "*-mwruinrandom", "*-surface", "*-underground" ]
+  },
+  "guiTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 13,
+      "y": -39,
+      "z": -163
+    },
+    "origin": {
+      "x": 0.43,
+      "y": 0.57,
+      "z": 0.46
+    },
+    "scaleXyz": {
+      "x": -1.3,
+      "y": 1.3,
+      "z": 1.3
+    }
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": -0.1,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 3,
+      "y": 3,
+      "z": 8
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.02,
+      "z": 0.5
+    },
+    "scale": 1.36
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": -65,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "scale": 1.62
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": -1.3,
+      "y": -0.7,
+      "z": -1.2
+    },
+    "rotation": {
+      "x": -57,
+      "y": -165,
+      "z": 92
+    },
+    "origin": {
+      "x": 0.4,
+      "y": 0.2,
+      "z": 0.4
+    }
+  }
+}

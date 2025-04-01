@@ -1,0 +1,13 @@
+﻿{
+	"code": "debugtablet",
+	"class": "ItemStargateDebugTablet",
+	"attributes": {
+		"handbook": {
+			"exclude": true
+		}
+	},
+	"maxstacksize": 1,
+	"texture": { "base": "item/utility/debug_tablet" },
+	"creativeinventory": { "astriaporta": [ "*" ] },
+	"materialDensity": 600
+}

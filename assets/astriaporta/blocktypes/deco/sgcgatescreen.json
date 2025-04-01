@@ -1,0 +1,70 @@
+﻿{
+  "code": "sgcgatedisplay",
+  "behaviors": [
+    { "name": "HorizontalOrientable" }
+  ],
+  "variantgroups": [
+    {
+      "code": "side",
+      "loadFromProperties": "abstract/horizontalorientation"
+    }
+  ],
+  "creativeinventory": {
+    "general": [ "*-north" ],
+    "decorative": [ "*-north" ],
+    "astriaporta": [ "*-north" ]
+  },
+  "drawtype": "json",
+  "shapebytype": {
+    "*-north": {
+      "base": "block/deco/sgc_gate_screen",
+      "rotateY": 90
+    },
+    "*-east": {
+      "base": "block/deco/sgc_gate_screen",
+      "rotateY": 0
+    },
+    "*-south": {
+      "base": "block/deco/sgc_gate_screen",
+      "rotateY": 270
+    },
+    "*-west": {
+      "base": "block/deco/sgc_gate_screen",
+      "rotateY": 180
+    }
+  },
+  "sidesolid": {
+    "all": false
+  },
+  "sideopaque": {
+    "all": false
+  },
+  "guiTransform": {
+    "rotation": {
+      "x": -22.6,
+      "y": -135,
+      "z": 0
+    }
+  },
+  "tpHandTransform": {
+    "rotation": {
+      "x": -45,
+      "y": -180,
+      "z": 90
+    }
+  },
+  "selectionBox": {
+    "x1": 0.125,
+    "y1": 0,
+    "z1": 0.1686,
+    "x2": 0.9002,
+    "y2": 0.8125,
+    "z2": 0.8251
+  },
+  "rainPermeable": true,
+  "lightAbsorption": 0,
+  "resistance": 1,
+  "materialdensity": 11500,
+  "replaceable": 90,
+  "blockMaterial": "Metal"
+}

@@ -1,0 +1,71 @@
+{
+  // === BASE GAME ===
+  "game:tapestry-destiny*": "Destiny",
+  "game:tapestry-astria-porta*": "Stargate",
+  "game:tabname-astriaporta": "Astria Porta",
+
+  // === ASTRIA PORTA ===
+
+  // == HANDBOOK ==
+  "modmechanicinfo-stargates-01": "",
+  "modmechanicinfo-stargates-01-title": "Stargates",
+  "modmechanicinfo-stargates-01-text": "<strong>The Stargate System</strong><br><br>The land has been dotted with strange constructs that have existed for as long as can be remembered. These metal rings bearing 9 chevrons are inscribed with a set of strange symbols.<br><br>It is said that in a time long ago, they were used by the people that made them as gateways, the rings connecting to one another to allow travel between any two points. The rings seem to be always accompanied by pedestals bearing the same symbols that are present on the structures.<br><br><strong>Travel the land, brave Seraph</strong><br>The stargates are devices found around the world that allow travelers to connect to any other stargate in the world. Opening a connection between two gates allows for the instantaneous transportation of matter between them. Though keep in mind, the matter stream is only capable of traveling in one direction, from the gate that started the connection (the <i>dialing gate</i>), to the other one (the <i>receiving gate</i>).<br>Every gate has a unique address associated with it, based on the position in the world. You can manually dial a gate address using the interface in the DHD (the <i>Dial Home Device</i>), or <hk>shift</hk>-<hk>rightmouse</hk>-click the DHD holding parchment with an address. The gate will start rotating to each symbol in the address, locking a chevron every time a glyph is reached.<br>The gate will shut down on its own after a while, or it can be closed manually by <hk>shift</hk>-<hk>rightmouse</hk>-clicking the DHD, or through the interface.<br><br><strong>Collecting stargate addresses</strong><br>One way of getting new stargate addresses is to write down the addresses of gates you find in the world. You can <hk>shift</hk>-rightclick on a gate with a piece of parchment to copy the address. It is also possible to find ancient cartouches in some ruins. These carved stone tablets lead to a gate some distance away. There have also been rumors of some traders finding these tablets on their travels, maybe they would be willing to sell them?<br>You can hold the item in your hand, and then <hk>rightmouse</hk>-click to generate a new address. Take care to keep the cartouche in your inventory until an address has been found!<br>Also, it is technically possible to start randomly dialing gate addresses. Though beware, you may spend a very long time searching without ever finding a random gate!<br><br>One final note; throughout the ages, some gates seem to have lost their DHD, making them unable to dial out to another gate. When traveling to an unkown position, be prepared for a journey!",
+
+  "modmechanicinfo-addresses-01": "",
+  "modmechanicinfo-addresses-01-title": "Stargate addresses",
+  "modmechanicinfo-addresses-01-text": "<strong>Stargate Addresses</strong><br><br>In order to connect to another stargate, you will need to know the address of that gate. Gate addresses are made up of up to nine symbols, although only the first seven are currently in use. The final two symbols are reserved for future inter-dimensional travel and can be ignored.<br>Gate addresses are assigned to each gate based on the position of the chunk they are in.<br><br><strong>Dialing the gate</strong><br>In order to dial the gate, a <a href=\"handbook://astriaporta:block-dialhomedevice-milkyway-north\">DHD</a> is required to dial a gate. While most stargates come with a DHD, some gates have lost theirs over time. Luckily, it is possible to move the DHD to other gates, although this requires at least an iron pickaxe.<br><br>You can <hk>shift</hk>-<hk>rightmouse</hk>-click on the DHD with an <a href=\"astriaporta:item-addressnote\">address note</a> or <a href=\"astriaporta:item-coordinatecartouche-mwruinrandom\">cartouche</a> to immediately start dialing the address on the item.<br>Alternatively, you can <hk>rightmouse</hk>-click the DHD to open the interface. Here you can manually enter an address. When the last two symbols are both zero it is allowed to leave those out, using only seven symbols.<br><br>A stargate's address can be found in the block's info at the top of the screen, and can be copied by <hk>rightmouse</hk>-clicking on the gate with a piece of parchment.",
+
+  "astriaporta:block-handbooktitle-astriaporta:stargate-milkyway-*": "About:",
+  "astriaporta:block-handbooktext-astriaporta:stargate-milkyway-*": "The stargates are devices created by an unknown people, in a time long forgotten. They allow users to travel instantly between any two gates.<br><br>But beware, the vortex created by the formation of the wormhole annihilates all matter in its way, which includes you!<br><br>See the <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Stargate System</a> section for more info.",
+  "astriaporta:block-handbooktitle-astriaporta:dialhomedevice-milkyway-*": "About:",
+  "astriaporta:block-handbooktext-astriaporta:dialhomedevice-milkyway-*": "The Dial Home Device, or DHD, is a device that is often found accompanying stargates. Their main purpose is to act as an interface to the stargate, allowing users to input addresses, and to close the connection.<br><br>See the <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Stargate System</a> section for more info.",
+  "astriaporta:item-handbooktext-astriaporta:coordinatecartouche-*": "Hold and <hk >rightmouse</hk>-click to locate an unknown stargate",
+
+  // == BLOCKS ==
+  "block-stargate-milkyway-*": "Stargate (Milkyway)",
+  "block-stargate-pegasus-*": "Stargate (Pegasus)",
+  "block-stargate-destiny-*": "Stargate (Destiny)",
+  "blockhelp-stargate-copyaddress": "Copy address",
+  "blockhelp-stargate-open-camouflage": "Open camouflage inventory",
+  "blockhelp-stargate-copy-address": "Copy address",
+  "stargate-blockinfo-dialingoutgoing": "Dialing address: ",
+  "stargate-blockinfo-dialingincoming": "Being dialed by remote gate",
+  "stargate-blockinfo-connectedoutgoing": "Outgoing wormhole",
+  "stargate-blockinfo-connectedincoming": "Incoming wormhole",
+  "stargate-blockinfo-obstructed": "<font color=\"red\">Event horizon obstructed</font>",
+
+  "block-dialhomedevice-milkyway-*": "DHD (Milkyway)",
+  "block-dialhomedevice-pegasus-*": "DHD (Pegasus)",
+
+  "block-sgcgatedisplay-*": "SGC gate activity monitor",
+
+  "block-randomizerorientable-normal-*": "Orientable Block Randomizer",
+
+  // == ITEMS ==
+  "item-addressnote": "Stargate address note",
+  "itemdesc-addressnote": "A stargate address written down on a piece of paper",
+  "item-coordinatecartouche-*": "Address Cartouche",
+  "itemdesc-coordinatecartouche-*": "A stone tablet with a strange sequence of symbols",
+  "itemhelp-cartouche-generate": "<hk>rightmouse</hk>: generate address",
+
+  "item-debugtablet": "Stargate Debug Tablet",
+  "debugtabletmodename-showgateiris": "Show gate iris",
+  "debugtabletmodename-showgatevortex": "Show gate vortex",
+  "debugtabletmodename-fillgateiris": "Fill gate iris",
+  "debugtabletmodename-fillgatevortex": "Fill gate vortex",
+  "debugtabletmodename-checkirisstate": "Check gate iris state",
+
+  // == OTHER ==
+  "astriaporta-cartouche-unlinked": "Address not yet generated",
+  "astriaporta-cartouche-generating": "Searching for stargate...",
+  "astriaporta-no-address-associated": "No address found",
+  "astriaporta-dhd-no-gate-linked": "No gate linked",
+  "astriaporta-cartouche-failed": "Failed to locate gate",
+
+  "blockhelp-dhd-notedial": "Dial address on note",
+  "blockhelp-dhd-dial": "Dial Stargate",
+  "blockhelp-dhd-close-gate": "Close stargate",
+  "blockhelp-dhd-open-ui": "Open DHD",
+
+  "DhdGuiTitleText": "Dial Home Device"
+}

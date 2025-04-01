@@ -1,0 +1,58 @@
+﻿{
+  "code": "randomizerorientable",
+  "class": "BlockRandomizerOrientable",
+  "entityClass": "BERandomizerOrientable",
+  "attributes": {
+    "handbook": {
+      "exclude": true
+    }
+  },
+  "behaviors": [
+    { "name": "HorizontalOrientable" }
+  ],
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [ "normal" ]
+    },
+    {
+      "code": "side",
+      "loadFromProperties": "abstract/horizontalorientation"
+    }
+  ],
+  "drawtype": "json",
+  "textures": {
+    "all": { "base": "game:block/fire-pink" }
+  },
+  "sidesolid": {
+    "all": true,
+    "down": false
+  },
+  "creativeinventory": {
+    "general": [ "*-north" ],
+    "meta": [ "*-north" ],
+    "astriaporta": [ "*-north" ]
+  },
+  "shapebytype": {
+    "*-north": {
+      "base": "game:block/basic/cube",
+      "rotateY": 90
+    },
+    "*-west": {
+      "base": "game:block/basic/cube",
+      "rotateY": 180
+    },
+    "*-south": {
+      "base": "game:block/basic/cube",
+      "rotateY": 270
+    },
+    "*-east": {
+      "base": "game:block/basic/cube",
+      "rotateY": 0
+    }
+  },
+  "blockmaterial": "Stone",
+  "replaceable": 900,
+  "lightAbsorption": 0,
+  "resistance": 1
+}

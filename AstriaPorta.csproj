@@ -1,0 +1,106 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>bin\$(Configuration)\Mods\mod</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="protobuf-net">
+      <HintPath>$(VINTAGE_STORY)\Lib\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="VintagestoryAPI">
+      <HintPath>$(VINTAGE_STORY)/VintagestoryAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VSSurvivalMod">
+      <HintPath>$(VINTAGE_STORY)/Mods/VSSurvivalMod.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VSEssentials">
+      <HintPath>$(VINTAGE_STORY)/Mods/VSEssentials.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VSCreativeMod">
+      <HintPath>$(VINTAGE_STORY)/Mods/VSCreativeMod.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VintagestoryLib">
+      <HintPath>$(VINTAGE_STORY)/VintagestoryLib.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+<ItemGroup>
+  <Content Include="assets\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </Content>
+  <Compile Remove="src\BlockEntity\StargateNewOld\**" />
+  <Compile Remove="src\BlockEntity\StargateOld\**" />
+  <EmbeddedResource Remove="src\BlockEntity\StargateNewOld\**" />
+  <EmbeddedResource Remove="src\BlockEntity\StargateOld\**" />
+  <None Remove="src\BlockEntity\StargateNewOld\**" />
+  <None Remove="src\BlockEntity\StargateOld\**" />
+  <None Remove="assets\astriaporta\blocktypes\deco\cloth\tapestry.json" />
+  <None Remove="assets\astriaporta\blocktypes\deco\sgcgatescreen.json" />
+  <None Remove="assets\astriaporta\blocktypes\dhd\dialhomedevice.json" />
+  <None Remove="assets\astriaporta\blocktypes\gates\multiblockstargate.json" />
+  <None Remove="assets\astriaporta\blocktypes\gates\stargate.json" />
+  <None Remove="assets\astriaporta\blocktypes\meta\randomizerorientable.json" />
+  <None Remove="assets\astriaporta\config\animatedtextures.json" />
+  <None Remove="assets\astriaporta\config\creativetabs.json" />
+  <None Remove="assets\astriaporta\config\handbook\stargates.json" />
+  <None Remove="assets\astriaporta\config\handbook\stargate_addresses.json" />
+  <None Remove="assets\astriaporta\config\worldconfig.json" />
+  <None Remove="assets\astriaporta\itemtypes\utility\addressnote.json" />
+  <None Remove="assets\astriaporta\itemtypes\utility\cartouche.json" />
+  <None Remove="assets\astriaporta\itemtypes\utility\gatedebugtablet.json" />
+  <None Remove="assets\astriaporta\patches\astriaporta_remaps.json" />
+  <None Remove="assets\astriaporta\patches\astriaporta_traders.json" />
+  <None Remove="assets\astriaporta\shaders\eventhorizon.fsh" />
+  <None Remove="assets\astriaporta\shaders\eventhorizon.vsh" />
+  <None Remove="assets\astriaporta\shapes\block\deco\sgc_gate_screen.json" />
+  <None Remove="assets\astriaporta\shapes\block\dhd\dhd_milkyway_base.json" />
+  <None Remove="assets\astriaporta\shapes\block\gates\milkyway_base.json" />
+  <None Remove="assets\astriaporta\shapes\block\gates\milkyway_chevron.json" />
+  <None Remove="assets\astriaporta\shapes\block\gates\milkyway_ring.json" />
+  <None Remove="assets\astriaporta\textures\animated\block\deco\sgc_displayglow_animated.png" />
+  <None Remove="assets\astriaporta\textures\block\deco\sgc_gate_screen.png" />
+  <None Remove="assets\astriaporta\textures\dhd\dhd_milkyway_sheet.png" />
+  <None Remove="assets\astriaporta\textures\gates\milkyway_sheet.png" />
+  <None Remove="assets\astriaporta\textures\item\utility\address_note.png" />
+  <None Remove="assets\astriaporta\textures\item\utility\debug_tablet.png" />
+  <None Remove="assets\astriaporta\worldgen\astriaporta_structures.json" />
+  <None Remove="assets\astriaporta\worldgen\schematics\surface\gates\milkyway\surfacegate-1.json" />
+  <None Remove="assets\astriaporta\worldgen\schematics\surface\gates\milkyway\surfacegate-2.json" />
+  <None Remove="assets\astriaporta\worldgen\schematics\surface\gates\milkyway\surfacegate-3.json" />
+  <None Remove="assets\astriaporta\worldgen\schematics\surface\gates\mwruins\ruin-p4x639.json" />
+  <None Remove="assets\astriaporta\worldgen\schematics\surface\traders\gatetrader-1.json" />
+  <None Remove="assets\astriaporta\worldgen\schematics\underground\ancients\undergroundstudy-1.json" />
+  <None Remove="assets\astriaporta\worldgen\schematics\underground\ancients\undergroundstudy-2.json" />
+  <None Remove="assets\astriaporta\worldgen\schematics\underground\gates\milkyway\undergroundgate-1.json" />
+  <None Remove="assets\astriaporta\worldgen\schematics\underground\gates\milkyway\undergroundgate-2.json" />
+  <None Remove="assets\game\textures\block\cloth\tapestry\astria-porta-a11.png" />
+  <None Remove="assets\game\textures\block\cloth\tapestry\astria-porta-a12.png" />
+  <None Remove="assets\game\textures\block\cloth\tapestry\astria-porta-a21.png" />
+  <None Remove="assets\game\textures\block\cloth\tapestry\astria-porta-a22.png" />
+  <None Remove="assets\game\textures\block\cloth\tapestry\destiny1.png" />
+  <None Remove="assets\game\textures\block\cloth\tapestry\destiny2.png" />
+  <None Remove="assets\game\textures\icons\worldmap\chevron_at.svg" />
+  <Content Include="modinfo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </Content>
+</ItemGroup>
+
+<ItemGroup>
+  <Folder Include="assets\astriaporta\shapes\item\" />
+</ItemGroup>
+
+<ItemGroup>
+  <None Update="modicon.png">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
+
+</Project>

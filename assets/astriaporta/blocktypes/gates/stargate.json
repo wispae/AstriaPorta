@@ -1,0 +1,135 @@
+﻿{
+  "code": "stargate",
+  "class": "BlockStargate",
+  "entityClass": "BEStargateMilkyway",
+  "behaviors": [
+    { "name": "HorizontalOrientable" },
+    {
+      "name": "MultiblockStargate",
+      "propertiesByType": {
+        "*-north": {
+          "sizex": 7,
+          "sizey": 7,
+          "sizez": 1,
+          "cposition": {
+            "x": 3,
+            "y": 0,
+            "z": 0
+          }
+        },
+        "*-south": {
+          "sizex": 7,
+          "sizey": 7,
+          "sizez": 1,
+          "cposition": {
+            "x": 3,
+            "y": 0,
+            "z": 0
+          }
+        },
+        "*-east": {
+          "sizex": 1,
+          "sizey": 7,
+          "sizez": 7,
+          "cposition": {
+            "x": 0,
+            "y": 0,
+            "z": 3
+          }
+        },
+        "*-west": {
+          "sizex": 1,
+          "sizey": 7,
+          "sizez": 7,
+          "cposition": {
+            "x": 0,
+            "y": 0,
+            "z": 3
+          }
+        }
+      }
+    }
+  ],
+  "attributes": {
+    "handbook": {
+      "groupBy": [ "stargate-*" ]
+    }
+  },
+  "entityBehaviors": [
+    { "name": "Animatable" }
+  ],
+  "variantgroups": [
+    {
+      "code": "gatetype",
+      "states": [ "milkyway" ]
+    },
+    {
+      "code": "side",
+      "loadFromProperties": "abstract/horizontalorientation"
+    }
+  ],
+  "creativeinventory": {
+    "general": [ "*-north" ],
+    "astriaporta": [ "*-north" ]
+  },
+  "drawtype": "json",
+  "shapebytype": {
+    "*-north": {
+      "base": "block/gates/{gatetype}_base",
+      "rotateY": 0
+    },
+    "*-west": {
+      "base": "block/gates/{gatetype}_base",
+      "rotateY": 90
+    },
+    "*-south": {
+      "base": "block/gates/{gatetype}_base",
+      "rotateY": 180
+    },
+    "*-east": {
+      "base": "block/gates/{gatetype}_base",
+      "rotateY": 270
+    }
+  },
+  "texture": { "base": "block/gates/{gatetype}_sheet" },
+  "sidesolid": {
+    "all": false
+  },
+  "sideopaque": {
+    "all": false
+  },
+  "guiTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": -180,
+      "z": 0
+    },
+    "scale": 0.25
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": -11.1,
+      "y": -7.8,
+      "z": -10.1
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": -135
+    },
+    "scale": 0.05
+  },
+  "faceCullMode": "NeverCull",
+  "rainPermeable": true,
+  "lightAbsorption": 0,
+  "resistance": 10,
+  "materialdensity": 11500,
+  "replaceable": 0,
+  "blockMaterial": "Mantle",
+  "requiredMiningTier": 5
+}

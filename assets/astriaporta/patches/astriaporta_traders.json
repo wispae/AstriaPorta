@@ -1,0 +1,40 @@
+﻿[
+  {
+    "op": "add",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "astriaporta:coordinatecartouche-surfacegates",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 1.1,
+        "var": 0.2
+      },
+      "price": {
+        "avg": 15,
+        "var": 5
+      }
+    },
+    "file": "game:config/tradelists/trader-treasurehunter",
+    "side": "server"
+  },
+  {
+    "op": "add",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "astriaporta:sgcgatedisplay-north",
+      "type": "block",
+      "stacksize": 1,
+      "stock": {
+        "avg": 1.1,
+        "var": 0.2
+      },
+      "price": {
+        "avg": 15,
+        "var": 5
+      }
+    },
+    "file": "game:config/tradelists/trader-luxuries",
+    "side": "server"
+  }
+]

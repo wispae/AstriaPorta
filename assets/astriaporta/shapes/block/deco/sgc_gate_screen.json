@@ -1,0 +1,181 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"sgc_display": "block/deco/sgc_gate_screen",
+		"fired": "game:block/clay/flintporcelain/fired"
+	},
+	"elements": [
+		{
+			"name": "model_root",
+			"from": [ 8.0, 0.0, 8.0 ],
+			"to": [ 8.0, 0.0, 8.0 ],
+			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
+			"rotationY": -90.0,
+			"faces": {
+				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"south": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"west": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"up": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"down": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 0.5 ] }
+			},
+			"children": [
+				{
+					"name": "stand_bottom",
+					"from": [ -3.0, 0.0, -2.0 ],
+					"to": [ 3.0, 1.0, 4.0 ],
+					"rotationOrigin": [ 0.0, 0.5, 1.0 ],
+					"faces": {
+						"north": { "texture": "#fired", "uv": [ 0.0, 0.0, 6.0, 1.0 ] },
+						"east": { "texture": "#fired", "uv": [ 0.0, 0.0, 6.0, 1.0 ], "windMode": [-1,-1,-1,-1] },
+						"south": { "texture": "#fired", "uv": [ 0.0, 0.0, 6.0, 1.0 ], "windMode": [-1,-1,-1,-1] },
+						"west": { "texture": "#fired", "uv": [ 0.0, 0.0, 6.0, 1.0 ], "windMode": [-1,-1,-1,-1] },
+						"up": { "texture": "#fired", "uv": [ 0.0, 0.0, 6.0, 6.0 ], "windMode": [-1,-1,-1,-1] },
+						"down": { "texture": "#fired", "uv": [ 0.0, 0.0, 6.0, 6.0 ], "windMode": [-1,-1,-1,-1] }
+					},
+					"children": [
+						{
+							"name": "stand_connector",
+							"from": [ 2.0, 1.0, 2.0 ],
+							"to": [ 4.0, 3.0, 4.0 ],
+							"rotationOrigin": [ 3.0, 2.0, 3.0 ],
+							"faces": {
+								"north": { "texture": "#fired", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
+								"east": { "texture": "#fired", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "windMode": [-1,-1,-1,-1] },
+								"south": { "texture": "#fired", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "windMode": [-1,-1,-1,-1] },
+								"west": { "texture": "#fired", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "windMode": [-1,-1,-1,-1] },
+								"up": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+								"down": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "windMode": [-1,-1,-1,-1], "enabled": false }
+							},
+							"children": [
+								{
+									"name": "crt_base",
+									"from": [ -3.0, 1.5, -3.0 ],
+									"to": [ 5.0, 7.5, 4.0 ],
+									"rotationOrigin": [ 1.0, 1.5, 1.0 ],
+									"rotationX": -5.0,
+									"faces": {
+										"north": { "texture": "#fired", "uv": [ 7.0, 0.0, 15.0, 6.0 ] },
+										"east": { "texture": "#fired", "uv": [ 0.0, 0.0, 7.0, 6.0 ], "windMode": [-1,-1,-1,-1] },
+										"south": { "texture": "#fired", "uv": [ 0.0, 0.0, 8.0, 6.0 ], "windMode": [-1,-1,-1,-1] },
+										"west": { "texture": "#fired", "uv": [ 0.0, 0.0, 7.0, 6.0 ], "windMode": [-1,-1,-1,-1] },
+										"up": { "texture": "#null", "uv": [ 0.0, 0.0, 8.0, 7.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+										"down": { "texture": "#fired", "uv": [ 7.0, 0.0, 15.0, 7.0 ], "windMode": [-1,-1,-1,-1] }
+									}
+								},
+								{
+									"name": "crt_cover",
+									"from": [ -4.0, 1.8, -5.0 ],
+									"to": [ 6.0, 7.8, 6.0 ],
+									"rotationOrigin": [ 1.0, 1.8, 0.0 ],
+									"faces": {
+										"north": { "texture": "#fired", "uv": [ 5.0, 0.0, 15.0, 6.0 ], "windMode": [-1,-1,-1,-1] },
+										"east": { "texture": "#fired", "uv": [ 4.0, 0.0, 15.0, 6.0 ], "windMode": [-1,-1,-1,-1] },
+										"south": { "texture": "#null", "uv": [ 0.0, 0.0, 10.0, 6.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+										"west": { "texture": "#fired", "uv": [ 4.0, 0.0, 15.0, 6.0 ], "windMode": [-1,-1,-1,-1] },
+										"up": { "texture": "#null", "uv": [ 0.0, 0.0, 10.0, 11.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+										"down": { "texture": "#fired", "uv": [ 5.0, 0.0, 15.0, 11.0 ], "windMode": [-1,-1,-1,-1] }
+									},
+									"children": [
+										{
+											"name": "crt_display",
+											"from": [ 0.8, 0.8, 10.6 ],
+											"to": [ 9.2, 9.1, 11.1 ],
+											"rotationOrigin": [ 0.8, 0.8, 10.6 ],
+											"faces": {
+												"north": { "texture": "#null", "uv": [ 0.0, 0.0, 8.0, 8.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+												"east": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 8.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+												"south": { "texture": "#sgc_display", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "glow": 128, "autoUv": false, "windMode": [-1,-1,-1,-1] },
+												"west": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 8.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+												"up": { "texture": "#null", "uv": [ 0.0, 0.0, 8.0, 0.5 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+												"down": { "texture": "#null", "uv": [ 0.0, 0.0, 8.0, 0.5 ], "windMode": [-1,-1,-1,-1], "enabled": false }
+											}
+										},
+										{
+											"name": "crt_displaycover_top",
+											"from": [ 0.8, 9.1, 10.0 ],
+											"to": [ 9.2, 10.1, 11.3 ],
+											"rotationOrigin": [ 0.8, 9.1, 10.0 ],
+											"faces": {
+												"north": { "texture": "#fired", "uv": [ 7.0, 0.0, 15.0, 1.0 ] },
+												"east": { "texture": "#null", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+												"south": { "texture": "#fired", "uv": [ 6.0, 0.0, 14.0, 1.0 ], "windMode": [-1,-1,-1,-1] },
+												"west": { "texture": "#null", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+												"up": { "texture": "#fired", "uv": [ 6.0, 0.0, 14.0, 1.0 ], "windMode": [-1,-1,-1,-1] },
+												"down": { "texture": "#fired", "uv": [ 6.0, 0.0, 14.0, 1.0 ], "windMode": [-1,-1,-1,-1] }
+											}
+										},
+										{
+											"name": "crt_displaycover_left",
+											"from": [ -0.2, -0.2, 10.0 ],
+											"to": [ 0.8, 10.1, 11.3 ],
+											"rotationOrigin": [ -0.2, -0.2, 10.0 ],
+											"faces": {
+												"north": { "texture": "#fired", "uv": [ 0.0, 0.0, 1.0, 10.0 ] },
+												"east": { "texture": "#fired", "uv": [ 0.0, 0.0, 1.0, 10.0 ], "windMode": [-1,-1,-1,-1] },
+												"south": { "texture": "#fired", "uv": [ 5.0, 0.0, 6.0, 10.0 ], "windMode": [-1,-1,-1,-1] },
+												"west": { "texture": "#fired", "uv": [ 0.0, 0.0, 1.0, 10.0 ], "windMode": [-1,-1,-1,-1] },
+												"up": { "texture": "#fired", "uv": [ 7.0, 0.0, 8.0, 1.0 ], "windMode": [-1,-1,-1,-1] },
+												"down": { "texture": "#fired", "uv": [ 6.0, 0.0, 7.0, 1.0 ], "windMode": [-1,-1,-1,-1] }
+											}
+										},
+										{
+											"name": "crt_displaycover_bottom",
+											"from": [ 0.8, -0.2, 10.0 ],
+											"to": [ 9.2, 0.8, 11.3 ],
+											"rotationOrigin": [ 0.8, -0.2, 10.0 ],
+											"faces": {
+												"north": { "texture": "#fired", "uv": [ 0.0, 0.0, 8.0, 1.0 ] },
+												"east": { "texture": "#null", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+												"south": { "texture": "#fired", "uv": [ 6.0, 8.0, 14.0, 9.0 ], "windMode": [-1,-1,-1,-1] },
+												"west": { "texture": "#null", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+												"up": { "texture": "#fired", "uv": [ 0.0, 0.0, 8.0, 1.0 ], "windMode": [-1,-1,-1,-1] },
+												"down": { "texture": "#fired", "uv": [ 0.0, 0.0, 8.0, 1.0 ], "windMode": [-1,-1,-1,-1] }
+											}
+										},
+										{
+											"name": "crt_displaycover_right",
+											"from": [ 9.2, -0.2, 10.0 ],
+											"to": [ 10.2, 10.1, 11.3 ],
+											"rotationOrigin": [ 9.2, -0.2, 10.0 ],
+											"faces": {
+												"north": { "texture": "#fired", "uv": [ 0.0, 0.0, 1.0, 10.0 ] },
+												"east": { "texture": "#fired", "uv": [ 0.0, 0.0, 1.0, 10.0 ], "windMode": [-1,-1,-1,-1] },
+												"south": { "texture": "#fired", "uv": [ 15.0, 0.0, 16.0, 10.0 ], "windMode": [-1,-1,-1,-1] },
+												"west": { "texture": "#fired", "uv": [ 0.0, 0.0, 1.0, 10.0 ], "windMode": [-1,-1,-1,-1] },
+												"up": { "texture": "#fired", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "windMode": [-1,-1,-1,-1] },
+												"down": { "texture": "#fired", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "windMode": [-1,-1,-1,-1] }
+											}
+										}
+									]
+								},
+								{
+									"name": "crt_cover_top",
+									"from": [ -4.0, 7.8, -5.0 ],
+									"to": [ 6.0, 11.8, 6.0 ],
+									"zOffset": 1,
+									"rotationOrigin": [ 1.0, 7.8, 6.0 ],
+									"rotationX": -8.0,
+									"faces": {
+										"north": { "texture": "#fired", "uv": [ 5.0, 0.0, 15.0, 4.0 ], "windMode": [-1,-1,-1,-1] },
+										"east": { "texture": "#fired", "uv": [ 4.0, 0.0, 15.0, 4.0 ], "windMode": [-1,-1,-1,-1] },
+										"south": { "texture": "#null", "uv": [ 0.0, 0.0, 10.0, 4.0 ], "windMode": [-1,-1,-1,-1], "enabled": false },
+										"west": { "texture": "#fired", "uv": [ 4.0, 0.0, 15.0, 4.0 ], "windMode": [-1,-1,-1,-1] },
+										"up": { "texture": "#fired", "uv": [ 5.0, 0.0, 15.0, 11.0 ], "windMode": [-1,-1,-1,-1] },
+										"down": { "texture": "#null", "uv": [ 0.0, 0.0, 10.0, 11.0 ], "windMode": [-1,-1,-1,-1], "enabled": false }
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]}

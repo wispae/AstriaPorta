@@ -1,0 +1,80 @@
+﻿{
+  "code": "dialhomedevice",
+  "class": "BlockDialHomeDevice",
+  "entityClass": "BEDialHomeDevice",
+  "behaviors": [
+    { "name": "HorizontalOrientable" }
+  ],
+  "variantgroups": [
+    {
+      "code": "gatetype",
+      "states": [ "milkyway" ]
+    },
+    {
+      "code": "side",
+      "loadFromProperties": "abstract/horizontalorientation"
+    }
+  ],
+  "attributes": {
+    "handbook": {
+      "groupBy": ["dialhomedevice-*"]
+    }
+  },
+  "creativeinventory": {
+    "general": [ "*-north" ],
+    "astriaporta": [ "*-north" ]
+  },
+  "shapebytype": {
+    "*-north": {
+      "base": "block/dhd/dhd_milkyway_base",
+      "rotateY": 0
+    },
+    "*-west": {
+      "base": "block/dhd/dhd_milkyway_base",
+      "rotateY": 90
+    },
+    "*-south": {
+      "base": "block/dhd/dhd_milkyway_base",
+      "rotateY": 180
+    },
+    "*-east": {
+      "base": "block/dhd/dhd_milkyway_base",
+      "rotateY": 270
+    }
+  },
+  "texture": { "base": "block/dhd/dhd_{gatetype}_sheet" },
+  "sidesolid": {
+    "all": false
+  },
+  "sideopaque": {
+    "all": false
+  },
+  "guiTransform": {
+    "translation": {
+      "x": -2,
+      "y": 5,
+      "z": 0
+    },
+    "rotation": {
+      "x": -22.6,
+      "y": -135,
+      "z": 0
+    },
+    "scale": 0.9
+  },
+  "tpHandTransform": {
+    "rotation": {
+      "x": -45,
+      "y": -180,
+      "z": 90
+    },
+    "scale": 0.28
+  },
+  "blockmaterial": "Mantle",
+  "rainPermeable": true,
+  "lightAbsorption": 1,
+  "resistance": 10,
+  "materialdensity": 11500,
+  "replaceable": 0,
+  "requiredMiningTier": 4
+}

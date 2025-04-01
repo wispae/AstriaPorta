@@ -1,0 +1,15 @@
+﻿{
+  "Animations": [
+    {
+      "AnimationPath": "animated/block/deco/sgc_displayglow_animated",
+      "TargetPath": "block/deco/sgc_gate_screen",
+      "NumColumns": 4,
+      "NumRows": 4,
+      "NumFrames": 12,
+      "SecondsPerFrame": 0.2,
+      "TargetOffsetX": 29,
+      "TargetOffsetY": 24,
+      "Priority": 10
+    }
+  ]
+}

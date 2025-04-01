@@ -1,0 +1,170 @@
+﻿{
+  "code": "astriaportatapestry",
+  "class": "BlockTapestry",
+  "entityClass": "Tapestry",
+  "behaviors": [ { "name": "HorizontalAttachable" } ],
+  "blockMaterial": "Cloth",
+  "attributes": {
+    "handbook": {
+      "exclude": true
+    },
+    "loreChapterIds": {
+      "destiny": -1,
+      "astria-porta-a": -1
+    },
+    "sizes": {
+      "destiny": "1x2",
+      "astria-porta-a": "2x2"
+    }
+  },
+  "variantgroups": [
+    {
+      "code": "side",
+      "loadFromProperties": "abstract/horizontalorientation"
+    }
+  ],
+  "creativeinventoryStacksByType": {
+    "*-north": [
+      {
+        "tabs": [ "general", "astriaporta" ],
+        "stacks": [
+          {
+            "type": "block",
+            "code": "astriaportatapestry-north",
+            "attributes": { "type": "destiny1" }
+          },
+          {
+            "type": "block",
+            "code": "astriaportatapestry-north",
+            "attributes": { "type": "destiny2" }
+          },
+          {
+            "type": "block",
+            "code": "astriaportatapestry-north",
+            "attributes": { "type": "astria-porta-a11" }
+          },
+          {
+            "type": "block",
+            "code": "astriaportatapestry-north",
+            "attributes": { "type": "astria-porta-a12" }
+          },
+          {
+            "type": "block",
+            "code": "astriaportatapestry-north",
+            "attributes": { "type": "astria-porta-a21" }
+          },
+          {
+            "type": "block",
+            "code": "astriaportatapestry-north",
+            "attributes": { "type": "astria-porta-a22" }
+          }
+        ]
+      }
+    ]
+  },
+  "shapebytype": {
+    "*-north": {
+      "base": "game:block/cloth/tapestry",
+      "rotateY": 0
+    },
+    "*-east": {
+      "base": "game:block/cloth/tapestry",
+      "rotateY": 270
+    },
+    "*-south": {
+      "base": "game:block/cloth/tapestry",
+      "rotateY": 180
+    },
+    "*-west": {
+      "base": "game:block/cloth/tapestry",
+      "rotateY": 90
+    }
+  },
+  "shapeinventory": {
+    "base": "game:block/cloth/tapestryinventory"
+  },
+  "sidesolid": {
+    "all": false
+  },
+  "sideopaque": {
+    "all": false
+  },
+  "sideao": { "all": true },
+  "emitsideao": { "all": false },
+  "replaceable": 5001,
+  "lightAbsorption": 0,
+  "resistance": 0.1,
+  "collisionbox": null,
+  "selectionbox": {
+    "x1": 0,
+    "y1": 0,
+    "z1": 0,
+    "x2": 1,
+    "y2": 1,
+    "z2": 0.0625,
+    "rotateYByType": {
+      "*-east": 270,
+      "*-south": 180,
+      "*-west": 90,
+      "*-north": 0
+    }
+  },
+  "sounds": {
+    "place": "block/cloth",
+    "break": "block/cloth",
+    "hit": "block/cloth"
+  },
+  "guiTransform": {
+    "rotate": false,
+    "rotation": {
+      "x": -22.6,
+      "y": 25,
+      "z": 0
+    },
+    "scaleXyz": {
+      "x": -1.39,
+      "y": 1.39,
+      "z": 1.39
+    }
+  },
+  "fpHandTransform": {
+    "rotation": {
+      "x": 0,
+      "y": 91,
+      "z": 0
+    }
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 90,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "scale": 2.75
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": -1.1,
+      "y": -0.69,
+      "z": -1
+    },
+    "rotation": {
+      "x": 0,
+      "y": 12,
+      "z": -25
+    },
+    "scale": 0.43
+  },
+  "rainPermeable": true,
+  "materialDensity": 600
+}

@@ -1,0 +1,42 @@
+{
+  "editor": {
+    "collapsedPaths": "Root/glyph_base,Root/glyph_ring/glyph_separator,Root/glyph_back_base,Root/chevron_base/chevron_1/activation_segment,Root/chevron_filler_base,Root/glyph_ring,Root/outer_base,Root/inner_base,Root/glyph_ring_base,Root/chevron_base/chevron_7,Root/chevron_base/chevron_8,Root/chevron_base/chevron_5,Root/chevron_base/chevron_6,Root/chevron_base/chevron_3,Root/chevron_base/chevron_4,Root/glyph_ring/glyph_base,Root/chevron_base/chevron_2,Root/glyph_ring_base/glyph_base,Root/glyph_ring_base/glyph_separator,Root/chevron_base/chevron_9",
+    "allAngles": false,
+    "entityTextureMode": false
+  },
+  "textureWidth": 16,
+  "textureHeight": 16,
+  "textureSizes": {},
+  "textures": { "glyph_sheet": "glyph_sheet" },
+  "elements": [
+    {
+      "name": "light_2",
+      "from": [ 5.2132, 57.6055, 8.1858 ],
+      "to": [ 10.7868, 61.3213, 9.6721 ],
+      "rotationOrigin": [ 7.0711, 57.6055, 8.1858 ],
+      "faces": {
+        "north": {
+          "texture": "#glyph_sheet",
+          "uv": [ 14.3, 6, 15.7, 7 ],
+          "autoUv": false,
+          "windMode": [ -1, -1, -1, -1 ],
+          "windData": [ 2, 2, 2, 2 ]
+        },
+        "south": {
+          "texture": "#glyph_sheet",
+          "uv": [ 14.3, 3, 15.7, 4 ],
+          "autoUv": false,
+          "windMode": [ -1, -1, -1, -1 ],
+          "windData": [ 2, 2, 2, 2 ]
+        },
+        "up": {
+          "texture": "#glyph_sheet",
+          "uv": [ 14, 2.8, 16, 3.2 ],
+          "autoUv": false,
+          "windMode": [ -1, -1, -1, -1 ],
+          "windData": [ 2, 2, 2, 2 ]
+        }
+      }
+    }
+  ]
+}
