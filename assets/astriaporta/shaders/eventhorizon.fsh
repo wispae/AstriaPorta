@@ -24,10 +24,10 @@ void main()
 	//outGlow = color;
 	float dis = distance(modPos, basePos);
 
-	if (dis <= 0.1) {
-		outColor = mix(color, vec4(1f, 1f, 1f, 1f), min(dis * 6, 1f));
+	if (dis <= 0.1f) {
+		outColor = mix(color, vec4(1.0f, 1.0f, 1.0f, 1.0f), min(dis * 6.0f, 1.0f));
 	} else {
-		outColor = mix(color, vec4(1f, 1f, 1f, 0.9f), min(dis/3, 1f));
+		outColor = mix(color, vec4(1.0f, 1.0f, 1.0f, 0.9f), min(dis/3.0f, 1.0f));
 	}
-	outGlow = vec4(.5f,.5f,.5f,0f);
+	outGlow = vec4(0.5f,0.5f,0.5f,0.0f);
 }
