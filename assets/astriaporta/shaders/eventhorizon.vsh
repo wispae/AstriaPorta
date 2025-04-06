@@ -46,11 +46,11 @@ void main()
 	worldPos.z += normalIn.z * offsetColor.r * tMult * 4.0 * vertexNormalIn.x;
 	worldPos.x += normalIn.x * offsetColor.r * tMult * 4.0 * vertexNormalIn.x;
 
-	if (distance(offsetColor.g - 0.5, 0.0) > .05) {
+	if (distance(offsetColor.g - 0.5, 0.0) > 0.05) {
 		worldPos.x += normalIn.z * (offsetColor.g - 0.5) * tMult * 0.75 * vertexNormalIn.x;
 		worldPos.z += normalIn.x * (offsetColor.g - 0.5) * tMult * 0.75 * vertexNormalIn.x;
 	}
-	if (distance(offsetColor.b - 0.5, 0.0) > .05) {
+	if (distance(offsetColor.b - 0.5, 0.0) > 0.05) {
 		worldPos.y += (offsetColor.b - 0.5) * tMult * 0.75 * vertexNormalIn.x;
 	}
 
