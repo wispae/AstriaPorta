@@ -13,14 +13,6 @@ namespace AstriaPorta.Content
 	{
 		WorldInteraction[] interactions;
 
-		new public int RequiredMiningTier
-		{
-			get
-			{
-				return StargateConfig.Loaded.StargateMiningTier;
-			}
-		}
-
 		public override void OnLoaded(ICoreAPI api)
 		{
 			base.OnLoaded(api);
@@ -80,6 +72,13 @@ namespace AstriaPorta.Content
 		public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer)
 		{
 			return interactions;
+		}
+
+		public override void AddMiningTierInfo(StringBuilder sb)
+		{
+			if (!StargateConfig.Loaded.StargateDestructable) return;
+			RequiredMiningTier = StargateConfig.Loaded.StargateMiningTier;
+			base.AddMiningTierInfo(sb);
 		}
 
 		public override EnumBlockMaterial GetBlockMaterial(IBlockAccessor blockAccessor, BlockPos pos, ItemStack stack = null)

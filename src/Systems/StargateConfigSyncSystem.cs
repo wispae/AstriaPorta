@@ -55,6 +55,7 @@ namespace AstriaPorta.src.Systems
 		private void onPlayerJoined(IServerPlayer player)
 		{
 			Mod.Logger.Notification($"Sending server-side config file to player {player.PlayerName}");
+			StargateConfig config = StargateConfig.Loaded;
 			serverChannel.SendPacket(StargateConfig.Loaded, new IServerPlayer[1] { player });
 		}
 
@@ -77,6 +78,7 @@ namespace AstriaPorta.src.Systems
 		private void onReceivedServerConfig(StargateConfig serverConfig)
 		{
 			Mod.Logger.Notification("Received config file from server, will use that instead");
+			StargateConfig config = StargateConfig.Loaded;
 			StargateConfig.Loaded = serverConfig;
 		}
 	}

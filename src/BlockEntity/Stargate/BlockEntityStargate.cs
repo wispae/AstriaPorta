@@ -1,5 +1,6 @@
 ﻿using AstriaPorta.Config;
 using AstriaPorta.src.Block;
+using AstriaPorta.src.Systems;
 using AstriaPorta.Util;
 using System;
 using System.Collections.Generic;
@@ -167,10 +168,10 @@ namespace AstriaPorta.Content
 
 			if (WillDialSucceed(address))
 			{
-				WorldGateManager.GetInstance().LoadRemoteGate(address, this);
+				StargateManagerSystem.GetInstance(Api).LoadRemoteGate(address, this);
 				if (!isForceLoaded)
 				{
-					WorldGateManager.GetInstance().ForceLoadChunk(Pos);
+					StargateManagerSystem.GetInstance(Api).ForceLoadChunk(Pos);
 					isForceLoaded = true;
 				}
 			}
@@ -232,7 +233,7 @@ namespace AstriaPorta.Content
 
 			if (isForceLoaded)
 			{
-				WorldGateManager.GetInstance().ReleaseChunk(Pos);
+				StargateManagerSystem.GetInstance(Api).ReleaseChunk(Pos);
 				isForceLoaded = false;
 			}
 
@@ -299,7 +300,7 @@ namespace AstriaPorta.Content
 			gateAddress.FromCoordinates(Pos.X, Pos.Y, Pos.Z);
 			if (!registeredToGateManager)
 			{
-				WorldGateManager.GetInstance().RegisterLoadedGate(this);
+				StargateManagerSystem.GetInstance(api).RegisterLoadedGate(this);
 				registeredToGateManager = true;
 			}
 
@@ -355,14 +356,14 @@ namespace AstriaPorta.Content
 
 			if (registeredToGateManager)
 			{
-				WorldGateManager.GetInstance().UnregisterLoadedGate(this);
+				StargateManagerSystem.GetInstance(Api).UnregisterLoadedGate(this);
 				registeredToGateManager = false;
 			}
 
 			if (isForceLoaded)
 			{
 				// TODO: Add to worldgatemanager to release when gate unregisters itself
-				WorldGateManager.GetInstance().ReleaseChunk(Pos);
+				StargateManagerSystem.GetInstance(Api).ReleaseChunk(Pos);
 				isForceLoaded = false;
 			}
 
@@ -439,13 +440,13 @@ namespace AstriaPorta.Content
 		{
 			if (registeredToGateManager)
 			{
-				WorldGateManager.GetInstance().UnregisterLoadedGate(this);
+				StargateManagerSystem.GetInstance(Api).UnregisterLoadedGate(this);
 				registeredToGateManager = false;
 			}
 
 			if (isForceLoaded)
 			{
-				WorldGateManager.GetInstance().ReleaseChunk(Pos);
+				StargateManagerSystem.GetInstance(Api).ReleaseChunk(Pos);
 				isForceLoaded = false;
 			}
 
@@ -733,7 +734,7 @@ namespace AstriaPorta.Content
 
 		protected void InitializeServer(ICoreServerAPI sapi)
 		{
-			WorldGateManager gmInstance = WorldGateManager.GetInstance();
+			StargateManagerSystem gmInstance = StargateManagerSystem.GetInstance(sapi);
 
 			if (!registeredToGateManager)
 			{
@@ -1068,7 +1069,7 @@ namespace AstriaPorta.Content
 
 			if (isForceLoaded)
 			{
-				WorldGateManager.GetInstance().ReleaseChunk(Pos);
+				StargateManagerSystem.GetInstance(Api).ReleaseChunk(Pos);
 				isForceLoaded = false;
 			}
 
@@ -1102,7 +1103,7 @@ namespace AstriaPorta.Content
 			stargateState = EnumStargateState.DialingIncoming;
 			if (!isForceLoaded)
 			{
-				WorldGateManager.GetInstance().RegisterLoadedGate(this);
+				StargateManagerSystem.GetInstance(Api).RegisterLoadedGate(this);
 				isForceLoaded = true;
 			}
 

@@ -6,6 +6,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using AstriaPorta.Content;
 using Vintagestory.API.Config;
+using AstriaPorta.src.Systems;
 
 namespace AstriaPorta.Util
 {
@@ -35,7 +36,7 @@ namespace AstriaPorta.Util
 
         public TextCommandResult RetrieveClosestGate(TextCommandCallingArgs args)
         {
-            WorldGateManager gateManager = WorldGateManager.GetInstance();
+			StargateManagerSystem gateManager = StargateManagerSystem.GetInstance(api);
 
             IPlayer player = args.Caller.Player;
 
@@ -54,7 +55,7 @@ namespace AstriaPorta.Util
 
         public TextCommandResult DisplayGateList(TextCommandCallingArgs args)
         {
-            WorldGateManager gateManager = WorldGateManager.GetInstance();
+			StargateManagerSystem gateManager = StargateManagerSystem.GetInstance(api);
             IPlayer player = args.Caller.Player;
             int gatesPerPage = 5;
 
