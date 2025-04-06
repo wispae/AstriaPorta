@@ -8,6 +8,7 @@ using AstriaPorta.Content;
 using AstriaPorta.Util;
 using AstriaPorta.src.Block;
 using Vintagestory.API.Util;
+using AstriaPorta.Config;
 
 namespace AstriaPorta
 {

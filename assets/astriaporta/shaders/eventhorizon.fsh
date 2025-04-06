@@ -6,8 +6,6 @@ layout(location = 1) out vec4 outGlow;
 
 uniform float tIn;
 
-// uniform sampler2D tex0;
-
 in vec4 color;
 in vec2 uv;
 in vec3 normal;
@@ -18,16 +16,12 @@ in vec4 modPos;
 
 void main()
 {
-	
-	// outColor = color;
-	// outColor = texture(tex0, uv);
-	//outGlow = color;
 	float dis = distance(modPos, basePos);
 
-	if (dis <= 0.1f) {
-		outColor = mix(color, vec4(1.0f, 1.0f, 1.0f, 1.0f), min(dis * 6.0f, 1.0f));
+	if (dis <= 0.1) {
+		outColor = mix(color, vec4(1.0, 1.0, 1.0, 1.0), min(dis * 6.0, 1.0));
 	} else {
-		outColor = mix(color, vec4(1.0f, 1.0f, 1.0f, 0.9f), min(dis/3.0f, 1.0f));
+		outColor = mix(color, vec4(1.0, 1.0, 1.0, 0.9), min(dis/3.0, 1.0));
 	}
-	outGlow = vec4(0.5f,0.5f,0.5f,0.0f);
+	outGlow = vec4(0.5,0.5,0.5,0.0);
 }
