@@ -34,7 +34,10 @@ namespace AstriaPorta.Content
 			this.api = api;
 			this.pos = pos;
 			this.activating = activating;
-			horizonMeshRef = api.Render.UploadMesh(StargateMeshHelper.GenDefaultHorizonMesh(api));
+			// thanks to ImNuts42 for solving the MultiTextureMeshRef problem
+			MeshData mesh = StargateMeshHelper.GenDefaultHorizonMesh(api);
+			horizonMeshRef = api.Render.UploadMesh(mesh);
+			horizonMultiMeshRef = new MultiTextureMeshRef(new MeshRef[] { horizonMeshRef }, mesh.TextureIds);
 			this.texPos = texPos;
 
 			eventHorizonShaderProgram = api.ModLoader.GetModSystem<AstriaPortaModSystem>().eventHorizonShaderProgram;
@@ -97,7 +100,6 @@ namespace AstriaPorta.Content
 
 			IShaderProgram prog = eventHorizonShaderProgram;
 			prog.Use();
-			prog.BindTexture2D("tex0", texPos.atlasTextureId, 0);
 
 			prog.UniformMatrix("viewMatrix", rpi.CameraMatrixOriginf);
 			prog.UniformMatrix("projectionMatrix", rpi.CurrentProjectionMatrix);
@@ -108,7 +110,7 @@ namespace AstriaPorta.Content
 			prog.Uniform("noiseOffset", noiseOffset);
 			prog.Uniform("normalIn", blockFacing.Normalf);
 
-			rpi.RenderMesh(horizonMeshRef);
+			rpi.RenderMultiTextureMesh(horizonMultiMeshRef, "tex0");
 
 			prog.Stop();
 		}
@@ -117,7 +119,8 @@ namespace AstriaPorta.Content
 		{
 			api.Event.UnregisterRenderer(this, EnumRenderStage.Opaque);
 
-			horizonMeshRef?.Dispose();
+			// horizonMeshRef?.Dispose();
+			horizonMultiMeshRef?.Dispose();
 		}
 	}
 }

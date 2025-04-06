@@ -165,7 +165,7 @@ namespace AstriaPorta.Content
 
 			dialingAddress = address;
 
-			if (!WillDialSucceed(address))
+			if (WillDialSucceed(address))
 			{
 				WorldGateManager.GetInstance().LoadRemoteGate(address, this);
 				if (!isForceLoaded)
