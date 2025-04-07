@@ -82,7 +82,7 @@
     "value": {
       "code": "tradergatessurface",
       "chance": 1,
-      "group": "trader",
+      "group": "stargatesurface",
       "minGroupDistance": 600,
       "placement": "surface",
       "schematics": [
