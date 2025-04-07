@@ -156,7 +156,9 @@ namespace AstriaPorta.Content
 				return;
 			}
 
+#if DEBUG
 			Api.Logger.Debug($"Started dial to {address} with coordinates ({address.AddressCoordinates.X},{address.AddressCoordinates.Y},{address.AddressCoordinates.Z})");
+#endif
 
 			if (stargateState != EnumStargateState.Idle)
 			{
@@ -824,7 +826,7 @@ namespace AstriaPorta.Content
 						
 						if (timeOpen > StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway)
 						{
-							Api.Logger.Debug("wormhole has been open for 60s, shutting down connection");
+							Api.Logger.Debug("wormhole has been open for max duration, shutting down connection");
 							TryDisconnect();
 						}
 

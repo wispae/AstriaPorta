@@ -148,7 +148,9 @@ namespace AstriaPorta.src.Systems
 		/// <returns>Whether the gate was registered or not</returns>
 		public bool RegisterLoadedGate(BlockEntityStargate gate)
 		{
+#if DEBUG
 			Mod.Logger.Debug($"Registered gate with address {gate.GateAddress} to manager");
+#endif
 			loadedGates.TryAdd(UnMetaBits(gate.GateAddress.AddressBits), gate.Pos);
 
 			return true;
@@ -160,7 +162,9 @@ namespace AstriaPorta.src.Systems
 		/// <param name="gate"></param>
 		public void UnregisterLoadedGate(BlockEntityStargate gate)
 		{
+#if DEBUG
 			Mod.Logger.Debug($"Unregistered gate with address {gate.GateAddress} to manager");
+#endif
 			loadedGates.Remove(gate.GateAddress.AddressBits);
 		}
 
@@ -280,8 +284,9 @@ namespace AstriaPorta.src.Systems
 					KeepLoaded = true,
 				};
 			}
-
+#if DEBUG
 			Mod.Logger.Debug($"Chunkloaded chunk at pos {blockPos}");
+#endif
 			sapi.WorldManager.LoadChunkColumnPriority(dictKey.X, dictKey.Y, co);
 		}
 
