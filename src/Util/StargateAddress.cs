@@ -234,8 +234,8 @@ namespace AstriaPorta.Util
 
 		public int GetDistanceTo(IStargateAddress remoteAddress)
 		{
-			int deltaX = remoteAddress.SectorOrigin.X - SectorOrigin.X;
-			int deltaZ = remoteAddress.SectorOrigin.Z - SectorOrigin.Z;
+			int deltaX = remoteAddress.AddressCoordinates.X - AddressCoordinates.X;
+			int deltaZ = remoteAddress.AddressCoordinates.Z - AddressCoordinates.Z;
 
 			return (int)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ);
 		}

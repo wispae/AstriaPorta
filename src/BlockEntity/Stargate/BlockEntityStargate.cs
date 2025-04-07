@@ -23,7 +23,7 @@ namespace AstriaPorta.Content
 {
 	public class BlockEntityStargate : BlockEntity, IStargate, IBlockEntityInteractable
 	{
-		protected float ROT_DEG_PER_S = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
+		protected float ROT_DEG_PER_S = 80f;
 
 		protected static Cuboidi vortexOffsetNorth;
 		protected static Cuboidi vortexOffsetEast;
@@ -136,6 +136,8 @@ namespace AstriaPorta.Content
 		public BlockEntityStargate()
 		{
 			InitializeInventory();
+
+			ROT_DEG_PER_S = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
 		}
 
 		/// <summary>
@@ -147,6 +149,7 @@ namespace AstriaPorta.Content
 		/// <param name="dialType"></param>
 		public void TryDial(StargateAddress address, EnumDialSpeed dialType)
 		{
+			ROT_DEG_PER_S = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
 			if (Api.Side == EnumAppSide.Client)
 			{
 				DialServerGate(address, dialType);
