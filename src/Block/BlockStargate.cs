@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstriaPorta.Config;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API.Client;
@@ -73,8 +74,16 @@ namespace AstriaPorta.Content
 			return interactions;
 		}
 
+		public override void AddMiningTierInfo(StringBuilder sb)
+		{
+			if (!StargateConfig.Loaded.StargateDestructable) return;
+			RequiredMiningTier = StargateConfig.Loaded.StargateMiningTier;
+			base.AddMiningTierInfo(sb);
+		}
+
 		public override EnumBlockMaterial GetBlockMaterial(IBlockAccessor blockAccessor, BlockPos pos, ItemStack stack = null)
 		{
+			if (!StargateConfig.Loaded.StargateDestructable) return EnumBlockMaterial.Mantle;
 			if (pos == null) return EnumBlockMaterial.Mantle;
 			BlockEntityStargate gate = GetBlockEntity<BlockEntityStargate>(pos);
 			if (gate == null) return EnumBlockMaterial.Mantle;

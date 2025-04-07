@@ -43,19 +43,19 @@ void main()
 	vec4 offsetColor = texture(tex0, uvIn);
 	float tMult = abs(sin(tIn));
 
-	worldPos.z += normalIn.z * offsetColor.r * tMult * 4f * vertexNormalIn.x;
-	worldPos.x += normalIn.x * offsetColor.r * tMult * 4f * vertexNormalIn.x;
+	worldPos.z += normalIn.z * offsetColor.r * tMult * 4.0 * vertexNormalIn.x;
+	worldPos.x += normalIn.x * offsetColor.r * tMult * 4.0 * vertexNormalIn.x;
 
-	if (distance(offsetColor.g - 0.5, 0f) > .05f) {
-		worldPos.x += normalIn.z * (offsetColor.g - 0.5f) * tMult * .75f * vertexNormalIn.x;
-		worldPos.z += normalIn.x * (offsetColor.g - 0.5f) * tMult * .75f * vertexNormalIn.x;
+	if (distance(offsetColor.g - 0.5, 0.0) > 0.05) {
+		worldPos.x += normalIn.z * (offsetColor.g - 0.5) * tMult * 0.75 * vertexNormalIn.x;
+		worldPos.z += normalIn.x * (offsetColor.g - 0.5) * tMult * 0.75 * vertexNormalIn.x;
 	}
-	if (distance(offsetColor.b - 0.5, 0f) > .05f) {
-		worldPos.y += (offsetColor.b - 0.5f) * tMult * .75f * vertexNormalIn.x;
+	if (distance(offsetColor.b - 0.5, 0.0) > 0.05) {
+		worldPos.y += (offsetColor.b - 0.5) * tMult * 0.75 * vertexNormalIn.x;
 	}
 
-	worldPos.z += vertexNormalIn.x * normalIn.z * cnoise2(vertexPositionIn.xy * noiseOffset) * 0.1f;
-	worldPos.x += vertexNormalIn.x * normalIn.x * cnoise2(vertexPositionIn.zy * noiseOffset) * 0.1f;
+	worldPos.z += vertexNormalIn.x * normalIn.z * cnoise2(vertexPositionIn.xy * noiseOffset) * 0.1;
+	worldPos.x += vertexNormalIn.x * normalIn.x * cnoise2(vertexPositionIn.zy * noiseOffset) * 0.1;
 
 	modPos = worldPos;
 
@@ -67,5 +67,5 @@ void main()
 
 	gl_Position = projectionMatrix * camPos;
 
-	normal = normalize((modelMatrix * vec4(normalIn.x, normalIn.y, normalIn.z, 0)).xyz);
+	normal = normalize((modelMatrix * vec4(normalIn.x, normalIn.y, normalIn.z, 0.0)).xyz);
 }

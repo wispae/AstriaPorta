@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstriaPorta.Config;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API.Client;
@@ -84,8 +85,16 @@ namespace AstriaPorta.Content
 			return interactions.Append(base.GetPlacedBlockInteractionHelp(world, selection, forPlayer));
 		}
 
+		public override void AddMiningTierInfo(StringBuilder sb)
+		{
+			if (!StargateConfig.Loaded.DhdDestructable) return;
+			RequiredMiningTier = StargateConfig.Loaded.DhdMiningTier;
+			base.AddMiningTierInfo(sb);
+		}
+
 		public override EnumBlockMaterial GetBlockMaterial(IBlockAccessor blockAccessor, BlockPos pos, ItemStack stack = null)
 		{
+			if (!StargateConfig.Loaded.DhdDestructable) return EnumBlockMaterial.Mantle;
 			if (pos == null) return EnumBlockMaterial.Mantle;
 			BlockEntityDialHomeDevice dhd = GetBlockEntity<BlockEntityDialHomeDevice>(pos);
 			if (dhd == null) return EnumBlockMaterial.Mantle;

@@ -1,4 +1,6 @@
-﻿using AstriaPorta.src.Block;
+﻿using AstriaPorta.Config;
+using AstriaPorta.src.Block;
+using AstriaPorta.src.Systems;
 using AstriaPorta.Util;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ namespace AstriaPorta.Content
 {
 	public class BlockEntityStargate : BlockEntity, IStargate, IBlockEntityInteractable
 	{
-		protected const float ROT_DEG_PER_S = 80f;
+		protected float ROT_DEG_PER_S = 80f;
 
 		protected static Cuboidi vortexOffsetNorth;
 		protected static Cuboidi vortexOffsetEast;
@@ -134,6 +136,8 @@ namespace AstriaPorta.Content
 		public BlockEntityStargate()
 		{
 			InitializeInventory();
+
+			ROT_DEG_PER_S = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
 		}
 
 		/// <summary>
@@ -145,13 +149,16 @@ namespace AstriaPorta.Content
 		/// <param name="dialType"></param>
 		public void TryDial(StargateAddress address, EnumDialSpeed dialType)
 		{
+			ROT_DEG_PER_S = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
 			if (Api.Side == EnumAppSide.Client)
 			{
 				DialServerGate(address, dialType);
 				return;
 			}
 
+#if DEBUG
 			Api.Logger.Debug($"Started dial to {address} with coordinates ({address.AddressCoordinates.X},{address.AddressCoordinates.Y},{address.AddressCoordinates.Z})");
+#endif
 
 			if (stargateState != EnumStargateState.Idle)
 			{
@@ -164,12 +171,12 @@ namespace AstriaPorta.Content
 
 			dialingAddress = address;
 
-			if (gateAddress.AddressBits != dialingAddress.AddressBits)
+			if (WillDialSucceed(address))
 			{
-				WorldGateManager.GetInstance().LoadRemoteGate(address, this);
+				StargateManagerSystem.GetInstance(Api).LoadRemoteGate(address, this);
 				if (!isForceLoaded)
 				{
-					WorldGateManager.GetInstance().ForceLoadChunk(Pos);
+					StargateManagerSystem.GetInstance(Api).ForceLoadChunk(Pos);
 					isForceLoaded = true;
 				}
 			}
@@ -179,8 +186,7 @@ namespace AstriaPorta.Content
 			activeChevrons = 0;
 			rotateCW = true;
 			nextGlyph = dialingAddress.AddressCoordinates.Glyphs[currentAddressIndex];
-			// TODO: replace timeout with config value
-			remoteLoadTimeout = 5f;
+			remoteLoadTimeout = StargateConfig.Loaded.MaxTimeoutSeconds;
 
 			if (tickListenerId != -1) UnregisterGameTickListener(tickListenerId);
 			tickListenerId = RegisterGameTickListener(OnTickServer, 20, 0);
@@ -197,6 +203,16 @@ namespace AstriaPorta.Content
 			{
 				ForceDisconnect();
 			}
+		}
+
+		public bool WillDialSucceed(StargateAddress address)
+		{
+			if (address.AddressBits == GateAddress.AddressBits) return false;
+			int distanceChunks = GateAddress.GetDistanceTo(address);
+			if (distanceChunks < StargateConfig.Loaded.MinRangeChunksMilkyway) return false;
+			if (distanceChunks > StargateConfig.Loaded.MaxRangeChunksMilkyway) return false;
+
+			return true;
 		}
 
 		/// <summary>
@@ -222,7 +238,7 @@ namespace AstriaPorta.Content
 
 			if (isForceLoaded)
 			{
-				WorldGateManager.GetInstance().ReleaseChunk(Pos);
+				StargateManagerSystem.GetInstance(Api).ReleaseChunk(Pos);
 				isForceLoaded = false;
 			}
 
@@ -258,7 +274,7 @@ namespace AstriaPorta.Content
 			base.Initialize(api);
 
 			gateAddress.FromCoordinates(Pos.X, Pos.Y, Pos.Z);
-			remoteLoadTimeout = 5f;
+			remoteLoadTimeout = StargateConfig.Loaded.MaxTimeoutSeconds;
 
 			gateTypeString = Block.Variant["gatetype"] ?? "milkyway";
 			glyphAngle = 360f / GlyphLength;
@@ -289,7 +305,7 @@ namespace AstriaPorta.Content
 			gateAddress.FromCoordinates(Pos.X, Pos.Y, Pos.Z);
 			if (!registeredToGateManager)
 			{
-				WorldGateManager.GetInstance().RegisterLoadedGate(this);
+				StargateManagerSystem.GetInstance(api).RegisterLoadedGate(this);
 				registeredToGateManager = true;
 			}
 
@@ -345,14 +361,14 @@ namespace AstriaPorta.Content
 
 			if (registeredToGateManager)
 			{
-				WorldGateManager.GetInstance().UnregisterLoadedGate(this);
+				StargateManagerSystem.GetInstance(Api).UnregisterLoadedGate(this);
 				registeredToGateManager = false;
 			}
 
 			if (isForceLoaded)
 			{
 				// TODO: Add to worldgatemanager to release when gate unregisters itself
-				WorldGateManager.GetInstance().ReleaseChunk(Pos);
+				StargateManagerSystem.GetInstance(Api).ReleaseChunk(Pos);
 				isForceLoaded = false;
 			}
 
@@ -429,13 +445,13 @@ namespace AstriaPorta.Content
 		{
 			if (registeredToGateManager)
 			{
-				WorldGateManager.GetInstance().UnregisterLoadedGate(this);
+				StargateManagerSystem.GetInstance(Api).UnregisterLoadedGate(this);
 				registeredToGateManager = false;
 			}
 
 			if (isForceLoaded)
 			{
-				WorldGateManager.GetInstance().ReleaseChunk(Pos);
+				StargateManagerSystem.GetInstance(Api).ReleaseChunk(Pos);
 				isForceLoaded = false;
 			}
 
@@ -715,7 +731,7 @@ namespace AstriaPorta.Content
 
 		#region Serverside
 
-		protected float remoteLoadTimeout = 5f;
+		protected float remoteLoadTimeout = StargateConfig.Loaded.MaxTimeoutSeconds;
 		protected float timeOpen = 0f;
 		protected bool remoteNotified = false;
 		protected bool willConnect = false;
@@ -723,7 +739,7 @@ namespace AstriaPorta.Content
 
 		protected void InitializeServer(ICoreServerAPI sapi)
 		{
-			WorldGateManager gmInstance = WorldGateManager.GetInstance();
+			StargateManagerSystem gmInstance = StargateManagerSystem.GetInstance(sapi);
 
 			if (!registeredToGateManager)
 			{
@@ -749,7 +765,7 @@ namespace AstriaPorta.Content
 			{
 				if (remotePosition == null)
 				{
-					remoteLoadTimeout = 10f;
+					remoteLoadTimeout = StargateConfig.Loaded.MaxTimeoutSeconds;
 					gmInstance.LoadRemoteGate(dialingAddress, this);
 				}
 				tickListenerId = RegisterGameTickListener(OnTickServer, 20, 0);
@@ -808,9 +824,9 @@ namespace AstriaPorta.Content
 						ProcessCollidingEntities();
 						timeOpen += delta;
 						
-						if (timeOpen > 60f)
+						if (timeOpen > StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway)
 						{
-							Api.Logger.Debug("wormhole has been open for 60s, shutting down connection");
+							Api.Logger.Debug("wormhole has been open for max duration, shutting down connection");
 							TryDisconnect();
 						}
 
@@ -975,7 +991,7 @@ namespace AstriaPorta.Content
 					SyncStateToClients();
 					if (timeoutCallbackId == -1)
 					{
-						timeoutCallbackId = RegisterDelayedCallback(OnRemoteTimeout, 5000);
+						timeoutCallbackId = RegisterDelayedCallback(OnRemoteTimeout, (int)(StargateConfig.Loaded.MaxTimeoutSeconds*1000));
 					}
 
 					return;
@@ -1058,7 +1074,7 @@ namespace AstriaPorta.Content
 
 			if (isForceLoaded)
 			{
-				WorldGateManager.GetInstance().ReleaseChunk(Pos);
+				StargateManagerSystem.GetInstance(Api).ReleaseChunk(Pos);
 				isForceLoaded = false;
 			}
 
@@ -1092,7 +1108,7 @@ namespace AstriaPorta.Content
 			stargateState = EnumStargateState.DialingIncoming;
 			if (!isForceLoaded)
 			{
-				WorldGateManager.GetInstance().RegisterLoadedGate(this);
+				StargateManagerSystem.GetInstance(Api).RegisterLoadedGate(this);
 				isForceLoaded = true;
 			}
 
@@ -1317,9 +1333,9 @@ namespace AstriaPorta.Content
 				case EnumStargateState.ConnectedOutgoing:
 					{
 						timeOpen += delta;
-						if (timeOpen >= 60f)
+						if (timeOpen >= StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway)
 						{
-							timeOpen = 60f;
+							timeOpen = StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway;
 						}
 
 						break;
@@ -1711,22 +1727,28 @@ namespace AstriaPorta.Content
 		internal void applyVortexDestruction()
 		{
 			if (Api.Side == EnumAppSide.Client) return;
+
 			IBlockAccessor accessor = (Api as ICoreServerAPI).World.BlockAccessor;
 			Cuboidi positions;
 
 			positions = VortexArea;
 
-			if (positions == null) return;
-			for (int x = positions.MinX; x <= positions.MaxX; x++)
+			if (StargateConfig.Loaded.VortexDestroys)
 			{
-				for (int z = positions.MinZ; z <= positions.MaxZ; z++)
+				if (positions == null) return;
+				for (int x = positions.MinX; x <= positions.MaxX; x++)
 				{
-					for (int y = positions.MinY; y <= positions.MaxY; y++)
+					for (int z = positions.MinZ; z <= positions.MaxZ; z++)
 					{
-						accessor.SetBlock(0, Pos.AddCopy(x, y, z));
+						for (int y = positions.MinY; y <= positions.MaxY; y++)
+						{
+							accessor.SetBlock(0, Pos.AddCopy(x, y, z));
+						}
 					}
 				}
 			}
+
+			if (!StargateConfig.Loaded.VortexKills) return;
 
 			EntityPlayer player;
 			Entity[] toKill = (Api as ICoreServerAPI).World.GetEntitiesInsideCuboid(

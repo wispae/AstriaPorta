@@ -8,12 +8,12 @@ using AstriaPorta.Content;
 using AstriaPorta.Util;
 using AstriaPorta.src.Block;
 using Vintagestory.API.Util;
+using AstriaPorta.Config;
 
 namespace AstriaPorta
 {
     public class AstriaPortaModSystem : ModSystem
 	{
-		private WorldGateManager gateManager;
 		private GateDiagnostics diagnostics;
 
 		public int eventHorizonShaderProgramRef;
@@ -46,9 +46,6 @@ namespace AstriaPorta
 		{
 			base.StartServerSide(api);
 			sapi = api;
-
-			gateManager = WorldGateManager.GetNewInstance(api);
-			gateManager.FlushRegisteredGates();
 
 			RegisterCommands(api);
 			Mod.Logger.Debug("Started server-side modsystem");
@@ -110,11 +107,6 @@ namespace AstriaPorta
 			api.RegisterBlockEntityClass("BEDialHomeDevice", typeof(BlockEntityDialHomeDevice));
 
 			api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));
-		}
-
-		private void RegisterWorldGenHooks(ICoreServerAPI api)
-		{
-			WorldGateManager gateManager = WorldGateManager.GetInstance(api);
 		}
 
 		private void RegisterCommands(ICoreServerAPI api)
