@@ -54,6 +54,7 @@
   "debugtabletmodename-fillgateiris": "Fill gate iris",
   "debugtabletmodename-fillgatevortex": "Fill gate vortex",
   "debugtabletmodename-checkirisstate": "Check gate iris state",
+  "debugtabletmodename-showdhdsearchrange": "Show DHD search range",
 
   // == OTHER ==
   "astriaporta-cartouche-unlinked": "Address not yet generated",
