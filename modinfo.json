@@ -9,7 +9,8 @@
   "networkVersion": "0.0.2",
   "version": "0.0.2",
   "dependencies": {
-    "game": ""
+    "game": "",
+    "survival": ""
   },
   "requiredOnClient": true,
   "requiredOnServer": true
