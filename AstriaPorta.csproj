@@ -63,6 +63,7 @@
   <None Remove="assets\astriaporta\itemtypes\utility\gatedebugtablet.json" />
   <None Remove="assets\astriaporta\patches\astriaporta_remaps.json" />
   <None Remove="assets\astriaporta\patches\astriaporta_traders.json" />
+  <None Remove="assets\astriaporta\recipes\grid\addressnote.json" />
   <None Remove="assets\astriaporta\shaders\eventhorizon.fsh" />
   <None Remove="assets\astriaporta\shaders\eventhorizon.vsh" />
   <None Remove="assets\astriaporta\shapes\block\deco\sgc_gate_screen.json" />

@@ -5,10 +5,12 @@
   ],
   "attributes": {
     "holdsgateaddress": true,
+    "noConsumeOnCrafting": true,
     "handbook": {
       "include": true
     }
   },
+  "maxstacksize": 16,
   "shape": { "base": "game:item/lore/map-treasure" },
   "textures": {
     "map-treasures": {

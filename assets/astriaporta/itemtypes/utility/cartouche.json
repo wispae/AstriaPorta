@@ -50,6 +50,7 @@
         ]
       }
     },
+    "noConsumeOnCrafting": true,
     "handbook": {
       "groupBy": [ "coordinatecartouche-*" ]
     }

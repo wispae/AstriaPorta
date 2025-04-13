@@ -13,7 +13,6 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
-using static Vintagestory.Server.Timer;
 
 namespace AstriaPorta.Content
 {

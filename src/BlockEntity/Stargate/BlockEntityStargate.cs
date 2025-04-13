@@ -2254,6 +2254,7 @@ namespace AstriaPorta.Content
 		{
 			ItemStack cartouche = new ItemStack(Api.World.GetItem("astriaporta:addressnote"));
 			cartouche.Attributes.SetString("gateAddressS", GateAddress.ToString());
+            cartouche.Attributes.SetBool("noConsumeOnCrafting", true);
 			cartouche.StackSize = 1;
 
 			forslot.TakeOut(1);
