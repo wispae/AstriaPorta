@@ -8,120 +8,142 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
+using AstriaPorta.Config;
+using Vintagestory.API.Config;
 
 namespace AstriaPorta.Content
 {
-	public class GuiDialogStargate : GuiDialogBlockEntity
-	{
-		EnumPosFlag screenPos;
+    public class GuiDialogStargate : GuiDialogBlockEntity
+    {
+        EnumPosFlag screenPos;
 
-		InventoryBase inv;
+        InventoryBase inv;
 
-		public override double DrawOrder => 0.2;
+        private bool quickDialState = false;
+        public Action<bool> OnQuickDialToggledClient;
 
-		public GuiDialogStargate(string dialogTitle,
-								 string displayAddress,
-								 InventoryBase Inventory,
-								 BlockPos BlockEntityPosition,
-								 ICoreClientAPI capi)
-			: base(dialogTitle, Inventory, BlockEntityPosition, capi)
-		{
-			if (IsDuplicate) return;
+        public override double DrawOrder => 0.2;
 
-			inv = Inventory;
-			capi.World.Player.InventoryManager.OpenInventory(Inventory);
+        public GuiDialogStargate(string dialogTitle,
+                                 string displayAddress,
+                                 InventoryBase Inventory,
+                                 BlockPos BlockEntityPosition,
+                                 ICoreClientAPI capi,
+                                 bool quickdialState = false)
+            : base(dialogTitle, Inventory, BlockEntityPosition, capi)
+        {
+            if (IsDuplicate) return;
 
-			SetupDialog(displayAddress);
-		}
+            inv = Inventory;
+            capi.World.Player.InventoryManager.OpenInventory(Inventory);
 
-		private void SetupDialog(string displayAddress)
-		{
-			ElementBounds txtBounds = ElementBounds.Fixed(0, 20, 200, 20);
-			ElementBounds camoSlotBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 0, 75, 5, 1);
+            SetupDialog(displayAddress, quickdialState);
+        }
 
-			ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
-			bgBounds.BothSizing = ElementSizing.FitToChildren;
-			bgBounds.WithChildren(ElementBounds.Fixed(0, 0, 210, 250));
+        private void SetupDialog(string displayAddress, bool quickDialState)
+        {
+            this.quickDialState = quickDialState;
 
-			ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog
-				.WithFixedAlignmentOffset(IsRight(screenPos) ? -GuiStyle.DialogToScreenPadding : GuiStyle.DialogToScreenPadding, 0)
-				.WithAlignment(IsRight(screenPos) ? EnumDialogArea.RightMiddle : EnumDialogArea.LeftMiddle);
+            ElementBounds txtBounds = ElementBounds.Fixed(0, 20, 200, 20);
+            ElementBounds quickDialBounds = ElementBounds.Fixed(0, 140, 150, 20);
+            ElementBounds camoSlotBounds = ElementStdBounds.SlotGrid(EnumDialogArea.None, 0, 75, 5, 1);
 
-			ClearComposers();
-			SingleComposer = capi.Gui
-				.CreateCompo("blockentitystargate" + BlockEntityPosition, dialogBounds)
-				.AddShadedDialogBG(bgBounds)
-				.AddDialogTitleBar(DialogTitle, OnTitleBarClose)
-				.BeginChildElements(bgBounds)
-					.AddStaticText(displayAddress, CairoFont.WhiteSmallishText(), txtBounds)
-					.AddItemSlotGrid(Inventory, SendInvPacket, 5, camoSlotBounds, "camoInventoryGrid")
-				.EndChildElements()
-				.Compose();
+            ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
+            bgBounds.BothSizing = ElementSizing.FitToChildren;
+            bgBounds.WithChildren(ElementBounds.Fixed(0, 0, 210, 250));
 
-			SingleComposer.GetSlotGrid("camoInventoryGrid").CanClickSlot = OnCanClickSlot;
-		}
+            ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog
+                .WithFixedAlignmentOffset(IsRight(screenPos) ? -GuiStyle.DialogToScreenPadding : GuiStyle.DialogToScreenPadding, 0)
+                .WithAlignment(IsRight(screenPos) ? EnumDialogArea.RightMiddle : EnumDialogArea.LeftMiddle);
 
-		private bool OnCanClickSlot(int slotID)
-		{
-			ItemStack mousestack = capi.World.Player.InventoryManager.MouseItemSlot.Itemstack;
+            ClearComposers();
+            SingleComposer = capi.Gui
+                .CreateCompo("blockentitystargate" + BlockEntityPosition, dialogBounds)
+                .AddShadedDialogBG(bgBounds)
+                .AddDialogTitleBar(DialogTitle, OnTitleBarClose)
+                .BeginChildElements(bgBounds)
+                    .AddStaticText(displayAddress, CairoFont.WhiteSmallishText(), txtBounds)
+                    .AddItemSlotGrid(Inventory, SendInvPacket, 5, camoSlotBounds, "camoInventoryGrid")
+                    .AddIf(StargateConfig.Loaded.AllowQuickDial)
+                        .AddStaticText(Lang.Get("stargate-gui-quickdialtoggletext"), CairoFont.WhiteSmallishText(), quickDialBounds)
+                        .AddSwitch(OnQuickDialToggled, quickDialBounds.RightCopy(0, 0), "quickDialSwitch")
+                    .EndIf()
+                .EndChildElements()
+                .Compose();
 
-			if (mousestack == null || mousestack.Block == null)
-			{
-				inv[slotID].Itemstack = null;
-			}
-			else
-			{
-				inv[slotID].Itemstack = mousestack.Clone();
-			}
+            SingleComposer.GetSlotGrid("camoInventoryGrid").CanClickSlot = OnCanClickSlot;
+            SingleComposer.GetSwitch("quickDialSwitch")?.SetValue(quickDialState);
+        }
 
-			inv[slotID].MarkDirty();
+        private void OnQuickDialToggled(bool newState)
+        {
+            quickDialState = newState;
+        }
 
-			return false;
-		}
+        private bool OnCanClickSlot(int slotID)
+        {
+            ItemStack mousestack = capi.World.Player.InventoryManager.MouseItemSlot.Itemstack;
 
-		private void SendInvPacket(object packet)
-		{
-			capi.Network.SendBlockEntityPacket(BlockEntityPosition.X, BlockEntityPosition.Y, BlockEntityPosition.Z, packet);
-		}
+            if (mousestack == null || mousestack.Block == null)
+            {
+                inv[slotID].Itemstack = null;
+            }
+            else
+            {
+                inv[slotID].Itemstack = mousestack.Clone();
+            }
 
-		private void OnInventorySlotModified(int slotid)
-		{
-			inv.MarkSlotDirty(slotid);
-		}
+            inv[slotID].MarkDirty();
 
-		private void OnTitleBarClose()
-		{
-			TryClose();
-		}
+            return false;
+        }
 
-		public override void OnGuiOpened()
-		{
-			base.OnGuiOpened();
-			inv.SlotModified += OnInventorySlotModified;
-		}
+        private void SendInvPacket(object packet)
+        {
+            capi.Network.SendBlockEntityPacket(BlockEntityPosition.X, BlockEntityPosition.Y, BlockEntityPosition.Z, packet);
+        }
 
-		public override void OnGuiClosed()
-		{
-			inv.SlotModified -= OnInventorySlotModified;
-			TreeAttribute tree = new TreeAttribute();
-			for (int i = 0; i < inv.Count; i++)
-			{
-				if (inv[i].Itemstack == null) continue;
-				tree.SetItemstack("stack" + i, inv[i].Itemstack.Clone());
-			}
+        private void OnInventorySlotModified(int slotid)
+        {
+            inv.MarkSlotDirty(slotid);
+        }
 
-			using (MemoryStream ms = new MemoryStream())
-			{
-				BinaryWriter writer = new BinaryWriter(ms);
-				tree.ToBytes(writer);
-				capi.Network.SendBlockEntityPacket(BlockEntityPosition, (int)EnumStargatePacketType.CamoUpdate, ms.ToArray());
-			}
+        private void OnTitleBarClose()
+        {
+            TryClose();
+        }
 
-			SingleComposer.GetSlotGrid("camoInventoryGrid").OnGuiClosed(capi);
+        public override void OnGuiOpened()
+        {
+            base.OnGuiOpened();
+            inv.SlotModified += OnInventorySlotModified;
+        }
 
-			base.OnGuiClosed();
+        public override void OnGuiClosed()
+        {
+            inv.SlotModified -= OnInventorySlotModified;
+            TreeAttribute tree = new TreeAttribute();
+            for (int i = 0; i < inv.Count; i++)
+            {
+                if (inv[i].Itemstack == null) continue;
+                tree.SetItemstack("stack" + i, inv[i].Itemstack.Clone());
+            }
 
-			FreePos("smallblockgui", screenPos);
-		}
-	}
+            tree.SetBool("quickdialstate", quickDialState);
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryWriter writer = new BinaryWriter(ms);
+                tree.ToBytes(writer);
+                capi.Network.SendBlockEntityPacket(BlockEntityPosition, (int)EnumStargatePacketType.CamoUpdate, ms.ToArray());
+            }
+
+            OnQuickDialToggledClient.Invoke(quickDialState);
+            SingleComposer.GetSlotGrid("camoInventoryGrid").OnGuiClosed(capi);
+
+            base.OnGuiClosed();
+
+            FreePos("smallblockgui", screenPos);
+        }
+    }
 }

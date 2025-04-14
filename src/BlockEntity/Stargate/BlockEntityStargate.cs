@@ -36,6 +36,7 @@ namespace AstriaPorta.Content
 
 		private StargateAddress dialingAddress;
 
+        private bool quickdialMode = false;
 		private EnumStargateType stargateType;
 		private EnumStargateState stargateState;
 
@@ -45,7 +46,6 @@ namespace AstriaPorta.Content
 
 		protected bool lightAdded = false;
 		protected LightiningPointLight horizonlight;
-		//        LightningPointLight
 
 		public StargateAddress GateAddress
 		{
@@ -636,6 +636,7 @@ namespace AstriaPorta.Content
 			tree.SetInt("gateState", (int)stargateState);
 			tree.SetInt("dialType", (int)dialType);
 			tree.SetBool("rotateCW", rotateCW);
+            tree.SetBool("quickdialMode", quickdialMode);
 			if (remotePosition != null)
 			{
 				tree.SetBlockPos("remotePosition", remotePosition);
@@ -670,6 +671,7 @@ namespace AstriaPorta.Content
 			stargateState = (EnumStargateState)tree.GetInt("gateState", 0);
 			dialType = (EnumDialSpeed)tree.GetInt("dialType", 0);
 			rotateCW = tree.GetBool("rotateCW", false);
+            quickdialMode = tree.GetBool("quickdialMode", false);
 			if (tree.HasAttribute("remotePositionX"))
 			{
 				remotePosition = tree.GetBlockPos("remotePosition");
@@ -1181,6 +1183,11 @@ namespace AstriaPorta.Content
 							}
 						}
 					}
+
+                    if (tree.HasAttribute("quickdialstate"))
+                    {
+                        quickdialMode = tree.GetBool("quickdialstate");
+                    }
 					break;
 			}
 		}
@@ -2224,7 +2231,7 @@ namespace AstriaPorta.Content
 
 		#region Interaction
 
-		protected GuiDialogBlockEntity gateDialog;
+		protected GuiDialogStargate gateDialog;
 
 		public bool OnRightClickInteraction(IPlayer player)
 		{
@@ -2266,9 +2273,9 @@ namespace AstriaPorta.Content
 		{
 			if (gateDialog == null)
 			{
-				var check = Lang.GetAllEntries();
 				// TODO: get stargate specific name from lang
-				gateDialog = new GuiDialogStargate(Block.GetPlacedBlockName(capi.World, Pos), GateAddress.ToString(), Inventory, Pos, capi);
+				gateDialog = new GuiDialogStargate(Block.GetPlacedBlockName(capi.World, Pos), GateAddress.ToString(), Inventory, Pos, capi, quickdialMode);
+                gateDialog.OnQuickDialToggledClient = (b) => { quickdialMode = b; };
 				gateDialog.OnClosed += () =>
 				{
 					gateDialog = null;
