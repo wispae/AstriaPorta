@@ -65,7 +65,7 @@ namespace AstriaPorta.Content
                     .AddStaticText(displayAddress, CairoFont.WhiteSmallishText(), txtBounds)
                     .AddItemSlotGrid(Inventory, SendInvPacket, 5, camoSlotBounds, "camoInventoryGrid")
                     .AddIf(StargateConfig.Loaded.AllowQuickDial)
-                        .AddStaticText(Lang.Get("stargate-gui-quickdialtoggletext"), CairoFont.WhiteSmallishText(), quickDialBounds)
+                        .AddStaticText(Lang.Get("astriaporta:stargate-gui-quickdialtoggletext"), CairoFont.WhiteSmallishText(), quickDialBounds)
                         .AddSwitch(OnQuickDialToggled, quickDialBounds.RightCopy(0, 0), "quickDialSwitch")
                     .EndIf()
                 .EndChildElements()

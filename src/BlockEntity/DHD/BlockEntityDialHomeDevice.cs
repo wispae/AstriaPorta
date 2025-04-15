@@ -200,7 +200,7 @@ namespace AstriaPorta.Content
         {
             if (connectedGate != null && address.IsValid)
             {
-                connectedGate.TryDial(address, EnumDialSpeed.Slow);
+                connectedGate.TryDial(address, EnumDialSpeed.Default);
             }
         }
 
@@ -230,7 +230,7 @@ namespace AstriaPorta.Content
 
             if (gate != null && gate is BlockEntityStargate)
             {
-                gate.TryDial(address, EnumDialSpeed.Slow);
+                gate.TryDial(address, EnumDialSpeed.Default);
             }
         }
 
