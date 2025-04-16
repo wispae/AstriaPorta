@@ -108,21 +108,47 @@ namespace AstriaPorta.src.Systems
                 Type structuresSystemType = typeof(GenStructures);
                 WorldGenStructuresConfig structuresConfig = structuresSystemType.GetField("scfg", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(structuresSystem) as WorldGenStructuresConfig;
 
-                WorldGenStructure structure;
-                for (int i = 0; i < structuresConfig.Structures.Length; i++)
+                if (config.EnableWorldGenGates)
                 {
-                    structure = structuresConfig.Structures[i];
-                    if (structure.Group == "stargatesurface")
-                    {
-                        structure.MinGroupDistance = config.MinDistanceSurfaceGates;
-                    } else if (structure.Group == "stargateunderground")
-                    {
-                        structure.MinGroupDistance = config.MinDistanceUndergroundGates;
-                    }
+                    SetStructureGroupDistance(structuresConfig, config);
+                } else
+                {
+                    DisableStargateStructures(structuresConfig);
                 }
+                
             } catch (Exception ex)
             {
                 Mod.Logger.Debug(ex.Message);
+            }
+        }
+
+        private void DisableStargateStructures(WorldGenStructuresConfig config)
+        {
+            WorldGenStructure structure;
+            for (int i = 0; i < config.Structures.Length; i++)
+            {
+                structure = config.Structures[i];
+                if (structure.Group == "stargatesurface" || structure.Group == "stargateunderground")
+                {
+                    structure.Chance = 0f;
+                }
+            }
+        }
+
+        private void SetStructureGroupDistance(WorldGenStructuresConfig structuresConfig, StargateConfig config)
+        {
+            WorldGenStructure structure;
+            for (int i = 0; i < structuresConfig.Structures.Length; i++)
+            {
+                structure = structuresConfig.Structures[i];
+                if (structure.Group == "stargatesurface")
+                {
+                    structure.MinGroupDistance = config.MinDistanceSurfaceGates;
+                }
+                else if (structure.Group == "stargateunderground")
+                {
+                    structure.MinGroupDistance = config.MinDistanceUndergroundGates;
+                }
             }
         }
     }

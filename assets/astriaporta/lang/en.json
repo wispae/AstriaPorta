@@ -4,6 +4,9 @@
   "game:tapestry-astria-porta*": "Stargate",
   "game:tabname-astriaporta": "Astria Porta",
 
+  // == ERROR EXTENSIONS ==
+  "game:ingameerror-cartouchedisabled": "Cartouche generation disabled by config",
+
   // === ASTRIA PORTA ===
 
   // == HANDBOOK ==

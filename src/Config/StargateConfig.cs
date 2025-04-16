@@ -111,5 +111,11 @@ namespace AstriaPorta.Config
                 _minDistanceUndergroundGates = value;
             }
         }
+
+        [ProtoMember(15), DefaultValue(true)]
+        public bool EnableWorldGenGates { get; set; } = true;
+
+        [ProtoMember(16), DefaultValue(true)]
+        public bool EnableCartoucheGates { get; set; } = true;
     }
 }
