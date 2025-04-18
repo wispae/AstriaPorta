@@ -19,7 +19,6 @@ namespace AstriaPorta.Content
 		public bool shouldRender = true;
 		public bool activating = true;
 		public BlockFacing blockFacing = BlockFacing.SOUTH;
-		public IShaderProgram eventHorizonShaderProgram;
 		public float t = 0f;
 		public float noiseOffset = 0f;
 
@@ -39,8 +38,6 @@ namespace AstriaPorta.Content
 			horizonMeshRef = api.Render.UploadMesh(mesh);
 			horizonMultiMeshRef = new MultiTextureMeshRef(new MeshRef[] { horizonMeshRef }, mesh.TextureIds);
 			this.texPos = texPos;
-
-			eventHorizonShaderProgram = api.ModLoader.GetModSystem<AstriaPortaModSystem>().eventHorizonShaderProgram;
 
 			precalc = new Matrixf()
 				.Identity()
@@ -98,7 +95,7 @@ namespace AstriaPorta.Content
 				.Translate(pos.X - camPos.X, pos.Y - camPos.Y, pos.Z - camPos.Z)
 				.Mul(precalc);
 
-			IShaderProgram prog = eventHorizonShaderProgram;
+            IShaderProgram prog = api.Shader.GetProgramByName("eventhorizon");
 			prog.Use();
 
 			prog.UniformMatrix("viewMatrix", rpi.CameraMatrixOriginf);

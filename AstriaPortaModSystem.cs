@@ -67,6 +67,7 @@ namespace AstriaPorta
         private void onClientAssetsLoaded()
         {
             capi.Event.ReloadTextures += CreateExternalTextures;
+            capi.Event.ReloadShader += RegisterShaderPrograms;
 
             CreateExternalTextures();
             RegisterShaderPrograms();
