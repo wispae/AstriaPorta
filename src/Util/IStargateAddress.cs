@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API.Datastructures;
 using ProtoBuf;
+using Vintagestory.API.Common;
 
 namespace AstriaPorta.Util
 {
@@ -41,7 +42,7 @@ namespace AstriaPorta.Util
 		public ulong AddressBits { get; }
 		public (int X, int Z) SectorOrigin { get; set; }
 
-		public void FromCoordinates(int x, int y, int z, EnumAddressLength length = EnumAddressLength.Short, int dimension = 0, int fromDimension = 0);
+		public void FromCoordinates(int x, int y, int z, ICoreAPI api, EnumAddressLength length = EnumAddressLength.Short, int dimension = 0, int fromDimension = 0);
 		public int GetAddressResolution(int mapSize, bool latitude);
 		public void FromTreeAttributes(ITreeAttribute tree);
 		public void ToTreeAttributes(ITreeAttribute tree);

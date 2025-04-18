@@ -285,7 +285,7 @@ namespace AstriaPorta.Content
         {
             base.Initialize(api);
 
-            gateAddress.FromCoordinates(Pos.X, Pos.Y, Pos.Z);
+            gateAddress.FromCoordinates(Pos.X, Pos.Y, Pos.Z, api);
             remoteLoadTimeout = StargateConfig.Loaded.MaxTimeoutSeconds;
 
             gateTypeString = Block.Variant["gatetype"] ?? "milkyway";
@@ -314,7 +314,7 @@ namespace AstriaPorta.Content
             gateTypeString = Block.Variant["gatetype"] ?? "milkyway";
             glyphAngle = 360f / GlyphLength;
 
-            gateAddress.FromCoordinates(Pos.X, Pos.Y, Pos.Z);
+            gateAddress.FromCoordinates(Pos.X, Pos.Y, Pos.Z, api);
             if (!registeredToGateManager)
             {
                 StargateManagerSystem.GetInstance(api).RegisterLoadedGate(this);
@@ -1181,7 +1181,7 @@ namespace AstriaPorta.Content
                 case EnumStargatePacketType.Dial:
                     GateStatePacket packet = SerializerUtil.Deserialize<GateStatePacket>(data);
                     StargateAddress address = new StargateAddress();
-                    address.FromBits(packet.RemoteAddressBits);
+                    address.FromBits(packet.RemoteAddressBits, Api);
                     TryDial(address, (EnumDialSpeed)packet.DialType);
                     break;
                 case EnumStargatePacketType.Abort:
@@ -2083,7 +2083,7 @@ namespace AstriaPorta.Content
         {
             EnumStargateState newState = (EnumStargateState)packet.State;
             dialingAddress = new StargateAddress();
-            dialingAddress.FromBits(packet.RemoteAddressBits);
+            dialingAddress.FromBits(packet.RemoteAddressBits, Api);
 
             Api.Logger.Debug("Received server packet, new state: " + newState);
 

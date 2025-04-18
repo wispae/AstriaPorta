@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vintagestory.API.Client;
+using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 
@@ -136,7 +137,7 @@ namespace AstriaPorta.Content
 			if (s.Length < 7) return false;
 
 			StargateAddress a = new StargateAddress();
-			a.FromGlyphs(StringAddressToBytes(s));
+			a.FromGlyphs(StringAddressToBytes(s), capi);
 
 			BlockEntityDialHomeDevice dhd;
 			dhd = capi.World.BlockAccessor.GetBlockEntity<BlockEntityDialHomeDevice>(bePosition);

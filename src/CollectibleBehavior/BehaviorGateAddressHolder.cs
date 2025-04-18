@@ -14,11 +14,19 @@ namespace AstriaPorta.Content
 {
 	public class BehaviorGateAddressHolder : CollectibleBehavior
 	{
+        private ICoreAPI api;
+
 		public BehaviorGateAddressHolder(CollectibleObject collObj) : base(collObj)
 		{
 		}
 
-		public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
+        public override void OnLoaded(ICoreAPI api)
+        {
+            base.OnLoaded(api);
+            this.api = api;
+        }
+
+        public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
 		{
 			base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
 			string baseInfo = inSlot.Itemstack.Attributes.GetString("gateAddressS");
@@ -79,7 +87,7 @@ namespace AstriaPorta.Content
                 if (!b && s != string.Empty)
                 {
 					StargateAddress a = new StargateAddress();
-					a.FromGlyphs(StringAddressToBytes(s));
+					a.FromGlyphs(StringAddressToBytes(s), api);
 
 					blockSel.Block.GetBlockEntity<BlockEntityDialHomeDevice>(blockSel)?.DialDhd(a);
 					handHandling = EnumHandHandling.Handled;
