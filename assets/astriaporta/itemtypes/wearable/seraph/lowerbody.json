@@ -19,7 +19,10 @@
   "storageFlags": 128,
   "attributes": {
     "clothescategory": "lowerbody",
-    "wearableAttachment": true
+    "wearableAttachment": true,
+    "warmthByType": {
+      "*": 1
+    }
   },
   "shapeByType": {
     "@*-(sgc-pants-standard|sgc-pants-desert)": {
@@ -27,21 +30,9 @@
     }
   },
   "texturesByType": {
-    "*-sgc-pants-standard": {
-      "seraph": {
-        "base": "game:block/transparent"
-      },
-      "pants": {
-        "base": "item/entity/humanoid/seraphclothes/lowerbody/sgc_pants_standard"
-      }
-    },
-    "*-sgc-pants-desert": {
-      "seraph": {
-        "base": "game:block/transparent"
-      },
-      "pants": {
-        "base": "item/entity/humanoid/seraphclothes/lowerbody/sgc_pants_desert"
-      }
+    "*": {
+      "seraph": { "base": "game:block/transparent" },
+      "pants": { "base": "entity/humanoid/seraphclothes/lowerbody/{lowerbody}" }
     }
   },
   "creativeinventory": {

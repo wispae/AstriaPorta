@@ -36,5 +36,169 @@
     },
     "file": "game:config/tradelists/trader-luxuries",
     "side": "server"
+  },
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "astriaporta:stargateclothes-foot-sgc-boots-standard",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-foot-sgc-boots-desert",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-head-sgc-cap-standard",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-head-sgc-cap-desert",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-head-sgc-boonie-standard",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-head-sgc-boonie-desert",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-lowerbody-sgc-pants-standard",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-lowerbody-sgc-pants-desert",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-upperbody-sgc-shirt-standard",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-upperbody-sgc-shirt-desert",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-upperbodyover-sgc-tacticalvest-standard",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "astriaporta:stargateclothes-upperbodyover-sgc-tacticalvest-desert",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-clothing",
+    "side": "server"
   }
 ]

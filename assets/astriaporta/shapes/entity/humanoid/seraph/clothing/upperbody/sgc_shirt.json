@@ -9,9 +9,9 @@
 	"textureSizes": {
 		"shirt": [28,56]
 	},
-	"textures": {
-		"shirt": "E:/Mine/Personal/Img/sg_story/textures/sgc_standard_shirt"
-	},
+  "textures": {
+    "shirt": "entity/humanoid/seraphclothes/upperbody/sgc-shirt-standard"
+  },
 	"elements": [
 		{
 			"name": "UpperTorsoOrigin",

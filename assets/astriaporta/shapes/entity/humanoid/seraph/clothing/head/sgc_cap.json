@@ -1,0 +1,89 @@
+{
+	"editor": {
+		"backDropShape": "entity/humanoid/seraph",
+		"allAngles": true,
+		"entityTextureMode": true
+	},
+	"textureWidth": 28,
+	"textureHeight": 12,
+	"textureSizes": {
+		"hat": [28,12]
+	},
+  "textures": {
+    "hat": "entity/humanoid/seraphclothes/head/sgc-cap-standard"
+  },
+	"elements": [
+		{
+			"name": "hidehat",
+			"stepParentName": "Head",
+			"from": [ -0.55, 2.6, -0.55 ],
+			"to": [ 6.15, 5.6, 5.55 ],
+			"renderPass": 1,
+			"unwrapMode": 4,
+			"uv": [ 0.5, 0.5 ],
+			"rotationOrigin": [ 1.85, 6.67, 2.8 ],
+			"rotationZ": 1.0,
+			"faces": {
+				"north": { "texture": "#hat", "uv": [ 0.5, 7.0, 7.0, 10.0 ] },
+				"east": { "texture": "#hat", "uv": [ 19.5, 7.0, 25.5, 10.0 ] },
+				"south": { "texture": "#hat", "uv": [ 13.0, 7.0, 19.5, 10.0 ] },
+				"west": { "texture": "#hat", "uv": [ 7.0, 7.0, 13.0, 10.0 ] },
+				"up": { "texture": "#hat", "uv": [ 7.0, 0.5, 13.0, 7.0 ], "rotation": 90 },
+				"down": { "texture": "#null", "uv": [ 7.0, 10.0, 13.0, 16.5 ], "rotation": 90, "enabled": false }
+			},
+			"children": [
+				{
+					"name": "CapFront",
+					"from": [ -2.0, 1.0, 1.5 ],
+					"to": [ 0.0, 1.2, 4.5 ],
+					"autoUnwrap": false,
+					"uv": [ 1.0, 5.0 ],
+					"rotationOrigin": [ -2.0, 1.0, 1.5 ],
+					"faces": {
+						"north": { "texture": "#hat", "uv": [ 0.0, 0.5, 0.5, 2.5 ], "rotation": 90 },
+						"east": { "texture": "#hat", "uv": [ 0.5, 0.0, 3.5, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"south": { "texture": "#hat", "uv": [ 0.0, 0.5, 0.5, 2.5 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"west": { "texture": "#hat", "uv": [ 0.5, 0.0, 3.5, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"up": { "texture": "#hat", "uv": [ 0.5, 0.5, 3.5, 2.5 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"down": { "texture": "#hat", "uv": [ 0.5, 2.5, 3.5, 4.5 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] }
+					},
+					"children": [
+						{
+							"name": "CapLeft",
+							"from": [ 0.5, 0.0, 3.0 ],
+							"to": [ 2.0, 0.2, 4.5 ],
+							"autoUnwrap": false,
+							"uv": [ 4.0, 4.0 ],
+							"rotationOrigin": [ 0.5, 0.2, 3.0 ],
+							"rotationX": 10.0,
+							"faces": {
+								"north": { "texture": "#hat", "uv": [ 4.0, 0.5, 4.5, 2.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+								"east": { "texture": "#hat", "uv": [ 4.5, 0.0, 6.0, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+								"south": { "texture": "#hat", "uv": [ 4.0, 0.5, 4.5, 2.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+								"west": { "texture": "#hat", "uv": [ 4.5, 0.0, 6.0, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+								"up": { "texture": "#hat", "uv": [ 4.5, 0.5, 6.0, 2.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+								"down": { "texture": "#hat", "uv": [ 4.5, 2.0, 6.0, 3.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] }
+							}
+						},
+						{
+							"name": "CapRight",
+							"from": [ 0.5, 0.0, -1.5 ],
+							"to": [ 2.0, 0.2, 0.0 ],
+							"autoUnwrap": false,
+							"uv": [ 4.0, 4.0 ],
+							"rotationOrigin": [ 0.5, 0.2, 0.0 ],
+							"rotationX": -10.0,
+							"faces": {
+								"north": { "texture": "#hat", "uv": [ 4.0, 0.5, 4.5, 2.0 ], "rotation": 90 },
+								"east": { "texture": "#hat", "uv": [ 4.5, 0.0, 6.0, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+								"south": { "texture": "#hat", "uv": [ 7.0, 5.5, 8.5, 6.0 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+								"west": { "texture": "#hat", "uv": [ 4.5, 0.0, 6.0, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+								"up": { "texture": "#hat", "uv": [ 4.5, 0.5, 6.0, 2.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+								"down": { "texture": "#hat", "uv": [ 4.5, 2.0, 6.0, 3.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] }
+							}
+						}
+					]
+				}
+			]
+		}
+	]}

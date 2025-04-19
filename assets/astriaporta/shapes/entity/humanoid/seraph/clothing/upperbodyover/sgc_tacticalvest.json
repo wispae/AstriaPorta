@@ -10,9 +10,9 @@
 	"textureSizes": {
 		"vest": [16,16]
 	},
-	"textures": {
-		"vest": "E:/Mine/Personal/Img/sg_story/textures/sgc_tacticalvest_standard"
-	},
+  "textures": {
+    "vest": "entity/humanoid/seraphclothes/upperbodyover/sgc-tacticalvest-standard"
+  },
 	"elements": [
 		{
 			"name": "UpperTorsoOrigin",

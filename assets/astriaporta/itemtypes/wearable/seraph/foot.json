@@ -1,0 +1,156 @@
+﻿{
+  "code": "stargateclothes",
+  "class": "ItemWearable",
+  "variantgroups": [
+    {
+      "code": "category",
+      "states": [ "foot" ]
+    },
+    {
+      "code": "foot",
+      "combine": "SelectiveMultiply",
+      "onVariant": "category",
+      "states": [
+        "sgc-boots-standard",
+        "sgc-boots-desert"
+      ]
+    }
+  ],
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.25,
+          "z2": 1
+        }
+      }
+    }
+  ],
+  "shapeByType": {
+    "@*-(sgc-boots-standard|sgc-boots-desert)": {
+      "base": "entity/humanoid/seraph/clothing/foot/sgc_boots"
+    }
+  },
+  "storageFlags": 128,
+  "attributes": {
+    "clothescategory": "foot",
+    "wearableAttachment": true,
+    "displaycaseable": true,
+    "shelvable": true,
+    "groundStorageTransform": {
+      "translation": {
+        "x": 0,
+        "y": 0.011,
+        "z": 0
+      }
+    },
+    "onDisplayTransform": {
+      "translation": {
+        "x": 0,
+        "y": 0.011,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": -90,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.5
+      },
+      "scale": 0.9
+    },
+
+    "warmthByType": {
+      "*": 1
+    }
+  },
+  "texturesByType": {
+    "*": {
+      "seraph": { "base": "game:block/transparent" },
+      "shoes": { "base": "entity/humanoid/seraphclothes/foot/{foot}" }
+    }
+  },
+  "creativeinventory": {
+    "general": [ "*" ],
+    "items": [ "*" ],
+    "clothing": [ "*" ],
+    "astriaporta": [ "*" ]
+  },
+  "renderAlphaTest": 0.25,
+  "fpHandTransform": {
+    "translation": {
+      "x": 0.7,
+      "y": 0.1,
+      "z": -0.4
+    },
+    "rotation": {
+      "x": -33,
+      "y": 10,
+      "z": -24
+    },
+    "scale": 2.5
+  },
+  "tpHandTransformByType": {
+    "*": {
+      "translation": {
+        "x": -0.71,
+        "y": -0.46,
+        "z": -0.84
+      },
+      "rotation": {
+        "x": 48,
+        "y": 88,
+        "z": 53
+      },
+      "scale": 0.71
+    }
+  },
+  "guiTransformByType": {
+    "*": {
+      "rotate": false,
+      "translation": {
+        "x": 2,
+        "y": 0,
+        "z": 18
+      },
+      "rotation": {
+        "x": 152,
+        "y": -118,
+        "z": -3
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.29,
+        "z": 0.55
+      },
+      "scale": 2.2
+    }
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0.05,
+      "y": 0.02,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "scale": 3.11
+  }
+}

@@ -28,21 +28,9 @@
     }
   },
   "texturesByType": {
-    "*-sgc-tacticalvest-standard": {
-      "seraph": {
-        "base": "game:block/transparent"
-      },
-      "vest": {
-        "base": "item/entity/humanoid/seraphclothes/upperbodyover/sgc_tacticalvest_standard"
-      }
-    },
-    "*-sgc-tacticalvest-desert": {
-      "seraph": {
-        "base": "game:block/transparent"
-      },
-      "vest": {
-        "base": "item/entity/humanoid/seraphclothes/upperbodyover/sgc_tacticalvest_desert"
-      }
+    "*": {
+      "seraph": { "base": "game:block/transparent" },
+      "vest": { "base": "entity/humanoid/seraphclothes/upperbodyover/{upperbodyover}" }
     }
   },
   "creativeinventory": {

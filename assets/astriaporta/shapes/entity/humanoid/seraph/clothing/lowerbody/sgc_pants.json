@@ -10,9 +10,9 @@
 	"textureSizes": {
 		"pants": [32,36]
 	},
-	"textures": {
-		"pants": "E:/Mine/Personal/Img/sg_story/textures/sgc_standard_pants"
-	},
+  "textures": {
+    "pants": "entity/humanoid/seraphclothes/lowerbody/sgc-pants-standard"
+  },
 	"elements": [
 		{
 			"name": "LowertorsoWparented",

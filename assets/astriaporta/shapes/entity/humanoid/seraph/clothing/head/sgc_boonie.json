@@ -1,0 +1,193 @@
+{
+	"editor": {
+		"backDropShape": "entity/humanoid/seraph",
+		"collapsedPaths": "",
+		"allAngles": true,
+		"entityTextureMode": true
+	},
+	"textureWidth": 28,
+	"textureHeight": 12,
+	"textureSizes": {
+		"hat": [28,12]
+	},
+	"textures": {
+		"hat": "entity/humanoid/seraphclothes/head/sgc-boonie-standard"
+	},
+	"elements": [
+		{
+			"name": "hidehat",
+			"stepParentName": "Head",
+			"from": [ -0.55, 2.6, -0.55 ],
+			"to": [ 6.15, 5.6, 5.55 ],
+			"renderPass": 1,
+			"unwrapMode": 4,
+			"autoUnwrap": false,
+			"uv": [ 0.5, 0.5 ],
+			"rotationOrigin": [ 1.85, 6.67, 2.8 ],
+			"rotationZ": 1.0,
+			"faces": {
+				"north": { "texture": "#hat", "uv": [ 0.5, 7.0, 7.0, 10.0 ] },
+				"east": { "texture": "#hat", "uv": [ 7.0, 7.0, 13.0, 10.0 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+				"south": { "texture": "#hat", "uv": [ 13.0, 7.0, 19.5, 10.0 ] },
+				"west": { "texture": "#hat", "uv": [ 7.0, 7.0, 13.0, 10.0 ] },
+				"up": { "texture": "#hat", "uv": [ 7.0, 0.5, 13.0, 7.0 ], "rotation": 90 },
+				"down": { "texture": "#null", "uv": [ 7.0, 10.0, 13.0, 16.5 ], "rotation": 90, "enabled": false }
+			},
+			"children": [
+				{
+					"name": "BoonieFront",
+					"from": [ -2.0, 1.0, -2.0 ],
+					"to": [ 0.0, 1.2, 6.1 ],
+					"autoUnwrap": false,
+					"uv": [ 1.0, 5.0 ],
+					"rotationOrigin": [ -2.0, 1.0, -2.0 ],
+					"faces": {
+						"north": { "texture": "#hat", "uv": [ 13.5, 0.5, 14.0, 2.5 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"east": { "texture": "#hat", "uv": [ 0.5, 0.0, 8.5, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+						"south": { "texture": "#hat", "uv": [ 0.0, 0.5, 0.5, 2.5 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+						"west": { "texture": "#hat", "uv": [ 14.0, 0.0, 22.0, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"up": { "texture": "#hat", "uv": [ 14.0, 0.5, 22.0, 2.5 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"down": { "texture": "#hat", "uv": [ 14.0, 2.5, 22.0, 4.5 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] }
+					}
+				},
+				{
+					"name": "BoonieBack",
+					"from": [ 6.7, 1.0, 0.0 ],
+					"to": [ 8.7, 1.2, 8.1 ],
+					"autoUnwrap": false,
+					"uv": [ 4.0, 0.0 ],
+					"rotationOrigin": [ 6.7, 1.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#hat", "uv": [ 0.0, 8.0, 2.0, 8.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+						"east": { "texture": "#hat", "uv": [ 14.0, 0.0, 22.0, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"south": { "texture": "#hat", "uv": [ 13.5, 0.5, 14.0, 2.5 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"west": { "texture": "#hat", "uv": [ 12.0, 8.0, 20.0, 8.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+						"up": { "texture": "#hat", "uv": [ 14.0, 0.5, 22.0, 2.5 ], "rotation": 270, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"down": { "texture": "#hat", "uv": [ 14.0, 2.5, 22.0, 4.5 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] }
+					}
+				},
+				{
+					"name": "BoonieLeft",
+					"from": [ -2.0, 1.0, 6.1 ],
+					"to": [ 6.7, 1.2, 8.1 ],
+					"autoUnwrap": false,
+					"uv": [ 10.0, 0.0 ],
+					"rotationOrigin": [ -2.0, 1.0, 6.1 ],
+					"faces": {
+						"north": { "texture": "#hat", "uv": [ 0.0, 2.0, 8.5, 2.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+						"east": { "texture": "#hat", "uv": [ 8.5, 2.0, 10.5, 2.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+						"south": { "texture": "#hat", "uv": [ 22.5, 0.5, 23.0, 9.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"west": { "texture": "#hat", "uv": [ 23.0, 0.0, 25.0, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"up": { "texture": "#hat", "uv": [ 23.0, 0.5, 25.0, 9.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"down": { "texture": "#hat", "uv": [ 25.0, 0.5, 27.0, 9.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] }
+					}
+				},
+				{
+					"name": "BoonieRight",
+					"from": [ 0.0, 1.0, -2.0 ],
+					"to": [ 8.7, 1.2, 0.0 ],
+					"autoUnwrap": false,
+					"uv": [ 0.0, 0.0 ],
+					"rotationOrigin": [ 0.0, 1.0, -2.0 ],
+					"faces": {
+						"north": { "texture": "#hat", "uv": [ 22.5, 0.5, 23.0, 9.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"east": { "texture": "#hat", "uv": [ 23.0, 0.0, 25.0, 0.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"south": { "texture": "#hat", "uv": [ 10.5, 2.0, 19.0, 2.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+						"west": { "texture": "#hat", "uv": [ 19.0, 2.0, 21.0, 2.5 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1], "enabled": false },
+						"up": { "texture": "#hat", "uv": [ 23.0, 0.5, 25.0, 9.0 ], "rotation": 270, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+						"down": { "texture": "#hat", "uv": [ 25.0, 0.5, 27.0, 9.0 ], "rotation": 90, "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] }
+					}
+				},
+				{
+					"name": "RopeOrigin",
+					"from": [ 1.0, 0.0, 0.0 ],
+					"to": [ 1.0, 0.0, 0.0 ],
+					"uv": [ 0.0, 0.0 ],
+					"rotationOrigin": [ 1.15, 1.0, 3.0 ],
+					"rotationZ": -14.0,
+					"faces": {
+						"north": { "texture": "#hat", "uv": [ 0.0, 0.5, 0.5, 1.0 ] },
+						"east": { "texture": "#hat", "uv": [ 0.5, 0.5, 1.0, 1.0 ] },
+						"south": { "texture": "#hat", "uv": [ 1.0, 0.5, 1.5, 1.0 ] },
+						"west": { "texture": "#hat", "uv": [ 1.5, 0.5, 2.0, 1.0 ] },
+						"up": { "texture": "#hat", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+						"down": { "texture": "#hat", "uv": [ 0.5, 0.0, 1.0, 0.5 ] }
+					},
+					"children": [
+						{
+							"name": "RopeTopR",
+							"from": [ 0.0, -2.5, -0.5 ],
+							"to": [ 0.3, 1.0, -0.2 ],
+							"uv": [ 0.5, 2.5 ],
+							"rotationOrigin": [ 0.0, 1.0, -0.5 ],
+							"rotationX": -15.0,
+							"rotationY": 0.0,
+							"rotationZ": 0.0,
+							"faces": {
+								"north": { "texture": "#hat", "uv": [ 0.5, 3.0, 1.0, 6.5 ] },
+								"east": { "texture": "#hat", "uv": [ 1.0, 3.0, 1.5, 6.5 ] },
+								"south": { "texture": "#hat", "uv": [ 1.5, 3.0, 2.0, 6.5 ] },
+								"west": { "texture": "#hat", "uv": [ 2.0, 3.0, 2.5, 6.5 ] },
+								"up": { "texture": "#hat", "uv": [ 0.5, 2.5, 1.0, 3.0 ] },
+								"down": { "texture": "#hat", "uv": [ 1.0, 2.5, 1.5, 3.0 ] }
+							},
+							"children": [
+								{
+									"name": "RopeBottomR",
+									"from": [ 0.01, -3.2, 0.0 ],
+									"to": [ 0.31, 0.0, 0.3 ],
+									"uv": [ 3.0, 2.5 ],
+									"rotationOrigin": [ 0.0, 0.0, 0.0 ],
+									"rotationX": -45.0,
+									"faces": {
+										"north": { "texture": "#hat", "uv": [ 3.0, 3.0, 3.5, 6.0 ] },
+										"east": { "texture": "#hat", "uv": [ 3.5, 3.0, 4.0, 6.0 ] },
+										"south": { "texture": "#hat", "uv": [ 4.0, 3.0, 4.5, 6.0 ] },
+										"west": { "texture": "#hat", "uv": [ 4.5, 3.0, 5.0, 6.0 ] },
+										"up": { "texture": "#hat", "uv": [ 3.0, 2.5, 3.5, 3.0 ] },
+										"down": { "texture": "#hat", "uv": [ 3.5, 2.5, 4.0, 3.0 ] }
+									}
+								}
+							]
+						},
+						{
+							"name": "RopeTopL",
+							"from": [ 0.0, -2.5, 6.5 ],
+							"to": [ 0.3, 1.0, 6.8 ],
+							"uv": [ 0.5, 2.5 ],
+							"rotationOrigin": [ 0.0, 1.0, 6.8 ],
+							"rotationX": 15.0,
+							"rotationY": 0.0,
+							"rotationZ": 0.0,
+							"faces": {
+								"north": { "texture": "#hat", "uv": [ 0.5, 3.0, 1.0, 6.5 ] },
+								"east": { "texture": "#hat", "uv": [ 1.0, 3.0, 1.5, 6.5 ] },
+								"south": { "texture": "#hat", "uv": [ 1.5, 3.0, 2.0, 6.5 ] },
+								"west": { "texture": "#hat", "uv": [ 2.0, 3.0, 2.5, 6.5 ] },
+								"up": { "texture": "#hat", "uv": [ 0.5, 2.5, 1.0, 3.0 ] },
+								"down": { "texture": "#hat", "uv": [ 1.0, 2.5, 1.5, 3.0 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] }
+							},
+							"children": [
+								{
+									"name": "RopeBottomL",
+									"from": [ 0.02, -3.2, 0.0 ],
+									"to": [ 0.32, 0.0, 0.3 ],
+									"uv": [ 3.0, 2.5 ],
+									"rotationOrigin": [ 0.0, 0.0, 0.3 ],
+									"rotationX": 45.0,
+									"faces": {
+										"north": { "texture": "#hat", "uv": [ 3.0, 3.0, 3.5, 6.0 ] },
+										"east": { "texture": "#hat", "uv": [ 3.5, 3.0, 4.0, 6.0 ] },
+										"south": { "texture": "#hat", "uv": [ 4.0, 3.0, 4.5, 6.0 ] },
+										"west": { "texture": "#hat", "uv": [ 4.5, 3.0, 5.0, 6.0 ] },
+										"up": { "texture": "#hat", "uv": [ 3.0, 2.5, 3.5, 3.0 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] },
+										"down": { "texture": "#hat", "uv": [ 3.5, 2.5, 4.0, 3.0 ], "windMode": [-1,-1,-1,-1], "windData": [1,1,1,1] }
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]}

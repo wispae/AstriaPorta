@@ -75,61 +75,69 @@ namespace AstriaPorta.Content
                 return;
             }
 
+            if (blockSel == null || blockSel.Block == null)
+            {
+                return;
+            }
+
             if (byEntity is not EntityPlayer) return;
             EntityPlayer byPlayer = byEntity as EntityPlayer;
 
-            int previousX, previousY, previousZ;
+            int previousX, previousY, previousZ, previousMode, toolMode;
             previousX = slot.Itemstack.TempAttributes.GetInt("posx", -1);
             previousY = slot.Itemstack.TempAttributes.GetInt("posy", -1);
             previousZ = slot.Itemstack.TempAttributes.GetInt("posz", -1);
+            previousMode = slot.Itemstack.TempAttributes.GetInt("pmode", -1);
+            toolMode = slot.Itemstack.Attributes.GetInt("toolMode", 0);
+            bool isSameBlock = false;
+
             if (previousX == blockSel.Position.X && previousY == blockSel.Position.Y && previousZ == blockSel.Position.Z)
             {
-                capi.World.HighlightBlocks(byPlayer.Player, 0, new List<BlockPos>());
-                slot.Itemstack.TempAttributes.SetInt("posx", -1);
-                return;
+                isSameBlock = ((toolMode == previousMode) && previousMode != -1);
             }
 
             BlockEntity targetBE = capi.World.BlockAccessor.GetBlockEntity(blockSel.Position);
             if (targetBE == null) return;
 
-            switch (slot.Itemstack.Attributes.GetInt("toolMode", 0))
+            switch (toolMode)
             {
                 case 0:
-                    DoActionShowIrisArea(byPlayer.Player, targetBE as BlockEntityStargate);
+                    DoActionShowIrisArea(byPlayer.Player, targetBE as BlockEntityStargate, isSameBlock);
                     break;
                 case 1:
-                    DoActionShowVortexArea(byPlayer.Player, targetBE as BlockEntityStargate);
+                    DoActionShowVortexArea(byPlayer.Player, targetBE as BlockEntityStargate, isSameBlock);
                     break;
                 case 2:
-                    DoActionFillIrisArea(targetBE as BlockEntityStargate);
+                    DoActionFillIrisArea(targetBE as BlockEntityStargate, isSameBlock);
                     break;
                 case 3:
-                    DoActionFillVortexArea(targetBE as BlockEntityStargate);
+                    DoActionFillVortexArea(targetBE as BlockEntityStargate, isSameBlock);
                     break;
                 case 4:
                     DoActionCheckIrisState(targetBE as BlockEntityStargate);
                     break;
                 case 5:
-                    DoActionShowDhdSearchArea(byPlayer.Player, targetBE as BlockEntityDialHomeDevice);
+                    DoActionShowDhdSearchArea(byPlayer.Player, targetBE as BlockEntityDialHomeDevice, isSameBlock);
                     break;
             }
 
             slot.Itemstack.TempAttributes.SetInt("posx", blockSel.Position.X);
             slot.Itemstack.TempAttributes.SetInt("posy", blockSel.Position.Y);
             slot.Itemstack.TempAttributes.SetInt("posz", blockSel.Position.Z);
+            slot.Itemstack.TempAttributes.SetInt("pmode", isSameBlock ? -1 : toolMode);
         }
 
-        protected void DoActionShowIrisArea(IPlayer player, BlockEntityStargate gate)
+        protected void DoActionShowIrisArea(IPlayer player, BlockEntityStargate gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             Cuboidi range = gate.IrisArea;
             if (range == null) return;
 
-            List<BlockPos> positions = CuboidOffsetToBlockPositions(range, gate.Pos);
+            List<BlockPos> positions = CuboidOffsetToBlockPositions(range, gate.Pos, isSameBlock);
             capi.World.HighlightBlocks(player, 0, positions);
         }
 
-        protected void DoActionFillIrisArea(BlockEntityStargate gate)
+        protected void DoActionFillIrisArea(BlockEntityStargate gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             Block filler = capi.World.GetBlock(new AssetLocation("game:soil-medium-none"));
@@ -140,6 +148,11 @@ namespace AstriaPorta.Content
             List<BlockPos> positions = CuboidOffsetToBlockPositions(range, gate.Pos);
             for (int i = 0; i < positions.Count; i++)
             {
+                if (isSameBlock)
+                {
+                    capi.World.BlockAccessor.SetBlock(0, positions[i]);
+                    continue;
+                }
                 if (capi.World.BlockAccessor.GetBlock(positions[i]).Id == 0)
                 {
                     capi.World.BlockAccessor.SetBlock(filler.Id, positions[i]);
@@ -147,17 +160,17 @@ namespace AstriaPorta.Content
             }
         }
 
-        protected void DoActionShowVortexArea(IPlayer player, BlockEntityStargate gate)
+        protected void DoActionShowVortexArea(IPlayer player, BlockEntityStargate gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             Cuboidi range = gate.VortexArea;
             if (range == null) return;
 
-            List<BlockPos> positions = CuboidOffsetToBlockPositions(range, gate.Pos);
+            List<BlockPos> positions = CuboidOffsetToBlockPositions(range, gate.Pos, isSameBlock);
             capi.World.HighlightBlocks(player, 0, positions);
         }
 
-        protected void DoActionFillVortexArea(BlockEntityStargate gate)
+        protected void DoActionFillVortexArea(BlockEntityStargate gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             Block filler = capi.World.GetBlock(new AssetLocation("game:soil-medium-none"));
@@ -168,6 +181,11 @@ namespace AstriaPorta.Content
             List<BlockPos> positions = CuboidOffsetToBlockPositions(range, gate.Pos);
             for (int i = 0; i < positions.Count; i++)
             {
+                if (isSameBlock)
+                {
+                    capi.World.BlockAccessor.SetBlock(0, positions[i]);
+                    continue;
+                }
                 if (capi.World.BlockAccessor.GetBlock(positions[i]).Id == 0)
                 {
                     capi.World.BlockAccessor.SetBlock(filler.Id, positions[i]);
@@ -175,24 +193,30 @@ namespace AstriaPorta.Content
             }
         }
 
-        protected void DoActionCheckIrisState(BlockEntityStargate gate)
+        protected void DoActionCheckIrisState(BlockEntityStargate gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             capi.ShowChatMessage(gate.IsIrisClear() ? "Gate iris space is clear" : "Gate iris space is NOT clear");
         }
 
-        protected void DoActionShowDhdSearchArea(IPlayer player, BlockEntityDialHomeDevice dhd)
+        protected void DoActionShowDhdSearchArea(IPlayer player, BlockEntityDialHomeDevice dhd, bool isSameBlock = false)
         {
             if (dhd == null) return;
             Cuboidi range = dhd.SearchArea;
 
-            List<BlockPos> positions = CuboidOffsetToBlockPositions(range, dhd.Pos);
+            List<BlockPos> positions = CuboidOffsetToBlockPositions(range, dhd.Pos, isSameBlock);
             capi.World.HighlightBlocks(player, 0, positions);
         }
 
-        protected List<BlockPos> CuboidOffsetToBlockPositions(Cuboidi range, BlockPos fromPos)
+        protected List<BlockPos> CuboidOffsetToBlockPositions(Cuboidi range, BlockPos fromPos, bool isSameBlock = false)
         {
             List<BlockPos> positions = new List<BlockPos>();
+
+            if (isSameBlock)
+            {
+                return positions;
+            }
+
             for (int x = range.MinX; x <= range.MaxX; x++)
             {
                 for (int z = range.MinZ; z <= range.MaxZ; z++)

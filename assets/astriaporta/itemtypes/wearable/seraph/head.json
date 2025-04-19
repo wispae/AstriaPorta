@@ -1,0 +1,126 @@
+﻿{
+  "code": "stargateclothes",
+  "class": "ItemWearable",
+  "variantgroups": [
+    {
+      "code": "category",
+      "states": [ "head" ]
+    },
+    {
+      "code": "head",
+      "states": [
+        "sgc-cap-standard",
+        "sgc-cap-desert",
+        "sgc-boonie-standard",
+        "sgc-boonie-desert"
+      ]
+    }
+  ],
+  "shapeByType": {
+    "@*-(sgc-cap-standard|sgc-cap-desert)": {
+      "base": "entity/humanoid/seraph/clothing/head/sgc_cap"
+    },
+    "@*-(sgc-boonie-standard|sgc-boonie-desert)": {
+      "base": "entity/humanoid/seraph/clothing/head/sgc_boonie"
+    }
+  },
+  "storageFlags": 128,
+  "attributes": {
+    "clothescategory": "head",
+    "wearableAttachment": true
+  },
+  "attributesByType": {
+    "*": {
+      "disableElements": [ "ponytailhigh", "hair-uncovered", "sidehigh", "sidelow", "bangs" ],
+      "keepElements": [ "hair-covered" ]
+    }
+  },
+  "texturesByType": {
+    "*": {
+      "seraph": { "base": "game:block/transparent" },
+      "hat": { "base": "entity/humanoid/seraphclothes/head/{head}" }
+    }
+  },
+  "creativeinventory": {
+    "general": [ "*" ],
+    "items": [ "*" ],
+    "clothing": [ "*" ],
+    "astriaporta": [ "*" ]
+  },
+  "fpHandTransformByType": {
+    "*": {
+      "translation": {
+        "x": 0.6,
+        "y": -1.6,
+        "z": -0.5
+      },
+      "rotation": {
+        "x": 180,
+        "y": -108,
+        "z": -180
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 1.6,
+        "z": 0.5
+      },
+      "scale": 2.15
+    }
+  },
+  "tpHandTransformByType": {
+    "*": {
+      "translation": {
+        "x": -0.97,
+        "y": -3,
+        "z": -1
+      },
+      "rotation": {
+        "x": -13,
+        "y": -80,
+        "z": 12
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 1.5,
+        "z": 0.5
+      },
+      "scale": 0.55
+    }
+  },
+  "guiTransformByType": {
+    "*": {
+      "rotate": false,
+      "translation": {
+        "x": 0,
+        "y": 0,
+        "z": 19
+      },
+      "rotation": {
+        "x": 174,
+        "y": -45,
+        "z": 23
+      },
+      "origin": {
+        "x": 0.52,
+        "y": 1.6,
+        "z": 0.5
+      },
+      "scale": 1.99
+    }
+  },
+  "groundTransformByType": {
+    "*": {
+      "translation": {
+        "x": 0.05,
+        "y": -0.3,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 2
+    }
+  }
+}

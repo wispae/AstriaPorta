@@ -19,7 +19,10 @@
   "storageFlags": 128,
   "attributes": {
     "clothescategory": "upperbody",
-    "wearableAttachment": true
+    "wearableAttachment": true,
+    "warmthByType": {
+      "*": 1
+    }
   },
   "shapeByType": {
     "@*-(sgc-shirt-standard|sgc-shirt-desert)": {
@@ -27,21 +30,9 @@
     }
   },
   "texturesByType": {
-    "*-sgc-shirt-standard": {
-      "seraph": {
-        "base": "game:block/transparent"
-      },
-      "shirt": {
-        "base": "item/entity/humanoid/seraphclothes/upperbody/sgc_shirt_standard"
-      }
-    },
-    "*-sgc-shirt-desert": {
-      "seraph": {
-        "base": "game:block/transparent"
-      },
-      "shirt": {
-        "base": "item/entity/humanoid/seraphclothes/upperbody/sgc_shirt_desert"
-      }
+    "*": {
+      "seraph": { "base": "game:block/transparent" },
+      "shirt": { "base": "entity/humanoid/seraphclothes/upperbody/{upperbody}" }
     }
   },
   "creativeinventory": {

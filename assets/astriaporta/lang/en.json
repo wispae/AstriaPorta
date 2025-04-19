@@ -59,6 +59,20 @@
   "debugtabletmodename-checkirisstate": "Check gate iris state",
   "debugtabletmodename-showdhdsearchrange": "Show DHD search range",
 
+  // = CLOTHING =
+  "item-stargateclothes-foot-sgc-boots-standard": "SGC boots (standard)",
+  "item-stargateclothes-foot-sgc-boots-desert": "SGC boots (desert)",
+  "item-stargateclothes-lowerbody-sgc-pants-standard": "SGC pants (standard)",
+  "item-stargateclothes-lowerbody-sgc-pants-desert": "SGC pants (desert)",
+  "item-stargateclothes-upperbody-sgc-shirt-standard": "SGC shirt (standard)",
+  "item-stargateclothes-upperbody-sgc-shirt-desert": "SGC shirt (desert)",
+  "item-stargateclothes-upperbodyover-sgc-tacticalvest-standard": "SGC tactical vest (standard)",
+  "item-stargateclothes-upperbodyover-sgc-tacticalvest-desert": "SGC tactical vest (desert)",
+  "item-stargateclothes-head-sgc-cap-standard": "SGC cap (standard)",
+  "item-stargateclothes-head-sgc-cap-desert": "SGC cap (desert)",
+  "item-stargateclothes-head-sgc-boonie-standard": "SGC boonie hat (standard)",
+  "item-stargateclothes-head-sgc-boonie-desert": "SGC boonie hat (desert)",
+
   // == OTHER ==
   "astriaporta-cartouche-unlinked": "Address not yet generated",
   "astriaporta-cartouche-generating": "Searching for stargate...",
