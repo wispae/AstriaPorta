@@ -25,21 +25,22 @@ namespace AstriaPorta.Content
     {
         Fast,
         Slow,
-        Instant
+        Instant,
+        Default
     }
 
-	// offset numbers by 1FFFF because the game uses some
-	// packet ids itself for some purposes
-	// (looking at you, InventoryNetworkUtil)
-	public enum EnumStargatePacketType
-	{
-		State = 0x1FFFF,
-		Animation = 0x2FFFF,
-		PlayerYaw = 0x3FFFF,
-		Dial = 0x4FFFF,
-		Abort = 0x5FFFF,
-		CamoUpdate = 0x6FFFF
-	}
+    // offset numbers by 1FFFF because the game uses some
+    // packet ids itself for some purposes
+    // (looking at you, InventoryNetworkUtil)
+    public enum EnumStargatePacketType
+    {
+        State = 0x1FFFF,
+        Animation = 0x2FFFF,
+        PlayerYaw = 0x3FFFF,
+        Dial = 0x4FFFF,
+        Abort = 0x5FFFF,
+        CamoUpdate = 0x6FFFF
+    }
 
     [ProtoContract]
     public struct GateAnimSyncPacket
@@ -63,8 +64,8 @@ namespace AstriaPorta.Content
     {
         [ProtoMember(1)]
         public int State { get; set; }
-		[ProtoMember(2)]
-		public int DialType { get; set; }
+        [ProtoMember(2)]
+        public int DialType { get; set; }
         [ProtoMember(3)]
         public byte CurrentGlyph { get; set; }
         [ProtoMember(4)]
@@ -75,8 +76,8 @@ namespace AstriaPorta.Content
         public int ConnectionSpeed { get; set; }
         [ProtoMember(7)]
         public bool RotateCW { get; set; }
-		[ProtoMember(8)]
-		public bool Rotating { get; set; }
+        [ProtoMember(8)]
+        public bool Rotating { get; set; }
         [ProtoMember(9)]
         public float CurrentAngle { get; set; }
         [ProtoMember(10)]
@@ -92,19 +93,19 @@ namespace AstriaPorta.Content
         public float Yaw { get; set; }
     }
 
-	public interface IStargate
-	{
-		public StargateAddress GateAddress { get; }
+    public interface IStargate
+    {
+        public StargateAddress GateAddress { get; }
 
-		public StargateAddress DialingAddress { get; }
+        public StargateAddress DialingAddress { get; }
 
-		public EnumStargateType StargateType { get; }
+        public EnumStargateType StargateType { get; }
 
-		public EnumStargateState StargateState { get; }
+        public EnumStargateState StargateState { get; }
 
-		public void TryDial(StargateAddress address, EnumDialSpeed dialType);
+        public void TryDial(StargateAddress address, EnumDialSpeed dialType);
 
-		public void TryDisconnect();
+        public void TryDisconnect();
 
         // public float TimeOpen { get; set; }
 

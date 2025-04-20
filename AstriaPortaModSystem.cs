@@ -13,124 +13,130 @@ using AstriaPorta.Config;
 namespace AstriaPorta
 {
     public class AstriaPortaModSystem : ModSystem
-	{
-		private GateDiagnostics diagnostics;
+    {
+        private GateDiagnostics diagnostics;
 
-		public int eventHorizonShaderProgramRef;
-		public int animatedTextureShaderProgramRef;
-		public int eventHorizonTexRef;
-		public int animatedTexRef;
-		public LoadedTexture eventHorizonTex;
-		public TextureAtlasPosition eventHorizonTexPos;
-		public TextureAtlasPosition animatedTexPos;
-		public IShaderProgram eventHorizonShaderProgram;
-		public IShaderProgram animatedTextureShaderProgram;
-		private ICoreClientAPI capi;
-		private ICoreServerAPI sapi;
-		private MeshData horizonMesh;
+        public int eventHorizonShaderProgramRef;
+        public int animatedTextureShaderProgramRef;
+        public int eventHorizonTexRef;
+        public int animatedTexRef;
+        public LoadedTexture eventHorizonTex;
+        public TextureAtlasPosition eventHorizonTexPos;
+        public TextureAtlasPosition animatedTexPos;
+        public IShaderProgram eventHorizonShaderProgram;
+        public IShaderProgram animatedTextureShaderProgram;
+        private ICoreClientAPI capi;
+        private ICoreServerAPI sapi;
+        private MeshData horizonMesh;
 
-		public override bool ShouldLoad(EnumAppSide forSide)
-		{
-			return true;
-		}
+        public override bool ShouldLoad(EnumAppSide forSide)
+        {
+            return true;
+        }
 
-		// Called on server and client
-		// Useful for registering block/entity classes on both sides
-		public override void Start(ICoreAPI api)
-		{
-			RegisterBlocks(api);
-			RegisterItems(api);
-		}
+        public override double ExecuteOrder()
+        {
+            return 0.36d;
+        }
 
-		public override void StartServerSide(ICoreServerAPI api)
-		{
-			base.StartServerSide(api);
-			sapi = api;
+        // Called on server and client
+        // Useful for registering block/entity classes on both sides
+        public override void Start(ICoreAPI api)
+        {
+            RegisterBlocks(api);
+            RegisterItems(api);
+        }
 
-			RegisterCommands(api);
-			Mod.Logger.Debug("Started server-side modsystem");
-		}
+        public override void StartServerSide(ICoreServerAPI api)
+        {
+            base.StartServerSide(api);
+            sapi = api;
 
-		public override void StartClientSide(ICoreClientAPI api)
-		{
-			base.StartClientSide(api);
-			capi = api;
+            RegisterCommands(api);
+            Mod.Logger.Debug("Started server-side modsystem");
+        }
 
-			api.Event.BlockTexturesLoaded += onClientAssetsLoaded;
-		}
+        public override void StartClientSide(ICoreClientAPI api)
+        {
+            base.StartClientSide(api);
+            capi = api;
 
-		private void onClientAssetsLoaded()
-		{
-			capi.Event.ReloadTextures += CreateExternalTextures;
+            api.Event.BlockTexturesLoaded += onClientAssetsLoaded;
+        }
 
-			CreateExternalTextures();
-			RegisterShaderPrograms();
-		}
+        private void onClientAssetsLoaded()
+        {
+            capi.Event.ReloadTextures += CreateExternalTextures;
+            capi.Event.ReloadShader += RegisterShaderPrograms;
 
-		private void CreateExternalTextures()
-		{
-			AssetLocation horizonTexLocation = new AssetLocation("astriaporta", "block/gates/vortex");
-			bool success = capi.BlockTextureAtlas.GetOrInsertTexture(horizonTexLocation, out eventHorizonTexRef, out eventHorizonTexPos);
-		}
+            CreateExternalTextures();
+            RegisterShaderPrograms();
+        }
 
-		private bool RegisterShaderPrograms()
-		{
-			eventHorizonShaderProgram = capi.Shader.NewShaderProgram();
-			eventHorizonShaderProgram.AssetDomain = "astriaporta";
-			eventHorizonShaderProgram.VertexShader = capi.Shader.NewShader(EnumShaderType.VertexShader);
-			eventHorizonShaderProgram.FragmentShader = capi.Shader.NewShader(EnumShaderType.FragmentShader);
-			eventHorizonShaderProgram.ClampTexturesToEdge = true;
+        private void CreateExternalTextures()
+        {
+            AssetLocation horizonTexLocation = new AssetLocation("astriaporta", "block/gates/vortex");
+            bool success = capi.BlockTextureAtlas.GetOrInsertTexture(horizonTexLocation, out eventHorizonTexRef, out eventHorizonTexPos);
+        }
 
-			eventHorizonShaderProgramRef = capi.Shader.RegisterFileShaderProgram("eventhorizon", eventHorizonShaderProgram);
+        private bool RegisterShaderPrograms()
+        {
+            eventHorizonShaderProgram = capi.Shader.NewShaderProgram();
+            eventHorizonShaderProgram.AssetDomain = "astriaporta";
+            eventHorizonShaderProgram.VertexShader = capi.Shader.NewShader(EnumShaderType.VertexShader);
+            eventHorizonShaderProgram.FragmentShader = capi.Shader.NewShader(EnumShaderType.FragmentShader);
+            eventHorizonShaderProgram.ClampTexturesToEdge = true;
 
-			capi.Logger.Notification("Loaded Shaderprogram for event horizon.");
+            eventHorizonShaderProgramRef = capi.Shader.RegisterFileShaderProgram("eventhorizon", eventHorizonShaderProgram);
 
-			return eventHorizonShaderProgram.Compile();
-		}
+            capi.Logger.Notification("Loaded Shaderprogram for event horizon.");
 
-		private void RegisterItems(ICoreAPI api)
-		{
-			api.RegisterCollectibleBehaviorClass("GateAddressHolder", typeof(BehaviorGateAddressHolder));
-			api.RegisterItemClass("ItemCartoucheLocator", typeof(ItemCartoucheLocator));
-			api.RegisterItemClass("ItemStargateDebugTablet", typeof(ItemStargateDebugTablet));
-		}
+            return eventHorizonShaderProgram.Compile();
+        }
 
-		private void RegisterBlocks(ICoreAPI api)
-		{
-			api.RegisterBlockClass("BlockRandomizerOrientable", typeof(BlockRandomizerOrientable));
-			api.RegisterBlockClass("BlockStargate", typeof(BlockStargate));
-			api.RegisterBlockClass("BlockDialHomeDevice", typeof(BlockDialHomeDevice));
-			api.RegisterBlockClass("BlockMultiblockStargate", typeof(BlockMultiblockStargate));
+        private void RegisterItems(ICoreAPI api)
+        {
+            api.RegisterCollectibleBehaviorClass("GateAddressHolder", typeof(BehaviorGateAddressHolder));
+            api.RegisterItemClass("ItemCartoucheLocator", typeof(ItemCartoucheLocator));
+            api.RegisterItemClass("ItemStargateDebugTablet", typeof(ItemStargateDebugTablet));
+        }
 
-			api.RegisterBlockEntityClass("BERandomizerOrientable", typeof(BlockEntityBlockRandomizerOrientable));
-			api.RegisterBlockEntityClass("BEStargate", typeof(BlockEntityStargate));
-			api.RegisterBlockEntityClass("BEDialHomeDevice", typeof(BlockEntityDialHomeDevice));
+        private void RegisterBlocks(ICoreAPI api)
+        {
+            api.RegisterBlockClass("BlockRandomizerOrientable", typeof(BlockRandomizerOrientable));
+            api.RegisterBlockClass("BlockStargate", typeof(BlockStargate));
+            api.RegisterBlockClass("BlockDialHomeDevice", typeof(BlockDialHomeDevice));
+            api.RegisterBlockClass("BlockMultiblockStargate", typeof(BlockMultiblockStargate));
 
-			api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));
-		}
+            api.RegisterBlockEntityClass("BERandomizerOrientable", typeof(BlockEntityBlockRandomizerOrientable));
+            api.RegisterBlockEntityClass("BEStargate", typeof(BlockEntityStargate));
+            api.RegisterBlockEntityClass("BEDialHomeDevice", typeof(BlockEntityDialHomeDevice));
 
-		private void RegisterCommands(ICoreServerAPI api)
-		{
-			diagnostics = new GateDiagnostics(api);
-			CommandArgumentParsers parsers = api.ChatCommands.Parsers;
+            api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));
+        }
 
-			api.ChatCommands.Create("sectoraddress")
-				.RequiresPrivilege(Privilege.gamemode)
-				.WithDescription("Calculates the local sector gate address")
-				.RequiresPlayer()
-				.HandleWith(diagnostics.CalculateNearestAddress);
+        private void RegisterCommands(ICoreServerAPI api)
+        {
+            diagnostics = new GateDiagnostics(api);
+            CommandArgumentParsers parsers = api.ChatCommands.Parsers;
 
-			api.ChatCommands.Create("nearestgate")
-				.RequiresPrivilege(Privilege.gamemode)
-				.WithDescription("Get the address of the nearest gate")
-				.RequiresPlayer()
-				.HandleWith(diagnostics.RetrieveClosestGate);
+            api.ChatCommands.Create("sectoraddress")
+                .RequiresPrivilege(Privilege.gamemode)
+                .WithDescription("Calculates the local sector gate address")
+                .RequiresPlayer()
+                .HandleWith(diagnostics.CalculateNearestAddress);
 
-			api.ChatCommands.Create("gatelist")
-				.RequiresPrivilege(Privilege.gamemode)
-				.WithDescription("Retrieve list of known gates")
-				.WithArgs(parsers.OptionalInt("page"))
-				.HandleWith(diagnostics.DisplayGateList);
+            api.ChatCommands.Create("nearestgate")
+                .RequiresPrivilege(Privilege.gamemode)
+                .WithDescription("Get the address of the nearest gate")
+                .RequiresPlayer()
+                .HandleWith(diagnostics.RetrieveClosestGate);
+
+            api.ChatCommands.Create("gatelist")
+                .RequiresPrivilege(Privilege.gamemode)
+                .WithDescription("Retrieve list of known gates")
+                .WithArgs(parsers.OptionalInt("page"))
+                .HandleWith(diagnostics.DisplayGateList);
 
 #if DEBUG
 			api.ChatCommands.Create("addresstest")
@@ -148,6 +154,6 @@ namespace AstriaPorta
 				.WithArgs(parsers.Word("address"))
 				.HandleWith(diagnostics.DialAnimationManually);
 #endif
-		}
-	}
+        }
+    }
 }

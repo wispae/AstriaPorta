@@ -15,327 +15,318 @@ using Vintagestory.GameContent;
 
 namespace AstriaPorta.Content
 {
-	public class BlockEntityDialHomeDevice : BlockEntity, IBlockEntityInteractable
-	{
-		private BlockEntityStargate connectedGate;
-		private BlockPos connectedPos;
+    public class BlockEntityDialHomeDevice : BlockEntity, IBlockEntityInteractable
+    {
+        private static Cuboidi searchArea = null;
 
-		private bool isActive = false;
+        private BlockEntityStargate connectedGate;
+        private BlockPos connectedPos;
 
-		public string LinkedAddress
-		{
-			get
-			{
-				return connectedGate?.GateAddress.ToString() ?? Lang.Get("astriaporta:astriaporta-dhd-no-gate-linked");
-			}
-		}
+        private bool isActive = false;
 
-		public bool IsGateOpen
-		{
-			get
-			{
-				return connectedGate?.StargateState == EnumStargateState.ConnectedOutgoing || connectedGate?.StargateState == EnumStargateState.ConnectedIncoming;
-			}
-		}
+        public string LinkedAddress
+        {
+            get
+            {
+                return connectedGate?.GateAddress.ToString() ?? Lang.Get("astriaporta:astriaporta-dhd-no-gate-linked");
+            }
+        }
 
-		public bool CanCloseGate
-		{
-			get
-			{
-				return IsGateOpen || connectedGate?.StargateState == EnumStargateState.DialingOutgoing;
-			}
-		}
+        public bool IsGateOpen
+        {
+            get
+            {
+                return connectedGate?.StargateState == EnumStargateState.ConnectedOutgoing || connectedGate?.StargateState == EnumStargateState.ConnectedIncoming;
+            }
+        }
 
-		public bool CanBreak
-		{
-			get
-			{
-				return connectedGate?.StargateState != EnumStargateState.ConnectedOutgoing && connectedGate?.StargateState != EnumStargateState.DialingOutgoing;
-			}
-		}
+        public bool CanCloseGate
+        {
+            get
+            {
+                return IsGateOpen || connectedGate?.StargateState == EnumStargateState.DialingOutgoing;
+            }
+        }
 
-		public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
-		{
-			base.GetBlockInfo(forPlayer, dsc);
+        public bool CanBreak
+        {
+            get
+            {
+                return connectedGate?.StargateState != EnumStargateState.ConnectedOutgoing && connectedGate?.StargateState != EnumStargateState.DialingOutgoing;
+            }
+        }
 
-			dsc.AppendLine($"Linked to: {LinkedAddress}");
-		}
+        public Cuboidi SearchArea
+        {
+            get
+            {
+                return searchArea;
+            }
+        }
 
-		/// <summary>
-		/// Finds the closest gate to this DHD<br/>
-		/// Expensive, use as little as possible
-		/// </summary>
-		/// <returns></returns>
-		protected BlockEntityStargate FindClosestGate()
-		{
-			BlockPos startPos = Pos.Copy();
-			BlockPos endPos = Pos.Copy();
+        public BlockEntityDialHomeDevice() : base()
+        {
+            if (searchArea == null)
+            {
+                searchArea = new Cuboidi(-7, -2, -7, 7, 2, 7);
+            }
+        }
 
-			switch (Block.Shape.rotateY)
-			{
-				case 0:
-					{
-						// facing north
-						startPos.Add(-3, -1, -1);
-						endPos.Add(3, 3, -6);
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
+        {
+            base.GetBlockInfo(forPlayer, dsc);
 
-						break;
-					}
-				case 90:
-					{
-						// facing west
-						startPos.Add(-1, -1, 3);
-						endPos.Add(-6, 3, -3);
+            dsc.AppendLine($"Linked to: {LinkedAddress}");
+        }
 
-						break;
-					}
-				case 180:
-					{
-						// facing south
-						startPos.Add(3, -1, 1);
-						endPos.Add(-3, 3, 6);
+        /// <summary>
+        /// Finds the closest gate to this DHD<br/>
+        /// Expensive, use as little as possible
+        /// </summary>
+        /// <returns></returns>
+        protected BlockEntityStargate FindClosestGate()
+        {
+            Cuboidi searchOffsets = SearchArea;
 
-						break;
-					}
-				case 270:
-					{
-						// facing east
-						startPos.Add(1, -1, -3);
-						endPos.Add(6, 3, 3);
+            List<BlockEntityStargate> targetBlocks = new List<BlockEntityStargate>();
+            BlockEntityStargate foundBE = null;
 
-						break;
-					}
-				default:
-					{
-						return null;
-					}
-			}
+            for (int x = searchOffsets.MinX; x <= searchOffsets.MaxX; x++)
+            {
+                for (int z = searchOffsets.MinZ; z <= searchOffsets.MaxZ; z++)
+                {
+                    for (int y = searchOffsets.MinY; y <= searchOffsets.MaxY; y++)
+                    {
+                        foundBE = Api.World.BlockAccessor.GetBlockEntity<BlockEntityStargate>(Pos.AddCopy(x, y, z));
+                        if (foundBE != null)
+                        {
+                            targetBlocks.Add(foundBE);
+                        }
+                    }
+                }
+            }
 
-			List<BlockEntityStargate> targetBlocks = new List<BlockEntityStargate>();
-			BlockEntity foundBE = null;
+            foundBE = targetBlocks.Count > 0 ? targetBlocks[0] : null;
+            foreach (BlockEntityStargate be in targetBlocks)
+            {
+                if (Pos.ManhattenDistance(be.Pos) < Pos.ManhattenDistance(foundBE.Pos))
+                {
+                    foundBE = be;
+                }
+            }
 
-			Api.World.BlockAccessor.WalkBlocks(startPos, endPos, (Block b, int x, int y, int z) =>
-			{
-				foundBE = Api.World.BlockAccessor.GetBlockEntity(new BlockPos(x, y, z, Pos.dimension));
-				if (foundBE != null && foundBE is BlockEntityStargate)
-				{
-					targetBlocks.Add((BlockEntityStargate)foundBE);
-				}
-			});
+            return foundBE as BlockEntityStargate;
+        }
 
-			foundBE = targetBlocks.Count > 0 ? targetBlocks[0] : null;
-			foreach (BlockEntityStargate be in targetBlocks)
-			{
-				if (Pos.ManhattenDistance(be.Pos) < Pos.ManhattenDistance(foundBE.Pos))
-				{
-					foundBE = be;
-				}
-			}
+        /// <summary>
+        /// Attempts to register this DHD to the specified gate
+        /// </summary>
+        /// <param name="gate"></param>
+        /// <returns></returns>
+        public bool RegisterToGate(BlockEntityStargate gate)
+        {
+            bool success = false;
+            success = gate.AttemptDhdRegistration(this);
 
-			return foundBE as BlockEntityStargate;
-		}
+            if (!success) return false;
 
-		/// <summary>
-		/// Attempts to register this DHD to the specified gate
-		/// </summary>
-		/// <param name="gate"></param>
-		/// <returns></returns>
-		public bool RegisterToGate(BlockEntityStargate gate)
-		{
-			bool success = false;
-			success = gate.AttemptDhdRegistration(this);
+            connectedGate = gate;
+            connectedPos = gate.Pos;
 
-			if (!success) return false;
+            return true;
+        }
 
-			connectedGate = gate;
-			connectedPos = gate.Pos;
+        protected void ReconnectGate(float delta)
+        {
+            if (connectedPos is null || connectedPos.X == -1) return;
 
-			return true;
-		}
+            if (Api.World.BlockAccessor.GetChunkAtBlockPos(connectedPos) == null)
+            {
+                Api.Event.RegisterCallback(ReconnectGate, 5000);
+                return;
+            }
 
-		protected void ReconnectGate(float delta)
-		{
-			if (connectedPos is null || connectedPos.X == -1) return;
+            BlockEntity foundEntity = Api.World.BlockAccessor.GetBlockEntity(connectedPos);
 
-			if (Api.World.BlockAccessor.GetChunkAtBlockPos(connectedPos) == null)
-			{
-				Api.Event.RegisterCallback(ReconnectGate, 5000);
-				return;
-			}
+            if (foundEntity == null || foundEntity is not BlockEntityStargate) return;
 
-			BlockEntity foundEntity = Api.World.BlockAccessor.GetBlockEntity(connectedPos);
+            BlockEntityStargate connectedGate = foundEntity as BlockEntityStargate;
+            if (connectedGate.AttemptDhdRegistration(this))
+            {
+                this.connectedGate = connectedGate;
+                if (isActive && (connectedGate.StargateState == EnumStargateState.Idle))
+                {
+                    isActive = false;
+                    // TODO:
+                    //		Update visual state to inactive
+                    //		Also need to create model
+                }
+            }
+        }
 
-			if (foundEntity == null || foundEntity is not BlockEntityStargate) return;
+        /// <summary>
+        /// Opens the DHD GUI
+        /// </summary>
+        /// <param name="player">The player performing</param>
+        /// <returns></returns>
+        public bool OnRightClickInteraction(IPlayer player)
+        {
+            if (player.Entity.Controls.ShiftKey)
+            {
+                return doShiftInteraction(player);
+            }
 
-			BlockEntityStargate connectedGate = foundEntity as BlockEntityStargate;
-			if (connectedGate.AttemptDhdRegistration(this))
-			{
-				this.connectedGate = connectedGate;
-				if (isActive && (connectedGate.StargateState == EnumStargateState.Idle))
-				{
-					isActive = false;
-					// TODO:
-					//		Update visual state to inactive
-					//		Also need to create model
-				}
-			}
-		}
+            return doNormalInteraction(player);
+        }
 
-		/// <summary>
-		/// Opens the DHD GUI
-		/// </summary>
-		/// <param name="player">The player performing</param>
-		/// <returns></returns>
-		public bool OnRightClickInteraction(IPlayer player)
-		{
-			if (Api.Side == EnumAppSide.Client)
-			{
-				if (player.Entity.Controls.ShiftKey)
-				{
-					if (CanCloseGate)
-					{
-						TryCloseGate();
-						return false;
-					}
-				}
+        protected bool doNormalInteraction(IPlayer player)
+        {
+            if (Api.Side == EnumAppSide.Client)
+            {
+                GuiDialogDhd dhdGui = new GuiDialogDhd("Dial Home Device", Api as ICoreClientAPI, this, false);
+                dhdGui.OnAddressChanged = OnAddressChanged;
+                dhdGui.OnAddressConfirmed = OnDhdConfirmed;
 
-				GuiDialogDhd dhdGui = new GuiDialogDhd("Dial Home Device", Api as ICoreClientAPI, this, false);
-				dhdGui.OnAddressChanged = OnAddressChanged;
-				dhdGui.OnAddressConfirmed = OnDhdConfirmed;
+                dhdGui.OnClosed += () => { dhdGui.Dispose(); dhdGui = null; };
 
-				dhdGui.OnClosed += () => { dhdGui.Dispose(); dhdGui = null; };
+                dhdGui.TryOpen();
 
-				dhdGui.TryOpen();
+                return true;
+            }
 
-				return true;
-			}
+            return false;
+        }
 
-			return false;
-		}
+        protected bool doShiftInteraction(IPlayer player)
+        {
+            TryCloseGate();
+            return false;
+        }
 
-		protected void OnAddressChanged(StargateAddress address)
-		{
-			if (connectedGate != null && address.IsValid)
-			{
-				connectedGate.TryDial(address, EnumDialSpeed.Slow);
-			}
-		}
+        protected void OnAddressChanged(StargateAddress address)
+        {
+            if (connectedGate != null && address.IsValid)
+            {
+                connectedGate.TryDial(address, EnumDialSpeed.Default);
+            }
+        }
 
-		protected void OnDhdConfirmed(StargateAddress address)
-		{
-			Api.Logger.Debug(address.ToString());
-		}
+        protected void OnDhdConfirmed(StargateAddress address)
+        {
+            Api.Logger.Debug(address.ToString());
+        }
 
-		public string CoupleDhd()
-		{
-			BlockEntityStargate cgate = FindClosestGate();
-			if (cgate != null)
-			{
-				RegisterToGate(cgate);
-				return cgate.GateAddress.ToString();
-			}
+        public string CoupleDhd()
+        {
+            BlockEntityStargate cgate = FindClosestGate();
+            if (cgate != null)
+            {
+                RegisterToGate(cgate);
+                return cgate.GateAddress.ToString();
+            }
 
-			return "";
-		}
+            return "";
+        }
 
-		public void DialDhd(StargateAddress address)
-		{
-			if (connectedPos == null) return;
+        public void DialDhd(StargateAddress address)
+        {
+            if (connectedPos == null) return;
 
-			BlockEntityStargate gate;
-			gate = Api.World.BlockAccessor.GetBlockEntity<BlockEntityStargate>(connectedPos);
+            BlockEntityStargate gate;
+            gate = Api.World.BlockAccessor.GetBlockEntity<BlockEntityStargate>(connectedPos);
 
-			if (gate != null && gate is BlockEntityStargate)
-			{
-				gate.TryDial(address, EnumDialSpeed.Slow);
-			}
-		}
+            if (gate != null && gate is BlockEntityStargate)
+            {
+                gate.TryDial(address, EnumDialSpeed.Default);
+            }
+        }
 
-		public void TryCloseGate()
-		{
-			if (connectedPos == null) return;
-			if (connectedGate == null)
-			{
-				connectedGate = FindClosestGate();
-				if (connectedGate == null)
-				{
-					connectedPos = null;
-					return;
-				}
-			}
+        public void TryCloseGate()
+        {
+            if (connectedPos == null) return;
+            if (connectedGate == null)
+            {
+                connectedGate = FindClosestGate();
+                if (connectedGate == null)
+                {
+                    connectedPos = null;
+                    return;
+                }
+            }
 
-			connectedGate.TryDisconnect();
-		}
+            connectedGate.TryDisconnect();
+        }
 
-		public void DisconnectGate()
-		{
-			if (connectedPos == null) return;
+        public void DisconnectGate()
+        {
+            if (connectedPos == null) return;
 
-			if (Api.Side == EnumAppSide.Client)
-			{
-				((ICoreClientAPI)Api).Network.SendBlockEntityPacket(connectedPos, 2, null);
-			}
-		}
+            if (Api.Side == EnumAppSide.Client)
+            {
+                ((ICoreClientAPI)Api).Network.SendBlockEntityPacket(connectedPos, 2, null);
+            }
+        }
 
-		public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
-		{
-			base.OnReceivedClientPacket(fromPlayer, packetid, data);
-		}
+        public override void OnReceivedClientPacket(IPlayer fromPlayer, int packetid, byte[] data)
+        {
+            base.OnReceivedClientPacket(fromPlayer, packetid, data);
+        }
 
-		public override void OnReceivedServerPacket(int packetid, byte[] data)
-		{
-			base.OnReceivedServerPacket(packetid, data);
-		}
+        public override void OnReceivedServerPacket(int packetid, byte[] data)
+        {
+            base.OnReceivedServerPacket(packetid, data);
+        }
 
-		public override void Initialize(ICoreAPI api)
-		{
-			base.Initialize(api);
-			this.Api = api;
+        public override void Initialize(ICoreAPI api)
+        {
+            base.Initialize(api);
+            this.Api = api;
 
-			if (connectedPos is null || connectedPos.X == -1)
-			{
-				CoupleDhd();
-			} else
-			{
-				ReconnectGate(0);
-			}
-		}
+            if (connectedPos is null || connectedPos.X == -1)
+            {
+                CoupleDhd();
+            }
+            else
+            {
+                ReconnectGate(0);
+            }
+        }
 
-		public override void OnBlockPlaced(ItemStack byItemStack = null)
-		{
-			base.OnBlockPlaced(byItemStack);
-		}
+        public override void OnBlockPlaced(ItemStack byItemStack = null)
+        {
+            base.OnBlockPlaced(byItemStack);
+        }
 
-		public override void OnPlacementBySchematic(ICoreServerAPI api, IBlockAccessor blockAccessor, BlockPos pos, Dictionary<int, Dictionary<int, int>> replaceBlocks, int centerrockblockid, Block layerBlock, bool resolveImports)
-		{
-			base.OnPlacementBySchematic(api, blockAccessor, pos, replaceBlocks, centerrockblockid, layerBlock, resolveImports);
-			this.Api = api;
+        public override void OnPlacementBySchematic(ICoreServerAPI api, IBlockAccessor blockAccessor, BlockPos pos, Dictionary<int, Dictionary<int, int>> replaceBlocks, int centerrockblockid, Block layerBlock, bool resolveImports)
+        {
+            base.OnPlacementBySchematic(api, blockAccessor, pos, replaceBlocks, centerrockblockid, layerBlock, resolveImports);
+            this.Api = api;
 
-			BlockEntityStargate connectedGate = FindClosestGate();
-			if (connectedGate != null && connectedGate.AttemptDhdRegistration(this))
-			{
-				this.connectedGate = connectedGate;
-				connectedPos = connectedGate.Pos;
-			}
-		}
+            BlockEntityStargate connectedGate = FindClosestGate();
+            if (connectedGate != null && connectedGate.AttemptDhdRegistration(this))
+            {
+                this.connectedGate = connectedGate;
+                connectedPos = connectedGate.Pos;
+            }
+        }
 
-		public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
-		{
-			base.FromTreeAttributes(tree, worldAccessForResolve);
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
+        {
+            base.FromTreeAttributes(tree, worldAccessForResolve);
 
-			if (connectedPos == null) connectedPos = new BlockPos(-1, -1, -1, Pos.dimension);
-			connectedPos.X = tree.GetAsInt("gateX", -1);
-			connectedPos.Y = tree.GetAsInt("gateY", -1);
-			connectedPos.Z = tree.GetAsInt("gateZ", -1);
-		}
+            if (connectedPos == null) connectedPos = new BlockPos(-1, -1, -1, Pos.dimension);
+            connectedPos.X = tree.GetAsInt("gateX", -1);
+            connectedPos.Y = tree.GetAsInt("gateY", -1);
+            connectedPos.Z = tree.GetAsInt("gateZ", -1);
+        }
 
-		public override void ToTreeAttributes(ITreeAttribute tree)
-		{
-			base.ToTreeAttributes(tree);
-			
-			tree.SetInt("gateX", connectedGate == null ? -1 : connectedGate.Pos.X);
-			tree.SetInt("gateY", connectedGate == null ? -1 : connectedGate.Pos.Y);
-			tree.SetInt("gateZ", connectedGate == null ? -1 : connectedGate.Pos.Z);
-		}
-	}
+        public override void ToTreeAttributes(ITreeAttribute tree)
+        {
+            base.ToTreeAttributes(tree);
+
+            tree.SetInt("gateX", connectedGate == null ? -1 : connectedGate.Pos.X);
+            tree.SetInt("gateY", connectedGate == null ? -1 : connectedGate.Pos.Y);
+            tree.SetInt("gateZ", connectedGate == null ? -1 : connectedGate.Pos.Z);
+        }
+    }
 }

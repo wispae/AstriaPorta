@@ -1,0 +1,107 @@
+﻿{
+  "code": "stargateclothes",
+  "class": "ItemWearable",
+  "variantgroups": [
+    {
+      "code": "category",
+      "states": [ "upperbody" ]
+    },
+    {
+      "code": "upperbody",
+      "combine": "SelectiveMultiply",
+      "onVariant": "category",
+      "states": [
+        "sgc-shirt-standard",
+        "sgc-shirt-desert"
+      ]
+    }
+  ],
+  "storageFlags": 128,
+  "attributes": {
+    "clothescategory": "upperbody",
+    "wearableAttachment": true,
+    "warmthByType": {
+      "*": 1
+    }
+  },
+  "shapeByType": {
+    "@*-(sgc-shirt-standard|sgc-shirt-desert)": {
+      "base": "entity/humanoid/seraph/clothing/upperbody/sgc_shirt"
+    }
+  },
+  "texturesByType": {
+    "*": {
+      "seraph": { "base": "game:block/transparent" },
+      "shirt": { "base": "entity/humanoid/seraphclothes/upperbody/{upperbody}" }
+    }
+  },
+  "creativeinventory": {
+    "general": [ "*" ],
+    "items": [ "*" ],
+    "clothing": [ "*" ],
+    "astriaporta": [ "*" ]
+  },
+  "renderAlphaTest": 0.25,
+  "fpHandTransform": {
+    "translation": {
+      "x": 0.05,
+      "y": -0.6,
+      "z": 0.3
+    },
+    "rotation": {
+      "x": 180,
+      "y": 150,
+      "z": 180
+    },
+    "scale": 2
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": -0.3,
+      "y": -0.9,
+      "z": -0.7
+    },
+    "rotation": {
+      "x": -71,
+      "y": 180,
+      "z": 83
+    },
+    "scale": 0.55
+  },
+  "guiTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": -178,
+      "y": -65,
+      "z": 10
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 1.2,
+      "z": 0.5
+    },
+    "scale": 1.8
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0.05,
+      "y": 0.05,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": -87
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5299
+    },
+    "scale": 4
+  }
+}

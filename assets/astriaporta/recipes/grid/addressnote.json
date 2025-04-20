@@ -1,0 +1,56 @@
+﻿[
+  {
+    "ingredientPattern": "NP",
+    "ingredients": {
+      "N": {
+        "type": "item",
+        "code": "astriaporta:addressnote",
+        "quantity": 1
+      },
+      "P": {
+        "type": "item",
+        "code": "game:paper-*",
+        "quantity": 1
+      }
+    },
+    "name": "Copy address",
+    "width": 2,
+    "height": 1,
+    "shapeless": true,
+    "copyAttributesFrom": "N",
+    "output": {
+      "type": "item",
+      "code": "astriaporta:addressnote",
+      "quantity": 1
+    }
+  },
+  {
+    "ingredientPattern": "CP",
+    "ingredients": {
+      "C": {
+        "type": "item",
+        "code": "astriaporta:coordinatecartouche-*",
+        "name": "type",
+        "quantity": 1,
+        "attributes": {
+          "generationfinished": true
+        }
+      },
+      "P": {
+        "type": "item",
+        "code": "game:paper-*",
+        "quantity": 1
+      }
+    },
+    "name": "Copy address",
+    "width": 2,
+    "height": 1,
+    "shapeless": true,
+    "copyAttributesFrom": "C",
+    "output": {
+      "type": "item",
+      "code": "astriaporta:addressnote",
+      "quantity": 1
+    }
+  }
+]

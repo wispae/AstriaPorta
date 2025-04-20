@@ -26,7 +26,7 @@ namespace AstriaPorta.Util
             Console.WriteLine("Retrieved Player");
             StargateAddress address = new StargateAddress();
             Console.WriteLine("Created stargate address");
-            address.FromCoordinates((int)player.Entity.Pos.X, (int)player.Entity.Pos.Y, (int)player.Entity.Pos.Z, EnumAddressLength.Short);
+            address.FromCoordinates((int)player.Entity.Pos.X, (int)player.Entity.Pos.Y, (int)player.Entity.Pos.Z, api, EnumAddressLength.Short);
             Console.WriteLine("set address from coordinates");
 
             string addressString = AddressDisplayString(address.AddressCoordinates);
@@ -93,14 +93,14 @@ namespace AstriaPorta.Util
 			int chunkX = playerPos.X / GlobalConstants.ChunkSize;
 			int chunkZ = playerPos.Z / GlobalConstants.ChunkSize;
 			sb.AppendLine($"Starting test from player chunk X{chunkX} Z{chunkZ}");
-			address.FromCoordinates(playerPos.X, playerPos.Y, playerPos.Z);
+			address.FromCoordinates(playerPos.X, playerPos.Y, playerPos.Z, api);
 			sb.AppendLine($"Coordinates transformed into address with glyphs {address.AddressCoordinates.Glyphs} ({address.ToString()})");
 			sb.AppendLine($"The address has embedded coordinates: X{address.AddressCoordinates.X} Z{address.AddressCoordinates.Z}");
 			sb.AppendLine($"Address bits are: {address.AddressBits}");
 			sb.AppendLine("==============================================================");
 
 			StargateAddress a2 = new StargateAddress();
-			a2.FromGlyphs(address.AddressCoordinates.Glyphs);
+			a2.FromGlyphs(address.AddressCoordinates.Glyphs, api);
 			sb.AppendLine("Data for secondary address:");
 			sb.AppendLine($"Glyphs transformed into address with glyphs {address.AddressCoordinates.Glyphs} ({address.ToString()})");
 			sb.AppendLine($"The address has embedded coordinates: X{address.AddressCoordinates.X} Z{address.AddressCoordinates.Z}");
@@ -168,7 +168,7 @@ namespace AstriaPorta.Util
             }
 
             StargateAddress address = new StargateAddress();
-            address.FromGlyphs(addressBytes);
+            address.FromGlyphs(addressBytes, api);
             // address.FromByteAddress(addressBytes);
 
             return address;
@@ -214,7 +214,7 @@ namespace AstriaPorta.Util
         private string AddressDisplayString(BlockPos pos)
         {
             StargateAddress address = new StargateAddress();
-            address.FromCoordinates(pos.X, pos.Y, pos.Z);
+            address.FromCoordinates(pos.X, pos.Y, pos.Z, api);
 
             return AddressDisplayString(address.AddressCoordinates);
         }
