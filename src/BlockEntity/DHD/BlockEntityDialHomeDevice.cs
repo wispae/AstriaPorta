@@ -171,17 +171,18 @@ namespace AstriaPorta.Content
         /// <returns></returns>
         public bool OnRightClickInteraction(IPlayer player)
         {
+            if (player.Entity.Controls.ShiftKey)
+            {
+                return doShiftInteraction(player);
+            }
+
+            return doNormalInteraction(player);
+        }
+
+        protected bool doNormalInteraction(IPlayer player)
+        {
             if (Api.Side == EnumAppSide.Client)
             {
-                if (player.Entity.Controls.ShiftKey)
-                {
-                    if (CanCloseGate)
-                    {
-                        TryCloseGate();
-                        return false;
-                    }
-                }
-
                 GuiDialogDhd dhdGui = new GuiDialogDhd("Dial Home Device", Api as ICoreClientAPI, this, false);
                 dhdGui.OnAddressChanged = OnAddressChanged;
                 dhdGui.OnAddressConfirmed = OnDhdConfirmed;
@@ -193,6 +194,12 @@ namespace AstriaPorta.Content
                 return true;
             }
 
+            return false;
+        }
+
+        protected bool doShiftInteraction(IPlayer player)
+        {
+            TryCloseGate();
             return false;
         }
 

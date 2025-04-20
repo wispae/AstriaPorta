@@ -2272,14 +2272,23 @@ namespace AstriaPorta.Content
 
         public bool OnRightClickInteraction(IPlayer player)
         {
+            if (player.Entity.Controls.ShiftKey)
+            {
+                return doShiftInteraction(player);
+            }
+
+            return doNormalInteraction(player);
+        }
+
+        protected bool doNormalInteraction(IPlayer player)
+        {
             ItemSlot usingSlot = player.InventoryManager.ActiveHotbarSlot;
             if (usingSlot != null && usingSlot?.Itemstack?.Item?.FirstCodePart() == "paper")
             {
                 if (Api.Side == EnumAppSide.Client)
                 {
                     (player as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract);
-                }
-                else
+                } else
                 {
                     createCartoucheForSlot(usingSlot, player);
                 }
@@ -2292,6 +2301,11 @@ namespace AstriaPorta.Content
                 toggleInventoryDialogClient(player, (ICoreClientAPI)Api);
             }
 
+            return true;
+        }
+
+        protected bool doShiftInteraction(IPlayer player)
+        {
             return true;
         }
 
