@@ -8,7 +8,7 @@ using Vintagestory.API.Server;
 using Vintagestory.Common;
 using Vintagestory.ServerMods;
 
-namespace AstriaPorta.src.Systems
+namespace AstriaPorta.Systems
 {
     public class StargateConfigSystem : ModSystem
     {

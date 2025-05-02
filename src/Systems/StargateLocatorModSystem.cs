@@ -1,4 +1,5 @@
 ﻿using AstriaPorta.Config;
+using AstriaPorta.Content;
 using AstriaPorta.Util;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 
-namespace AstriaPorta.Content
+namespace AstriaPorta.Systems
 {
     public class GateGenerationRequest
     {

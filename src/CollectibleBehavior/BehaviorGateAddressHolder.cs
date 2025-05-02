@@ -9,6 +9,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Util;
+using Vintagestory.GameContent;
 
 namespace AstriaPorta.Content
 {
@@ -24,6 +25,16 @@ namespace AstriaPorta.Content
         {
             base.OnLoaded(api);
             this.api = api;
+        }
+
+        public override void GetHeldItemName(StringBuilder sb, ItemStack itemStack)
+        {
+            base.GetHeldItemName(sb, itemStack);
+
+            if (itemStack.Attributes.HasAttribute("addresscustomname"))
+            {
+                sb.AppendLine($"<i>{itemStack.Attributes.GetString("addresscustomname")}</i>");
+            }
         }
 
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
@@ -71,14 +82,32 @@ namespace AstriaPorta.Content
 
 		public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handHandling, ref EnumHandling handling)
 		{
-			if (!byEntity.Controls.ShiftKey)
+            ItemStack currentStack = slot.Itemstack;
+
+            if (!byEntity.Controls.ShiftKey)
 			{
-				handHandling = EnumHandHandling.PreventDefault;
-				handling = EnumHandling.PreventSubsequent;
+                handHandling = EnumHandHandling.NotHandled;
+                handling = EnumHandling.PreventSubsequent;
+
+                if (api.Side == EnumAppSide.Client)
+                {
+                    TextAreaConfig config = new TextAreaConfig();
+                    config.MaxWidth = 200;
+
+                    GuiDialogNoteName noteDialog = new GuiDialogNoteName("Address name", currentStack.Attributes.GetString("addresscustomname", ""), api as ICoreClientAPI, config, slot);
+
+                    noteDialog.OnClosed += () =>
+                    {
+                        noteDialog.Dispose();
+                        noteDialog = null;
+                    };
+
+                    noteDialog.TryOpen();
+                }
+
 				return;
 			}
 
-			ItemStack currentStack = slot.Itemstack;
 			if (blockSel != null && blockSel.Block is BlockDialHomeDevice)
 			{
 				string s = currentStack.Attributes.GetString("gateAddressS", string.Empty);
