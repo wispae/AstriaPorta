@@ -85,6 +85,8 @@
   "blockhelp-dhd-close-gate": "Close stargate",
   "blockhelp-dhd-open-ui": "Open DHD",
 
+  "addressholder-name-changetitle": "Change address name",
+
   "stargate-gui-quickdialtoggletext": "Use fast dialing",
 
   "DhdGuiTitleText": "Dial Home Device"

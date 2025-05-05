@@ -95,9 +95,14 @@ namespace AstriaPorta.Systems
             serverChannel.SetMessageHandler<BlockInventoryAttributeSyncMessage>(OnReceivedClientBlockOperation);
         }
 
-        public void ModifyAttribute(IPlayer player, IInventory inventory, int slotNumber, ITreeAttribute attribute)
+        public void ModifyAttribute(IPlayer forPlayer, IInventory inventory, int slotNumber, ITreeAttribute attribute)
         {
-            SendPlayerAttributeOperation(player, inventory, slotNumber, attribute, EnumAttributeSyncOperation.Modify);
+            SendPlayerAttributeOperation(forPlayer, inventory, slotNumber, attribute, EnumAttributeSyncOperation.Modify);
+        }
+
+        public void ModifyAttribute(IPlayer forPlayer, ItemSlot slot, ITreeAttribute attribute)
+        {
+            SendPlayerAttributeOperation(forPlayer, slot.Inventory, slot.Inventory.GetSlotId(slot), attribute, EnumAttributeSyncOperation.Modify);
         }
 
         public void ModifyAttribute(BlockPos pos, IInventory inventory, int slotNumber, ITreeAttribute attribute)
@@ -108,6 +113,11 @@ namespace AstriaPorta.Systems
         public void DeleteAttribute(IPlayer player, IInventory inventory, int slotNumber, ITreeAttribute attribute)
         {
             SendPlayerAttributeOperation(player, inventory, slotNumber, attribute, EnumAttributeSyncOperation.Remove);
+        }
+
+        public void DeleteAttribute(IPlayer player, ItemSlot slot, ITreeAttribute attribute)
+        {
+            SendPlayerAttributeOperation(player, slot.Inventory, slot.Inventory.GetSlotId(slot), attribute, EnumAttributeSyncOperation.Remove);
         }
 
         public void DeleteAttribute(BlockPos pos, IInventory inventory, int slotNumber, ITreeAttribute attribute)

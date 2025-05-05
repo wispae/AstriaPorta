@@ -33,6 +33,7 @@ namespace AstriaPorta.Content
 
             if (itemStack.Attributes.HasAttribute("addresscustomname"))
             {
+                sb.Clear();
                 sb.AppendLine($"<i>{itemStack.Attributes.GetString("addresscustomname")}</i>");
             }
         }
@@ -94,7 +95,7 @@ namespace AstriaPorta.Content
                     TextAreaConfig config = new TextAreaConfig();
                     config.MaxWidth = 200;
 
-                    GuiDialogNoteName noteDialog = new GuiDialogNoteName("Address name", currentStack.Attributes.GetString("addresscustomname", ""), api as ICoreClientAPI, config, slot);
+                    GuiDialogNoteName noteDialog = new GuiDialogNoteName(Lang.Get("astriaporta:addressholder-name-changetitle"), currentStack.Attributes.GetString("addresscustomname", ""), api as ICoreClientAPI, config, slot);
 
                     noteDialog.OnClosed += () =>
                     {
