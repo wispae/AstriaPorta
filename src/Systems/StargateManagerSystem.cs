@@ -93,10 +93,12 @@ namespace AstriaPorta.Systems
                 });
             }
 
+#if DEBUG
             if (releasedBefore != releasedChunks.Count)
             {
                 Mod.Logger.Debug("Unloaded " + (releasedBefore - releasedChunks.Count) + " released chunks");
             }
+#endif
         }
 
         /// <summary>

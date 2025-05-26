@@ -796,7 +796,7 @@ namespace AstriaPorta.Content
 
                                 if (remoteLoadTimeout <= 0)
                                 {
-                                    Api.Logger.Debug("remoteLoadTimeout reached, cancelling outgoing wormhole");
+                                    // Api.Logger.Debug("remoteLoadTimeout reached, cancelling outgoing wormhole");
                                     TryDisconnect();
                                 }
                                 break;
@@ -810,7 +810,7 @@ namespace AstriaPorta.Content
 
                         if (timeOpen > StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway)
                         {
-                            Api.Logger.Debug("wormhole has been open for max duration, shutting down connection");
+                            Api.Logger.Notification("wormhole has been open for max duration, shutting down connection");
                             TryDisconnect();
                         }
 
@@ -2046,8 +2046,9 @@ namespace AstriaPorta.Content
             dialingAddress = new StargateAddress();
             dialingAddress.FromBits(packet.RemoteAddressBits, Api);
 
+#if DEBUG
             Api.Logger.Debug("Received server packet, new state: " + newState);
-
+#endif
             activeChevrons = packet.ActiveChevrons;
             currentGlyph = packet.CurrentGlyph;
             currentAddressIndex = packet.CurrentGlyphIndex;
@@ -2062,7 +2063,9 @@ namespace AstriaPorta.Content
                 case EnumStargateState.Idle:
                     {
                         TransitionIdleClient();
+#if DEBUG
                         Api.Logger.Debug("Active chevrons: " + activeChevrons);
+#endif
                         break;
                     }
                 case EnumStargateState.DialingIncoming:

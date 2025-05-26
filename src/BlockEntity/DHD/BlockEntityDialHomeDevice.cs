@@ -215,7 +215,9 @@ namespace AstriaPorta.Content
 
         protected void OnDhdConfirmed(StargateAddress address)
         {
+#if DEBUG
             Api.Logger.Debug(address.ToString());
+#endif
         }
 
         public string CoupleDhd()
