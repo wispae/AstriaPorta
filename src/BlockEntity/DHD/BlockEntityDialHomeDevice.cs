@@ -171,6 +171,8 @@ namespace AstriaPorta.Content
         /// <returns></returns>
         public bool OnRightClickInteraction(IPlayer player)
         {
+            if (connectedGate == null) CoupleDhd();
+
             if (player.Entity.Controls.ShiftKey)
             {
                 return doShiftInteraction(player);
@@ -230,15 +232,12 @@ namespace AstriaPorta.Content
 
         public void DialDhd(StargateAddress address)
         {
-            if (connectedPos == null) return;
-
-            BlockEntityStargate gate;
-            gate = Api.World.BlockAccessor.GetBlockEntity<BlockEntityStargate>(connectedPos);
-
-            if (gate != null && gate is BlockEntityStargate)
+            if (connectedGate == null)
             {
-                gate.TryDial(address, EnumDialSpeed.Default);
+                if (CoupleDhd() == string.Empty) return;
             }
+
+            connectedGate.TryDial(address, EnumDialSpeed.Default);
         }
 
         public void TryCloseGate()
