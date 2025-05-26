@@ -1146,7 +1146,6 @@ namespace AstriaPorta.Content
                     break;
                 case EnumStargatePacketType.Abort:
                     TryDisconnect();
-
                     break;
                 case EnumStargatePacketType.CamoUpdate:
                     TreeAttribute tree = new TreeAttribute();

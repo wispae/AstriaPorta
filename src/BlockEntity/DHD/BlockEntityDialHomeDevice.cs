@@ -172,7 +172,7 @@ namespace AstriaPorta.Content
         public bool OnRightClickInteraction(IPlayer player)
         {
             if (connectedGate == null) CoupleDhd();
-
+            
             if (player.Entity.Controls.ShiftKey)
             {
                 return doShiftInteraction(player);
