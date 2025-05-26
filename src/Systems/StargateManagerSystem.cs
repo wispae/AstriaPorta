@@ -12,7 +12,7 @@ using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.Server;
 
-namespace AstriaPorta.src.Systems
+namespace AstriaPorta.Systems
 {
     public class StargateManagerSystem : ModSystem
     {
@@ -93,10 +93,12 @@ namespace AstriaPorta.src.Systems
                 });
             }
 
+#if DEBUG
             if (releasedBefore != releasedChunks.Count)
             {
                 Mod.Logger.Debug("Unloaded " + (releasedBefore - releasedChunks.Count) + " released chunks");
             }
+#endif
         }
 
         /// <summary>

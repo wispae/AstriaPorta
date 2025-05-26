@@ -1,6 +1,6 @@
 ﻿using AstriaPorta.Config;
 using AstriaPorta.src.Block;
-using AstriaPorta.src.Systems;
+using AstriaPorta.Systems;
 using AstriaPorta.Util;
 using System;
 using System.Collections.Generic;
@@ -24,13 +24,6 @@ namespace AstriaPorta.Content
     public class BlockEntityStargate : BlockEntity, IStargate, IBlockEntityInteractable
     {
         protected float ROT_DEG_PER_S = 80f;
-
-        protected static Cuboidi vortexOffsetNorth;
-        protected static Cuboidi vortexOffsetEast;
-        protected static Cuboidi vortexOffsetSouth;
-        protected static Cuboidi vortexOffsetWest;
-        protected static Cuboidi irisOffsetNorthSouth;
-        protected static Cuboidi irisOffsetEastWest;
 
         private StargateAddress gateAddress = new StargateAddress(EnumAddressLength.Short);
 
@@ -105,19 +98,7 @@ namespace AstriaPorta.Content
         {
             get
             {
-                switch (Block.Shape.rotateY)
-                {
-                    case 0f:
-                        return vortexOffsetNorth;
-                    case 90f:
-                        return vortexOffsetWest;
-                    case 180f:
-                        return vortexOffsetSouth;
-                    case 270f:
-                        return vortexOffsetEast;
-                    default:
-                        return null;
-                }
+                return StargateVolumeManager.Instance.GetVortexVolume(Block.Shape.rotateY);
             }
         }
 
@@ -125,11 +106,7 @@ namespace AstriaPorta.Content
         {
             get
             {
-                if (Block.Shape.rotateY % 180 == 0)
-                {
-                    return irisOffsetNorthSouth;
-                }
-                return irisOffsetEastWest;
+                return StargateVolumeManager.Instance.GetIrisVolume(Block.Shape.rotateY);
             }
         }
 
@@ -259,6 +236,11 @@ namespace AstriaPorta.Content
                 UnregisterGameTickListener(tickListenerId);
                 tickListenerId = -1;
             }
+            if (callbackId != -1)
+            {
+                UnregisterDelayedCallback(callbackId);
+                callbackId = -1;
+            }
 
             SyncStateToClients();
         }
@@ -266,6 +248,7 @@ namespace AstriaPorta.Content
         #region Universal
 
         protected long tickListenerId = -1;
+        protected long callbackId = -1;
 
         protected bool awaitingChevronAnimation = false;
         protected byte activeChevrons = 0;
@@ -299,9 +282,6 @@ namespace AstriaPorta.Content
 
             inventory.Pos = Pos;
             inventory.LateInitialize("stargate-" + Pos.X + "/" + Pos.Y + "/" + Pos.Z, api);
-
-            initializeVortexOffsets();
-            initializeIrisOffsets();
 
             if (api.Side == EnumAppSide.Client) InitializeClient((ICoreClientAPI)api);
             else InitializeServer((ICoreServerAPI)api);
@@ -432,26 +412,6 @@ namespace AstriaPorta.Content
             }
 
             return true;
-        }
-
-        protected void initializeVortexOffsets()
-        {
-            if (vortexOffsetNorth == null)
-            {
-                vortexOffsetNorth = new Cuboidi(-1, 1, 1, 1, 4, 3);
-                vortexOffsetSouth = new Cuboidi(-1, 1, 1, 1, 4, -3);
-                vortexOffsetEast = new Cuboidi(-1, 1, -1, -3, 4, 1);
-                vortexOffsetWest = new Cuboidi(1, 1, -1, 3, 4, 1);
-            }
-        }
-
-        protected void initializeIrisOffsets()
-        {
-            if (irisOffsetNorthSouth == null)
-            {
-                irisOffsetNorthSouth = new Cuboidi(-2, 1, 0, 2, 5, 0);
-                irisOffsetEastWest = new Cuboidi(0, 1, -2, 0, 5, 2);
-            }
         }
 
         private void DestroyGate()
@@ -836,7 +796,7 @@ namespace AstriaPorta.Content
 
                                 if (remoteLoadTimeout <= 0)
                                 {
-                                    Api.Logger.Debug("remoteLoadTimeout reached, cancelling outgoing wormhole");
+                                    // Api.Logger.Debug("remoteLoadTimeout reached, cancelling outgoing wormhole");
                                     TryDisconnect();
                                 }
                                 break;
@@ -850,7 +810,7 @@ namespace AstriaPorta.Content
 
                         if (timeOpen > StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway)
                         {
-                            Api.Logger.Debug("wormhole has been open for max duration, shutting down connection");
+                            Api.Logger.Notification("wormhole has been open for max duration, shutting down connection");
                             TryDisconnect();
                         }
 
@@ -992,7 +952,7 @@ namespace AstriaPorta.Content
 
         protected void OnGlyphReachedServer()
         {
-            tickListenerId = RegisterDelayedCallback(OnGlyphActivatedServer, (currentDialSpeed == EnumDialSpeed.Slow) ? 2000 : 1000);
+            callbackId = RegisterDelayedCallback(OnGlyphActivatedServer, (currentDialSpeed == EnumDialSpeed.Slow) ? 2000 : 1000);
         }
 
         private long timeoutCallbackId = -1;
@@ -2009,7 +1969,7 @@ namespace AstriaPorta.Content
 
         protected void OnGlyphReachedClient()
         {
-            tickListenerId = RegisterDelayedCallback(OnGlyphDownClient, 1000);
+            callbackId = RegisterDelayedCallback(OnGlyphDownClient, 1000);
 
             PauseRotateSound();
             awaitingChevronAnimation = true;
@@ -2085,8 +2045,9 @@ namespace AstriaPorta.Content
             dialingAddress = new StargateAddress();
             dialingAddress.FromBits(packet.RemoteAddressBits, Api);
 
+#if DEBUG
             Api.Logger.Debug("Received server packet, new state: " + newState);
-
+#endif
             activeChevrons = packet.ActiveChevrons;
             currentGlyph = packet.CurrentGlyph;
             currentAddressIndex = packet.CurrentGlyphIndex;
@@ -2101,6 +2062,9 @@ namespace AstriaPorta.Content
                 case EnumStargateState.Idle:
                     {
                         TransitionIdleClient();
+#if DEBUG
+                        Api.Logger.Debug("Active chevrons: " + activeChevrons);
+#endif
                         break;
                     }
                 case EnumStargateState.DialingIncoming:
@@ -2196,10 +2160,16 @@ namespace AstriaPorta.Content
             RegisterDelayedCallback((t) => DeactivateHorizon(), 750);
             RegisterDelayedCallback((t) => UpdateChevronGlow(0, EnumAddressLength.Short), 1000);
 
-            if (tickListenerId != 0)
+            if (tickListenerId != -1)
             {
                 UnregisterGameTickListener(tickListenerId);
                 tickListenerId = -1;
+            }
+
+            if (callbackId != -1)
+            {
+                UnregisterDelayedCallback(callbackId);
+                callbackId = -1;
             }
         }
 
