@@ -248,9 +248,12 @@ namespace AstriaPorta.Content
 
         public override void OnUnloaded(ICoreAPI api)
         {
-            for (int i = 0; i < modes.Length; i++)
+            if (modes != null)
             {
-                modes[i]?.Dispose();
+                for (int i = 0; i < modes.Length; i++)
+                {
+                    modes[i].Dispose();
+                }
             }
         }
     }
