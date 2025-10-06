@@ -172,6 +172,7 @@ namespace AstriaPorta.Content
 
             if (tickListenerId != -1) UnregisterGameTickListener(tickListenerId);
             tickListenerId = RegisterGameTickListener(OnTickServer, 20, 0);
+
             SyncStateToClients();
         }
 
@@ -578,10 +579,24 @@ namespace AstriaPorta.Content
         /// <returns>True when registration succeeds, else false</returns>
         public bool AttemptDhdRegistration(BlockEntityDialHomeDevice dhd)
         {
+            if (controllingDhd != null && controllingDhd == dhd) return true;
+
+            CheckDhdStillValid();
+
             if (controllingDhd != null) return false;
             controllingDhd = dhd;
 
             return true;
+        }
+
+        public void CheckDhdStillValid()
+        {
+            if (controllingDhd == null) return;
+
+            if (Api.World.BlockAccessor.GetBlockEntity<BlockEntityDialHomeDevice>(controllingDhd.Pos) == null)
+            {
+                controllingDhd = null;
+            }
         }
 
         #endregion

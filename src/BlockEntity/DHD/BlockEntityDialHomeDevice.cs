@@ -225,7 +225,7 @@ namespace AstriaPorta.Content
             BlockEntityStargate cgate = FindClosestGate();
             if (cgate != null)
             {
-                RegisterToGate(cgate);
+                if (!RegisterToGate(cgate)) return "";
                 return cgate.GateAddress.ToString();
             }
 
@@ -236,7 +236,7 @@ namespace AstriaPorta.Content
         {
             if (connectedGate == null)
             {
-                if (CoupleDhd() == string.Empty) return;
+                if (string.IsNullOrEmpty(CoupleDhd())) return;
             }
 
             connectedGate.TryDial(address, EnumDialSpeed.Default);
