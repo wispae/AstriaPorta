@@ -7,10 +7,8 @@
   ],
   "description": "Use ancient artifacts of a long lost race to explore distant lands",
   "networkVersion": "0.0.4",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "dependencies": {
-    "game": "",
-    "survival": ""
   },
   "requiredOnClient": true,
   "requiredOnServer": true
