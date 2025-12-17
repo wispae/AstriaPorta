@@ -20,8 +20,8 @@ namespace AstriaPorta.Content
 
 		public BlockPos bePosition;
 
-		public Action<StargateAddress> OnAddressChanged;
-		public Action<StargateAddress> OnAddressConfirmed;
+		public Action<IStargateAddress> OnAddressChanged;
+		public Action<IStargateAddress> OnAddressConfirmed;
 
 		public GuiDialogDhd(string dialogTitle, ICoreClientAPI capi, BlockEntityDialHomeDevice owner, bool isDialing) : base(dialogTitle, capi)
 		{

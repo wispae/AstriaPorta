@@ -15,11 +15,11 @@ using Vintagestory.GameContent;
 
 namespace AstriaPorta.Content
 {
-    public class BlockEntityDialHomeDevice : BlockEntity, IBlockEntityInteractable
+    public class BlockEntityDialHomeDevice : BlockEntity, IBlockEntityInteractable, IDialHomeDevice
     {
         private static Cuboidi searchArea = null;
 
-        private BlockEntityStargate connectedGate;
+        private IStargate connectedGate;
         private BlockPos connectedPos;
 
         private bool isActive = false;
@@ -28,7 +28,7 @@ namespace AstriaPorta.Content
         {
             get
             {
-                return connectedGate?.GateAddress.ToString() ?? Lang.Get("astriaporta:astriaporta-dhd-no-gate-linked");
+                return connectedGate?.Address.ToString() ?? Lang.Get("astriaporta:astriaporta-dhd-no-gate-linked");
             }
         }
 
@@ -36,7 +36,7 @@ namespace AstriaPorta.Content
         {
             get
             {
-                return connectedGate?.StargateState == EnumStargateState.ConnectedOutgoing || connectedGate?.StargateState == EnumStargateState.ConnectedIncoming;
+                return connectedGate?.State == EnumStargateState.ConnectedOutgoing || connectedGate?.State == EnumStargateState.ConnectedIncoming;
             }
         }
 
@@ -44,7 +44,7 @@ namespace AstriaPorta.Content
         {
             get
             {
-                return IsGateOpen || connectedGate?.StargateState == EnumStargateState.DialingOutgoing;
+                return IsGateOpen || connectedGate?.State == EnumStargateState.DialingOutgoing;
             }
         }
 
@@ -52,7 +52,7 @@ namespace AstriaPorta.Content
         {
             get
             {
-                return connectedGate?.StargateState != EnumStargateState.ConnectedOutgoing && connectedGate?.StargateState != EnumStargateState.DialingOutgoing;
+                return connectedGate?.State != EnumStargateState.ConnectedOutgoing && connectedGate?.State != EnumStargateState.DialingOutgoing;
             }
         }
 
@@ -61,6 +61,18 @@ namespace AstriaPorta.Content
             get
             {
                 return searchArea;
+            }
+        }
+
+        new public BlockPos Pos
+        {
+            get
+            {
+                return base.Pos;
+            }
+            set
+            {
+                base.Pos = value;
             }
         }
 
@@ -84,12 +96,12 @@ namespace AstriaPorta.Content
         /// Expensive, use as little as possible
         /// </summary>
         /// <returns></returns>
-        protected BlockEntityStargate FindClosestGate()
+        protected IStargate FindClosestGate()
         {
             Cuboidi searchOffsets = SearchArea;
 
-            List<BlockEntityStargate> targetBlocks = new List<BlockEntityStargate>();
-            BlockEntityStargate foundBE = null;
+            List<IStargate> targetBlocks = new List<IStargate>();
+            IStargate foundGate = null;
 
             for (int x = searchOffsets.MinX; x <= searchOffsets.MaxX; x++)
             {
@@ -97,25 +109,25 @@ namespace AstriaPorta.Content
                 {
                     for (int y = searchOffsets.MinY; y <= searchOffsets.MaxY; y++)
                     {
-                        foundBE = Api.World.BlockAccessor.GetBlockEntity<BlockEntityStargate>(Pos.AddCopy(x, y, z));
-                        if (foundBE != null)
+                        foundGate = Api.World.BlockAccessor.GetBlockEntity<StargateBase>(Pos.AddCopy(x, y, z));
+                        if (foundGate != null)
                         {
-                            targetBlocks.Add(foundBE);
+                            targetBlocks.Add(foundGate);
                         }
                     }
                 }
             }
 
-            foundBE = targetBlocks.Count > 0 ? targetBlocks[0] : null;
-            foreach (BlockEntityStargate be in targetBlocks)
+            foundGate = targetBlocks.Count > 0 ? targetBlocks[0] : null;
+            foreach (var be in targetBlocks)
             {
-                if (Pos.ManhattenDistance(be.Pos) < Pos.ManhattenDistance(foundBE.Pos))
+                if (Pos.ManhattenDistance(be.Pos) < Pos.ManhattenDistance(foundGate.Pos))
                 {
-                    foundBE = be;
+                    foundGate = be;
                 }
             }
 
-            return foundBE as BlockEntityStargate;
+            return foundGate;
         }
 
         /// <summary>
@@ -123,7 +135,7 @@ namespace AstriaPorta.Content
         /// </summary>
         /// <param name="gate"></param>
         /// <returns></returns>
-        public bool RegisterToGate(BlockEntityStargate gate)
+        public bool RegisterToGate(IStargate gate)
         {
             bool success = false;
             success = gate.AttemptDhdRegistration(this);
@@ -148,13 +160,13 @@ namespace AstriaPorta.Content
 
             BlockEntity foundEntity = Api.World.BlockAccessor.GetBlockEntity(connectedPos);
 
-            if (foundEntity == null || foundEntity is not BlockEntityStargate) return;
+            if (foundEntity == null || foundEntity is not IStargate) return;
 
-            BlockEntityStargate connectedGate = foundEntity as BlockEntityStargate;
+            var connectedGate = foundEntity as IStargate;
             if (connectedGate.AttemptDhdRegistration(this))
             {
                 this.connectedGate = connectedGate;
-                if (isActive && (connectedGate.StargateState == EnumStargateState.Idle))
+                if (isActive && (connectedGate.State == EnumStargateState.Idle))
                 {
                     isActive = false;
                     // TODO:
@@ -205,7 +217,7 @@ namespace AstriaPorta.Content
             return false;
         }
 
-        protected void OnAddressChanged(StargateAddress address)
+        protected void OnAddressChanged(IStargateAddress address)
         {
             if (connectedGate != null && address.IsValid)
             {
@@ -213,7 +225,7 @@ namespace AstriaPorta.Content
             }
         }
 
-        protected void OnDhdConfirmed(StargateAddress address)
+        protected void OnDhdConfirmed(IStargateAddress address)
         {
 #if DEBUG
             Api.Logger.Debug(address.ToString());
@@ -222,17 +234,17 @@ namespace AstriaPorta.Content
 
         public string CoupleDhd()
         {
-            BlockEntityStargate cgate = FindClosestGate();
+            IStargate cgate = FindClosestGate();
             if (cgate != null)
             {
                 if (!RegisterToGate(cgate)) return "";
-                return cgate.GateAddress.ToString();
+                return cgate.Address.ToString();
             }
 
             return "";
         }
 
-        public void DialDhd(StargateAddress address)
+        public void DialDhd(IStargateAddress address)
         {
             if (connectedGate == null)
             {
@@ -303,7 +315,7 @@ namespace AstriaPorta.Content
             base.OnPlacementBySchematic(api, blockAccessor, pos, replaceBlocks, centerrockblockid, layerBlock, resolveImports);
             this.Api = api;
 
-            BlockEntityStargate connectedGate = FindClosestGate();
+            IStargate connectedGate = FindClosestGate();
             if (connectedGate != null && connectedGate.AttemptDhdRegistration(this))
             {
                 this.connectedGate = connectedGate;

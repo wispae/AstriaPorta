@@ -9,6 +9,7 @@ using AstriaPorta.Util;
 using AstriaPorta.src.Block;
 using Vintagestory.API.Util;
 using AstriaPorta.Config;
+using AstriaPorta.src.BlockEntity.Stargate.Milkyway;
 
 namespace AstriaPorta
 {
@@ -61,10 +62,12 @@ namespace AstriaPorta
             base.StartClientSide(api);
             capi = api;
 
-            api.Event.BlockTexturesLoaded += onClientAssetsLoaded;
+            InitializeConfigurations();
+
+            api.Event.BlockTexturesLoaded += OnClientAssetsLoaded;
         }
 
-        private void onClientAssetsLoaded()
+        private void OnClientAssetsLoaded()
         {
             capi.Event.ReloadTextures += CreateExternalTextures;
             capi.Event.ReloadShader += RegisterShaderPrograms;
@@ -109,10 +112,27 @@ namespace AstriaPorta
             api.RegisterBlockClass("BlockMultiblockStargate", typeof(BlockMultiblockStargate));
 
             api.RegisterBlockEntityClass("BERandomizerOrientable", typeof(BlockEntityBlockRandomizerOrientable));
-            api.RegisterBlockEntityClass("BEStargate", typeof(BlockEntityStargate));
+            // api.RegisterBlockEntityClass("BEStargate", typeof(BlockEntityStargate));
+            api.RegisterBlockEntityClass("BEStargateMilkyway", typeof(BlockEntityStargateMilkyway));
             api.RegisterBlockEntityClass("BEDialHomeDevice", typeof(BlockEntityDialHomeDevice));
 
             api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));
+        }
+
+        private void InitializeConfigurations()
+        {
+            var milkywaySoundConfig = new StargateSoundLocationConfiguration
+            {
+                ActiveSoundLocation = new("sounds/environment/underwater.ogg"),
+                LockSoundLocation = new("sounds/block/vesselclose.ogg"),
+                ReleaseSoundLocation = new("sounds/block/vesselopen.ogg"),
+                WarningSoundLocation = new("sounds/block/hopperopen.ogg"),
+                VortexSoundLocation = new("sounds/environment/largesplash2.ogg"),
+                BreakSoundLocation = new("sounds/effect/translocate-breakdimension.ogg"),
+                RotateSoundLocation = new("sounds/block/quern.ogg"),
+            };
+
+            StargateSoundManager.InitializeLocations(EnumStargateType.Milkyway, milkywaySoundConfig);
         }
 
         private void RegisterCommands(ICoreServerAPI api)

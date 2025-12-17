@@ -85,7 +85,7 @@ namespace AstriaPorta.Content
 		{
 			if (!StargateConfig.Loaded.StargateDestructable) return EnumBlockMaterial.Mantle;
 			if (pos == null) return EnumBlockMaterial.Mantle;
-			BlockEntityStargate gate = GetBlockEntity<BlockEntityStargate>(pos);
+			IStargate gate = GetBlockEntity<StargateBase>(pos);
 			if (gate == null) return EnumBlockMaterial.Mantle;
 
 			if (gate.CanBreak) return EnumBlockMaterial.Metal;

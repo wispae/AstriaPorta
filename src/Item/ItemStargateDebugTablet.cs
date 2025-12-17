@@ -102,19 +102,19 @@ namespace AstriaPorta.Content
             switch (toolMode)
             {
                 case 0:
-                    DoActionShowIrisArea(byPlayer.Player, targetBE as BlockEntityStargate, isSameBlock);
+                    DoActionShowIrisArea(byPlayer.Player, targetBE as StargateBase, isSameBlock);
                     break;
                 case 1:
-                    DoActionShowVortexArea(byPlayer.Player, targetBE as BlockEntityStargate, isSameBlock);
+                    DoActionShowVortexArea(byPlayer.Player, targetBE as StargateBase, isSameBlock);
                     break;
                 case 2:
-                    DoActionFillIrisArea(targetBE as BlockEntityStargate, isSameBlock);
+                    DoActionFillIrisArea(targetBE as StargateBase, isSameBlock);
                     break;
                 case 3:
-                    DoActionFillVortexArea(targetBE as BlockEntityStargate, isSameBlock);
+                    DoActionFillVortexArea(targetBE as StargateBase, isSameBlock);
                     break;
                 case 4:
-                    DoActionCheckIrisState(targetBE as BlockEntityStargate);
+                    DoActionCheckIrisState(targetBE as StargateBase);
                     break;
                 case 5:
                     DoActionShowDhdSearchArea(byPlayer.Player, targetBE as BlockEntityDialHomeDevice, isSameBlock);
@@ -127,7 +127,7 @@ namespace AstriaPorta.Content
             slot.Itemstack.TempAttributes.SetInt("pmode", isSameBlock ? -1 : toolMode);
         }
 
-        protected void DoActionShowIrisArea(IPlayer player, BlockEntityStargate gate, bool isSameBlock = false)
+        protected void DoActionShowIrisArea(IPlayer player, StargateBase gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             Cuboidi range = gate.IrisArea;
@@ -137,7 +137,7 @@ namespace AstriaPorta.Content
             capi.World.HighlightBlocks(player, 0, positions);
         }
 
-        protected void DoActionFillIrisArea(BlockEntityStargate gate, bool isSameBlock = false)
+        protected void DoActionFillIrisArea(StargateBase gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             Block filler = capi.World.GetBlock(new AssetLocation("game:soil-medium-none"));
@@ -160,7 +160,7 @@ namespace AstriaPorta.Content
             }
         }
 
-        protected void DoActionShowVortexArea(IPlayer player, BlockEntityStargate gate, bool isSameBlock = false)
+        protected void DoActionShowVortexArea(IPlayer player, StargateBase gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             Cuboidi range = gate.VortexArea;
@@ -170,7 +170,7 @@ namespace AstriaPorta.Content
             capi.World.HighlightBlocks(player, 0, positions);
         }
 
-        protected void DoActionFillVortexArea(BlockEntityStargate gate, bool isSameBlock = false)
+        protected void DoActionFillVortexArea(StargateBase gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             Block filler = capi.World.GetBlock(new AssetLocation("game:soil-medium-none"));
@@ -193,7 +193,7 @@ namespace AstriaPorta.Content
             }
         }
 
-        protected void DoActionCheckIrisState(BlockEntityStargate gate, bool isSameBlock = false)
+        protected void DoActionCheckIrisState(StargateBase gate, bool isSameBlock = false)
         {
             if (gate == null) return;
             capi.ShowChatMessage(gate.IsIrisClear() ? "Gate iris space is clear" : "Gate iris space is NOT clear");

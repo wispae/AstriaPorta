@@ -152,13 +152,11 @@ namespace AstriaPorta.Systems
         /// Registers a gate so that it is easily known to be loaded
         /// </summary>
         /// <param name="gate"></param>
+        /// <param name="pos"></param>
         /// <returns>Whether the gate was registered or not</returns>
-        public bool RegisterLoadedGate(BlockEntityStargate gate)
+        public bool RegisterLoadedGate(IStargate gate, BlockPos pos)
         {
-#if DEBUG
-			Mod.Logger.Debug($"Registered gate with address {gate.GateAddress} to manager");
-#endif
-            loadedGates.TryAdd(UnMetaBits(gate.GateAddress.AddressBits), gate.Pos);
+            loadedGates.TryAdd(UnMetaBits(gate.Address.AddressBits), pos);
 
             return true;
         }
@@ -167,12 +165,9 @@ namespace AstriaPorta.Systems
         /// Removes provided gate from known loaded gates
         /// </summary>
         /// <param name="gate"></param>
-        public void UnregisterLoadedGate(BlockEntityStargate gate)
+        public void UnregisterLoadedGate(IStargate gate)
         {
-#if DEBUG
-			Mod.Logger.Debug($"Unregistered gate with address {gate.GateAddress} to manager");
-#endif
-            loadedGates.Remove(gate.GateAddress.AddressBits);
+            loadedGates.Remove(gate.Address.AddressBits);
         }
 
         /// <summary>
@@ -184,12 +179,12 @@ namespace AstriaPorta.Systems
         /// <param name="address"></param>
         /// <param name="requester"></param>
         /// <param name="shouldHaveLoaded"></param>
-        public void LoadRemoteGate(StargateAddress address, BlockEntityStargate requester, bool shouldHaveLoaded = false)
+        public void LoadRemoteGate(IStargateAddress address, IStargate requester, bool shouldHaveLoaded = false)
         {
             if (!address.IsValid)
             {
                 Mod.Logger.Debug($"Address {address} was invalid, returning null");
-                requester.RemotePosition = null;
+                requester.ReleaseRemoteGate();
                 return;
             }
 
@@ -199,7 +194,7 @@ namespace AstriaPorta.Systems
             ulong bitKey = UnMetaBits(address.AddressBits);
 
             bool keyExists = false;
-            BlockEntityStargate remoteGate;
+            IStargate remoteGate;
 
             keyExists = loadedGates.ContainsKey(bitKey);
             if (keyExists) gatePos = loadedGates[bitKey];
@@ -216,7 +211,7 @@ namespace AstriaPorta.Systems
                     ForceLoadChunk(gatePos);
                 }
 
-                remoteGate = sapi.World.BlockAccessor.GetBlockEntity<BlockEntityStargate>(gatePos);
+                remoteGate = sapi.World.BlockAccessor.GetBlockEntity<StargateBase>(gatePos);
                 if (remoteGate != null)
                 {
                     remoteGate.IsForceLoaded = true;
@@ -230,7 +225,7 @@ namespace AstriaPorta.Systems
             return;
         }
 
-        private void TryForceLoadUnloadedGate(StargateAddress address, BlockPos gatePos, AddressCoordinates gateCoordinates, BlockEntityStargate requester, bool shouldHaveLoaded = false)
+        private void TryForceLoadUnloadedGate(IStargateAddress address, BlockPos gatePos, AddressCoordinates gateCoordinates, IStargate requester, bool shouldHaveLoaded = false)
         {
             gatePos.X = gateCoordinates.X;
             gatePos.Y = gateCoordinates.Y;
