@@ -55,6 +55,7 @@
   "item-debugtablet": "Stargate Debug Tablet",
   "debugtabletmodename-showgateiris": "Show gate iris",
   "debugtabletmodename-showgatevortex": "Show gate vortex",
+  "debugtabletmodename-showtparea": "Show TP area (aprox.)",
   "debugtabletmodename-fillgateiris": "Fill gate iris",
   "debugtabletmodename-fillgatevortex": "Fill gate vortex",
   "debugtabletmodename-checkirisstate": "Check gate iris state",

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
@@ -149,20 +150,11 @@ namespace AstriaPorta.Content
 
         protected Entity[] GetCollidingEntities()
         {
-            BlockPos startPos;
-            BlockPos endPos;
-            if (Gate.Block.Shape.rotateY % 180 == 0)
-            {
-                startPos = Gate.Pos.AddCopy(-2f, 0.5f, 0);
-                endPos = Gate.Pos.AddCopy(3f, 6f, 1f);
-            }
-            else
-            {
-                startPos = Gate.Pos.AddCopy(0, 0.5f, -2f);
-                endPos = Gate.Pos.AddCopy(1f, 6f, 3f);
-            }
+            var area = StargateVolumeManager.GetTeleportArea(Gate.Block.Shape.rotateY);
+            Cuboidf[] areaCol = [area];
 
-            return Api.World.GetEntitiesInsideCuboid(startPos, endPos);
+            var entities = Api.World.GetIntersectingEntities(Gate.Pos, areaCol, (e) => true);
+            return entities;
         }
 
         protected void HandleDialPacket(byte[] data)
@@ -434,7 +426,7 @@ namespace AstriaPorta.Content
             }
 
             rotatelocal = (rotatelocal + 270) % 360;
-            rotateremote = (rotatelocal + 270) % 360;
+            rotateremote = (rotateremote + 270) % 360;
             float thetaf = (Math.Abs(rotatelocal - rotateremote) + 180) % 360;
             float costhetaf = MathF.Cos(thetaf * GameMath.DEG2RAD);
             float sinthetaf = MathF.Sin(thetaf * GameMath.DEG2RAD);

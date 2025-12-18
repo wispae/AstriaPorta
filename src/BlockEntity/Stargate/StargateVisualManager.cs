@@ -120,18 +120,20 @@ namespace AstriaPorta.src.BlockEntity.Stargate
         /// </summary>
         protected void DisposeRenderers()
         {
-            if (GateRenderer != null && GateRendererRegistered)
+            if (GateRenderer != null)
             {
-                Capi.Event.UnregisterRenderer(GateRenderer, EnumRenderStage.Opaque);
+                if (GateRendererRegistered)
+                    Capi.Event.UnregisterRenderer(GateRenderer, EnumRenderStage.Opaque);
                 GateRenderer.Dispose();
                 GateRenderer = null;
                 GateRendererRegistered = false;
                 GateRendererInitialized = false;
             }
 
-            if (EventHorizonRenderer != null && HorizonRendererRegistered)
+            if (EventHorizonRenderer != null)
             {
-                Capi.Event.UnregisterRenderer(EventHorizonRenderer, EnumRenderStage.Opaque);
+                if (HorizonRendererRegistered)
+                    Capi.Event.UnregisterRenderer(EventHorizonRenderer, EnumRenderStage.Opaque);
                 EventHorizonRenderer.Dispose();
                 EventHorizonRenderer = null;
                 HorizonRendererRegistered = false;

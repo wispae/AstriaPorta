@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
+using Vintagestory.API.MathTools;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AstriaPorta.Content
@@ -245,6 +246,16 @@ namespace AstriaPorta.Content
             if (distanceChunks > StargateConfig.Loaded.MaxRangeChunksMilkyway) return false;
 
             return true;
+        }
+
+        internal Vec3f GetTpOffsetStart()
+        {
+            return (Gate.Block.Shape.rotateY == 180 || Gate.Block.Shape.rotateY == 0) ? new(-2f, 0.5f, 0) : new(0, 0.5f, -2f);
+        }
+
+        internal Vec3f GetTpOffsetEnd()
+        {
+            return (Gate.Block.Shape.rotateY == 180 || Gate.Block.Shape.rotateY == 0) ? new(3f, 6f, 1f) : new(1f, 6f, 3f);
         }
     }
 }

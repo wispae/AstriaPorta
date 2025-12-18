@@ -10,6 +10,9 @@ using AstriaPorta.src.Block;
 using Vintagestory.API.Util;
 using AstriaPorta.Config;
 using AstriaPorta.src.BlockEntity.Stargate.Milkyway;
+using Vintagestory.Common;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace AstriaPorta
 {
@@ -44,8 +47,11 @@ namespace AstriaPorta
         // Useful for registering block/entity classes on both sides
         public override void Start(ICoreAPI api)
         {
+            ClassRegistry.legacyBlockEntityClassNames.TryAdd("BEStargate", "BEStargateMilkyway");
             RegisterBlocks(api);
             RegisterItems(api);
+
+            StargateVolumeManager.Initialize();
         }
 
         public override void StartServerSide(ICoreServerAPI api)

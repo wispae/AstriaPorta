@@ -311,6 +311,7 @@ namespace AstriaPorta.Systems
                 long chunkIndex = sapi.WorldManager.MapChunkIndex2D(dictKey.X, dictKey.Y);
                 ((ServerMain)sapi.World).RemoveChunkColumnFromForceLoadedList(chunkIndex);
                 activeBlockChunks.Remove(dictKey);
+                Mod.Logger.Debug("Released Chunk (" + dictKey.X + " ; " + dictKey.Y + ")");
                 return;
             }
 
