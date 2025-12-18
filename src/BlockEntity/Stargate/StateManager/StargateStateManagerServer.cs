@@ -65,7 +65,7 @@ namespace AstriaPorta.Content
                 if (!Gate.IsRemoteLoaded)
                 {
                     RemoteLoadTimeout = StargateConfig.Loaded.MaxTimeoutSeconds;
-                    gmInstance.LoadRemoteGate(Gate.Address, Gate);
+                    gmInstance.LoadRemoteGate(Gate.DialingAddress, Gate);
                 }
                 TryRegisterTickListener(OnTick, 20);
             }

@@ -128,8 +128,6 @@ namespace AstriaPorta.Content
             byte targetGlyph = DialingAddress.AddressCoordinates.Glyphs[CurrentAddressIndex];
             PreviousAngle = CurrentAngle;
 
-            Api.Logger.Debug($"Current glyph: {CurrentGlyph} | Current Angle: {CurrentAngle} | RotateCW: {RotateCW}");
-
             if (CurrentGlyph != targetGlyph)
             {
                 CurrentAngle += delta * RotationDegPerSecond * (RotateCW ? -1 : 1);
