@@ -1,9 +1,5 @@
-﻿using AstriaPorta.Content;
-using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
@@ -23,12 +19,19 @@ namespace AstriaPorta.Content
 
     public class StargateSoundLocationConfiguration
     {
+        [JsonProperty("activeSound")]
         public AssetLocation ActiveSoundLocation;
+        [JsonProperty("breakSound")]
         public AssetLocation BreakSoundLocation;
+        [JsonProperty("lockSound")]
         public AssetLocation LockSoundLocation;
+        [JsonProperty("releaseSound")]
         public AssetLocation ReleaseSoundLocation;
+        [JsonProperty("rotateSound")]
         public AssetLocation RotateSoundLocation;
+        [JsonProperty("vortexSound")]
         public AssetLocation VortexSoundLocation;
+        [JsonProperty("warningSound")]
         public AssetLocation WarningSoundLocation;
     }
 
@@ -145,9 +148,8 @@ namespace AstriaPorta.Content
 
         public void StopActiveSound()
         {
-            if (_activeSound == null) return;
-            _activeSound.Stop();
-            _activeSound.Dispose();
+            _activeSound?.Stop();
+            _activeSound?.Dispose();
             _activeSound = null;
         }
 
@@ -159,9 +161,8 @@ namespace AstriaPorta.Content
 
         public void StopRotateSound()
         {
-            if (_rotateSound == null) return;
-            _rotateSound.Stop();
-            _rotateSound.Dispose();
+            _rotateSound?.Stop();
+            _rotateSound?.Dispose();
             _rotateSound = null;
         }
     }

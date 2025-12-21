@@ -1,6 +1,4 @@
 ﻿using AstriaPorta.Config;
-using AstriaPorta.src.Block;
-using AstriaPorta.src.BlockEntity.Stargate;
 using AstriaPorta.Util;
 using System;
 using System.Collections.Generic;

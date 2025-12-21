@@ -1,9 +1,8 @@
-﻿using AstriaPorta.Content;
-using Vintagestory.API.Client;
+﻿using Vintagestory.API.Client;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace AstriaPorta.src.BlockEntity.Stargate.Milkyway;
+namespace AstriaPorta.Content;
 
 public class MilkywayVisualManager : StargateVisualManager
 {

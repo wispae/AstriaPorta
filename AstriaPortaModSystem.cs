@@ -1,18 +1,9 @@
-﻿using System;
-using Vintagestory.API.Client;
+﻿using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Config;
 using Vintagestory.API.Server;
-using Vintagestory.Client.NoObf;
 using AstriaPorta.Content;
 using AstriaPorta.Util;
-using AstriaPorta.src.Block;
-using Vintagestory.API.Util;
-using AstriaPorta.Config;
-using AstriaPorta.src.BlockEntity.Stargate.Milkyway;
 using Vintagestory.Common;
-using System.Reflection;
-using System.Collections.Generic;
 
 namespace AstriaPorta
 {
@@ -68,8 +59,6 @@ namespace AstriaPorta
             base.StartClientSide(api);
             capi = api;
 
-            InitializeConfigurations();
-
             api.Event.BlockTexturesLoaded += OnClientAssetsLoaded;
         }
 
@@ -77,6 +66,8 @@ namespace AstriaPorta
         {
             capi.Event.ReloadTextures += CreateExternalTextures;
             capi.Event.ReloadShader += RegisterShaderPrograms;
+
+            InitializeConfigurations(capi);
 
             CreateExternalTextures();
             RegisterShaderPrograms();
@@ -125,9 +116,9 @@ namespace AstriaPorta
             api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));
         }
 
-        private void InitializeConfigurations()
+        private void InitializeConfigurations(ICoreAPI api)
         {
-            var milkywaySoundConfig = new StargateSoundLocationConfiguration
+            var baseSoundConfig = new StargateSoundLocationConfiguration
             {
                 ActiveSoundLocation = new("sounds/environment/underwater.ogg"),
                 LockSoundLocation = new("sounds/block/vesselclose.ogg"),
@@ -137,8 +128,28 @@ namespace AstriaPorta
                 BreakSoundLocation = new("sounds/effect/translocate-breakdimension.ogg"),
                 RotateSoundLocation = new("sounds/block/quern.ogg"),
             };
+            var milkywayConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-milkyway-north");
 
-            StargateSoundManager.InitializeLocations(EnumStargateType.Milkyway, milkywaySoundConfig);
+            StargateSoundManager.InitializeLocations(EnumStargateType.Milkyway, milkywayConfig);
+        }
+
+        private StargateSoundLocationConfiguration InitializeSoundConfiguration(ICoreAPI api, StargateSoundLocationConfiguration baseConfig, AssetLocation fromBlock)
+        {
+            var gateBlock = api.World.GetBlock(fromBlock);
+            if (gateBlock == null) return baseConfig;
+
+            var soundConfig = gateBlock.Attributes["gateSounds"].AsObject<StargateSoundLocationConfiguration>();
+            if (soundConfig == null) return baseConfig;
+
+            soundConfig.ActiveSoundLocation ??= baseConfig.ActiveSoundLocation;
+            soundConfig.BreakSoundLocation ??= baseConfig.BreakSoundLocation;
+            soundConfig.LockSoundLocation ??= baseConfig.LockSoundLocation;
+            soundConfig.ReleaseSoundLocation ??= baseConfig.ReleaseSoundLocation;
+            soundConfig.RotateSoundLocation ??= baseConfig.RotateSoundLocation;
+            soundConfig.VortexSoundLocation ??= baseConfig.VortexSoundLocation;
+            soundConfig.WarningSoundLocation ??= baseConfig.WarningSoundLocation;
+
+            return soundConfig;
         }
 
         private void RegisterCommands(ICoreServerAPI api)

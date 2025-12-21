@@ -1,9 +1,8 @@
 ﻿using AstriaPorta.Config;
-using AstriaPorta.Content;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 
-namespace AstriaPorta.src.BlockEntity.Stargate.Milkyway;
+namespace AstriaPorta.Content;
 
 public class BlockEntityStargateMilkyway : StargateBase
 {

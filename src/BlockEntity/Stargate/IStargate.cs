@@ -1,10 +1,6 @@
 ﻿using ProtoBuf;
-using System.Collections.Generic;
-using System.Text;
 using AstriaPorta.Util;
-using System;
 using Vintagestory.API.MathTools;
-using AstriaPorta.src.BlockEntity.Stargate;
 
 namespace AstriaPorta.Content
 {

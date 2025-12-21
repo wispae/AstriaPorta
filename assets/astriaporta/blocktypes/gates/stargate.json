@@ -56,6 +56,17 @@
   "attributes": {
     "handbook": {
       "groupBy": [ "stargate-*" ]
+    },
+    "gateSoundsByType": {
+      "stargate-milkyway-*": {
+        "activeSound": "game:sounds/environment/underwater.ogg",
+        "breakSound": "sounds/effect/translocate-breakdimension.ogg",
+        "lockSound": "sounds/block/vesselclose.ogg",
+        "releaseSound": "sounds/block/vesselopen.ogg",
+        "rotateSound": "sounds/block/quern.ogg",
+        "vortexSound": "sounds/environment/largesplash2.ogg",
+        "warningSound": "sounds/block/hopperopen.ogg"
+      }
     }
   },
   "entityBehaviors": [
