@@ -8,7 +8,7 @@
   "variantgroups": [
     {
       "code": "gatetype",
-      "states": [ "milkyway" ]
+      "states": [ "milkyway", "pegasus" ]
     },
     {
       "code": "side",
