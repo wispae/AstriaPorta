@@ -74,7 +74,7 @@ public abstract class StargateVisualManager
         }
     }
 
-    public void ActivateLockChevron()
+    public virtual void ActivateLockChevron()
     {
         if (GateRenderer == null) return;
 
@@ -112,7 +112,7 @@ public abstract class StargateVisualManager
     /// <summary>
     /// Disposes of the main and event horizon renderers
     /// </summary>
-    protected void DisposeRenderers()
+    protected virtual void DisposeRenderers()
     {
         if (GateRenderer != null)
         {
@@ -174,6 +174,8 @@ public abstract class StargateVisualManager
         }
     }
 
+    public abstract void StartDialing();
+
     /// <summary>
     /// Updates which chevrons should glow, depending on the
     /// active chevrons and the length of the address being dialed
@@ -197,7 +199,7 @@ public abstract class StargateVisualManager
     /// </summary>
     /// <param name="activeChevrons"></param>
     /// <param name="length"></param>
-    protected void UpdateChevronGlow(int activeChevrons, EnumAddressLength length)
+    protected virtual void UpdateChevronGlow(int activeChevrons, EnumAddressLength length)
     {
         if (GateRenderer == null) return;
 
@@ -245,7 +247,7 @@ public abstract class StargateVisualManager
     /// Updates the renderer state.<br/>
     /// Currently updates only the inner ring rotation
     /// </summary>
-    public void UpdateRendererState(float currentAngle)
+    public virtual void UpdateRendererState(float currentAngle)
     {
         if (GateRenderer == null) return;
 

@@ -12,7 +12,7 @@ using Vintagestory.API.Util;
 
 namespace AstriaPorta.Content;
 
-public class StargateStateManagerServer : StargateStateManagerBase
+public abstract class StargateStateManagerServer : StargateStateManagerBase
 {
     protected ICoreServerAPI ServerApi;
 
@@ -114,6 +114,16 @@ public class StargateStateManagerServer : StargateStateManagerBase
             State = (int)State,
             DialType = (int)CurrentDialSpeed
         };
+    }
+
+    protected virtual void ConfigureDialingSettings()
+    {
+        State = EnumStargateState.DialingOutgoing;
+        CurrentAddressIndex = 0;
+        ActiveChevrons = 0;
+        RotateCW = true;
+        NextGlyph = DialingAddress.AddressCoordinates.Glyphs[CurrentAddressIndex];
+        RemoteLoadTimeout = StargateConfig.Loaded.MaxTimeoutSeconds;
     }
 
     public override void ForceDisconnect(bool notifyRemote = true)
@@ -290,13 +300,7 @@ public class StargateStateManagerServer : StargateStateManagerBase
             UpdateRemoteChevrons();
         }
 
-        CurrentAddressIndex++;
-        RotateCW = (CurrentAddressIndex == 0) ? true : !RotateCW;
-        NextGlyph = DialingAddress.AddressCoordinates.Glyphs[CurrentAddressIndex];
-
-        SyncStateToClients();
-
-        TryRegisterTickListener(OnTick, 20);
+        ContinueToNextIndex();
     }
 
     protected override void OnGlyphReached()
@@ -316,26 +320,6 @@ public class StargateStateManagerServer : StargateStateManagerBase
             Gate.TryDisconnect();
             return;
         }
-    }
-
-    protected override void OnTick(float delta)
-    {
-        switch (State)
-        {
-            case EnumStargateState.DialingOutgoing:
-                TickDialingOutgoing(delta);
-                break;
-            case EnumStargateState.ConnectedOutgoing:
-                TickConnectedOutgoing(delta);
-                break;
-            default:
-                UnregisterTickListener();
-                break;
-        }
-
-        // We should preferably not keep a permanent reference to the remote gate
-        // should be fine to keep it during a single tick, but best to yeet it here
-        Gate.ReleaseRemoteGate();
     }
 
     public override void ProcessStatePacket(EnumStargatePacketType packetType, byte[] data)
@@ -507,7 +491,7 @@ public class StargateStateManagerServer : StargateStateManagerBase
         ServerApi.Network.BroadcastBlockEntityPacket(Gate.Pos, (int)EnumStargatePacketType.State, packet);
     }
 
-    private void TickConnectedOutgoing(float delta)
+    protected virtual void TickConnectedOutgoing(float delta)
     {
         TickTimer++;
         TickAvg += delta;
@@ -544,7 +528,7 @@ public class StargateStateManagerServer : StargateStateManagerBase
         }
     }
 
-    private void TickDialingOutgoing(float delta)
+    protected virtual void TickDialingOutgoing(float delta)
     {
         if (CurrentDialSpeed == EnumDialSpeed.Slow)
         {
@@ -562,7 +546,7 @@ public class StargateStateManagerServer : StargateStateManagerBase
         Api.Logger.Debug($"Started dial to {address} with coordinates ({address.AddressCoordinates.X},{address.AddressCoordinates.Y},{address.AddressCoordinates.Z})");
 #endif
 
-        RotationDegPerSecond = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
+        // RotationDegPerSecond = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
         if (State != EnumStargateState.Idle)
         {
             return false;
@@ -587,12 +571,7 @@ public class StargateStateManagerServer : StargateStateManagerBase
             }
         }
 
-        State = EnumStargateState.DialingOutgoing;
-        CurrentAddressIndex = 0;
-        ActiveChevrons = 0;
-        RotateCW = true;
-        NextGlyph = DialingAddress.AddressCoordinates.Glyphs[CurrentAddressIndex];
-        RemoteLoadTimeout = StargateConfig.Loaded.MaxTimeoutSeconds;
+        ConfigureDialingSettings();
 
         UnregisterTickListener();
         TryRegisterTickListener(OnTick, 20);

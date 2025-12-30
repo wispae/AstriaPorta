@@ -1,0 +1,29 @@
+{
+	"editor": {
+		"collapsedPaths": "",
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"glyph_sheet": "glyph_sheet"
+	},
+	"elements": [
+		{
+			"name": "glyph_cover_1",
+			"from": [ 4.5842, 48.87, 8.9 ],
+			"to": [ 11.0158, 55.3016, 9.0 ],
+			"rotationOrigin": [ 8.5, 8.0, 8.0 ],
+			"faces": {
+				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 6.0, 6.0 ], "enabled": false },
+				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 6.0 ], "enabled": false },
+				"south": { "texture": "#glyph_sheet", "uv": [ 0.0, 0.0, 2.4, 2.4 ], "autoUv": false },
+				"west": { "texture": "#null", "uv": [ 0.0, 0.0, 0.5, 6.0 ], "enabled": false },
+				"up": { "texture": "#null", "uv": [ 0.0, 0.0, 6.0, 0.5 ], "enabled": false },
+				"down": { "texture": "#null", "uv": [ 0.0, 0.0, 6.0, 0.5 ], "enabled": false }
+			}
+		}
+	]}

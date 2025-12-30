@@ -1,11 +1,7 @@
 ﻿using AstriaPorta.Util;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
-using Vintagestory.API.Util;
 
 namespace AstriaPorta.Content
 {
@@ -66,8 +62,8 @@ namespace AstriaPorta.Content
 			prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
 			prog.RgbaGlowIn = glowColor;
 
-			// TODO: refactor to use instanced rendering???
-			for (int i = 1; i <= 9; i++)
+            // TODO: refactor to use instanced rendering???
+            for (int i = 1; i <= 9; i++)
 			{
 				prog.ModelMatrix = ModelMat.Identity()
 				.Translate(pos.X - camPos.X, pos.Y - camPos.Y, pos.Z - camPos.Z)

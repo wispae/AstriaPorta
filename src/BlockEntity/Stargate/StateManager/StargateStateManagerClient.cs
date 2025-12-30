@@ -8,7 +8,7 @@ using Vintagestory.API.Util;
 
 namespace AstriaPorta.Content;
 
-public class StargateStateManagerClient : StargateStateManagerBase
+public abstract class StargateStateManagerClient : StargateStateManagerBase
 {
     protected ICoreClientAPI ClientAPI;
 
@@ -57,13 +57,7 @@ public class StargateStateManagerClient : StargateStateManagerBase
         ClientAPI.Network.SendBlockEntityPacket(Gate.Pos, (int)EnumStargatePacketType.Dial, packet);
     }
 
-    protected void OnGlyphDown(float _)
-    {
-        UnregisterTickListener();
-        AwaitingChevronAnimation = false;
-
-        Gate.VisualManager.DeactivateLockChevron();
-    }
+    protected abstract void OnGlyphDown(float _);
 
     protected override void OnGlyphReached()
     {
@@ -85,35 +79,8 @@ public class StargateStateManagerClient : StargateStateManagerBase
         {
             Gate.SoundManager.Play(EnumGateSoundLocation.Release);
         }, 500);
-    }
 
-    protected override void OnTick(float delta)
-    {
-        switch (State)
-        {
-            case EnumStargateState.DialingOutgoing:
-                if (CurrentDialSpeed == EnumDialSpeed.Slow)
-                {
-                    Gate.SoundManager.StartRotateSound();
-                    NextAngle(delta);
-                }
-                else
-                {
-                    OnGlyphReached();
-                }
-                Gate.VisualManager.UpdateRendererState(CurrentAngle);
-                break;
-            case EnumStargateState.ConnectedOutgoing:
-                TimeOpen += delta;
-                if (TimeOpen >= MaxConnectionDuration)
-                {
-                    TimeOpen = MaxConnectionDuration;
-                }
-                break;
-            default:
-                UnregisterTickListener();
-                break;
-        }
+        ContinueToNextIndex();
     }
 
     /// <summary>
@@ -176,9 +143,9 @@ public class StargateStateManagerClient : StargateStateManagerBase
                 break;
         }
 
+        State = newState;
         Gate.VisualManager.UpdateChevronGlow(ActiveChevrons);
         Gate.VisualManager.UpdateRendererState(CurrentAngle);
-        State = newState;
     }
 
     /// <summary>
@@ -200,6 +167,29 @@ public class StargateStateManagerClient : StargateStateManagerBase
         (Gate.Api as ICoreClientAPI).World.Player.CameraYaw = packet.Yaw;
     }
 
+    protected virtual void TickConnectedOutgoing(float delta)
+    {
+        TimeOpen += delta;
+        if (TimeOpen >= MaxConnectionDuration)
+        {
+            TimeOpen = MaxConnectionDuration;
+        }
+    }
+
+    protected virtual void TickDialingOutgoing(float delta)
+    {
+        if (CurrentDialSpeed == EnumDialSpeed.Slow)
+        {
+            Gate.SoundManager.StartRotateSound();
+            NextAngle(delta);
+        }
+        else
+        {
+            OnGlyphReached();
+        }
+        Gate.VisualManager.UpdateRendererState(CurrentAngle);
+    }
+
     /// <summary>
     /// Manages transitions into the dialingIncoming state
     /// </summary>
@@ -211,7 +201,7 @@ public class StargateStateManagerClient : StargateStateManagerBase
     /// <summary>
     /// Manages transitions into the dialingOutgoing state
     /// </summary>
-    protected void TransitionToDialingOutgoing()
+    protected virtual void TransitionToDialingOutgoing()
     {
         if (State == EnumStargateState.Idle)
         {
@@ -289,7 +279,7 @@ public class StargateStateManagerClient : StargateStateManagerBase
 
     public override bool TryDial(IStargateAddress address, EnumDialSpeed speed)
     {
-        RotationDegPerSecond = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
+        // RotationDegPerSecond = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
         DialServerGate(address, speed);
         return true;
     }

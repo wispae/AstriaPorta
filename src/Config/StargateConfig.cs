@@ -21,6 +21,8 @@ namespace AstriaPorta.Config
         [JsonIgnore]
         private float _dialSpeedDegreesPerSecondMilkyway = 80f;
         [JsonIgnore]
+        private float _dialSpeedDegreesPerSecondPegasus = 120f;
+        [JsonIgnore]
         private int _minDistanceSurfaceGates = 1000;
         [JsonIgnore]
         private int _minDistanceUndergroundGates = 1000;
@@ -87,10 +89,21 @@ namespace AstriaPorta.Config
                 _dialSpeedDegreesPerSecondMilkyway = value;
             }
         }
-        [ProtoMember(12), DefaultValue(true)]
+        [ProtoMember(12), DefaultValue(120f)]
+        public float DialSpeedDegreesPerSecondPegasus
+        {
+            get => _dialSpeedDegreesPerSecondPegasus;
+            set
+            {
+                if (value < 20f) value = 20f;
+                if (value > 180f) value = 180f;
+                _dialSpeedDegreesPerSecondPegasus = value;
+            }
+        }
+        [ProtoMember(13), DefaultValue(true)]
         public bool AllowQuickDial { get; set; } = true;
 
-        [ProtoMember(13)]
+        [ProtoMember(14)]
         public int MinDistanceSurfaceGates
         {
             get => _minDistanceSurfaceGates;
@@ -101,7 +114,7 @@ namespace AstriaPorta.Config
             }
         }
 
-        [ProtoMember(14)]
+        [ProtoMember(15)]
         public int MinDistanceUndergroundGates
         {
             get => _minDistanceUndergroundGates;
@@ -112,10 +125,10 @@ namespace AstriaPorta.Config
             }
         }
 
-        [ProtoMember(15), DefaultValue(true)]
+        [ProtoMember(16), DefaultValue(true)]
         public bool EnableWorldGenGates { get; set; } = true;
 
-        [ProtoMember(16), DefaultValue(true)]
+        [ProtoMember(17), DefaultValue(true)]
         public bool EnableCartoucheGates { get; set; } = true;
     }
 }

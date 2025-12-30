@@ -39,4 +39,8 @@ public class MilkywayVisualManager : StargateVisualManager
         GateRendererInitialized = true;
         GateRendererRegistered = true;
     }
+
+    public override void StartDialing()
+    {
+    }
 }

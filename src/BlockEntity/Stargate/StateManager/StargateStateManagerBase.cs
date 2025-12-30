@@ -22,8 +22,8 @@ public abstract class StargateStateManagerBase : IStargateStateManager
     protected long CallbackId = -1;
     protected long TickListenerId = -1;
 
-    protected int CurrentAddressIndex;
-    protected EnumDialSpeed CurrentDialSpeed;
+    private int _currentAddressIndex;
+    private EnumDialSpeed _currentDialSpeed;
     protected byte CurrentGlyph;
     protected float GlyphAngle;
     internal byte NextGlyph;
@@ -33,6 +33,8 @@ public abstract class StargateStateManagerBase : IStargateStateManager
 
     public byte ActiveChevrons { get; protected set; }
     public float CurrentAngle { get; protected set; }
+    public int CurrentAddressIndex { get; protected set; }
+    public EnumDialSpeed CurrentDialSpeed { get; protected set; }
     public IStargateAddress DialingAddress { get; set; }
 
     public bool IsCallbackRegistered => CallbackId != -1;
@@ -87,6 +89,8 @@ public abstract class StargateStateManagerBase : IStargateStateManager
         UnregisterTickListener();
     }
 
+    protected abstract void ContinueToNextIndex();
+
     public virtual void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessorForResolve)
     {
         if (tree.GetBool("hasAddress", false))
@@ -117,7 +121,7 @@ public abstract class StargateStateManagerBase : IStargateStateManager
     /// </summary>
     /// <param name="delta"></param>
     /// <returns></returns>
-    protected float NextAngle(float delta)
+    protected virtual float NextAngle(float delta)
     {
         byte targetGlyph = DialingAddress.AddressCoordinates.Glyphs[CurrentAddressIndex];
         PreviousAngle = CurrentAngle;

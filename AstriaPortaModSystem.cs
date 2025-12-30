@@ -34,6 +34,11 @@ namespace AstriaPorta
             return 0.36d;
         }
 
+        public override void Dispose()
+        {
+            StargateMeshHelper.Dispose();
+        }
+
         // Called on server and client
         // Useful for registering block/entity classes on both sides
         public override void Start(ICoreAPI api)
@@ -71,6 +76,8 @@ namespace AstriaPorta
 
             CreateExternalTextures();
             RegisterShaderPrograms();
+
+            InitializeMeshes(capi);
         }
 
         private void CreateExternalTextures()
@@ -111,6 +118,7 @@ namespace AstriaPorta
             api.RegisterBlockEntityClass("BERandomizerOrientable", typeof(BlockEntityBlockRandomizerOrientable));
             // api.RegisterBlockEntityClass("BEStargate", typeof(BlockEntityStargate));
             api.RegisterBlockEntityClass("BEStargateMilkyway", typeof(BlockEntityStargateMilkyway));
+            api.RegisterBlockEntityClass("BEStargatePegasus", typeof(BlockEntityStargatePegasus));
             api.RegisterBlockEntityClass("BEDialHomeDevice", typeof(BlockEntityDialHomeDevice));
 
             api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));
@@ -129,8 +137,10 @@ namespace AstriaPorta
                 RotateSoundLocation = new("sounds/block/quern.ogg"),
             };
             var milkywayConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-milkyway-north");
+            var pegasusConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-pegasus-north");
 
             StargateSoundManager.InitializeLocations(EnumStargateType.Milkyway, milkywayConfig);
+            StargateSoundManager.InitializeLocations(EnumStargateType.Pegasus, pegasusConfig);
         }
 
         private StargateSoundLocationConfiguration InitializeSoundConfiguration(ICoreAPI api, StargateSoundLocationConfiguration baseConfig, AssetLocation fromBlock)
@@ -150,6 +160,11 @@ namespace AstriaPorta
             soundConfig.WarningSoundLocation ??= baseConfig.WarningSoundLocation;
 
             return soundConfig;
+        }
+
+        private void InitializeMeshes(ICoreClientAPI api)
+        {
+            StargateMeshHelper.Initialize(api);
         }
 
         private void RegisterCommands(ICoreServerAPI api)

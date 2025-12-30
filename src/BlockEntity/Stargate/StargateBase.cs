@@ -340,15 +340,6 @@ namespace AstriaPorta.Content
         {
             base.FromTreeAttributes(tree, worldAccessForResolve);
 
-            if (worldAccessForResolve is IClientWorldAccessor)
-            {
-                StateManager ??= new StargateStateManagerClient();
-            }
-            else
-            {
-                StateManager ??= new StargateStateManagerServer();
-            }
-
             StateManager.FromTreeAttributes(tree, worldAccessForResolve);
 
             Inventory.FromTreeAttributes(tree.GetTreeAttribute("inventoryCamo"));
