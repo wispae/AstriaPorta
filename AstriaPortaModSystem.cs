@@ -1,14 +1,9 @@
-﻿using System;
-using Vintagestory.API.Client;
+﻿using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Config;
 using Vintagestory.API.Server;
-using Vintagestory.Client.NoObf;
 using AstriaPorta.Content;
 using AstriaPorta.Util;
-using AstriaPorta.src.Block;
-using Vintagestory.API.Util;
-using AstriaPorta.Config;
+using Vintagestory.Common;
 
 namespace AstriaPorta
 {
@@ -39,12 +34,20 @@ namespace AstriaPorta
             return 0.36d;
         }
 
+        public override void Dispose()
+        {
+            StargateMeshHelper.Dispose();
+        }
+
         // Called on server and client
         // Useful for registering block/entity classes on both sides
         public override void Start(ICoreAPI api)
         {
+            ClassRegistry.legacyBlockEntityClassNames.TryAdd("BEStargate", "BEStargateMilkyway");
             RegisterBlocks(api);
             RegisterItems(api);
+
+            StargateVolumeManager.Initialize();
         }
 
         public override void StartServerSide(ICoreServerAPI api)
@@ -53,7 +56,9 @@ namespace AstriaPorta
             sapi = api;
 
             RegisterCommands(api);
+#if DEBUG
             Mod.Logger.Debug("Started server-side modsystem");
+#endif
         }
 
         public override void StartClientSide(ICoreClientAPI api)
@@ -61,16 +66,20 @@ namespace AstriaPorta
             base.StartClientSide(api);
             capi = api;
 
-            api.Event.BlockTexturesLoaded += onClientAssetsLoaded;
+            api.Event.BlockTexturesLoaded += OnClientAssetsLoaded;
         }
 
-        private void onClientAssetsLoaded()
+        private void OnClientAssetsLoaded()
         {
             capi.Event.ReloadTextures += CreateExternalTextures;
             capi.Event.ReloadShader += RegisterShaderPrograms;
 
+            InitializeConfigurations(capi);
+
             CreateExternalTextures();
             RegisterShaderPrograms();
+
+            InitializeMeshes(capi);
         }
 
         private void CreateExternalTextures()
@@ -89,7 +98,9 @@ namespace AstriaPorta
 
             eventHorizonShaderProgramRef = capi.Shader.RegisterFileShaderProgram("eventhorizon", eventHorizonShaderProgram);
 
+#if DEBUG
             capi.Logger.Notification("Loaded Shaderprogram for event horizon.");
+#endif
 
             return eventHorizonShaderProgram.Compile();
         }
@@ -109,10 +120,55 @@ namespace AstriaPorta
             api.RegisterBlockClass("BlockMultiblockStargate", typeof(BlockMultiblockStargate));
 
             api.RegisterBlockEntityClass("BERandomizerOrientable", typeof(BlockEntityBlockRandomizerOrientable));
-            api.RegisterBlockEntityClass("BEStargate", typeof(BlockEntityStargate));
+            // api.RegisterBlockEntityClass("BEStargate", typeof(BlockEntityStargate));
+            api.RegisterBlockEntityClass("BEStargateMilkyway", typeof(BlockEntityStargateMilkyway));
+            api.RegisterBlockEntityClass("BEStargatePegasus", typeof(BlockEntityStargatePegasus));
             api.RegisterBlockEntityClass("BEDialHomeDevice", typeof(BlockEntityDialHomeDevice));
 
             api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));
+        }
+
+        private void InitializeConfigurations(ICoreAPI api)
+        {
+            var baseSoundConfig = new StargateSoundLocationConfiguration
+            {
+                ActiveSoundLocation = new("sounds/environment/underwater.ogg"),
+                LockSoundLocation = new("sounds/block/vesselclose.ogg"),
+                ReleaseSoundLocation = new("sounds/block/vesselopen.ogg"),
+                WarningSoundLocation = new("sounds/block/hopperopen.ogg"),
+                VortexSoundLocation = new("sounds/environment/largesplash2.ogg"),
+                BreakSoundLocation = new("sounds/effect/translocate-breakdimension.ogg"),
+                RotateSoundLocation = new("sounds/block/quern.ogg"),
+            };
+            var milkywayConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-milkyway-north");
+            var pegasusConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-pegasus-north");
+
+            StargateSoundManager.InitializeLocations(EnumStargateType.Milkyway, milkywayConfig);
+            StargateSoundManager.InitializeLocations(EnumStargateType.Pegasus, pegasusConfig);
+        }
+
+        private StargateSoundLocationConfiguration InitializeSoundConfiguration(ICoreAPI api, StargateSoundLocationConfiguration baseConfig, AssetLocation fromBlock)
+        {
+            var gateBlock = api.World.GetBlock(fromBlock);
+            if (gateBlock == null) return baseConfig;
+
+            var soundConfig = gateBlock.Attributes["gateSounds"].AsObject<StargateSoundLocationConfiguration>();
+            if (soundConfig == null) return baseConfig;
+
+            soundConfig.ActiveSoundLocation ??= baseConfig.ActiveSoundLocation;
+            soundConfig.BreakSoundLocation ??= baseConfig.BreakSoundLocation;
+            soundConfig.LockSoundLocation ??= baseConfig.LockSoundLocation;
+            soundConfig.ReleaseSoundLocation ??= baseConfig.ReleaseSoundLocation;
+            soundConfig.RotateSoundLocation ??= baseConfig.RotateSoundLocation;
+            soundConfig.VortexSoundLocation ??= baseConfig.VortexSoundLocation;
+            soundConfig.WarningSoundLocation ??= baseConfig.WarningSoundLocation;
+
+            return soundConfig;
+        }
+
+        private void InitializeMeshes(ICoreClientAPI api)
+        {
+            StargateMeshHelper.Initialize(api);
         }
 
         private void RegisterCommands(ICoreServerAPI api)

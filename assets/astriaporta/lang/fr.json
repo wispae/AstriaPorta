@@ -1,0 +1,101 @@
+{
+  // French Translation provided by laerinok
+  // Traduction française fournie par laerinok
+
+  // === BASE GAME ===
+  "game:astriaportatapestry-name": "{0} (tapisserie)",
+  "game:astriaportatapestry-destiny*": "Destinée",
+  "game:astriaportatapestry-astria-porta*": "Porte des étoiles",
+  "game:tabname-astriaporta": "Astria Porta",
+
+  // == ERROR EXTENSIONS ==
+  "game:ingameerror-cartouchedisabled": "Génération de cartouche désactivée par la configuration",
+
+  // === ASTRIA PORTA ===
+
+  // == HANDBOOK ==
+  "modmechanicinfo-stargates-01": "",
+  "modmechanicinfo-stargates-01-title": "Portes des étoiles",
+  "modmechanicinfo-stargates-01-text": "<strong>Le système des Portes des étoiles</strong><br><br>Le pays est parsemé d'étranges constructions qui existent depuis des temps immémoriaux. Ces anneaux métalliques comportant 9 chevrons sont gravés d'une série de symboles étranges.<br><br>On raconte qu'autrefois, ils étaient utilisés par leurs créateurs comme des portails, les anneaux se connectant les uns aux autres pour permettre de voyager entre deux points quelconques. Les anneaux semblent toujours être accompagnés de piédestaux portant les mêmes symboles que ceux présents sur les structures.<br><br><strong>Parcours le monde, brave Séraphin</strong><br>Les portes des étoiles sont des dispositifs que l'on trouve à travers le monde et qui permettent aux voyageurs de se connecter à n'importe quelle autre porte. Ouvrir une connexion entre deux portes permet le transport instantané de matière entre elles. Garde cependant à l'esprit que le flux de matière ne peut voyager que dans une seule direction : de la porte ayant initié la connexion (la <i>porte d'origine</i>) vers l'autre (la <i>porte de destination</i>).<br>Chaque porte possède une adresse unique, basée sur sa position dans le monde. Tu peux composer manuellement l'adresse d'une porte en utilisant l'interface du DHD (le <i>Dial Home Device</i>), ou faire <hk>shift</hk>-<hk>rightmouse</hk> sur le DHD en tenant un parchemin avec une adresse. La porte commencera à tourner vers chaque symbole de l'adresse, verrouillant un chevron à chaque fois qu'un glyphe est atteint.<br>La porte se fermera d'elle-même après un certain temps, mais elle peut aussi être fermée manuellement via <hk>shift</hk>-<hk>rightmouse</hk> sur le DHD, ou via l'interface.<br><br><strong>Collecter les adresses de portes</strong><br>Une façon d'obtenir de nouvelles adresses est de noter celles des portes que tu trouves dans le monde. Tu peux faire <hk>shift</hk>-<hk>rightmouse</hk> sur une porte avec un morceau de parchemin pour copier l'adresse. Il est également possible de trouver des cartouches anciens dans certaines ruines. Ces tablettes de pierre gravées mènent à une porte située à une certaine distance. Des rumeurs disent aussi que certains marchands trouvent ces tablettes lors de leurs voyages ; peut-être accepteraient-ils de les vendre ?<br>Tu peux tenir l'objet en main, puis faire un <hk>rightmouse</hk> pour générer une nouvelle adresse. Prends soin de garder le cartouche dans ton inventaire jusqu'à ce qu'une adresse soit trouvée !<br>Enfin, il est techniquement possible de composer des adresses de porte au hasard. Mais attention, tu pourrais passer un très long moment à chercher sans jamais trouver une porte aléatoire !<br><br>Une dernière note : à travers les âges, certaines portes semblent avoir perdu leur DHD, ce qui les empêche de composer vers une autre porte. Lorsque tu voyages vers une position inconnue, prépare-toi pour une expédition !",
+
+  "modmechanicinfo-addresses-01": "",
+  "modmechanicinfo-addresses-01-title": "Adresses de porte des étoiles",
+  "modmechanicinfo-addresses-01-text": "<strong>Adresses de Porte des étoiles</strong><br><br>Pour se connecter à une autre porte des étoiles, tu devras connaître l'adresse de cette porte. Les adresses de porte sont composées de neuf symboles maximum, bien que seuls les sept premiers soient actuellement utilisés. Les deux derniers symboles sont réservés aux futurs voyages interdimensionnels et peuvent être ignorés.<br>Les adresses sont attribuées à chaque porte en fonction de la position du chunk dans lequel elle se trouve.<br><br><strong>Composer l'adresse</strong><br>Pour composer l'adresse, un <a href=\"handbook://block-astriaporta:dialhomedevice-milkyway-north\">DHD</a> est nécessaire. Bien que la plupart des portes des étoiles soient accompagnées d'un DHD, certaines ont perdu le leur au fil du temps. Heureusement, il est possible de déplacer le DHD vers d'autres portes, bien que cela nécessite au moins une pioche en fer.<br><br>Tu peux faire <hk>shift</hk>-<hk>rightmouse</hk> sur le DHD avec une <a href=\"handbook://item-astriaporta:addressnote\">note d'adresse</a> ou un <a href=\"handbook://item-astriaporta:coordinatecartouche-mwruinrandom\">cartouche</a> pour commencer immédiatement à composer l'adresse de l'objet.<br>Alternativement, tu peux faire <hk>rightmouse</hk> sur le DHD pour ouvrir l'interface. Ici, tu peux entrer une adresse manuellement. Lorsque les deux derniers symboles sont tous deux à zéro, il est permis de les omettre et de n'utiliser que sept symboles.<br><br>L'adresse d'une porte des étoiles se trouve dans les informations du bloc en haut de l'écran, et peut être copiée en faisant <hk>rightmouse</hk> sur la porte avec un morceau de parchemin.",
+
+  "astriaporta:block-handbooktitle-astriaporta:stargate-milkyway-*": "À propos :",
+  "astriaporta:block-handbooktext-astriaporta:stargate-milkyway-*": "Les portes des étoiles sont des dispositifs créés par un peuple inconnu, à une époque oubliée depuis longtemps. Elles permettent aux utilisateurs de voyager instantanément entre deux portes.<br><br>Mais attention, le vortex créé par la formation du trou de ver anéantit toute matière sur son passage, y compris toi !<br><br>Voir la section <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Système de Portes des étoiles</a> pour plus d'informations.",
+  "astriaporta:block-handbooktitle-astriaporta:stargate-pegasus-*": "À propos :",
+  "astriaporta:block-handbooktext-astriaporta:stargate-pegasus-*": "Les portes des étoiles sont des dispositifs créés par un peuple inconnu, à une époque oubliée depuis longtemps. Elles permettent aux utilisateurs de voyager instantanément entre deux portes.<br><br>Mais attention, le vortex créé par la formation du trou de ver anéantit toute matière sur son passage, y compris toi !<br><br>Voir la section <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Système de Portes des étoiles</a> pour plus d'informations.",
+  "astriaporta:block-handbooktitle-astriaporta:dialhomedevice-milkyway-*": "À propos :",
+  "astriaporta:block-handbooktext-astriaporta:dialhomedevice-milkyway-*": "Le \"Dial Home Device\", ou DHD, est un appareil que l'on trouve souvent en compagnie des portes des étoiles. Son but principal est de servir d'interface pour la porte, permettant aux utilisateurs d'entrer des adresses et de fermer la connexion.<br><br>Voir la section <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Système de Portes des étoiles</a> pour plus d'informations.",
+  "astriaporta:block-handbooktitle-astriaporta:dialhomedevice-pegasus-*": "À propos :",
+  "astriaporta:block-handbooktext-astriaporta:dialhomedevice-pegasus-*": "Le \"Dial Home Device\", ou DHD, est un appareil que l'on trouve souvent en compagnie des portes des étoiles. Son but principal est de servir d'interface pour la porte, permettant aux utilisateurs d'entrer des adresses et de fermer la connexion.<br><br>Voir la section <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Système de Portes des étoiles</a> pour plus d'informations.",
+  "astriaporta:item-handbooktext-astriaporta:coordinatecartouche-*": "Tenir en main et faire <hk>rightmouse</hk> pour localiser une porte des étoiles inconnue",
+
+  // == BLOCKS ==
+  "block-stargate-milkyway-*": "Porte des étoiles (Voie Lactée)",
+  "block-stargate-pegasus-*": "Porte des étoiles (Pégase)",
+  "block-stargate-destiny-*": "Porte des étoiles (Destinée)",
+  "blockhelp-stargate-copyaddress": "Copier l'adresse",
+  "blockhelp-stargate-open-camouflage": "Ouvrir l'inventaire de camouflage",
+  "blockhelp-stargate-copy-address": "Copier l'adresse",
+  "stargate-blockinfo-dialingoutgoing": "Composition de l'adresse : ",
+  "stargate-blockinfo-dialingincoming": "Appel entrant d'une porte distante",
+  "stargate-blockinfo-connectedoutgoing": "Trou de ver sortant",
+  "stargate-blockinfo-connectedincoming": "Trou de ver entrant",
+  "stargate-blockinfo-obstructed": "<font color=\"red\">Horizon des événements obstrué</font>",
+
+  "block-dialhomedevice-milkyway-*": "DHD (Voie Lactée)",
+  "block-dialhomedevice-pegasus-*": "DHD (Pégase)",
+
+  "block-sgcgatedisplay-*": "Moniteur d'activité de porte du SGC",
+
+  "block-randomizerorientable-normal-*": "Randomiseur de bloc orientable",
+
+  // == ITEMS ==
+  "item-addressnote": "Note d'adresse de porte",
+  "itemdesc-addressnote": "Une adresse de porte des étoiles inscrite sur un morceau de papier",
+  "item-coordinatecartouche-*": "Cartouche d'adresse",
+  "itemdesc-coordinatecartouche-*": "Une tablette de pierre avec une étrange séquence de symboles",
+  "itemhelp-cartouche-generate": "<hk>rightmouse</hk> : générer l'adresse",
+
+  "item-debugtablet": "Tablette de débogage de porte",
+  "debugtabletmodename-showgateiris": "Afficher l'iris de la porte",
+  "debugtabletmodename-showgatevortex": "Afficher le vortex de la porte",
+  "debugtabletmodename-fillgateiris": "Remplir l'iris de la porte",
+  "debugtabletmodename-fillgatevortex": "Remplir le vortex de la porte",
+  "debugtabletmodename-checkirisstate": "Vérifier l'état de l'iris",
+  "debugtabletmodename-showdhdsearchrange": "Afficher la portée de recherche du DHD",
+
+  // = CLOTHING =
+  "item-stargateclothes-foot-sgc-boots-standard": "Bottes du SGC (standard)",
+  "item-stargateclothes-foot-sgc-boots-desert": "Bottes du SGC (désert)",
+  "item-stargateclothes-lowerbody-sgc-pants-standard": "Pantalon du SGC (standard)",
+  "item-stargateclothes-lowerbody-sgc-pants-desert": "Pantalon du SGC (désert)",
+  "item-stargateclothes-upperbody-sgc-shirt-standard": "Chemise du SGC (standard)",
+  "item-stargateclothes-upperbody-sgc-shirt-desert": "Chemise du SGC (désert)",
+  "item-stargateclothes-upperbodyover-sgc-tacticalvest-standard": "Gilet tactique du SGC (standard)",
+  "item-stargateclothes-upperbodyover-sgc-tacticalvest-desert": "Gilet tactique du SGC (désert)",
+  "item-stargateclothes-head-sgc-cap-standard": "Casquette du SGC (standard)",
+  "item-stargateclothes-head-sgc-cap-desert": "Casquette du SGC (désert)",
+  "item-stargateclothes-head-sgc-boonie-standard": "Chapeau de brousse du SGC (standard)",
+  "item-stargateclothes-head-sgc-boonie-desert": "Chapeau de brousse du SGC (désert)",
+
+  // == OTHER ==
+  "astriaporta-cartouche-unlinked": "Adresse non générée",
+  "astriaporta-cartouche-generating": "Recherche de porte des étoiles...",
+  "astriaporta-no-address-associated": "Aucune adresse trouvée",
+  "astriaporta-dhd-no-gate-linked": "Aucune porte liée",
+  "astriaporta-cartouche-failed": "Échec de la localisation de la porte",
+
+  "blockhelp-dhd-notedial": "Composer l'adresse de la note",
+  "blockhelp-dhd-dial": "Composer sur la Porte",
+  "blockhelp-dhd-close-gate": "Fermer la porte des étoiles",
+  "blockhelp-dhd-open-ui": "Ouvrir le DHD",
+
+  "addressholder-name-changetitle": "Changer le nom de l'adresse",
+
+  "stargate-gui-quickdialtoggletext": "Utiliser la composition rapide",
+
+  "DhdGuiTitleText": "Dispositif de commande (DHD)"
+}
