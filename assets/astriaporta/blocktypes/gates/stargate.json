@@ -70,7 +70,7 @@
       },
       "stargate-pegasus-*": {
         "lockSound": "game:sounds/block/charcoal1.ogg",
-        "releaseSound": "game:sounds/block/largechestopen.ogg",
+        "releaseSound": "game:sounds/block/charcoal3.ogg",
         "rotateSound": "game:sounds/effect/translocate-active.ogg"
       }
     }

@@ -547,10 +547,10 @@ namespace AstriaPorta.Content
                     {
                         slot.Itemstack = null;
                     }
-                }
-                else
-                {
-                    slot.Itemstack.Collectible.OnLoadCollectibleMappings(worldForNewMappings, slot, oldBlockIdMapping, oldItemIdMapping, resolveImports);
+                    else
+                    {
+                        slot.Itemstack.Collectible.OnLoadCollectibleMappings(worldForNewMappings, slot, oldBlockIdMapping, oldItemIdMapping, resolveImports);
+                    }
                 }
 
                 ItemStack itemstack = slot.Itemstack;

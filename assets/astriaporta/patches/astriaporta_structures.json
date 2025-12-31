@@ -80,6 +80,26 @@
     "op": "add",
     "path": "/structures/-",
     "value": {
+      "code": "surfacepegasus",
+      "group": "stargatesurface",
+      "minGroupDistance": 600,
+      "chance": 10,
+      "placement": "surface",
+      "schematics": [
+        "astriaporta:surface/gates/pegasus/*"
+      ],
+      "offsety": -1,
+      "suppressTrees": true,
+      "postPass": true,
+      "rockTypeRemapGroup": "astriaportastandard"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
       "code": "tradergatessurface",
       "chance": 1,
       "group": "stargatesurface",
@@ -120,6 +140,23 @@
     "op": "add",
     "path": "/structures/-",
     "value": {
+      "code": "undergroundpegasus",
+      "group": "stargateunderground",
+      "minGroupDistance": 600,
+      "chance": 1,
+      "placement": "underground",
+      "schematics": [
+        "astriaporta:underground/gates/pegasus/undergroundgatepegasus-1"
+      ],
+      "rockTypeRemapGroup": "underground"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
       "code": "undergroundmilkywayrare",
       "group": "stargateunderground",
       "minGroupDistance": 600,
@@ -127,6 +164,24 @@
       "placement": "underground",
       "schematics": [
         "astriaporta:underground/gates/milkyway/undergroundgate-2"
+      ],
+      "rockTypeRemapGroup": "underground",
+      "postPass": true
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "undergroundpegasusrare",
+      "group": "stargateunderground",
+      "minGroupDistance": 600,
+      "chance": 0.2,
+      "placement": "underground",
+      "schematics": [
+        "astriaporta:underground/gates/pegasus/undergroundgatepegasus-2"
       ],
       "rockTypeRemapGroup": "underground",
       "postPass": true
