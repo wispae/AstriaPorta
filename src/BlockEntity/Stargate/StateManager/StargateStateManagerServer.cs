@@ -523,7 +523,9 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
 
         if (TimeOpen > StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway)
         {
+#if DEBUG
             Api.Logger.Notification("Wormhole has been open for max duration, shutting down connection");
+#endif
             Gate.TryDisconnect();
         }
     }

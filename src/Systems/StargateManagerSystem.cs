@@ -56,7 +56,9 @@ namespace AstriaPorta.Systems
         /// </summary>
         public void FlushRegisteredGates()
         {
+#if DEBUG
             Mod.Logger.Debug("Flushing all gates from GateManager...");
+#endif
             knownGates.Clear();
             loadedGates.Clear();
             activeBlockChunks.Clear();
@@ -66,7 +68,9 @@ namespace AstriaPorta.Systems
                 sapi.Event.UnregisterGameTickListener(tickListenerId);
                 tickListenerId = -1;
             }
+#if DEBUG
             Mod.Logger.Debug("All gates flushed, lists emptied");
+#endif
         }
 
         /// <summary>
@@ -183,7 +187,9 @@ namespace AstriaPorta.Systems
         {
             if (!address.IsValid)
             {
+#if DEBUG
                 Mod.Logger.Debug($"Address {address} was invalid, returning null");
+#endif
                 requester.ReleaseRemoteGate();
                 return;
             }
@@ -216,10 +222,12 @@ namespace AstriaPorta.Systems
                 {
                     remoteGate.IsForceLoaded = true;
                 }
+#if DEBUG
                 else
                 {
                     Mod.Logger.Debug($"The requested gate ({address}) was null");
                 }
+#endif
             }
             requester.RemotePosition = remoteGate?.Pos;
             return;
@@ -311,11 +319,15 @@ namespace AstriaPorta.Systems
                 long chunkIndex = sapi.WorldManager.MapChunkIndex2D(dictKey.X, dictKey.Y);
                 ((ServerMain)sapi.World).RemoveChunkColumnFromForceLoadedList(chunkIndex);
                 activeBlockChunks.Remove(dictKey);
+#if DEBUG
                 Mod.Logger.Debug("Released Chunk (" + dictKey.X + " ; " + dictKey.Y + ")");
+#endif
                 return;
             }
 
+#if DEBUG
             Mod.Logger.Debug("Chunk (" + dictKey.X + " ; " + dictKey.Y + ") is seemingly still in use");
+#endif
         }
 
         /// <summary>

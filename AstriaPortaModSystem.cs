@@ -56,7 +56,9 @@ namespace AstriaPorta
             sapi = api;
 
             RegisterCommands(api);
+#if DEBUG
             Mod.Logger.Debug("Started server-side modsystem");
+#endif
         }
 
         public override void StartClientSide(ICoreClientAPI api)
@@ -96,7 +98,9 @@ namespace AstriaPorta
 
             eventHorizonShaderProgramRef = capi.Shader.RegisterFileShaderProgram("eventhorizon", eventHorizonShaderProgram);
 
+#if DEBUG
             capi.Logger.Notification("Loaded Shaderprogram for event horizon.");
+#endif
 
             return eventHorizonShaderProgram.Compile();
         }

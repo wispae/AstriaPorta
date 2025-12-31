@@ -66,7 +66,7 @@ namespace AstriaPorta.Systems
 
         private void onPlayerJoined(IServerPlayer player)
         {
-            Mod.Logger.Notification($"Sending server-side config file to player {player.PlayerName}");
+            Mod.Logger.Debug($"Sending server-side config file to player {player.PlayerName}");
             StargateConfig config = StargateConfig.Loaded;
             serverChannel.SendPacket(StargateConfig.Loaded, new IServerPlayer[1] { player });
         }
@@ -87,7 +87,7 @@ namespace AstriaPorta.Systems
 
         private void onReceivedServerConfig(StargateConfig serverConfig)
         {
-            Mod.Logger.Notification("Received config file from server, will use that instead");
+            Mod.Logger.Debug("Received config file from server, will use that instead");
             StargateConfig.Loaded = serverConfig;
         }
 
@@ -98,7 +98,7 @@ namespace AstriaPorta.Systems
             GenStructures structuresSystem = sapi.ModLoader.GetModSystem<GenStructures>();
             if (structuresSystem == null)
             {
-                Mod.Logger.Debug("Couldn't find GenStructures modsystem, ignoring config settings related to structure generation");
+                Mod.Logger.Warning("Couldn't find GenStructures modsystem, ignoring config settings related to structure generation");
                 return;
             }
 

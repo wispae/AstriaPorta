@@ -65,8 +65,6 @@ public class PegasusStateManagerClient : StargateStateManagerClient
                 tNextAngle = (nextAngle + (360 - PreviousAngle)) % 360;
             }
 
-            Api.Logger.Debug($"Current glyph: {CurrentGlyph} | Next glyph: {NextGlyph} | Target glyph: {targetGlyph}");
-
             if ((tCurrentAngle >= tNextAngle && tNextAngle > tPreviousAngle) || (tCurrentAngle <= tNextAngle && tNextAngle < tPreviousAngle))
             {
                 CurrentGlyph = NextGlyph;
