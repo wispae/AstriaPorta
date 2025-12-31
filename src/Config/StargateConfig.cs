@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AstriaPorta.Content;
+using Newtonsoft.Json;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,75 @@ namespace AstriaPorta.Config
         [JsonIgnore]
         private int _minRangeChunksMilkyway = 10;
         [JsonIgnore]
+        private int _minRangeChunksPegasus = 10;
+        [JsonIgnore]
         private int _maxRangeChunksMilkyway = 262144;
+        [JsonIgnore]
+        private int _maxRangeChunksPegasus = 262144;
         [JsonIgnore]
         private float _maxConnectionDurationSecondsMilkyway = 60f;
         [JsonIgnore]
+        private float _maxConnectionDurationSecondsPegasus = 60f;
+        [JsonIgnore]
         private float _dialSpeedDegreesPerSecondMilkyway = 80f;
+        [JsonIgnore]
+        private float _dialSpeedDegreesPerSecondPegasus = 120f;
         [JsonIgnore]
         private int _minDistanceSurfaceGates = 1000;
         [JsonIgnore]
         private int _minDistanceUndergroundGates = 1000;
+
+        public int GetMinRangeChunks(EnumStargateType type)
+        {
+            switch (type)
+            {
+                case EnumStargateType.Milkyway:
+                    return _minRangeChunksMilkyway;
+                case EnumStargateType.Pegasus:
+                    return _minRangeChunksPegasus;
+                default:
+                    return _minRangeChunksMilkyway;
+            }
+        }
+
+        public int GetMaxRangeChunks(EnumStargateType type)
+        {
+            switch (type)
+            {
+                case EnumStargateType.Milkyway:
+                    return _maxRangeChunksMilkyway;
+                case EnumStargateType.Pegasus:
+                    return _maxRangeChunksPegasus;
+                default:
+                    return _maxRangeChunksMilkyway;
+            }
+        }
+
+        public float GetMaxConnectionDuration(EnumStargateType type)
+        {
+            switch (type)
+            {
+                case EnumStargateType.Milkyway:
+                    return _maxConnectionDurationSecondsMilkyway;
+                case EnumStargateType.Pegasus:
+                    return _maxConnectionDurationSecondsPegasus;
+                default:
+                    return _maxConnectionDurationSecondsMilkyway;
+            }
+        }
+
+        public float GetDialSpeedDegreesPerSecond(EnumStargateType type)
+        {
+            switch (type)
+            {
+                case EnumStargateType.Milkyway:
+                    return _dialSpeedDegreesPerSecondMilkyway;
+                case EnumStargateType.Pegasus:
+                    return _dialSpeedDegreesPerSecondPegasus;
+                default:
+                    return _dialSpeedDegreesPerSecondMilkyway;
+            }
+        }
 
         public static StargateConfig Loaded { get; set; } = new StargateConfig();
 
@@ -53,7 +114,19 @@ namespace AstriaPorta.Config
                 _minRangeChunksMilkyway = value;
             }
         }
-        [ProtoMember(9), DefaultValue(262144)]
+        [ProtoMember(9), DefaultValue(10)]
+        public int MinRangeChunksPegasus
+        {
+            get => _minRangeChunksPegasus;
+            set
+            {
+                if (value < _minRangeChunksPegasus) value = _minRangeChunksPegasus - 1;
+                if (value < 0) value = 0;
+                if (value > 262144) value = 262144;
+                _maxRangeChunksPegasus = value;
+            }
+        }
+        [ProtoMember(10), DefaultValue(262144)]
         public int MaxRangeChunksMilkyway
         {
             get => _maxRangeChunksMilkyway;
@@ -65,7 +138,19 @@ namespace AstriaPorta.Config
                 _maxRangeChunksMilkyway = value;
             }
         }
-        [ProtoMember(10), DefaultValue(60f)]
+        [ProtoMember(11), DefaultValue(262144)]
+        public int MaxRangeChunksPegasus
+        {
+            get => _maxRangeChunksPegasus;
+            set
+            {
+                if (value < _minRangeChunksPegasus) value = _minRangeChunksPegasus + 1;
+                if (value < 0) value = 0;
+                if (value > 262144) value = 262144;
+                _maxRangeChunksPegasus = value;
+            }
+        }
+        [ProtoMember(12), DefaultValue(60f)]
         public float MaxConnectionDurationSecondsMilkyway
         {
             get => _maxConnectionDurationSecondsMilkyway;
@@ -76,7 +161,18 @@ namespace AstriaPorta.Config
                 _maxConnectionDurationSecondsMilkyway = value;
             }
         }
-        [ProtoMember(11), DefaultValue(80f)]
+        [ProtoMember(13), DefaultValue(60f)]
+        public float MaxConnectionDurationSecondsPegasus
+        {
+            get => _maxConnectionDurationSecondsPegasus;
+            set
+            {
+                if (value < 10f) value = 10f;
+                if (value > 180f) value = 180f;
+                _maxConnectionDurationSecondsPegasus = value;
+            }
+        }
+        [ProtoMember(14), DefaultValue(80f)]
         public float DialSpeedDegreesPerSecondMilkyway
         {
             get => _dialSpeedDegreesPerSecondMilkyway;
@@ -87,10 +183,21 @@ namespace AstriaPorta.Config
                 _dialSpeedDegreesPerSecondMilkyway = value;
             }
         }
-        [ProtoMember(12), DefaultValue(true)]
+        [ProtoMember(15), DefaultValue(120f)]
+        public float DialSpeedDegreesPerSecondPegasus
+        {
+            get => _dialSpeedDegreesPerSecondPegasus;
+            set
+            {
+                if (value < 20f) value = 20f;
+                if (value > 180f) value = 180f;
+                _dialSpeedDegreesPerSecondPegasus = value;
+            }
+        }
+        [ProtoMember(16), DefaultValue(true)]
         public bool AllowQuickDial { get; set; } = true;
 
-        [ProtoMember(13)]
+        [ProtoMember(17)]
         public int MinDistanceSurfaceGates
         {
             get => _minDistanceSurfaceGates;
@@ -101,7 +208,7 @@ namespace AstriaPorta.Config
             }
         }
 
-        [ProtoMember(14)]
+        [ProtoMember(18)]
         public int MinDistanceUndergroundGates
         {
             get => _minDistanceUndergroundGates;
@@ -112,10 +219,10 @@ namespace AstriaPorta.Config
             }
         }
 
-        [ProtoMember(15), DefaultValue(true)]
+        [ProtoMember(19), DefaultValue(true)]
         public bool EnableWorldGenGates { get; set; } = true;
 
-        [ProtoMember(16), DefaultValue(true)]
+        [ProtoMember(20), DefaultValue(true)]
         public bool EnableCartoucheGates { get; set; } = true;
     }
 }

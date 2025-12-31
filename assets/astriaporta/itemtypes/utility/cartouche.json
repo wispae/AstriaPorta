@@ -8,7 +8,7 @@
   "variantgroups": [
     {
       "code": "type",
-      "states": [ "mwruinrandom", "surface", "underground" ]
+      "states": [ "mwruinrandom", "pgruinrandom", "surface", "underground" ]
     }
   ],
   "attributes": {
@@ -33,10 +33,30 @@
           }
         ]
       },
+      "*-pgruinrandom": {
+        "schematics": [
+          {
+            "schematic": "surfacepegasus",
+            "weight": 6
+          },
+          {
+            "schematic": "undergroundpegasus",
+            "weight": 3
+          },
+          {
+            "schematic": "undergroundpegasusrare",
+            "weight": 1
+          }
+        ]
+      },
       "*-surface": {
         "schematics": [
           {
             "schematic": "surfacemilkyway",
+            "weight": 2
+          },
+          {
+            "schematic": "surfacepegasus",
             "weight": 1
           }
         ]
@@ -45,6 +65,10 @@
         "schematics": [
           {
             "schematic": "undergroundmilkyway",
+            "weight": 2
+          },
+          {
+            "schematic": "undergroundpegasus",
             "weight": 1
           }
         ]
@@ -61,8 +85,8 @@
     "sandstone3": { "base": "game:block/stone/rock/sandstone3" }
   },
   "creativeinventory": {
-    "general": [ "*-mwruinrandom", "*-surface", "*-underground" ],
-    "astriaporta": [ "*-mwruinrandom", "*-surface", "*-underground" ]
+    "general": [ "*-mwruinrandom", "*-pgruinrandom", "*-surface", "*-underground" ],
+    "astriaporta": [ "*-mwruinrandom", "*-pgruinrandom", "*-surface", "*-underground" ]
   },
   "guiTransform": {
     "translation": {

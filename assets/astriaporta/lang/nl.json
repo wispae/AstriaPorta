@@ -1,0 +1,99 @@
+{
+  // === BASE GAME ===
+  "game:astriaportatapestry-name": "{0} (wandtapijt)",
+  "game:astriaportatapestry-destiny*": "Destiny",
+  "game:astriaportatapestry-astria-porta*": "Stargate",
+  "game:tabname-astriaporta": "Astria Porta",
+
+  // == ERROR EXTENSIONS ==
+  "game:ingameerror-cartouchedisabled": "Cartouche generatie niet toegestaan door configuratie",
+
+  // === ASTRIA PORTA ===
+
+  // == HANDBOOK ==
+  "modmechanicinfo-stargates-01": "",
+  "modmechanicinfo-stargates-01-title": "Stargates",
+  "modmechanicinfo-stargates-01-text": "<strong>Het Stargate Systeem</strong><br><br>Voor zolang men het zich kan herinneren is het land al bezaaid geweest met vreemde objecten. Deze metalen ringen hebben 9 chevrons en zijn gegraveerd met een set van vreemde symbolen.<br><br>Er wordt gezegd dat lang geleden deze ringen met elkaar konden verbinden zodat er tussen de ringen gereisd kon worden door de mensen die de ringen maakten. De ringen lijken altijd vergezeld te zijn door sokkels die dezelfde symbolen hebben als degene die op de ring aanwezig zijn.<br><br><strong>Reis door het land, moedige Seraph</strong><br>The stargates zijn apparaten die over heel de wereld gevonden kunnen worden die reizigers toestaan om te verbinden met eender welke andere stargate in de wereld. Het openen van een verbinding tussen twee poorten maakt het onmiddelijke transport van materie ertussen mogelijk. Maar hou in gedachten dat de materiestroom slechts in één richting kan reizen, vanuit de poort die verbinding begon (de <i>bellende poort</i>), naar de andere (de <i>ontvangende poort</i>).<br>Elke poort heeft een uniek adres, dat gebaseerd is op de positie in de wereld. Je kan een poort manueel bellen door gebruik te maken van de interface in de DHD (het <i>Dial Home Device</i> of <i>Bel Naar Huis Apparaat</i>), of door te <hk>shift</hk>-<hk>rightmouse</hk>-klikken op de DHD terwijl je een nota vasthebt met een adres op. De poort zal beginnen draaien naar elke symbool in het adres, en bevestigt een chevron telkens een symbool bereikt wordt.<br>De poort zal na verloop van tijd vanzelf sluiten, of het kan manueel gesloten worden door te <hk>shift</hk>-<hk>rightmouse</hk>-klikken op de DHD, of door de interface.<br><br><strong>Stargate adressen verzamelen</strong><br>Een van de manieren om nieuwe stargate adressen te vinden is door de adressen op te schrijven van poorten die je vind. Je kan <hk>shift</hk>-rechtermuisklikken op een poort met een blad perkament om het adres te kopiëren. Het is ook mogelijk om antieke cartouches te vinden in sommige ruïnes. Deze gekervde stenen tabletten leiden naar een verre stargate. Er zijn ook geruchten dat sommige handelaars deze tabletten hebben gevonden doorheen hun reizen, misschien dat ze deze wel willen verkopen?<br>Je kan de cartouche in je hand houden, en dan <hk>rightmouse</hk>-klikken om een nieuw adres te genereren. Let er zeker up dat je de cartouche in je inventaris houd todat een adres gevonden werd!<br>Het is trouwens ook technisch gezien mogelijk om willekeurig naar gate adressen te bellen. Maar wees gewaarschuwt, op deze manier kan je heel lang op zoek zijn zonder ooit een willekeurige poort te vinden!<br><br>Nog een laatste opmerking; het lijkt erop dat doorheen de eeuwen sommige poorten hun DHD zijn kwijtgeraakt, waardoor ze niet meer naar een andere poort kunnen bellen. Wees zeker voorbereid op een lange reis wanneer je naar een onbekend adres belt!",
+
+  "modmechanicinfo-addresses-01": "",
+  "modmechanicinfo-addresses-01-title": "Stargate adressen",
+  "modmechanicinfo-addresses-01-text": "<strong>Stargate Adressen</strong><br><br>Om te kunnen verbinden met een andere stargate, zal je het adres van die poort moeten kennen. Poort adressen kunnen tot negen symbolen bevatten, hoewel momenteel enkel de eerste zeven in gebruik zijn. De laatste twee symbolen zijn gereserveerd voor toekomstige inter-dimensionale reizen en kunnen genegeerd worden.<br>Poort adressen worden toegekend aan elke poort op basis van de positie van de chunk waar ze zich in bevinden.<br><br><strong>De poort bellen</strong><br>Om de poort te bellen is er een <a href=\"handbook://block-astriaporta:dialhomedevice-milkyway-north\">DHD</a> vereist. Hoewel de meeste stargates gevonden kunnen worden met een DHD, hebben sommige poorten deze verloren doorheen de tijd. Gelukkig is het mogelijk om de DHD te verplaatsen naar andere poorten, hoewel dit minstens een ijzeren pikhouweel vereist.<br><br>Je kan <hk>shift</hk>-<hk>rightmouse</hk>-klikken op de DHD met een <a href=\"handbook://item-astriaporta:addressnote\">adres nota</a> of <a href=\"handbook://item-astriaporta:coordinatecartouche-mwruinrandom\">cartouche</a> om onmiddelijk naar het adres te bellen dat op het voorwerp staat.<br>Als alternatief kan je <hk>rightmouse</hk>-klikken op de DHD om de interface te openen. Hier kan je manueel een adres ingeven. Wanneer de laatste twee symbolen nul zijn, kan je deze negeren, waardoor je dus maar zeven symbolen nodig hebt.<br><br>Het adres van een stargate kan gevonden worden in de info van de blok bovenaan het scherm, en kan gekopiëerd worden door te <hk>rightmouse</hk>-klikken op de poort met een blad perkament.",
+
+  "astriaporta:block-handbooktitle-astriaporta:stargate-milkyway-*": "Over:",
+  "astriaporta:block-handbooktext-astriaporta:stargate-milkyway-*": "De stargates zijn apparaten die gecreëerd werden door een onbekend volk, in het verre verleden. Ze staan gebruikers toe om onmiddelijk tussen twee poorten te reizen.<br><br>Maar pas op, de vortex die vormd door de formatie van het wormgat vernietigt alle materie die in de weg staat, inclusief jij!<br><br>Zie de <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Stargate Systeem</a> sectie voor meer info.",
+  "astriaporta:block-handbooktitle-astriaporta:stargate-pegasus-*": "Over:",
+  "astriaporta:block-handbooktext-astriaporta:stargate-pegasus-*": "De stargates zijn apparaten die gecreëerd werden door een onbekend volk, in het verre verleden. Ze staan gebruikers toe om onmiddelijk tussen twee poorten te reizen.<br><br>Maar pas op, de vortex die vormd door de formatie van het wormgat vernietigt alle materie die in de weg staat, inclusief jij!<br><br>Zie de <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Stargate Systeem</a> sectie voor meer info.",
+  "astriaporta:block-handbooktitle-astriaporta:dialhomedevice-milkyway-*": "Over:",
+  "astriaporta:block-handbooktext-astriaporta:dialhomedevice-milkyway-*": "Het \"Bel Naar Huis Apparaat\" (Dial Home Device), of DHD, is een apparaat dat vaak samen gevonden wordt bij stargates. Hun hoofddoel is om te dienen als interface voor de stargate, zodat gebruikers adressen kunnen ingeven, en om de verbinding te sluiten.<br><br>Zie de <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Stargate Systeem</a> sectie voor meer info.",
+  "astriaporta:block-handbooktitle-astriaporta:dialhomedevice-pegasus-*": "Over:",
+  "astriaporta:block-handbooktext-astriaporta:dialhomedevice-pegasus-*": "Het \"Bel Naar Huis Apparaat\" (Dial Home Device), of DHD, is een apparaat dat vaak samen gevonden wordt bij stargates. Hun hoofddoel is om te dienen als interface voor de stargate, zodat gebruikers adressen kunnen ingeven, en om de verbinding te sluiten.<br><br>Zie de <a href=\"handbook://astriaporta:modmechanicinfo-stargates-01\">Stargate Systeem</a> sectie voor meer info.",
+  "astriaporta:item-handbooktext-astriaporta:coordinatecartouche-*": "Hou vast en <hk >rightmouse</hk>-klik om een onbekende stargate te vinden",
+
+  // == BLOCKS ==
+  "block-stargate-milkyway-*": "Stargate (Melkweg)",
+  "block-stargate-pegasus-*": "Stargate (Pegasus)",
+  "block-stargate-destiny-*": "Stargate (Destiny)",
+  "blockhelp-stargate-copyaddress": "Kopieer adres",
+  "blockhelp-stargate-open-camouflage": "Open camouflage inventaris",
+  "blockhelp-stargate-copy-address": "Kopieer adres",
+  "stargate-blockinfo-dialingoutgoing": "Adres aan het oproepen: ",
+  "stargate-blockinfo-dialingincoming": "Wordt opgeroepen door andere gate",
+  "stargate-blockinfo-connectedoutgoing": "Uitgaande wormgat",
+  "stargate-blockinfo-connectedincoming": "Binnenkomend wormgat",
+  "stargate-blockinfo-obstructed": "<font color=\"red\">Waarnemingshorizon geblokkeerd</font>",
+
+  "block-dialhomedevice-milkyway-*": "DHD (Melkweg)",
+  "block-dialhomedevice-pegasus-*": "DHD (Pegasus)",
+
+  "block-sgcgatedisplay-*": "SGC gate activiteitsmonitor",
+
+  "block-randomizerorientable-normal-*": "Oriënteerbare Block Randomizer",
+
+  // == ITEMS ==
+  "item-addressnote": "Stargate adres nota",
+  "itemdesc-addressnote": "Een stargate adres neergeschreven op een blad papier",
+  "item-coordinatecartouche-*": "Adres Cartouche",
+  "itemdesc-coordinatecartouche-*": "Een stenen tablet met een vreemde reeks symbolen",
+  "itemhelp-cartouche-generate": "<hk>rightmouse</hk>: genereer adres",
+
+  "item-debugtablet": "Stargate Debug Tablet",
+  "debugtabletmodename-showgateiris": "Toon gate iris",
+  "debugtabletmodename-showgatevortex": "Toon gate vortex",
+  "debugtabletmodename-showtparea": "Toon TP gebied (ongeveer)",
+  "debugtabletmodename-fillgateiris": "Vul gate iris",
+  "debugtabletmodename-fillgatevortex": "Vul gate vortex",
+  "debugtabletmodename-checkirisstate": "Check gate iris staat",
+  "debugtabletmodename-showdhdsearchrange": "Toon DHD zoekradius",
+
+  // = CLOTHING =
+  "item-stargateclothes-foot-sgc-boots-standard": "SGC laars (standaard)",
+  "item-stargateclothes-foot-sgc-boots-desert": "SGC laars (woestijn)",
+  "item-stargateclothes-lowerbody-sgc-pants-standard": "SGC broek (standaard)",
+  "item-stargateclothes-lowerbody-sgc-pants-desert": "SGC broek (woestijn)",
+  "item-stargateclothes-upperbody-sgc-shirt-standard": "SGC shirt (standaard)",
+  "item-stargateclothes-upperbody-sgc-shirt-desert": "SGC shirt (woestijn)",
+  "item-stargateclothes-upperbodyover-sgc-tacticalvest-standard": "SGC tactische vest (standaard)",
+  "item-stargateclothes-upperbodyover-sgc-tacticalvest-desert": "SGC tactische vest (woestijn)",
+  "item-stargateclothes-head-sgc-cap-standard": "SGC pet (standaard)",
+  "item-stargateclothes-head-sgc-cap-desert": "SGC pet (woestijn)",
+  "item-stargateclothes-head-sgc-boonie-standard": "SGC boonie hoed (standaard)",
+  "item-stargateclothes-head-sgc-boonie-desert": "SGC boonie hoed (woestijn)",
+
+  // == OTHER ==
+  "astriaporta-cartouche-unlinked": "Adres nog niet gegenereerd",
+  "astriaporta-cartouche-generating": "Aan het zoekn naar stargate...",
+  "astriaporta-no-address-associated": "Geen adres gevonden",
+  "astriaporta-dhd-no-gate-linked": "Geen gate gekoppeld",
+  "astriaporta-cartouche-failed": "Gate vinden mislukt",
+
+  "blockhelp-dhd-notedial": "Bel adres op nota",
+  "blockhelp-dhd-dial": "Bel Stargate",
+  "blockhelp-dhd-close-gate": "Sluit stargate",
+  "blockhelp-dhd-open-ui": "Open DHD",
+
+  "addressholder-name-changetitle": "Verander adres naam",
+
+  "stargate-gui-quickdialtoggletext": "Gebruik snel bellen",
+
+  "DhdGuiTitleText": "Dial Home Device"
+}

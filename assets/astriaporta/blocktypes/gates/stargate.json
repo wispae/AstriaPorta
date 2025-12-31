@@ -3,7 +3,8 @@
   "class": "BlockStargate",
   // "entityClass": "BEStargate",
   "entityClassByType": {
-    "stargate-milkyway-*": "BEStargate"
+    "stargate-milkyway-*": "BEStargateMilkyway",
+    "stargate-pegasus-*": "BEStargatePegasus"
   },
   "behaviors": [
     { "name": "HorizontalOrientable" },
@@ -56,6 +57,22 @@
   "attributes": {
     "handbook": {
       "groupBy": [ "stargate-*" ]
+    },
+    "gateSoundsByType": {
+      "stargate-milkyway-*": {
+        "activeSound": "game:sounds/environment/underwater.ogg",
+        "breakSound": "game:sounds/effect/translocate-breakdimension.ogg",
+        "lockSound": "game:sounds/block/vesselclose.ogg",
+        "releaseSound": "game:sounds/block/vesselopen.ogg",
+        "rotateSound": "game:sounds/block/quern.ogg",
+        "vortexSound": "game:sounds/environment/largesplash2.ogg",
+        "warningSound": "game:sounds/block/hopperopen.ogg"
+      },
+      "stargate-pegasus-*": {
+        "lockSound": "game:sounds/block/charcoal1.ogg",
+        "releaseSound": "game:sounds/block/charcoal3.ogg",
+        "rotateSound": "game:sounds/effect/translocate-active.ogg"
+      }
     }
   },
   "entityBehaviors": [
@@ -64,7 +81,7 @@
   "variantgroups": [
     {
       "code": "gatetype",
-      "states": [ "milkyway" ]
+      "states": [ "milkyway", "pegasus" ]
     },
     {
       "code": "side",

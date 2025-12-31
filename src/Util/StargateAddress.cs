@@ -83,7 +83,7 @@ namespace AstriaPorta.Util
         public (int X, int Z) SectorOrigin { get; set; }
         public ulong AddressBits { get; set; }
 
-        public bool IsValid = false;
+        public bool IsValid { get; protected set; } = false;
 
         public readonly int MaxDimension = 1023;
 

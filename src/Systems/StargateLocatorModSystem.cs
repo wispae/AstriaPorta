@@ -190,15 +190,14 @@ namespace AstriaPorta.Systems
 
         private void exitChunkLoaded(GateGenerationRequest request, BlockPos pos)
         {
-            BlockEntity be = sapi.World.BlockAccessor.GetBlockEntity(pos);
-            BlockEntityStargate gateEntity = be as BlockEntityStargate;
+            IStargate gateEntity = sapi.World.BlockAccessor.GetBlockEntity<StargateBase>(pos);
             if (gateEntity == null)
             {
                 request.currentlySearching = false;
                 return;
             }
 
-            StargateAddress addr = gateEntity.GateAddress;
+            var addr = gateEntity.Address;
 
             request.forStack.Attributes.SetString("gateAddressS", addr.ToString());
 

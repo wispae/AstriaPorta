@@ -115,10 +115,10 @@ namespace AstriaPorta.Util
             IPlayer player = args.Caller.Player;
             int glyphPos = (int)args[0];
 
-            BlockEntityStargate gate = FindGateNear(player.Entity.Pos.AsBlockPos);
+            var gate = FindGateNear(player.Entity.Pos.AsBlockPos);
             if (gate == null) return TextCommandResult.Error("No gate found in 10-block radius!");
 
-            if (glyphPos >= gate.GateAddress.GlyphLength) return TextCommandResult.Error($"Max glyph length is {gate.GateAddress.GlyphLength - 1}");
+            if (glyphPos >= gate.Address.GlyphLength) return TextCommandResult.Error($"Max glyph length is {gate.Address.GlyphLength - 1}");
 
             // gate.TargetGlyph = (byte)glyphPos;
 
@@ -129,7 +129,7 @@ namespace AstriaPorta.Util
         {
             IPlayer player = args.Caller.Player;
 
-            BlockEntityStargate gate = FindGateNear(player.Entity.Pos.AsBlockPos);
+            var gate = FindGateNear(player.Entity.Pos.AsBlockPos);
             if (gate == null) return TextCommandResult.Error("No gate found in 10-block radius!");
 
             StargateAddress address = FromStringAddress((string)args[0]);
@@ -174,11 +174,12 @@ namespace AstriaPorta.Util
             return address;
         }
 
-        private BlockEntityStargate FindGateNear(BlockPos pos)
+        private IStargate FindGateNear(BlockPos pos)
         {
             BlockPos minPos = new BlockPos(pos.dimension).Set(pos.X - 10, pos.Y - 10, pos.Z - 10);
             BlockPos maxPos = new BlockPos(pos.dimension).Set(pos.X + 10, pos.Y + 10, pos.Z + 10);
             BlockPos gatePos = null;
+
             api.World.BlockAccessor.SearchBlocks(minPos, maxPos, (b, bp) =>
             {
                 if (b.Variant["gatetype"] != null)
@@ -186,6 +187,7 @@ namespace AstriaPorta.Util
                     gatePos = bp;
                     return false;
                 }
+
                 return true;
             });
 
@@ -194,9 +196,7 @@ namespace AstriaPorta.Util
                 return null;
             }
 
-            BlockEntityStargate gate = api.World.BlockAccessor.GetBlockEntity<BlockEntityStargate>(gatePos);
-
-            return gate;
+            return api.World.BlockAccessor.GetBlockEntity<StargateBase>(gatePos);
         }
 
         private string AddressDisplayString(AddressCoordinates address)

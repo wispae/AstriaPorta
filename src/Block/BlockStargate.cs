@@ -15,8 +15,6 @@ namespace AstriaPorta.Content
 
 		public override void OnLoaded(ICoreAPI api)
 		{
-			base.OnLoaded(api);
-
 			if (api.Side != EnumAppSide.Client) return;
 			ICoreClientAPI capi = api as ICoreClientAPI;
 
@@ -57,15 +55,6 @@ namespace AstriaPorta.Content
 
 		public override bool TryPlaceBlockForWorldGen(IBlockAccessor blockAccessor, BlockPos pos, BlockFacing onBlockFace, IRandom worldgenRandom, BlockPatchAttributes attributes = null)
 		{
-			Console.WriteLine("Block try place for worldgen called...");
-
-			return true;
-		}
-
-		public override bool CanPlaceBlock(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref string failureCode)
-		{
-			Console.WriteLine("CanPlaceBlock called");
-			
 			return true;
 		}
 
@@ -85,7 +74,7 @@ namespace AstriaPorta.Content
 		{
 			if (!StargateConfig.Loaded.StargateDestructable) return EnumBlockMaterial.Mantle;
 			if (pos == null) return EnumBlockMaterial.Mantle;
-			BlockEntityStargate gate = GetBlockEntity<BlockEntityStargate>(pos);
+			IStargate gate = GetBlockEntity<StargateBase>(pos);
 			if (gate == null) return EnumBlockMaterial.Mantle;
 
 			if (gate.CanBreak) return EnumBlockMaterial.Metal;
