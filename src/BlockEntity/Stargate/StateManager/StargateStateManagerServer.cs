@@ -521,7 +521,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
         ProcessCollidingEntities();
         TimeOpen += delta;
 
-        if (TimeOpen > StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway)
+        if (TimeOpen > StargateConfig.Loaded.GetMaxConnectionDuration(Gate.Type))
         {
 #if DEBUG
             Api.Logger.Notification("Wormhole has been open for max duration, shutting down connection");

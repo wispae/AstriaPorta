@@ -42,13 +42,13 @@ public abstract class StargateStateManagerBase : IStargateStateManager
     public bool IsRegisteredToGateManager { get; set; } = false;
     public bool IsTickListenerRegistered => TickListenerId != -1;
 
-    public float MaxConnectionDuration => Gate.Type switch
+    public float MaxConnectionDuration
     {
-        EnumStargateType.Milkyway => StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway,
-        EnumStargateType.Pegasus => StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway,
-        EnumStargateType.Destiny => StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway,
-        _ => StargateConfig.Loaded.MaxConnectionDurationSecondsMilkyway
-    };
+        get
+        {
+            return StargateConfig.Loaded.GetMaxConnectionDuration(Gate.Type);
+        }
+    }
 
     public float RemoteLoadTimeout { get; set; }
     public float RotationDegPerSecond { get; set; }
@@ -238,8 +238,8 @@ public abstract class StargateStateManagerBase : IStargateStateManager
     {
         if (address.AddressBits == Gate.Address.AddressBits) return false;
         int distanceChunks = Gate.Address.GetDistanceTo(address);
-        if (distanceChunks < StargateConfig.Loaded.MinRangeChunksMilkyway) return false;
-        if (distanceChunks > StargateConfig.Loaded.MaxRangeChunksMilkyway) return false;
+        if (distanceChunks < StargateConfig.Loaded.GetMinRangeChunks(Gate.Type)) return false;
+        if (distanceChunks > StargateConfig.Loaded.GetMaxRangeChunks(Gate.Type)) return false;
 
         return true;
     }
