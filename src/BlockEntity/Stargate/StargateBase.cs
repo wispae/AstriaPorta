@@ -513,6 +513,8 @@ namespace AstriaPorta.Content
             base.OnBlockUnloaded();
 
             StateManager.Dispose();
+            SoundManager?.Dispose();
+            VisualManager?.Dispose();
         }
 
         public override void OnBlockRemoved()
