@@ -22,8 +22,6 @@ public abstract class StargateStateManagerBase : IStargateStateManager
     protected long CallbackId = -1;
     protected long TickListenerId = -1;
 
-    private int _currentAddressIndex;
-    private EnumDialSpeed _currentDialSpeed;
     protected byte CurrentGlyph;
     protected float GlyphAngle;
     internal byte NextGlyph;
@@ -68,7 +66,7 @@ public abstract class StargateStateManagerBase : IStargateStateManager
         Api = gate.Api;
         Gate = gate;
         RemoteLoadTimeout = StargateConfig.Loaded.MaxTimeoutSeconds;
-        GlyphAngle = 360 / Gate.GlyphLength;
+        GlyphAngle = 360f / Gate.GlyphLength;
     }
 
     public virtual void Dispose()
