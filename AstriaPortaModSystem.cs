@@ -43,6 +43,8 @@ namespace AstriaPorta
         // Useful for registering block/entity classes on both sides
         public override void Start(ICoreAPI api)
         {
+            GateLogger.Initialize(Mod.Logger);
+
             ClassRegistry.legacyBlockEntityClassNames.TryAdd("BEStargate", "BEStargateMilkyway");
             RegisterBlocks(api);
             RegisterItems(api);

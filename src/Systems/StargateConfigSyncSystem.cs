@@ -1,4 +1,5 @@
 ﻿using AstriaPorta.Config;
+using AstriaPorta.Util;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -24,12 +25,12 @@ namespace AstriaPorta.Systems
 
         public override void StartPre(ICoreAPI api)
         {
-            setupNetworkChannels(api);
-            loadConfiguration(api);
+            SetupNetworkChannels(api);
+            LoadConfiguration(api);
 
             if (api.Side == EnumAppSide.Server)
             {
-                (api as ICoreServerAPI).Event.PlayerJoin += onPlayerJoined;
+                (api as ICoreServerAPI).Event.PlayerJoin += OnPlayerJoined;
             }
         }
 
@@ -37,11 +38,11 @@ namespace AstriaPorta.Systems
         {
             if (TerraGenConfig.DoDecorationPass)
             {
-                api.Event.InitWorldGenerator(new Action(() => patchStructureParameters(api)), "standard");
+                api.Event.InitWorldGenerator(new Action(() => PatchStructureParameters(api)), "standard");
             }
         }
 
-        private void setupNetworkChannels(ICoreAPI api)
+        private void SetupNetworkChannels(ICoreAPI api)
         {
             if (api.Side == EnumAppSide.Server)
             {
@@ -60,18 +61,18 @@ namespace AstriaPorta.Systems
                     clientChannel = (api as ICoreClientAPI).Network.RegisterChannel(configChannelName);
                 }
                 clientChannel.RegisterMessageType<StargateConfig>();
-                clientChannel.SetMessageHandler<StargateConfig>(onReceivedServerConfig);
+                clientChannel.SetMessageHandler<StargateConfig>(OnReceivedServerConfig);
             }
         }
 
-        private void onPlayerJoined(IServerPlayer player)
+        private void OnPlayerJoined(IServerPlayer player)
         {
             Mod.Logger.Debug($"Sending server-side config file to player {player.PlayerName}");
             StargateConfig config = StargateConfig.Loaded;
             serverChannel.SendPacket(StargateConfig.Loaded, new IServerPlayer[1] { player });
         }
 
-        private void loadConfiguration(ICoreAPI api)
+        private void LoadConfiguration(ICoreAPI api)
         {
             string filename = Mod.Info.ModID + ".json";
 
@@ -81,17 +82,19 @@ namespace AstriaPorta.Systems
             {
                 StargateConfig.Loaded = config;
             }
+            GateLogger.SetLogLevel(StargateConfig.Loaded.DebugLogLevel);
 
             api.StoreModConfig(StargateConfig.Loaded, filename);
         }
 
-        private void onReceivedServerConfig(StargateConfig serverConfig)
+        private void OnReceivedServerConfig(StargateConfig serverConfig)
         {
             Mod.Logger.Debug("Received config file from server, will use that instead");
             StargateConfig.Loaded = serverConfig;
+            GateLogger.SetLogLevel(StargateConfig.Loaded.DebugLogLevel);
         }
 
-        private void patchStructureParameters(ICoreServerAPI sapi)
+        private void PatchStructureParameters(ICoreServerAPI sapi)
         {
             StargateConfig config = StargateConfig.Loaded;
             if (config == null) return;
