@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Server;
 
 namespace AstriaPorta.Content
 {
@@ -10,9 +11,12 @@ namespace AstriaPorta.Content
     {
         Active,
         Break,
+        Enter,
+        Fail,
         Lock,
         Release,
         Rotate,
+        RotateStart,
         Vortex,
         Warning
     }
@@ -23,39 +27,42 @@ namespace AstriaPorta.Content
         public AssetLocation ActiveSoundLocation;
         [JsonProperty("breakSound")]
         public AssetLocation BreakSoundLocation;
+        [JsonProperty("enterSound")]
+        public AssetLocation EnterSoundLocation;
+        [JsonProperty("failSound")]
+        public AssetLocation FailSoundLocation;
         [JsonProperty("lockSound")]
         public AssetLocation LockSoundLocation;
         [JsonProperty("releaseSound")]
         public AssetLocation ReleaseSoundLocation;
         [JsonProperty("rotateSound")]
         public AssetLocation RotateSoundLocation;
+        [JsonProperty("rotateStartSound")]
+        public AssetLocation RotateStartSoundLocation;
         [JsonProperty("vortexSound")]
         public AssetLocation VortexSoundLocation;
         [JsonProperty("warningSound")]
         public AssetLocation WarningSoundLocation;
+
+        [JsonProperty("vortexSoundDelay")]
+        public int? VortexSoundDelay = 750;
     }
 
-    public class StargateSoundManager
+    public abstract class StargateSoundManagerBase
     {
         protected static readonly Dictionary<EnumStargateType, StargateSoundLocationConfiguration> SoundLocations = new();
 
-        private readonly ICoreClientAPI _capi;
-        private readonly BlockPos _gatePos;
-        private readonly EnumStargateType _gateType;
+        protected readonly ICoreAPI _api;
+        protected readonly BlockPos _gatePos;
+        protected readonly EnumStargateType _gateType;
 
-        private ILoadedSound _activeSound;
-        private ILoadedSound _rotateSound;
+        public int VortexSoundDelay => SoundLocations[_gateType].VortexSoundDelay ?? 750;
 
-        public StargateSoundManager(ICoreClientAPI capi, EnumStargateType gateType, BlockPos gatePos)
+        public StargateSoundManagerBase(ICoreAPI api, EnumStargateType gateType, BlockPos gatePos)
         {
-            _capi = capi;
+            _api = api;
             _gateType = gateType;
             _gatePos = gatePos;
-        }
-
-        public virtual void Dispose()
-        {
-            StopAllSounds();
         }
 
         /// <summary>
@@ -68,25 +75,7 @@ namespace AstriaPorta.Content
             SoundLocations[gateType] = config;
         }
 
-        public void PauseActiveSound()
-        {
-            if (_activeSound == null) return;
-            _activeSound.Pause();
-        }
-
-        public void PauseAllSounds()
-        {
-            PauseActiveSound();
-            PauseRotateSound();
-        }
-
-        public void PauseRotateSound()
-        {
-            if (_rotateSound == null) return;
-            _rotateSound.Pause();
-        }
-
-        public virtual void Play(EnumGateSoundLocation gateSound)
+        public virtual void Play(EnumGateSoundLocation gateSound, float volume = 1f)
         {
             StargateSoundLocationConfiguration currentConfig = SoundLocations[_gateType];
 
@@ -94,9 +83,12 @@ namespace AstriaPorta.Content
             {
                 EnumGateSoundLocation.Active => currentConfig.ActiveSoundLocation,
                 EnumGateSoundLocation.Break => currentConfig.BreakSoundLocation,
+                EnumGateSoundLocation.Enter => currentConfig.EnterSoundLocation,
+                EnumGateSoundLocation.Fail => currentConfig.FailSoundLocation,
                 EnumGateSoundLocation.Lock => currentConfig.LockSoundLocation,
                 EnumGateSoundLocation.Release => currentConfig.ReleaseSoundLocation,
                 EnumGateSoundLocation.Rotate => currentConfig.RotateSoundLocation,
+                EnumGateSoundLocation.RotateStart => currentConfig.RotateStartSoundLocation,
                 EnumGateSoundLocation.Warning => currentConfig.WarningSoundLocation,
                 EnumGateSoundLocation.Vortex => currentConfig.VortexSoundLocation,
                 _ => null
@@ -104,10 +96,110 @@ namespace AstriaPorta.Content
 
             if (soundLocation == null) return;
 
-            _capi.World.PlaySoundAt(soundLocation, _gatePos, 1, null, false);
+            _api.World.PlaySoundAt(soundLocation, _gatePos, 1, null, false);
         }
 
-        public void StartActiveSound()
+        public abstract void Dispose();
+        public abstract void PauseActiveSound();
+        public abstract void PauseAllSounds();
+        public abstract void PauseRotateSound();
+        public abstract void StartActiveSound();
+        public abstract void StartRotateSound();
+        public abstract void StopActiveSound();
+        public abstract void StopAllSounds();
+        public abstract void StopRotateSound();
+    }
+
+    public class StargateSoundManagerServer : StargateSoundManagerBase
+    {
+        private readonly ICoreServerAPI _sapi;
+
+        public StargateSoundManagerServer(ICoreServerAPI sapi, EnumStargateType gateType, BlockPos gatePos) : base(sapi, gateType, gatePos)
+        {
+            _sapi = sapi;
+        }
+
+        public override void Dispose()
+        {
+        }
+
+        public override void PauseActiveSound()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void PauseAllSounds()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void PauseRotateSound()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void StartActiveSound()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void StartRotateSound()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void StopActiveSound()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void StopAllSounds()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void StopRotateSound()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class StargateSoundManagerClient : StargateSoundManagerBase
+    {
+        private readonly ICoreClientAPI _capi;
+
+        private ILoadedSound _activeSound;
+        private ILoadedSound _rotateSound;
+
+        public StargateSoundManagerClient(ICoreClientAPI capi, EnumStargateType gateType, BlockPos gatePos) : base(capi, gateType, gatePos)
+        {
+            _capi = capi;
+        }
+
+        public override void Dispose()
+        {
+            StopAllSounds();
+        }
+
+        public override void PauseActiveSound()
+        {
+            if (_activeSound == null) return;
+            _activeSound.Pause();
+        }
+
+        public override void PauseAllSounds()
+        {
+            PauseActiveSound();
+            PauseRotateSound();
+        }
+
+        public override void PauseRotateSound()
+        {
+            if (_rotateSound == null) return;
+            _rotateSound.Pause();
+        }
+
+        public override void StartActiveSound()
         {
             if (_activeSound == null)
             {
@@ -125,7 +217,7 @@ namespace AstriaPorta.Content
             _activeSound.Start();
         }
 
-        public void StartRotateSound()
+        public override void StartRotateSound()
         {
             if (_rotateSound == null)
             {
@@ -146,20 +238,20 @@ namespace AstriaPorta.Content
             }
         }
 
-        public void StopActiveSound()
+        public override void StopActiveSound()
         {
             _activeSound?.Stop();
             _activeSound?.Dispose();
             _activeSound = null;
         }
 
-        public void StopAllSounds()
+        public override void StopAllSounds()
         {
             StopActiveSound();
             StopRotateSound();
         }
 
-        public void StopRotateSound()
+        public override void StopRotateSound()
         {
             _rotateSound?.Stop();
             _rotateSound?.Dispose();

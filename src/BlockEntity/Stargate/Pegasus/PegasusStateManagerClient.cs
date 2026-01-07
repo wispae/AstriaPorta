@@ -185,7 +185,7 @@ public class PegasusStateManagerClient : StargateStateManagerClient
         Gate.VisualManager.UpdateRendererState(CurrentAngle);
     }
 
-    protected override void TransitionToDialingOutgoing()
+    protected override void TransitionToDialingOutgoing(uint extraFlags)
     {
         if (Gate.VisualManager is PegasusVisualManager pvm)
         {
@@ -200,6 +200,6 @@ public class PegasusStateManagerClient : StargateStateManagerClient
             pvm.ActivateDialingGlyph();
         }
 
-        base.TransitionToDialingOutgoing();
+        base.TransitionToDialingOutgoing(extraFlags);
     }
 }
