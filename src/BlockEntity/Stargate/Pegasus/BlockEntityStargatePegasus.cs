@@ -2,6 +2,7 @@
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
+using Vintagestory.API.Server;
 
 namespace AstriaPorta.Content;
 
@@ -17,7 +18,7 @@ public class BlockEntityStargatePegasus : StargateBase
 
         if (api is ICoreClientAPI capi)
         {
-            SoundManager = new StargateSoundManager(capi, EnumStargateType.Pegasus, Pos);
+            SoundManager = new StargateSoundManagerClient(capi, EnumStargateType.Pegasus, Pos);
             VisualManager = new PegasusVisualManager(this);
             StateManager ??= new PegasusStateManagerClient();
 
@@ -25,6 +26,7 @@ public class BlockEntityStargatePegasus : StargateBase
         }
         else
         {
+            SoundManager = new StargateSoundManagerServer(api as ICoreServerAPI, EnumStargateType.Pegasus, Pos);
             StateManager ??= new PegasusStateManagerServer();
         }
 

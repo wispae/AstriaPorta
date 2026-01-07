@@ -2,6 +2,7 @@
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
+using Vintagestory.API.Server;
 
 namespace AstriaPorta.Content;
 
@@ -17,7 +18,7 @@ public class BlockEntityStargateMilkyway : StargateBase
 
         if (api is ICoreClientAPI capi)
         {
-            SoundManager = new StargateSoundManager(capi, EnumStargateType.Milkyway, Pos);
+            SoundManager = new StargateSoundManagerClient(capi, EnumStargateType.Milkyway, Pos);
             VisualManager = new MilkywayVisualManager(this);
             StateManager ??= new MilkywayStateManagerClient();
 
@@ -25,6 +26,7 @@ public class BlockEntityStargateMilkyway : StargateBase
         }
         else
         {
+            SoundManager = new StargateSoundManagerServer(api as ICoreServerAPI, EnumStargateType.Milkyway, Pos);
             StateManager ??= new MilkywayStateManagerServer();
         }
 

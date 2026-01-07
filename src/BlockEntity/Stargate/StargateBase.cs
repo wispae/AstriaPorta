@@ -138,7 +138,7 @@ namespace AstriaPorta.Content
         public StargateVisualManager VisualManager { get; protected set; }
 
         /// <inheritdoc/>
-        public StargateSoundManager SoundManager { get; protected set; }
+        public StargateSoundManagerBase SoundManager { get; protected set; }
 
         /// <inheritdoc/>
         public StargateStateManagerBase StateManager { get; protected set; }

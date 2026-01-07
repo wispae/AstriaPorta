@@ -1,6 +1,7 @@
 ﻿using ProtoBuf;
 using AstriaPorta.Util;
 using Vintagestory.API.MathTools;
+using System;
 
 namespace AstriaPorta.Content
 {
@@ -39,6 +40,12 @@ namespace AstriaPorta.Content
         Dial = 0x4FFFF,
         Abort = 0x5FFFF,
         CamoUpdate = 0x6FFFF
+    }
+
+    [Flags]
+    public enum EnumExtraStateFlags
+    {
+        RotationStarted = 0x1
     }
 
     [ProtoContract]
@@ -81,6 +88,8 @@ namespace AstriaPorta.Content
         public bool Rotating { get; set; }
         [ProtoMember(10)]
         public int State { get; set; }
+        [ProtoMember(11)]
+        public uint Flags { get; set; }
     }
 
     [ProtoContract]
@@ -151,7 +160,7 @@ namespace AstriaPorta.Content
         /// <summary>
         /// The sound manager for this gate
         /// </summary>
-        public StargateSoundManager SoundManager { get; }
+        public StargateSoundManagerBase SoundManager { get; }
 
         /// <summary>
         /// The manager that handles state and state transitions

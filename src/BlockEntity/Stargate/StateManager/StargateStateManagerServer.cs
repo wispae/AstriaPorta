@@ -20,6 +20,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
     {
     }
 
+    protected bool AwaitingRemote = false;
     protected bool IsRemoteNotified = false;
     protected float TickAvg = 0;
     protected int TickTimer = 0;
@@ -101,7 +102,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
         SyncStateToClients();
     }
 
-    protected GateStatePacket AssembleStatePacket()
+    protected GateStatePacket AssembleStatePacket(uint extraFlags = 0)
     {
         return new GateStatePacket
         {
@@ -112,7 +113,8 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
             RemoteAddressBits = DialingAddress?.AddressBits ?? 0,
             RotateCW = RotateCW,
             State = (int)State,
-            DialType = (int)CurrentDialSpeed
+            DialType = (int)CurrentDialSpeed,
+            Flags = extraFlags,
         };
     }
 
@@ -148,6 +150,11 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
 
         UnregisterTickListener();
         UnregisterDelayedCallback();
+
+        if (State == EnumStargateState.ConnectedIncoming || State == EnumStargateState.ConnectedOutgoing)
+        {
+            Gate.SoundManager?.Play(EnumGateSoundLocation.Break);
+        }
 
         SyncStateToClients();
     }
@@ -224,6 +231,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
             IsForceLoaded = false;
         }
 
+        Gate.SoundManager?.Play(EnumGateSoundLocation.Fail);
         SyncStateToClients();
     }
 
@@ -238,7 +246,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
         Gate.RegisterDelayedCallback((t) =>
         {
             Gate.ApplyVortexDestruction();
-        }, 750);
+        }, Gate.SoundManager?.VortexSoundDelay ?? 750);
 
         var remoteGate = Gate.GetRemoteGate();
         if (remoteGate != null)
@@ -253,6 +261,11 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
     {
         AwaitingChevronAnimation = false;
         ActiveChevrons++;
+
+        if (CurrentDialSpeed == EnumDialSpeed.Fast)
+        {
+            Gate.SoundManager?.Play(EnumGateSoundLocation.Lock);
+        }
 
         IStargate remoteGate = Gate.GetRemoteGate();
 
@@ -274,6 +287,9 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
                 {
                     TimeoutCallbackId = Gate.RegisterDelayedCallback(OnRemoteTimeout, (int)(StargateConfig.Loaded.MaxTimeoutSeconds * 1000));
                 }
+
+                AwaitingRemote = true;
+                TryRegisterDelayedCallback(OnTick, 20);
 
                 return;
             }
@@ -301,6 +317,16 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
         }
 
         ContinueToNextIndex();
+
+        // assume 1000ms required for rotate start sound to be safe
+        var angleDiff = NextGlyph * GlyphAngle - CurrentAngle;
+        if (angleDiff < 0) angleDiff += 360;
+
+        if (RotateCW) angleDiff = 360 - angleDiff;
+        if (angleDiff/RotationDegPerSecond >= 1f)
+        {
+            Gate.SoundManager?.Play(EnumGateSoundLocation.RotateStart);
+        }
     }
 
     protected override void OnGlyphReached()
@@ -317,7 +343,8 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
         TimeoutCallbackId = -1;
         if (State == EnumStargateState.DialingOutgoing)
         {
-            Gate.TryDisconnect();
+            OnConnectionFailure(delta);
+            // Gate.TryDisconnect();
             return;
         }
     }
@@ -389,6 +416,12 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
             traveler.TeleportToDouble(remoteGate.Pos.X + offsetX + 0.5f, remoteGate.Pos.Y + offsetY, remoteGate.Pos.Z + offsetZ + 0.5f);
 
             UpdateTravelerMotion(traveler, originYaw, rotateLocal, rotateRemote, remoteGate);
+        }
+
+        if (travelers.Length > 0)
+        {
+            Gate.SoundManager?.Play(EnumGateSoundLocation.Enter);
+            remoteGate.SoundManager?.Play(EnumGateSoundLocation.Enter);
         }
     }
 
@@ -469,7 +502,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
     /// Synchronizes server state only to specified client
     /// </summary>
     /// <param name="player"></param>
-    protected virtual void SyncStateToPlayer(IPlayer player)
+    protected virtual void SyncStateToPlayer(IPlayer player, uint extraFlags = 0)
     {
         if (player.ClientId == 0) return;
 
@@ -478,16 +511,16 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
 
         if (splayer == null || splayer.ConnectionState != EnumClientState.Connected) return;
 
-        GateStatePacket packet = AssembleStatePacket();
+        GateStatePacket packet = AssembleStatePacket(extraFlags);
         ServerApi.Network.SendBlockEntityPacket(splayer, Gate.Pos, (int)EnumStargatePacketType.State, packet);
     }
 
     /// <summary>
     /// Synchronizes server state to all clients
     /// </summary>
-    protected virtual void SyncStateToClients()
+    protected virtual void SyncStateToClients(uint extraFlags = 0)
     {
-        GateStatePacket packet = AssembleStatePacket();
+        GateStatePacket packet = AssembleStatePacket(extraFlags);
         ServerApi.Network.BroadcastBlockEntityPacket(Gate.Pos, (int)EnumStargatePacketType.State, packet);
     }
 
@@ -580,6 +613,20 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
 
         SyncStateToClients();
         return true;
+    }
+
+    public virtual void TryFinishConnection()
+    {
+        IStargate remote = Gate.GetRemoteGate();
+        if (remote == null) return;
+
+        if (TimeoutCallbackId != -1)
+        {
+            Gate.UnregisterDelayedCallback(TimeoutCallbackId);
+        }
+
+        ActiveChevrons++;
+        OnConnectionSuccess();
     }
 
     protected void UpdateRemoteChevrons()
