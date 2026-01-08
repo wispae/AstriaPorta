@@ -280,7 +280,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
             // final glyph activated
             if (remoteGate == null)
             {
-                Gate.Api.Logger.Debug("Final chevron locked, but remote gate not available yet");
+                GateLogger.LogAudit(LogLevel.Info, "Final chevron locked, but remote gate not available yet");
                 ActiveChevrons--;
                 SyncStateToClients();
                 if (TimeoutCallbackId == -1)
@@ -556,9 +556,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
 
         if (TimeOpen > StargateConfig.Loaded.GetMaxConnectionDuration(Gate.Type))
         {
-#if DEBUG
-            Api.Logger.Notification("Wormhole has been open for max duration, shutting down connection");
-#endif
+            GateLogger.LogAudit(LogLevel.Info, "Wormhole has been open for max duration, shutting down connection");
             Gate.TryDisconnect();
         }
     }
@@ -577,9 +575,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
 
     public override bool TryDial(IStargateAddress address, EnumDialSpeed speed)
     {
-#if DEBUG
-        Api.Logger.Debug($"Started dial to {address} with coordinates ({address.AddressCoordinates.X},{address.AddressCoordinates.Y},{address.AddressCoordinates.Z})");
-#endif
+        GateLogger.LogAudit(LogLevel.Info, $"Started dial to {address} with coordinates ({address.AddressCoordinates.X},{address.AddressCoordinates.Y},{address.AddressCoordinates.Z})");
 
         // RotationDegPerSecond = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
         if (State != EnumStargateState.Idle)
