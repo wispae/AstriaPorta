@@ -1,5 +1,7 @@
 ﻿using AstriaPorta.Content;
+using AstriaPorta.Util;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -224,5 +226,17 @@ namespace AstriaPorta.Config
 
         [ProtoMember(20), DefaultValue(true)]
         public bool EnableCartoucheGates { get; set; } = true;
+
+        [ProtoMember(21), DefaultValue(false)]
+        public bool LogInfo { get; set; } = false;
+
+        [ProtoMember(22), DefaultValue(false)]
+        public bool LogDebug { get; set; } = false;
+
+        [ProtoMember(23), DefaultValue(false)]
+        public bool LogWarning { get; set; } = false;
+
+        [ProtoMember(24), DefaultValue(false)]
+        public bool LogError { get; set; } = false;
     }
 }

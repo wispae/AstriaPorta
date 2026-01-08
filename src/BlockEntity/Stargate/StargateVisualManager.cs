@@ -39,6 +39,12 @@ public abstract class StargateVisualManager
     public virtual void Dispose()
     {
         DisposeRenderers();
+
+        if (HorizonLightAdded)
+        {
+            Capi.Render.RemovePointLight(EventHorizonLight);
+            HorizonLightAdded = false;
+        }
     }
 
     /// <summary>

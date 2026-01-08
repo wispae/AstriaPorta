@@ -97,12 +97,11 @@ namespace AstriaPorta.Systems
                 });
             }
 
-#if DEBUG
             if (releasedBefore != releasedChunks.Count)
             {
-                Mod.Logger.Debug("Unloaded " + (releasedBefore - releasedChunks.Count) + " released chunks");
+                // Mod.Logger.Debug("Unloaded " + (releasedBefore - releasedChunks.Count) + " released chunks");
+                GateLogger.LogAudit(LogLevel.Info, $"Unloaded {releasedBefore - releasedChunks.Count} released chunks");
             }
-#endif
         }
 
         /// <summary>
@@ -187,9 +186,7 @@ namespace AstriaPorta.Systems
         {
             if (!address.IsValid)
             {
-#if DEBUG
-                Mod.Logger.Debug($"Address {address} was invalid, returning null");
-#endif
+                GateLogger.LogDebug(LogLevel.Debug, $"Load request for address {address} was invalid, returning null");
                 requester.ReleaseRemoteGate();
                 return;
             }
@@ -222,12 +219,10 @@ namespace AstriaPorta.Systems
                 {
                     remoteGate.IsForceLoaded = true;
                 }
-#if DEBUG
                 else
                 {
-                    Mod.Logger.Debug($"The requested gate ({address}) was null");
+                    GateLogger.LogDebug(LogLevel.Debug, $"The requested gate ({address}) was null");
                 }
-#endif
             }
             requester.RemotePosition = remoteGate?.Pos;
             return;
@@ -294,9 +289,8 @@ namespace AstriaPorta.Systems
                     KeepLoaded = true,
                 };
             }
-#if DEBUG
-			Mod.Logger.Debug($"Chunkloaded chunk at pos {blockPos}");
-#endif
+
+			GateLogger.LogDebug(LogLevel.Info, $"Chunkloaded chunk at pos {blockPos}");
             sapi.WorldManager.LoadChunkColumnPriority(dictKey.X, dictKey.Y, co);
         }
 
@@ -319,9 +313,8 @@ namespace AstriaPorta.Systems
                 long chunkIndex = sapi.WorldManager.MapChunkIndex2D(dictKey.X, dictKey.Y);
                 ((ServerMain)sapi.World).RemoveChunkColumnFromForceLoadedList(chunkIndex);
                 activeBlockChunks.Remove(dictKey);
-#if DEBUG
-                Mod.Logger.Debug("Released Chunk (" + dictKey.X + " ; " + dictKey.Y + ")");
-#endif
+
+                GateLogger.LogDebug(LogLevel.Info, "Released Chunk (" + dictKey.X + " ; " + dictKey.Y + ")");
                 return;
             }
 
