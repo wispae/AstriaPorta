@@ -1,11 +1,14 @@
 ﻿using AstriaPorta.Config;
+using AstriaPorta.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
+using Vintagestory.Client.NoObf;
 
 namespace AstriaPorta.Content
 {
@@ -53,7 +56,32 @@ namespace AstriaPorta.Content
 			});
 		}
 
-		public override bool TryPlaceBlockForWorldGen(IBlockAccessor blockAccessor, BlockPos pos, BlockFacing onBlockFace, IRandom worldgenRandom, BlockPatchAttributes attributes = null)
+        public override string GetPlacedBlockInfo(IWorldAccessor world, BlockPos pos, IPlayer forPlayer)
+        {
+			if (world.BlockAccessor.GetBlockEntity<StargateBase>(pos) == null)
+			{
+				return Lang.Get("astriaporta:error-gate-blockentity-broken", Lang.Get("Right mouse button"));
+			}
+
+            return base.GetPlacedBlockInfo(world, pos, forPlayer);
+        }
+
+        public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
+        {
+            BlockEntity target = world.BlockAccessor.GetBlockEntity(blockSel.Position);
+            if (target != null && target is IBlockEntityInteractable)
+            {
+                return (target as IBlockEntityInteractable).OnRightClickInteraction(byPlayer);
+            }
+			else
+			{
+                FixGateEntity(world.BlockAccessor, blockSel.Position);
+            }
+
+			return true;
+        }
+
+        public override bool TryPlaceBlockForWorldGen(IBlockAccessor blockAccessor, BlockPos pos, BlockFacing onBlockFace, IRandom worldgenRandom, BlockPatchAttributes attributes = null)
 		{
 			return true;
 		}
@@ -73,12 +101,38 @@ namespace AstriaPorta.Content
 		public override EnumBlockMaterial GetBlockMaterial(IBlockAccessor blockAccessor, BlockPos pos, ItemStack stack = null)
 		{
 			if (!StargateConfig.Loaded.StargateDestructable) return EnumBlockMaterial.Mantle;
-			if (pos == null) return EnumBlockMaterial.Mantle;
+			if (pos == null)
+			{
+				GateLogger.LogError(LogLevel.Error, "gate block position was null?");
+                return EnumBlockMaterial.Mantle;
+            }
 			IStargate gate = GetBlockEntity<StargateBase>(pos);
-			if (gate == null) return EnumBlockMaterial.Soil;
+			if (gate == null)
+			{
+				// gates breaking safety feature
+				FixGateEntity(blockAccessor, pos);
+                return EnumBlockMaterial.Soil;
+            }
 
 			if (gate.CanBreak) return EnumBlockMaterial.Metal;
 			return EnumBlockMaterial.Mantle;
+		}
+
+        public override float GetResistance(IBlockAccessor blockAccessor, BlockPos pos)
+        {
+			if (GetBlockEntity<StargateBase>(pos) == null)
+			{
+				FixGateEntity(blockAccessor, pos);
+				return 1f;
+			}
+
+            return base.GetResistance(blockAccessor, pos);
+        }
+
+		private void FixGateEntity(IBlockAccessor accessor, BlockPos pos)
+		{
+			GateLogger.LogWarning(LogLevel.Warning, $"Stargate at {pos} somehow lost its BlockEntity, attempting to fix...");
+			accessor.SpawnBlockEntity(EntityClass, pos);
 		}
 	}
 }

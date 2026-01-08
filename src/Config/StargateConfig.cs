@@ -36,14 +36,6 @@ namespace AstriaPorta.Config
         [JsonIgnore]
         private int _minDistanceUndergroundGates = 1000;
 
-        [JsonIgnore]
-        private string[] _supportedLoggingLevels = [
-            "None",
-            "Low",
-            "Medium",
-            "High"
-        ];
-
         public int GetMinRangeChunks(EnumStargateType type)
         {
             switch (type)
@@ -235,17 +227,16 @@ namespace AstriaPorta.Config
         [ProtoMember(20), DefaultValue(true)]
         public bool EnableCartoucheGates { get; set; } = true;
 
-        [ProtoMember(21), JsonConverter(typeof(StringEnumConverter))]
-        public LogLevel DebugLogLevel { get; set; } = LogLevel.None;
+        [ProtoMember(21), DefaultValue(false)]
+        public bool LogInfo { get; set; } = false;
 
-        [ProtoMember(22)]
-        public string[] AvailableLoggingLevels
-        {
-            get
-            {
-                return _supportedLoggingLevels;
-            }
-            set { }
-        }
+        [ProtoMember(22), DefaultValue(false)]
+        public bool LogDebug { get; set; } = false;
+
+        [ProtoMember(23), DefaultValue(false)]
+        public bool LogWarning { get; set; } = false;
+
+        [ProtoMember(24), DefaultValue(false)]
+        public bool LogError { get; set; } = false;
     }
 }

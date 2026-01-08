@@ -9,6 +9,7 @@
   "game:ingameerror-cartouchedisabled": "Cartouche generatie niet toegestaan door configuratie",
 
   // === ASTRIA PORTA ===
+  "error-gate-blockentity-broken": "<font color=\"red\">Error; Gate kapot. Druk met {0} op deze block om te fixen</font>",
 
   // == HANDBOOK ==
   "modmechanicinfo-stargates-01": "",
@@ -64,6 +65,7 @@
   "debugtabletmodename-fillgatevortex": "Vul gate vortex",
   "debugtabletmodename-checkirisstate": "Check gate iris staat",
   "debugtabletmodename-showdhdsearchrange": "Toon DHD zoekradius",
+  "debugtabletmodename-breakstargateentity": "Break Gate BE",
 
   // = CLOTHING =
   "item-stargateclothes-foot-sgc-boots-standard": "SGC laars (standaard)",

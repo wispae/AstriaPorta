@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vintagestory.API.Common;
 
 namespace AstriaPorta.Util;
 
+[Flags]
 public enum LogLevel
 {
-    None,
-    Low,
-    Medium,
-    High
+    None = 0,
+    Info = 0x1,
+    Debug = 0x2,
+    Warning = 0x4,
+    Error = 0x8
 }
 
 public static class GateLogger
@@ -25,37 +23,37 @@ public static class GateLogger
         _internalLogger = logger;
     }
 
-    public static void Log(LogLevel minimumLevel, EnumLogType logType, string message)
+    public static void Log(LogLevel level, EnumLogType logType, string message)
     {
-        if (_loggingLevel < minimumLevel) return;
+        if ((_loggingLevel & level) == 0) return;
 
         _internalLogger.Log(logType, message);
     }
 
-    public static void LogAudit(LogLevel minimumLevel, string message)
+    public static void LogAudit(LogLevel level, string message)
     {
-        if (_loggingLevel < minimumLevel) return;
+        if ((_loggingLevel & level) == 0) return;
 
         _internalLogger.Audit(message);
     }
 
-    public static void LogDebug(LogLevel minimumLevel, string message)
+    public static void LogDebug(LogLevel level, string message)
     {
-        if (_loggingLevel < minimumLevel) return;
+        if ((_loggingLevel & level) == 0) return;
 
         _internalLogger.Debug(message);
     }
 
-    public static void LogError(LogLevel minimumLevel, string message)
+    public static void LogError(LogLevel level, string message)
     {
-        if (_loggingLevel < minimumLevel) return;
+        if ((_loggingLevel & level) == 0) return;
 
         _internalLogger.Error(message);
     }
 
-    public static void LogWarning(LogLevel minimumLevel, string message)
+    public static void LogWarning(LogLevel level, string message)
     {
-        if (_loggingLevel < minimumLevel) return;
+        if ((_loggingLevel & level) == 0) return;
 
         _internalLogger.Warning(message);
     }

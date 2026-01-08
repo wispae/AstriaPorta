@@ -82,7 +82,7 @@ namespace AstriaPorta.Systems
             {
                 StargateConfig.Loaded = config;
             }
-            GateLogger.SetLogLevel(StargateConfig.Loaded.DebugLogLevel);
+            SetLoggerLevel();
 
             api.StoreModConfig(StargateConfig.Loaded, filename);
         }
@@ -91,7 +91,20 @@ namespace AstriaPorta.Systems
         {
             Mod.Logger.Debug("Received config file from server, will use that instead");
             StargateConfig.Loaded = serverConfig;
-            GateLogger.SetLogLevel(StargateConfig.Loaded.DebugLogLevel);
+            SetLoggerLevel();
+        }
+
+        private static void SetLoggerLevel()
+        {
+            var config = StargateConfig.Loaded;
+
+            LogLevel level = LogLevel.None;
+            if (config.LogInfo) level |= LogLevel.Info;
+            if (config.LogDebug) level |= LogLevel.Debug;
+            if (config.LogWarning) level |= LogLevel.Warning;
+            if (config.LogError) level |= LogLevel.Error;
+
+            GateLogger.SetLogLevel(level);
         }
 
         private void PatchStructureParameters(ICoreServerAPI sapi)
