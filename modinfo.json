@@ -7,7 +7,7 @@
   ],
   "description": "Use ancient artifacts of a long lost race to explore distant lands",
   "networkVersion": "0.0.5",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
   },
   "requiredOnClient": true,

@@ -133,7 +133,7 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
                 TransitionToDialingIncoming();
                 break;
             case EnumStargateState.DialingOutgoing:
-                TransitionToDialingOutgoing();
+                TransitionToDialingOutgoing(packet.Flags);
                 break;
             case EnumStargateState.ConnectedIncoming:
                 TransitionToConnectedIncoming();
@@ -143,8 +143,17 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
                 break;
         }
 
+        bool shouldUpdateChevronGlow = true;
+        if (State != EnumStargateState.Idle && newState == EnumStargateState.Idle)
+        {
+            shouldUpdateChevronGlow = false;
+        }
+
         State = newState;
-        Gate.VisualManager.UpdateChevronGlow(ActiveChevrons);
+        if (shouldUpdateChevronGlow)
+        {
+            Gate.VisualManager.UpdateChevronGlow(ActiveChevrons);
+        }
         Gate.VisualManager.UpdateRendererState(CurrentAngle);
     }
 
@@ -201,7 +210,7 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
     /// <summary>
     /// Manages transitions into the dialingOutgoing state
     /// </summary>
-    protected virtual void TransitionToDialingOutgoing()
+    protected virtual void TransitionToDialingOutgoing(uint extraFlags)
     {
         if (State == EnumStargateState.Idle)
         {
@@ -211,6 +220,7 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
 
         // always attempt to re-register as it needs to be restarted when the server
         // signals that the glyph activation is completed
+
         TryRegisterTickListener(OnTick, 20);
     }
 
@@ -235,6 +245,8 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
     {
         if (State == EnumStargateState.ConnectedOutgoing) return;
 
+        Gate.SoundManager.Play(EnumGateSoundLocation.Warning);
+
         // play activation sound
         // register OnTick if empty
         if (TickListenerId == -1) TickListenerId = Gate.RegisterGameTickListener(OnTick, 20, 750);
@@ -242,7 +254,7 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
         {
             Gate.VisualManager.ActivateHorizon(true);
             Gate.SoundManager.Play(EnumGateSoundLocation.Vortex);
-        }, 750);
+        }, Gate.SoundManager.VortexSoundDelay);
     }
 
     /// <summary>
@@ -261,8 +273,7 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
 
             case EnumStargateState.ConnectedIncoming:
             case EnumStargateState.ConnectedOutgoing:
-                capi.World.PlaySoundAt(new AssetLocation("sounds/effect/translocate-breakdimension.ogg"), Gate.Pos.X, Gate.Pos.Y, Gate.Pos.Z, null, false);
-                Gate.VisualManager.SpawnDeactivationParticles();
+                Gate.SoundManager?.Play(EnumGateSoundLocation.Break);
                 break;
 
             default:
@@ -270,10 +281,18 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
                 break;
         }
 
-        Gate.RegisterDelayedCallback((t) => Gate.VisualManager.DeactivateHorizon(), 750);
-        Gate.RegisterDelayedCallback((t) => Gate.VisualManager.UpdateChevronGlow(0), 1000);
+        if (State == EnumStargateState.ConnectedIncoming || State == EnumStargateState.ConnectedOutgoing)
+        {
+            Gate.RegisterDelayedCallback((t) => Gate.VisualManager.SpawnDeactivationParticles(), 1500);
+            Gate.RegisterDelayedCallback((t) => Gate.VisualManager.DeactivateHorizon(), 2000);
+            Gate.RegisterDelayedCallback((t) => Gate.VisualManager.UpdateChevronGlow(0), 2000);
+        }
+        else
+        {
+            Gate.VisualManager.UpdateChevronGlow(0);
+        }
 
-        UnregisterTickListener();
+            UnregisterTickListener();
         UnregisterDelayedCallback();
     }
 

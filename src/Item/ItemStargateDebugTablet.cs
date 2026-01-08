@@ -55,6 +55,11 @@ namespace AstriaPorta.Content
                 {
                     Code = new AssetLocation("astriaporta:debugtabletmode-showdhdsearchrange"),
                     Name = Lang.Get("astriaporta:debugtabletmodename-showdhdsearchrange")
+                },
+                new SkillItem
+                {
+                    Code = new AssetLocation("astriaporta:debugtabletmode-breakstargateentity"),
+                    Name = Lang.Get("astriaporta:debugtabletmodename-breakstargateentity")
                 }
             };
 
@@ -68,6 +73,7 @@ namespace AstriaPorta.Content
                 modes[4].WithLetterIcon(capi, "VF");
                 modes[5].WithLetterIcon(capi, "CIS");
                 modes[6].WithLetterIcon(capi, "DR");
+                modes[7].WithLetterIcon(capi, "BG");
             }
         }
 
@@ -128,12 +134,22 @@ namespace AstriaPorta.Content
                 case 6:
                     DoActionShowDhdSearchArea(byPlayer.Player, targetBE as BlockEntityDialHomeDevice, isSameBlock);
                     break;
+                case 7:
+                    DoActionBreakGateEntity(byPlayer.Player, targetBE as StargateBase);
+                    break;
             }
 
             slot.Itemstack.TempAttributes.SetInt("posx", blockSel.Position.X);
             slot.Itemstack.TempAttributes.SetInt("posy", blockSel.Position.Y);
             slot.Itemstack.TempAttributes.SetInt("posz", blockSel.Position.Z);
             slot.Itemstack.TempAttributes.SetInt("pmode", isSameBlock ? -1 : toolMode);
+        }
+
+        protected void DoActionBreakGateEntity(IPlayer player, StargateBase gate)
+        {
+            if (gate == null) return;
+
+            capi.World.BlockAccessor.RemoveBlockEntity(gate.Pos);
         }
 
         protected void DoActionShowIrisArea(IPlayer player, StargateBase gate, bool isSameBlock = false)

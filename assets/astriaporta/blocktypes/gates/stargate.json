@@ -66,7 +66,8 @@
         "releaseSound": "game:sounds/block/vesselopen.ogg",
         "rotateSound": "game:sounds/block/quern.ogg",
         "vortexSound": "game:sounds/environment/largesplash2.ogg",
-        "warningSound": "game:sounds/block/hopperopen.ogg"
+        "warningSound": "game:sounds/block/hopperopen.ogg",
+        "vortexSoundDelay": 750
       },
       "stargate-pegasus-*": {
         "lockSound": "game:sounds/block/charcoal1.ogg",

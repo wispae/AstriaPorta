@@ -9,6 +9,7 @@
   "game:ingameerror-cartouchedisabled": "Cartouche generation disabled by config",
 
   // === ASTRIA PORTA ===
+  "error-gate-blockentity-broken": "<font color=\"red\">Error; Gate Broken. Press {0} on this block to fix</font>",
 
   // == HANDBOOK ==
   "modmechanicinfo-stargates-01": "",
@@ -64,6 +65,7 @@
   "debugtabletmodename-fillgatevortex": "Fill gate vortex",
   "debugtabletmodename-checkirisstate": "Check gate iris state",
   "debugtabletmodename-showdhdsearchrange": "Show DHD search range",
+  "debugtabletmodename-breakstargateentity": "Break Gate BE",
 
   // = CLOTHING =
   "item-stargateclothes-foot-sgc-boots-standard": "SGC boots (standard)",

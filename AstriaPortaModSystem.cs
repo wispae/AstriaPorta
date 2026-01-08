@@ -43,6 +43,8 @@ namespace AstriaPorta
         // Useful for registering block/entity classes on both sides
         public override void Start(ICoreAPI api)
         {
+            GateLogger.Initialize(Mod.Logger);
+
             ClassRegistry.legacyBlockEntityClassNames.TryAdd("BEStargate", "BEStargateMilkyway");
             RegisterBlocks(api);
             RegisterItems(api);
@@ -133,18 +135,13 @@ namespace AstriaPorta
             var baseSoundConfig = new StargateSoundLocationConfiguration
             {
                 ActiveSoundLocation = new("sounds/environment/underwater.ogg"),
-                LockSoundLocation = new("sounds/block/vesselclose.ogg"),
-                ReleaseSoundLocation = new("sounds/block/vesselopen.ogg"),
-                WarningSoundLocation = new("sounds/block/hopperopen.ogg"),
-                VortexSoundLocation = new("sounds/environment/largesplash2.ogg"),
-                BreakSoundLocation = new("sounds/effect/translocate-breakdimension.ogg"),
                 RotateSoundLocation = new("sounds/block/quern.ogg"),
             };
             var milkywayConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-milkyway-north");
             var pegasusConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-pegasus-north");
 
-            StargateSoundManager.InitializeLocations(EnumStargateType.Milkyway, milkywayConfig);
-            StargateSoundManager.InitializeLocations(EnumStargateType.Pegasus, pegasusConfig);
+            StargateSoundManagerClient.InitializeLocations(EnumStargateType.Milkyway, milkywayConfig);
+            StargateSoundManagerClient.InitializeLocations(EnumStargateType.Pegasus, pegasusConfig);
         }
 
         private StargateSoundLocationConfiguration InitializeSoundConfiguration(ICoreAPI api, StargateSoundLocationConfiguration baseConfig, AssetLocation fromBlock)
@@ -157,11 +154,15 @@ namespace AstriaPorta
 
             soundConfig.ActiveSoundLocation ??= baseConfig.ActiveSoundLocation;
             soundConfig.BreakSoundLocation ??= baseConfig.BreakSoundLocation;
+            soundConfig.EnterSoundLocation ??= baseConfig.EnterSoundLocation;
+            soundConfig.FailSoundLocation ??= baseConfig.FailSoundLocation;
             soundConfig.LockSoundLocation ??= baseConfig.LockSoundLocation;
             soundConfig.ReleaseSoundLocation ??= baseConfig.ReleaseSoundLocation;
             soundConfig.RotateSoundLocation ??= baseConfig.RotateSoundLocation;
+            soundConfig.RotateStartSoundLocation ??= baseConfig.RotateStartSoundLocation;
             soundConfig.VortexSoundLocation ??= baseConfig.VortexSoundLocation;
             soundConfig.WarningSoundLocation ??= baseConfig.WarningSoundLocation;
+            soundConfig.VortexSoundDelay ??= baseConfig.VortexSoundDelay;
 
             return soundConfig;
         }
