@@ -63,6 +63,13 @@ namespace AstriaPorta
 #endif
         }
 
+        public override void AssetsFinalize(ICoreAPI api)
+        {
+            base.AssetsFinalize(api);
+
+            InitializeConfigurations(api);
+        }
+
         public override void StartClientSide(ICoreClientAPI api)
         {
             base.StartClientSide(api);
@@ -75,8 +82,6 @@ namespace AstriaPorta
         {
             capi.Event.ReloadTextures += CreateExternalTextures;
             capi.Event.ReloadShader += RegisterShaderPrograms;
-
-            InitializeConfigurations(capi);
 
             CreateExternalTextures();
             RegisterShaderPrograms();
