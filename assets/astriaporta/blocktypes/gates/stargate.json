@@ -70,9 +70,13 @@
         "vortexSoundDelay": 750
       },
       "stargate-pegasus-*": {
+        "activeSound": "game:sounds/environment/underwater.ogg",
+        "breakSound": "game:sounds/effect/translocate-breakdimension.ogg",
         "lockSound": "game:sounds/block/charcoal1.ogg",
         "releaseSound": "game:sounds/block/charcoal3.ogg",
-        "rotateSound": "game:sounds/effect/translocate-active.ogg"
+        "rotateSound": "game:sounds/effect/translocate-active.ogg",
+        "vortexSound": "game:sounds/environment/largesplash2.ogg",
+        "warningSound": "game:sounds/block/hopperopen.ogg"
       }
     }
   },
