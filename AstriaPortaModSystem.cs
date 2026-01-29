@@ -133,6 +133,9 @@ namespace AstriaPorta
             api.RegisterBlockEntityClass("BEDialHomeDevice", typeof(BlockEntityDialHomeDevice));
 
             api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));
+            api.RegisterBlockBehaviorClass("APSlidingDoorBehavior", typeof(BlockBehaviorSlidingDoor));
+
+            api.RegisterBlockEntityBehaviorClass("APSlidingDoorBEBehavior", typeof(BEBehaviorSlidingDoor));
         }
 
         private void InitializeConfigurations(ICoreAPI api)

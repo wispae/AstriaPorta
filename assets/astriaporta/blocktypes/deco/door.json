@@ -1,0 +1,102 @@
+{
+  "code": "door",
+  "class": "BlockGeneric",
+  "entityClass": "Generic",
+  "behaviors": [
+    { "name": "Lockable" },
+    { "name": "APSlidingDoorBehavior" },
+    { "name": "BlockEntityInteract" }
+  ],
+  "entityBehaviors": [ { "name": "APSlidingDoorBEBehavior" } ],
+  "variantgroups": [
+    {
+      "code": "style",
+      "states": [
+        "pgsinglesolid1"
+      ]
+    },
+    {
+      "code": "material",
+      "loadFromProperties": "game:block/metal"
+    }
+  ],
+  "allowedvariants": [
+    "door-pgsinglesolid1-*"
+  ],
+  "skipvariants": [
+    "*-uranium"
+  ],
+  "attributes": {
+    "airtight": true,
+    "widthByType": {
+      "*": 1
+    },
+    "heightByType": {
+      "*": 2
+    },
+    "easingSpeedByType": {
+      "door-pgsinglesolid1-*": 2
+    }
+  },
+  "creativeinventory": {
+    "general": [ "*" ],
+    "decorative": [ "*" ],
+    "astriaporta": [ "*" ]
+  },
+  "shape": {
+    "base": "astriaporta:block/deco/doortest"
+  },
+  "textures": {
+    "metal": { "base": "game:block/metal/ingot/{material}" }
+  },
+  "drawtype": "json",
+  "renderPass": "OpaqueNoCull",
+  "faceCullMode": "NeverCull",
+  "blockMaterial": "Metal",
+  "sideAo": { "all": false },
+  "replaceable": 500,
+  "resistance": 3.5,
+  "lightAbsorption": 0,
+  "sidesolid": {
+    "all": false
+  },
+  "sideopaque": {
+    "all": false
+  },
+  "selectionBoxes": [
+    {
+      "x1": 0,
+      "y1": 0,
+      "z1": 0.4375,
+      "x2": 0.1875,
+      "y2": 1,
+      "z2": 0.5625
+    },
+    {
+      "x1": 0.8125,
+      "y1": 0,
+      "z1": 0.4375,
+      "x2": 1,
+      "y2": 1,
+      "z2": 0.5625
+    }
+  ],
+  "collisionBoxes": [
+    {
+      "x1": 0,
+      "y1": 0,
+      "z1": 0.4375,
+      "x2": 0.5,
+      "y2": 1,
+      "z2": 0.5625
+    },
+    {
+      "x1": 0.5,
+      "y1": 0,
+      "z1": 0.4375,
+      "x2": 1,
+      "y2": 1,
+      "z2": 0.5625
+    }
+  ]
+}
