@@ -134,6 +134,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
         ActiveChevrons = 0;
         StableConnection = false;
         TimeOpen = 0f;
+        AwaitingChevronAnimation = false;
 
         var remoteGate = Gate.GetRemoteGate();
 
@@ -577,7 +578,6 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
     {
         GateLogger.LogAudit(LogLevel.Info, $"Started dial to {address} with coordinates ({address.AddressCoordinates.X},{address.AddressCoordinates.Y},{address.AddressCoordinates.Z})");
 
-        // RotationDegPerSecond = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
         if (State != EnumStargateState.Idle)
         {
             return false;
