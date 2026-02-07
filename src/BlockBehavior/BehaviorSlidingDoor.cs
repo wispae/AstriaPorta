@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
@@ -14,6 +15,11 @@ public class BlockBehaviorSlidingDoor : StrongBlockBehavior, IMultiBlockColSelBo
     public int Height;
     public int Width;
     public bool SingleDoor;
+    public bool Airtight;
+
+    public MeshData AnimatableOriginMesh;
+    public Shape AnimatableShape;
+    public string AnimatableDictKey;
 
     public BlockBehaviorSlidingDoor(Block b) : base(b)
     {
