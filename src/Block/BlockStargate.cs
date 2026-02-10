@@ -109,9 +109,16 @@ namespace AstriaPorta.Content
 			IStargate gate = GetBlockEntity<StargateBase>(pos);
 			if (gate == null)
 			{
-				// gates breaking safety feature
-				FixGateEntity(blockAccessor, pos);
-                return EnumBlockMaterial.Soil;
+                // gates breaking safety feature
+                Block b = blockAccessor.GetBlock(pos);
+				if (b is BlockStargate)
+				{
+                    FixGateEntity(blockAccessor, pos);
+                    return EnumBlockMaterial.Soil;
+                } else
+				{
+					return base.GetBlockMaterial(blockAccessor, pos, stack);
+				}
             }
 
 			if (gate.CanBreak) return EnumBlockMaterial.Metal;
@@ -122,8 +129,13 @@ namespace AstriaPorta.Content
         {
 			if (GetBlockEntity<StargateBase>(pos) == null)
 			{
-				FixGateEntity(blockAccessor, pos);
-				return 1f;
+                // gates breaking safety feature
+                Block b = blockAccessor.GetBlock(pos);
+				if (b is BlockStargate)
+				{
+                    FixGateEntity(blockAccessor, pos);
+                    return 1f;
+                }
 			}
 
             return base.GetResistance(blockAccessor, pos);
