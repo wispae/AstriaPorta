@@ -135,8 +135,8 @@ public class PegasusStateManagerClient : StargateStateManagerClient
         Gate.SoundManager.PauseRotateSound();
         AwaitingChevronAnimation = true;
 
-        Gate.SoundManager.Play(EnumGateSoundLocation.Lock);
         if (CurrentDialSpeed == EnumDialSpeed.Fast) return;
+        Gate.SoundManager.Play(EnumGateSoundLocation.Lock);
 
         Gate.VisualManager.ActivateLockChevron();
         Gate.VisualManager.UpdateChevronGlow(ActiveChevrons + 1);
