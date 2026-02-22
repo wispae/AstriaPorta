@@ -219,7 +219,7 @@ public abstract class StargateStateManagerBase : IStargateStateManager
         if (CallbackId != -1)
         {
             Gate.UnregisterDelayedCallback(CallbackId);
-            TickListenerId = -1;
+            CallbackId = -1;
         }
     }
 
@@ -235,7 +235,7 @@ public abstract class StargateStateManagerBase : IStargateStateManager
     public bool WillDialSucceed(IStargateAddress address)
     {
         if (address.AddressBits == Gate.Address.AddressBits) return false;
-        int distanceChunks = Gate.Address.GetDistanceTo(address);
+        int distanceChunks = Gate.Address.GetChunkDistanceTo(address);
         if (distanceChunks < StargateConfig.Loaded.GetMinRangeChunks(Gate.Type)) return false;
         if (distanceChunks > StargateConfig.Loaded.GetMaxRangeChunks(Gate.Type)) return false;
 

@@ -44,6 +44,7 @@ namespace AstriaPorta.Util
         public void FromBits(ulong addressBits, ICoreAPI api, int fromDimension = 0);
         public int GetAddressResolution(int mapSize, bool latitude);
         public int GetDistanceTo(IStargateAddress remoteAddres);
+        public int GetChunkDistanceTo(IStargateAddress remoteAddres);
         public void FromTreeAttributes(ITreeAttribute tree);
         public void ToTreeAttributes(ITreeAttribute tree);
     }

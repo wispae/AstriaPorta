@@ -74,6 +74,14 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
             }
         }
 
+        if (State == EnumStargateState.DialingIncoming || State == EnumStargateState.ConnectedIncoming)
+        {
+            if (!Gate.IsRemoteLoaded)
+            {
+                TryRegisterDelayedCallback(OnRemoteTimeout, (int)(StargateConfig.Loaded.MaxTimeoutSeconds * 1000));
+            }
+        }
+
         SyncStateToClients();
     }
 
@@ -134,6 +142,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
         ActiveChevrons = 0;
         StableConnection = false;
         TimeOpen = 0f;
+        AwaitingChevronAnimation = false;
 
         var remoteGate = Gate.GetRemoteGate();
 
@@ -341,7 +350,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
     protected void OnRemoteTimeout(float delta)
     {
         TimeoutCallbackId = -1;
-        if (State == EnumStargateState.DialingOutgoing)
+        if (State == EnumStargateState.DialingOutgoing || State == EnumStargateState.DialingIncoming || State == EnumStargateState.ConnectedIncoming)
         {
             OnConnectionFailure(delta);
             // Gate.TryDisconnect();
@@ -548,6 +557,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
                 }
             }
 
+            remoteGate.EvaluateIncomingConnection(Gate);
             StableConnection = true;
         }
 
@@ -577,7 +587,6 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
     {
         GateLogger.LogAudit(LogLevel.Info, $"Started dial to {address} with coordinates ({address.AddressCoordinates.X},{address.AddressCoordinates.Y},{address.AddressCoordinates.Z})");
 
-        // RotationDegPerSecond = StargateConfig.Loaded.DialSpeedDegreesPerSecondMilkyway;
         if (State != EnumStargateState.Idle)
         {
             return false;

@@ -227,9 +227,16 @@ namespace AstriaPorta.Util
 
         public int GetDistanceTo(IStargateAddress remoteAddress)
         {
-            int deltaX = remoteAddress.AddressCoordinates.X - AddressCoordinates.X;
-            int deltaZ = remoteAddress.AddressCoordinates.Z - AddressCoordinates.Z;
+            double deltaX = remoteAddress.AddressCoordinates.X - AddressCoordinates.X;
+            double deltaZ = remoteAddress.AddressCoordinates.Z - AddressCoordinates.Z;
 
+            return (int)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ);
+        }
+
+        public int GetChunkDistanceTo(IStargateAddress remoteAddress)
+        {
+            double deltaX = (double)((remoteAddress.AddressCoordinates.X - AddressCoordinates.X) / 32);
+            double deltaZ = (double)((remoteAddress.AddressCoordinates.Z - AddressCoordinates.Z) / 32);
             return (int)Math.Sqrt(deltaX * deltaX + deltaZ * deltaZ);
         }
 
