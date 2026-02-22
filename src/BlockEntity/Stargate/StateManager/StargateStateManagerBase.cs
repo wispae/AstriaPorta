@@ -219,7 +219,7 @@ public abstract class StargateStateManagerBase : IStargateStateManager
         if (CallbackId != -1)
         {
             Gate.UnregisterDelayedCallback(CallbackId);
-            TickListenerId = -1;
+            CallbackId = -1;
         }
     }
 

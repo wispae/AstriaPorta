@@ -74,6 +74,14 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
             }
         }
 
+        if (State == EnumStargateState.DialingIncoming || State == EnumStargateState.ConnectedIncoming)
+        {
+            if (!Gate.IsRemoteLoaded)
+            {
+                TryRegisterDelayedCallback(OnRemoteTimeout, (int)(StargateConfig.Loaded.MaxTimeoutSeconds * 1000));
+            }
+        }
+
         SyncStateToClients();
     }
 
@@ -342,7 +350,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
     protected void OnRemoteTimeout(float delta)
     {
         TimeoutCallbackId = -1;
-        if (State == EnumStargateState.DialingOutgoing)
+        if (State == EnumStargateState.DialingOutgoing || State == EnumStargateState.DialingIncoming || State == EnumStargateState.ConnectedIncoming)
         {
             OnConnectionFailure(delta);
             // Gate.TryDisconnect();
@@ -549,6 +557,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
                 }
             }
 
+            remoteGate.EvaluateIncomingConnection(Gate);
             StableConnection = true;
         }
 

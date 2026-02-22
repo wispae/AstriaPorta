@@ -103,7 +103,7 @@ namespace AstriaPorta.Content
 			if (!StargateConfig.Loaded.StargateDestructable) return EnumBlockMaterial.Mantle;
 			if (pos == null)
 			{
-				GateLogger.LogError(LogLevel.Error, "gate block position was null?");
+				GateLogger.LogError(LogLevel.Error, "gate block position was null? (ignore this message during world startup)");
                 return EnumBlockMaterial.Mantle;
             }
 			IStargate gate = GetBlockEntity<StargateBase>(pos);
