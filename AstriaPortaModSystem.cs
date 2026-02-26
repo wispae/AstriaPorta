@@ -130,6 +130,7 @@ namespace AstriaPorta
             // api.RegisterBlockEntityClass("BEStargate", typeof(BlockEntityStargate));
             api.RegisterBlockEntityClass("BEStargateMilkyway", typeof(BlockEntityStargateMilkyway));
             api.RegisterBlockEntityClass("BEStargatePegasus", typeof(BlockEntityStargatePegasus));
+            api.RegisterBlockEntityClass("BEStargateDestiny", typeof(BlockEntityStargateDestiny));
             api.RegisterBlockEntityClass("BEDialHomeDevice", typeof(BlockEntityDialHomeDevice));
 
             api.RegisterBlockBehaviorClass("MultiblockStargate", typeof(BlockBehaviorMultiblockStargate));
@@ -144,9 +145,11 @@ namespace AstriaPorta
             };
             var milkywayConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-milkyway-north");
             var pegasusConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-pegasus-north");
+            var destinyConfig = InitializeSoundConfiguration(api, baseSoundConfig, "astriaporta:stargate-destiny-north");
 
             StargateSoundManagerClient.InitializeLocations(EnumStargateType.Milkyway, milkywayConfig);
             StargateSoundManagerClient.InitializeLocations(EnumStargateType.Pegasus, pegasusConfig);
+            StargateSoundManagerClient.InitializeLocations(EnumStargateType.Destiny, destinyConfig);
         }
 
         private StargateSoundLocationConfiguration InitializeSoundConfiguration(ICoreAPI api, StargateSoundLocationConfiguration baseConfig, AssetLocation fromBlock)
