@@ -19,10 +19,7 @@ public class DestinyVisualManager : StargateVisualManager
     {
     }
 
-    /// <summary>
-    /// Initializes and registers the main gate renderer. Should also call the
-    /// event horizon renderer initializer
-    /// </summary>
+    /// <inheritdoc/>
     public override void Initialize()
     {
         InitializeGateRenderer();
@@ -30,7 +27,7 @@ public class DestinyVisualManager : StargateVisualManager
         EventHorizonLight = new LightiningPointLight(new Vec3f(0.8f, 0.8f, 0.8f), Gate.Pos.AddCopy(0, 3, 0).ToVec3d());
 
         UpdateRendererState(Gate.StateManager.CurrentAngle);
-        UpdateChevronGlow(Gate.StateManager.ActiveChevrons);
+        UpdateChevronGlow(Gate.StateManager.ActiveChevrons, false);
 
         InitializeHorizonRenderer();
     }
@@ -49,7 +46,26 @@ public class DestinyVisualManager : StargateVisualManager
         GateRendererRegistered = true;
     }
 
-    protected override void UpdateChevronGlow(int activeChevrons, EnumAddressLength length)
+    protected override void InitializeHorizonRenderer()
+    {
+        if (HorizonRendererInitialized) return;
+
+        TextureAtlasPosition texPos = Capi.ModLoader.GetModSystem<AstriaPortaModSystem>().eventHorizonTexPos;
+
+        var horizonColor = new Vec4f(.6f, .6f, .6f, .5f);
+        EventHorizonRenderer = new EventHorizonRenderer(Capi, Gate.Pos, texPos, false, horizonColor);
+        EventHorizonRenderer.shouldRender = false;
+        EventHorizonRenderer.Orientation = Gate.Block.Shape.rotateY;
+
+        HorizonRendererInitialized = true;
+
+        if (Gate.State == EnumStargateState.ConnectedIncoming || Gate.State == EnumStargateState.ConnectedOutgoing)
+        {
+            ActivateHorizon(false);
+        }
+    }
+
+    protected override void UpdateChevronGlow(int activeChevrons, EnumAddressLength length, bool activeDialingState = false)
     {
         if (_destinyRenderer == null) return;
 
@@ -65,7 +81,7 @@ public class DestinyVisualManager : StargateVisualManager
             }
         }
 
-        _destinyRenderer.IsDialing = Gate.State != EnumStargateState.Idle;
+        _destinyRenderer.IsDialing = activeDialingState;
         _destinyRenderer.MeshDirty = true;
     }
 

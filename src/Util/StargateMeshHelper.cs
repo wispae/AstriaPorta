@@ -59,8 +59,8 @@ namespace AstriaPorta.Util
 				return;
 			}
 
-			_destinyGlyphMeshData = new MeshData[DESTINY_GLYPH_COUNT];
-			var glyphMesh = GenGlyphMesh(capi, "destiny");
+            _destinyGlyphMeshData = new MeshData[DESTINY_GLYPH_COUNT];
+            var glyphMesh = GenSingleGlyphMesh(capi, "destiny");
 
             float glyphSizeX = 0;
             float glyphSizeY = 0;
@@ -114,9 +114,9 @@ namespace AstriaPorta.Util
 						.Translate(-.5f, -.5f, 0f);
 
 					tempMesh.MatrixTransform(transform.Values);
-					_destinyGlyphMeshData[i] = tempMesh;
+                    _destinyGlyphMeshData[i] = tempMesh;
 
-					for (int j = 0; j < glyphMesh.Uv.Length; j += 2)
+                    for (int j = 0; j < glyphMesh.Uv.Length; j += 2)
 					{
 						glyphMesh.Uv[j] += glyphSizeX;
 					}
@@ -142,7 +142,7 @@ namespace AstriaPorta.Util
 			}
 
 			_pegasusGlyphMeshRefs = new MultiTextureMeshRef[GLYPH_SHEET_HEIGHT * GLYPH_SHEET_WIDTH];
-            var glyphMesh = GenGlyphMesh(capi, "pegasus");
+            var glyphMesh = GenSingleGlyphMesh(capi, "pegasus");
 
 			float glyphSizeX = 0;
 			float glyphSizeY = 0;
@@ -201,6 +201,13 @@ namespace AstriaPorta.Util
 			}
         }
 
+		/// <summary>
+		/// Returns a newly created or cached version of the single chevron mesh
+		/// for the provided gate type
+		/// </summary>
+		/// <param name="capi"></param>
+		/// <param name="gateType"></param>
+		/// <returns></returns>
 		public static MeshData GenChevronMesh(ICoreClientAPI capi, string gateType)
 		{
 			MeshData baseMesh = ObjectCacheUtil.GetOrCreate(capi, $"astriaporta{gateType}chevronmesh", () =>
@@ -220,6 +227,15 @@ namespace AstriaPorta.Util
 			return baseMesh;
 		}
 
+		/// <summary>
+		/// Returns a new or cached meshref to the single chevron mesh for the provided gate type
+		/// </summary>
+		/// <remarks>
+		/// Only valid for "milkyway" and "pegasus" gates, "destiny" will return null
+		/// </remarks>
+		/// <param name="capi"></param>
+		/// <param name="gateType"></param>
+		/// <returns></returns>
 		public static MultiTextureMeshRef GetChevronMeshRef(ICoreClientAPI capi, string gateType)
 		{
 			switch (gateType)
@@ -241,9 +257,9 @@ namespace AstriaPorta.Util
 			}
 		}
 
-		public static MeshData GenDestinyGateMesh(ICoreClientAPI capi, bool chevronsActive, bool includeGlyphs = true)
+		public static MeshData GenDestinyGateMesh(ICoreClientAPI capi, bool chevronsActive)
 		{
-            var baseMesh = GenRingMesh(capi, "destiny");
+            var baseMesh = GenRingMesh(capi, "destiny").Clone();
             var chevronMesh = GenChevronMesh(capi, "destiny");
 
 			if (chevronMesh == null)
@@ -256,19 +272,11 @@ namespace AstriaPorta.Util
 				return null;
 			}
 
-            if (chevronsActive)
-            {
-                if (includeGlyphs)
-				{
-                    var glyphMesh = GenDestinyGlyphMesh(capi, []);
-                    if (glyphMesh != null)
-                    {
-                        baseMesh.AddMeshData(glyphMesh);
-                    }
-                }
-
+			if (chevronsActive)
+			{
+				chevronMesh = chevronMesh.Clone();
 				chevronMesh.SetVertexFlags(255);
-            }
+			}
 
 			MeshData tempMesh;
 			Matrixf transform = new();
@@ -287,7 +295,7 @@ namespace AstriaPorta.Util
 			return baseMesh;
         }
 
-		public static MultiTextureMeshRef GetDestinyGateMeshRef(ICoreClientAPI capi, bool chevronsActive, bool includeGlyphs = true)
+		public static MultiTextureMeshRef GetDestinyGateMeshRef(ICoreClientAPI capi, bool chevronsActive)
 		{
             // we want to keep 2 meshes loaded in GPU for the destiny gates;
             // the active and inactive gates, since for destiny gates it's
@@ -315,7 +323,17 @@ namespace AstriaPorta.Util
 			return _destinyGateMeshRef;
         }
 
-		public static MeshData GenGlyphMesh(ICoreClientAPI capi, string gateType)
+		/// <summary>
+		/// Generates a single 0° offset top-side glyph for the given gate type
+		/// </summary>
+		/// <remarks>
+		/// Assumes that a shape called "{gateType}_glyph.json" exists in the
+		/// "shapes/block/gates/" folder
+		/// </remarks>
+		/// <param name="capi"></param>
+		/// <param name="gateType"></param>
+		/// <returns></returns>
+		public static MeshData GenSingleGlyphMesh(ICoreClientAPI capi, string gateType)
 		{
 			MeshData baseMesh = ObjectCacheUtil.GetOrCreate(capi, $"astriaporta{gateType}glyphmesh", () =>
 			{
@@ -334,7 +352,7 @@ namespace AstriaPorta.Util
 			return baseMesh;
 		}
 
-		public static MeshData GenDestinyGlyphMesh(ICoreClientAPI capi, int[] activeGlyphs)
+        public static MeshData GenDestinyGlyphMesh(ICoreClientAPI capi, int[] activeGlyphs)
 		{
 			MeshData baseMesh = new MeshData(1, 1);
 
@@ -343,16 +361,12 @@ namespace AstriaPorta.Util
 			for (int i = 0; i < DESTINY_GLYPH_COUNT; i++)
 			{
 				tempMesh = _destinyGlyphMeshData[i].Clone();
-				transform = transform.Identity()
-                    .Translate(.5f, .5f, 0f)
-                    .RotateZDeg((i + (i / 4) + 1) * 8f)
-                    .Translate(-.5f, -.5f, 0f);
 				tempMesh.MatrixTransform(transform.Values);
 
 				if (activeGlyphs != null && activeGlyphs.Contains(i))
 				{
 					tempMesh.SetVertexFlags(255);
-                }
+				}
 
 				baseMesh.AddMeshData(tempMesh);
             }

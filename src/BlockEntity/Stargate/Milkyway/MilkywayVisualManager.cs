@@ -23,7 +23,7 @@ public class MilkywayVisualManager : StargateVisualManager
         AnimUtil.InitializeAnimator("milkyway_chevron_animation", null, null, new Vec3f(0, Gate.Block.Shape.rotateY, 0));
 
         UpdateRendererState(Gate.StateManager.CurrentAngle);
-        UpdateChevronGlow(Gate.StateManager.ActiveChevrons);
+        UpdateChevronGlow(Gate.StateManager.ActiveChevrons, false);
 
         InitializeHorizonRenderer();
     }

@@ -20,7 +20,7 @@ public class PegasusVisualManager : StargateVisualManager
         EventHorizonLight = new LightiningPointLight(new(0.9f, 0.5f, 0.5f), Gate.Pos.AddCopy(0, 3, 0).ToVec3d());
 
         UpdateRendererState(Gate.StateManager.CurrentAngle);
-        UpdateChevronGlow(Gate.StateManager.ActiveChevrons);
+        UpdateChevronGlow(Gate.StateManager.ActiveChevrons, false);
 
         InitializeHorizonRenderer();
     }
@@ -56,7 +56,7 @@ public class PegasusVisualManager : StargateVisualManager
         GateRendererInitialized = true;
     }
 
-    protected override void UpdateChevronGlow(int activeChevrons, EnumAddressLength length)
+    protected override void UpdateChevronGlow(int activeChevrons, EnumAddressLength length, bool activeDialingState = false)
     {
         if (_pegasusRenderer == null) return;
 

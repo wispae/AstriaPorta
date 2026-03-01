@@ -50,7 +50,7 @@ public class DestinyGateRenderer : GateRenderer
     {
         if (!MeshDirty) return;
 
-        ringMeshRef = StargateMeshHelper.GetDestinyGateMeshRef(_api, IsDialing, false);
+        ringMeshRef = StargateMeshHelper.GetDestinyGateMeshRef(_api, IsDialing);
         var glyphMeshData = StargateMeshHelper.GenDestinyGlyphMesh(_api, ActiveGlyphIndices);
 
         if (glyphMeshRef != null && !glyphMeshRef.Disposed && glyphMeshRef.meshrefs != null && glyphMeshRef.meshrefs.Length > 0 && !glyphMeshRef.meshrefs[0].Disposed)

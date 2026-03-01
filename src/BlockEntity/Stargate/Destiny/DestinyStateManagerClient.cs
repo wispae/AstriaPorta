@@ -21,7 +21,9 @@ public class DestinyStateManagerClient : StargateStateManagerClient
         UnregisterTickListener();
         AwaitingChevronAnimation = false;
 
-        Gate.VisualManager.DeactivateLockChevron();
+        Gate.VisualManager.UpdateChevronGlow(ActiveChevrons, true);
+
+        // Gate.VisualManager.DeactivateLockChevron();
     }
 
     protected override void OnTick(float delta)
@@ -37,6 +39,21 @@ public class DestinyStateManagerClient : StargateStateManagerClient
             default:
                 UnregisterTickListener();
                 break;
+        }
+    }
+
+    protected override void TransitionToDialingOutgoing(uint extraFlags)
+    {
+        if (State == EnumStargateState.Idle)
+        {
+            TryRegisterDelayedCallback((t) =>
+            {
+                TryRegisterTickListener(OnTick, 20);
+            }, 1000);
+        }
+        else
+        {
+            base.TransitionToDialingOutgoing(extraFlags);
         }
     }
 }
