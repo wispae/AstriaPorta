@@ -52,7 +52,7 @@ public class DestinyVisualManager : StargateVisualManager
 
         TextureAtlasPosition texPos = Capi.ModLoader.GetModSystem<AstriaPortaModSystem>().eventHorizonTexPos;
 
-        var horizonColor = new Vec4f(.6f, .6f, .6f, .5f);
+        var horizonColor = new Vec4f(.6f, .6f, .6f, .8f);
         EventHorizonRenderer = new EventHorizonRenderer(Capi, Gate.Pos, texPos, false, horizonColor);
         EventHorizonRenderer.shouldRender = false;
         EventHorizonRenderer.Orientation = Gate.Block.Shape.rotateY;

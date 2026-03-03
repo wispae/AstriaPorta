@@ -30,6 +30,7 @@ namespace AstriaPorta.Util
 			_pegasusChevronMeshRef?.Dispose();
 			_destinyGateMeshRef?.Dispose();
 			_activeDestinyGateMeshRef?.Dispose();
+			_destinyGlyphMeshData = null;
 
 			if (_pegasusChevronMeshRef != null)
 			{
@@ -110,7 +111,7 @@ namespace AstriaPorta.Util
 					tempMesh = glyphMesh.Clone();
 					transform = transform.Identity()
 						.Translate(.5f, .5f, 0f)
-						.RotateZDeg((i + (i / 4) + 1) * 8f)
+						.RotateZDeg((i + (i / 4) + 1) * -8f)
 						.Translate(-.5f, -.5f, 0f);
 
 					tempMesh.MatrixTransform(transform.Values);
@@ -361,7 +362,6 @@ namespace AstriaPorta.Util
 			for (int i = 0; i < DESTINY_GLYPH_COUNT; i++)
 			{
 				tempMesh = _destinyGlyphMeshData[i].Clone();
-				tempMesh.MatrixTransform(transform.Values);
 
 				if (activeGlyphs != null && activeGlyphs.Contains(i))
 				{

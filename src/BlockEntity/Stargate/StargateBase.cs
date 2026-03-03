@@ -60,7 +60,8 @@ namespace AstriaPorta.Content
         {
             EnumStargateType.Milkyway => 39,
             EnumStargateType.Pegasus => 36,
-            EnumStargateType.Destiny => 36,
+            // We need to account for the 9 empty glyph locations in the destiny gate
+            EnumStargateType.Destiny => 45,
             _ => 36
         };
 
