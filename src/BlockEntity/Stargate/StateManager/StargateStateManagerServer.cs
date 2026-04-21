@@ -399,7 +399,7 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
 
         foreach (Entity traveler in travelers)
         {
-            originYaw = (traveler.SidedPos.Yaw + thetaf) % GameMath.TWOPI;
+            originYaw = (traveler.Pos.Yaw + thetaf) % GameMath.TWOPI;
 
             offsetY = traveler.Pos.Y - Gate.Pos.Y;
             offsetOriginX = Gate.Pos.X - traveler.Pos.X + 0.5f;
@@ -419,8 +419,8 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
                 else offsetX *= -1;
             }
 
-            traveler.SidedPos.Yaw = originYaw;
-            traveler.SidedPos.HeadYaw = originYaw;
+            traveler.Pos.Yaw = originYaw;
+            traveler.Pos.HeadYaw = originYaw;
 
             traveler.TeleportToDouble(remoteGate.Pos.X + offsetX + 0.5f, remoteGate.Pos.Y + offsetY, remoteGate.Pos.Z + offsetZ + 0.5f);
 
@@ -468,20 +468,20 @@ public abstract class StargateStateManagerServer : StargateStateManagerBase
                 (remoteGate.StateManager as StargateStateManagerServer)?.SyncStateToClients();
                 (Api as ICoreServerAPI).Network.BroadcastBlockEntityPacket(remoteGate.Pos, (int)EnumStargatePacketType.PlayerYaw, p);
 
-                motionX = (float)traveler.SidedPos.Motion.X * costhetaf - (float)traveler.SidedPos.Motion.Z * sinthetaf;
-                motionZ = (float)traveler.SidedPos.Motion.X * sinthetaf + (float)traveler.SidedPos.Motion.Z * costhetaf;
-                motionY = (float)traveler.SidedPos.Motion.Y;
+                motionX = (float)traveler.Pos.Motion.X * costhetaf - (float)traveler.Pos.Motion.Z * sinthetaf;
+                motionZ = (float)traveler.Pos.Motion.X * sinthetaf + (float)traveler.Pos.Motion.Z * costhetaf;
+                motionY = (float)traveler.Pos.Motion.Y;
 
-                traveler.SidedPos.Motion.Set(motionX, motionY, motionZ);
+                traveler.Pos.Motion.Set(motionX, motionY, motionZ);
             }, 20);
         }
         else
         {
-            motionX = (float)traveler.SidedPos.Motion.X * costhetaf - (float)traveler.SidedPos.Motion.Z * sinthetaf;
-            motionZ = (float)traveler.SidedPos.Motion.X * sinthetaf + (float)traveler.SidedPos.Motion.Z * costhetaf;
-            motionY = (float)traveler.SidedPos.Motion.Y;
+            motionX = (float)traveler.Pos.Motion.X * costhetaf - (float)traveler.Pos.Motion.Z * sinthetaf;
+            motionZ = (float)traveler.Pos.Motion.X * sinthetaf + (float)traveler.Pos.Motion.Z * costhetaf;
+            motionY = (float)traveler.Pos.Motion.Y;
 
-            traveler.SidedPos.Motion.Set(motionX, motionY, motionZ);
+            traveler.Pos.Motion.Set(motionX, motionY, motionZ);
         }
     }
 
