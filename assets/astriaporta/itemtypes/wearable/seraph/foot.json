@@ -1,6 +1,5 @@
 ﻿{
   "code": "stargateclothes",
-  "class": "ItemWearable",
   "variantgroups": [
     {
       "code": "category",
@@ -17,6 +16,9 @@
     }
   ],
   "behaviors": [
+    {
+      "name": "Wearable"
+    },
     {
       "name": "GroundStorable",
       "properties": {
