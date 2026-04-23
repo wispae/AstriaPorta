@@ -116,7 +116,7 @@ public class BlockEntityDialHomeDevice : BlockEntity, IBlockEntityInteractable, 
         foundGate = targetBlocks.Count > 0 ? targetBlocks[0] : null;
         foreach (var be in targetBlocks)
         {
-            if (Pos.ManhattenDistance(be.Pos) < Pos.ManhattenDistance(foundGate.Pos))
+            if (Pos.ManhattanDistance(be.Pos) < Pos.ManhattanDistance(foundGate.Pos))
             {
                 foundGate = be;
             }
