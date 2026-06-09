@@ -91,11 +91,10 @@ namespace AstriaPorta.Content
 			return interactions;
 		}
 
-		public override void AddMiningTierInfo(StringBuilder sb)
+		public override void AddMiningTierInfo(StringBuilder sb, IWorldAccessor world, BlockPos pos)
 		{
 			if (!StargateConfig.Loaded.StargateDestructable) return;
-			RequiredMiningTier = StargateConfig.Loaded.StargateMiningTier;
-			base.AddMiningTierInfo(sb);
+			base.AddMiningTierInfo(sb, world, pos);
 		}
 
 		public override EnumBlockMaterial GetBlockMaterial(IBlockAccessor blockAccessor, BlockPos pos, ItemStack stack = null)
@@ -124,6 +123,17 @@ namespace AstriaPorta.Content
 			if (gate.CanBreak) return EnumBlockMaterial.Metal;
 			return EnumBlockMaterial.Mantle;
 		}
+
+        public override int GetRequiredMiningTier(IWorldAccessor world, BlockPos pos)
+        {
+            if (!StargateConfig.Loaded.StargateDestructable)
+            {
+                return base.GetRequiredMiningTier(world, pos);
+            }
+
+            RequiredMiningTier = StargateConfig.Loaded.StargateMiningTier;
+            return RequiredMiningTier;
+        }
 
         public override float GetResistance(IBlockAccessor blockAccessor, BlockPos pos)
         {

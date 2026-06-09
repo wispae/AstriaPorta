@@ -1,6 +1,8 @@
 ﻿{
   "code": "stargateclothes",
-  "class": "ItemWearable",
+  "behaviors": [
+    { "name": "Wearable" }
+  ],
   "variantgroups": [
     {
       "code": "category",
