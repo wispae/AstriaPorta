@@ -57,6 +57,8 @@
   "itemdesc-coordinatecartouche-*": "Een stenen tablet met een vreemde reeks symbolen",
   "itemhelp-cartouche-generate": "<hk>rightmouse</hk>: genereer adres",
 
+  "item-kinoremote": "Kino Afstandsbediening",
+
   "item-debugtablet": "Stargate Debug Tablet",
   "debugtabletmodename-showgateiris": "Toon gate iris",
   "debugtabletmodename-showgatevortex": "Toon gate vortex",
@@ -83,7 +85,7 @@
 
   // == OTHER ==
   "astriaporta-cartouche-unlinked": "Adres nog niet gegenereerd",
-  "astriaporta-cartouche-generating": "Aan het zoekn naar stargate...",
+  "astriaporta-cartouche-generating": "Aan het zoeken naar stargate...",
   "astriaporta-no-address-associated": "Geen adres gevonden",
   "astriaporta-dhd-no-gate-linked": "Geen gate gekoppeld",
   "astriaporta-cartouche-failed": "Gate vinden mislukt",
@@ -97,5 +99,20 @@
 
   "stargate-gui-quickdialtoggletext": "Gebruik snel bellen",
 
-  "DhdGuiTitleText": "Dial Home Device"
+  "DhdGuiTitleText": "Dial Home Device",
+
+  "heldhelp-kino": "Sluiten: rechtermuisknop | Navigeren: scroll | Interactie: linkermuisknop",
+
+  "gui-kino-no-gate-detected": "< geen gate getecteerd >",
+  "gui-kino-gate-status-idle": "INACTIEF",
+  "gui-kino-gate-status-dialing": "BELLEN",
+  "gui-kino-gate-status-connected": "VERBONDEN",
+  "gui-kino-label-empty": "< leeg >",
+  "gui-kino-label-empty-index": "< {0}. leeg >",
+  "gui-kino-button-dial": "DIAL",
+  "gui-kino-button-addresses": "Adressen",
+  "gui-kino-button-status": "Status",
+  "gui-kino-button-copy": "KOPIEER",
+  "gui-kino-placeholder-address": "Adres...",
+  "gui-kino-placeholder-description": "Omschrijving..."
 }

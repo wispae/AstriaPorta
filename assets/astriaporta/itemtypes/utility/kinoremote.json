@@ -1,0 +1,40 @@
+{
+  "code": "kinoremote",
+  "class": "AstriaPorta.ItemKinoRemote",
+  "maxstacksize": 1,
+  "creativeinventory": {
+    "general": [ "*" ],
+    "astriaporta": [ "*" ]
+  },
+  "shape": {
+    "base": "item/utility/kinoremote",
+    "ignoreElements": [
+      "gui"
+    ]
+  },
+  "textures": {
+    "molybdochalkos1": { "base": "game:block/metal/sheet/molybdochalkos1" }
+  },
+  "heldTpIdleAnimation": "holdbothhands",
+  "tpHandTransform": {
+    "translation": {
+      "x": -0.5,
+      "y": -0.2,
+      "z": 0.8
+    },
+    "origin": {
+      "x": -0,
+      "y": -0,
+      "z": -0
+    },
+    "scale": 0.62
+  },
+  "guiTransform": {
+    "rotation": {
+      "x": 90,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 1.5
+  }
+}

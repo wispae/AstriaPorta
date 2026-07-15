@@ -130,7 +130,7 @@ namespace AstriaPorta.Config
             get => _minRangeChunksPegasus;
             set
             {
-                if (value < _minRangeChunksPegasus) value = _maxRangeChunksPegasus - 1;
+                if (value > _maxRangeChunksPegasus) value = _maxRangeChunksPegasus - 1;
                 if (value < 0) value = 0;
                 if (value > 262144) value = 262144;
                 _minRangeChunksPegasus = value;
@@ -142,7 +142,7 @@ namespace AstriaPorta.Config
             get => _minRangeChunksDestiny;
             set
             {
-                if (value < _minRangeChunksDestiny) value = _maxRangeChunksDestiny - 1;
+                if (value < _maxRangeChunksDestiny) value = _maxRangeChunksDestiny - 1;
                 if (value < 0) value = 0;
                 if (value > 262144) value = 262144;
                 _minRangeChunksDestiny = value;

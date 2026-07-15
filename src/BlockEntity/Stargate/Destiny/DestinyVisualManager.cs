@@ -24,7 +24,7 @@ public class DestinyVisualManager : StargateVisualManager
     {
         InitializeGateRenderer();
 
-        EventHorizonLight = new LightiningPointLight(new Vec3f(0.8f, 0.8f, 0.8f), Gate.Pos.AddCopy(0, 3, 0).ToVec3d());
+        EventHorizonLight = new LightiningPointLight(new Vec3f(26f, 26f, 26f), Gate.Pos.AddCopy(0, 3, 0).ToVec3d());
 
         UpdateRendererState(Gate.StateManager.CurrentAngle);
         UpdateChevronGlow(Gate.StateManager.ActiveChevrons, false);

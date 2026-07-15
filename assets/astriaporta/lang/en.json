@@ -56,6 +56,8 @@
   "item-coordinatecartouche-*": "Address Cartouche",
   "itemdesc-coordinatecartouche-*": "A stone tablet with a strange sequence of symbols",
   "itemhelp-cartouche-generate": "<hk>rightmouse</hk>: generate address",
+  
+  "item-kinoremote": "Kino Remote",
 
   "item-debugtablet": "Stargate Debug Tablet",
   "debugtabletmodename-showgateiris": "Show gate iris",
@@ -97,5 +99,20 @@
 
   "stargate-gui-quickdialtoggletext": "Use fast dialing",
 
-  "DhdGuiTitleText": "Dial Home Device"
+  "DhdGuiTitleText": "Dial Home Device",
+
+  "heldhelp-kino": "Close: rightmouse | Navigate: scroll | Interact: leftmouse",
+
+  "gui-kino-no-gate-detected": "< no gate detected >",
+  "gui-kino-gate-status-idle": "IDLE",
+  "gui-kino-gate-status-dialing": "DIALING",
+  "gui-kino-gate-status-connected": "CONNECTED",
+  "gui-kino-label-empty": "< empty >",
+  "gui-kino-label-empty-index": "< {0}. empty >",
+  "gui-kino-button-dial": "DIAL",
+  "gui-kino-button-addresses": "Addresses",
+  "gui-kino-button-status": "Status",
+  "gui-kino-button-copy": "COPY",
+  "gui-kino-placeholder-address": "Address...",
+  "gui-kino-placeholder-description": "Description..."
 }

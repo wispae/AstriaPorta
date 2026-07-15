@@ -1,17 +1,13 @@
-﻿using AstriaPorta.Systems;
-using System;
+﻿using AstriaPorta.Content;
+using AstriaPorta.Systems;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
-using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
-namespace AstriaPorta.Content
+namespace AstriaPorta.Gui
 {
     public class GuiDialogNoteName : GuiDialogGeneric
     {

@@ -91,9 +91,11 @@
       }
     }
   },
-  "entityBehaviors": [
-    { "name": "Animatable" }
-  ],
+  "entityBehaviorsByType": {
+    "stargate-milkyway-*": [
+      { "name": "Animatable" }
+    ]
+  },
   "variantgroups": [
     {
       "code": "gatetype",

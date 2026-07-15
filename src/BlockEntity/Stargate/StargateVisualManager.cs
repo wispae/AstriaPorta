@@ -2,7 +2,10 @@
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
+using Vintagestory.Client.NoObf;
 using Vintagestory.GameContent;
+
+#nullable enable
 
 namespace AstriaPorta.Content;
 
@@ -27,7 +30,7 @@ public abstract class StargateVisualManager
     protected LightiningPointLight EventHorizonLight;
     protected bool HorizonLightAdded = false;
 
-    public BlockEntityAnimationUtil AnimUtil => Gate.GetBehavior<BEBehaviorAnimatable>().animUtil;
+    public BlockEntityAnimationUtil? AnimUtil => Gate.GetBehavior<BEBehaviorAnimatable>()?.animUtil;
 
     /// <summary>
     /// Initializes and registers the main gate renderer. Should also call the
@@ -72,6 +75,8 @@ public abstract class StargateVisualManager
             HorizonRendererRegistered = true;
         }
 
+        var clientMain = (Capi.World as ClientMain);
+
         if (!HorizonLightAdded)
         {
             Capi.Render.AddPointLight(EventHorizonLight);
@@ -89,6 +94,8 @@ public abstract class StargateVisualManager
         if (GateRenderer == null) return;
 
         GateRenderer.chevronGlow[8] = 200;
+        if (AnimUtil == null)
+            return;
 
         AnimationMetaData metaData = new()
         {

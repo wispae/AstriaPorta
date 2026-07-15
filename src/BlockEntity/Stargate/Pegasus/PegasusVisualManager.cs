@@ -17,8 +17,7 @@ public class PegasusVisualManager : StargateVisualManager
     {
         InitializeGateRenderer();
 
-        EventHorizonLight = new LightiningPointLight(new(0.9f, 0.5f, 0.5f), Gate.Pos.AddCopy(0, 3, 0).ToVec3d());
-
+        EventHorizonLight = new LightiningPointLight(new(29f, 16f, 16f), Gate.Pos.AddCopy(0, 3, 0).ToVec3d());
         UpdateRendererState(Gate.StateManager.CurrentAngle);
         UpdateChevronGlow(Gate.StateManager.ActiveChevrons, false);
 

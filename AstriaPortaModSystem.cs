@@ -117,6 +117,7 @@ namespace AstriaPorta
             api.RegisterCollectibleBehaviorClass("GateAddressHolder", typeof(BehaviorGateAddressHolder));
             api.RegisterItemClass("ItemCartoucheLocator", typeof(ItemCartoucheLocator));
             api.RegisterItemClass("ItemStargateDebugTablet", typeof(ItemStargateDebugTablet));
+            api.RegisterItemClass("AstriaPorta.ItemKinoRemote", typeof(ItemKinoRemote));
         }
 
         private void RegisterBlocks(ICoreAPI api)
