@@ -136,13 +136,6 @@ namespace AstriaPorta.Util
             addressCoordinates = coordinates;
         }
 
-        [Obsolete]
-        public void FromByteAddress(byte[] address)
-        {
-            AddressCoordinates coordinates = new AddressCoordinates { X = 0, Y = 0, Z = 0, Dimension = 0, AddressBits = 0, IsValid = true, Glyphs = address };
-            addressCoordinates = coordinates;
-        }
-
         /// <summary>
         /// Initializes address and address bits from provided glyphs<br/>
         /// </summary>
@@ -400,33 +393,6 @@ namespace AstriaPorta.Util
             return address;
         }
 
-        [Obsolete]
-        private byte grabGlyphPosition(int pos, int length, int division)
-        {
-            return (byte)(((float)pos / length) * (division));
-        }
-
-        [Obsolete]
-        private int transformPosition(int pos, int origin, int division, int toOrigin)
-        {
-            return (Math.Abs(origin) > Math.Abs(toOrigin)) ? (origin - toOrigin) : (toOrigin - origin);
-        }
-
-        [Obsolete]
-        private List<byte> createGlyphList(int count, bool includeOrigin)
-        {
-            int originModifier = (byte)(includeOrigin ? 1 : 0);
-
-            List<byte> freeGlyphs = new List<byte>(count + originModifier - 1);
-
-            for (int i = 0; i < freeGlyphs.Capacity; i++)
-            {
-                freeGlyphs.Add((byte)(i + originModifier));
-            }
-
-            return freeGlyphs;
-        }
-
         public void FromTreeAttributes(ITreeAttribute tree)
         {
             string tp = "s";
@@ -479,20 +445,7 @@ namespace AstriaPorta.Util
 
         public override string ToString()
         {
-            if (AddressCoordinates.Glyphs.Length == 0) return string.Empty;
-
-            string addressString = "" + GlyphToChar(AddressCoordinates.Glyphs[0]);
-            for (int i = 1; i < AddressCoordinates.Glyphs.Length; i++)
-            {
-                addressString += "-" + GlyphToChar(AddressCoordinates.Glyphs[i]);
-            }
-
-            return addressString;
-        }
-
-        public char GlyphToChar(byte glyph)
-        {
-            return "0123456789abcdefghijklmnopqrstuvwxyz"[glyph % 36];
+            return AddressUtils.FormatAddress(this);
         }
     }
 }

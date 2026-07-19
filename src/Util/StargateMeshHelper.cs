@@ -9,17 +9,28 @@ namespace AstriaPorta.Util
 	{
 		private static readonly int GLYPH_SHEET_HEIGHT = 6;
 		private static readonly int GLYPH_SHEET_WIDTH = 6;
+		private static readonly int CHEVRON_COUNT = 9;
+		private static readonly int DESTINY_SHEET_WIDTH = 14;
+		private static readonly int DESTINY_SHEET_HEIGHT = 3;
+		private static readonly int DESTINY_GLYPH_COUNT = 36;
 
 		private static MultiTextureMeshRef _milkywayChevronMeshRef;
         private static MultiTextureMeshRef _milkywayRingMeshRef;
         private static MultiTextureMeshRef _pegasusChevronMeshRef;
 		private static MultiTextureMeshRef[] _pegasusGlyphMeshRefs;
+		private static MultiTextureMeshRef _destinyGateMeshRef;
+		private static MultiTextureMeshRef _activeDestinyGateMeshRef;
+
+		private static MeshData[] _destinyGlyphMeshData;
 
 		public static void Dispose()
 		{
 			_milkywayChevronMeshRef?.Dispose();
 			_milkywayRingMeshRef?.Dispose();
 			_pegasusChevronMeshRef?.Dispose();
+			_destinyGateMeshRef?.Dispose();
+			_activeDestinyGateMeshRef?.Dispose();
+			_destinyGlyphMeshData = null;
 
 			if (_pegasusChevronMeshRef != null)
 			{
@@ -36,7 +47,89 @@ namespace AstriaPorta.Util
 			GenChevronMesh(capi, "milkyway");
 			GenChevronMesh(capi, "pegasus");
 			InitializePegasusGlyphs(capi);
+			InitializeDestinyGlyphs(capi);
 		}
+
+		public static void InitializeDestinyGlyphs(ICoreClientAPI capi)
+		{
+			// initialize the meshdata for the glyphs.
+			// no need to upload this yet as we want to
+			// just add it to the big glyph mesh for efficiency
+			if (_destinyGlyphMeshData != null)
+			{
+				return;
+			}
+
+            _destinyGlyphMeshData = new MeshData[DESTINY_GLYPH_COUNT];
+            var glyphMesh = GenSingleGlyphMesh(capi, "destiny");
+
+            float glyphSizeX = 0;
+            float glyphSizeY = 0;
+            float minUvX = 1f;
+            float maxUvX = 0;
+            float minUvY = 1f;
+            float maxUvY = 0;
+            for (int j = 0; j < glyphMesh.Uv.Length; j += 2)
+            {
+                if (glyphMesh.Uv[j] == 0 && glyphMesh.Uv[j + 1] == 0) continue;
+
+                if (glyphMesh.Uv[j] > maxUvX)
+                {
+                    maxUvX = glyphMesh.Uv[j];
+                }
+
+                if (glyphMesh.Uv[j] < minUvX)
+                {
+                    minUvX = glyphMesh.Uv[j];
+                }
+
+                if (glyphMesh.Uv[j + 1] > maxUvY)
+                {
+                    maxUvY = glyphMesh.Uv[j + 1];
+                }
+
+                if (glyphMesh.Uv[j + 1] < minUvY)
+                {
+                    minUvY = glyphMesh.Uv[j + 1];
+                }
+            }
+
+            // assume the texture atlas is square
+            glyphSizeX = maxUvX - minUvX;
+            glyphSizeY = maxUvY - minUvY;
+			MeshData tempMesh;
+			Matrixf transform = new();
+			int i;
+
+			for (var y = 0; y < DESTINY_SHEET_HEIGHT; y++)
+			{
+				for (var x = 0; x < DESTINY_SHEET_WIDTH; x++)
+				{
+					i = y * DESTINY_SHEET_WIDTH + x;
+					if (i >= DESTINY_GLYPH_COUNT) return;
+
+					tempMesh = glyphMesh.Clone();
+					transform = transform.Identity()
+						.Translate(.5f, .5f, 0f)
+						.RotateZDeg((i + (i / 4) + 1) * -8f)
+						.Translate(-.5f, -.5f, 0f);
+
+					tempMesh.MatrixTransform(transform.Values);
+                    _destinyGlyphMeshData[i] = tempMesh;
+
+                    for (int j = 0; j < glyphMesh.Uv.Length; j += 2)
+					{
+						glyphMesh.Uv[j] += glyphSizeX;
+					}
+				}
+
+				for (int j = 0; j < glyphMesh.Uv.Length; j += 2)
+				{
+					glyphMesh.Uv[j] -= DESTINY_SHEET_WIDTH * glyphSizeX;
+					glyphMesh.Uv[j + 1] += glyphSizeY;
+				}
+			}
+        }
 
 		public static void InitializePegasusGlyphs(ICoreClientAPI capi)
 		{
@@ -50,7 +143,7 @@ namespace AstriaPorta.Util
 			}
 
 			_pegasusGlyphMeshRefs = new MultiTextureMeshRef[GLYPH_SHEET_HEIGHT * GLYPH_SHEET_WIDTH];
-            var glyphMesh = GenGlyphMesh(capi, "pegasus");
+            var glyphMesh = GenSingleGlyphMesh(capi, "pegasus");
 
 			float glyphSizeX = 0;
 			float glyphSizeY = 0;
@@ -109,6 +202,13 @@ namespace AstriaPorta.Util
 			}
         }
 
+		/// <summary>
+		/// Returns a newly created or cached version of the single chevron mesh
+		/// for the provided gate type
+		/// </summary>
+		/// <param name="capi"></param>
+		/// <param name="gateType"></param>
+		/// <returns></returns>
 		public static MeshData GenChevronMesh(ICoreClientAPI capi, string gateType)
 		{
 			MeshData baseMesh = ObjectCacheUtil.GetOrCreate(capi, $"astriaporta{gateType}chevronmesh", () =>
@@ -128,6 +228,15 @@ namespace AstriaPorta.Util
 			return baseMesh;
 		}
 
+		/// <summary>
+		/// Returns a new or cached meshref to the single chevron mesh for the provided gate type
+		/// </summary>
+		/// <remarks>
+		/// Only valid for "milkyway" and "pegasus" gates, "destiny" will return null
+		/// </remarks>
+		/// <param name="capi"></param>
+		/// <param name="gateType"></param>
+		/// <returns></returns>
 		public static MultiTextureMeshRef GetChevronMeshRef(ICoreClientAPI capi, string gateType)
 		{
 			switch (gateType)
@@ -149,7 +258,83 @@ namespace AstriaPorta.Util
 			}
 		}
 
-		public static MeshData GenGlyphMesh(ICoreClientAPI capi, string gateType)
+		public static MeshData GenDestinyGateMesh(ICoreClientAPI capi, bool chevronsActive)
+		{
+            var baseMesh = GenRingMesh(capi, "destiny").Clone();
+            var chevronMesh = GenChevronMesh(capi, "destiny");
+
+			if (chevronMesh == null)
+			{
+				if (baseMesh != null)
+				{
+					return baseMesh;
+				}
+
+				return null;
+			}
+
+			if (chevronsActive)
+			{
+				chevronMesh = chevronMesh.Clone();
+				chevronMesh.SetVertexFlags(255);
+			}
+
+			MeshData tempMesh;
+			Matrixf transform = new();
+
+            for (int i = 0; i < CHEVRON_COUNT; i++)
+			{
+				transform = transform.Identity()
+					.Translate(.5f, .5f, 0f)
+					.RotateZDeg((i - 1) * 40f)
+					.Translate(-.5f, -.5f, 0f);
+
+				tempMesh = chevronMesh.Clone().MatrixTransform(transform.Values);
+				baseMesh.AddMeshData(tempMesh);
+			}
+
+			return baseMesh;
+        }
+
+		public static MultiTextureMeshRef GetDestinyGateMeshRef(ICoreClientAPI capi, bool chevronsActive)
+		{
+            // we want to keep 2 meshes loaded in GPU for the destiny gates;
+            // the active and inactive gates, since for destiny gates it's
+            // either all or nothing for the chevrons. Then we just need to
+            // assemble the large glyph mesh and upload that seperately
+            // The base gate meshes can also be reused without issue across instances
+            if (chevronsActive && _activeDestinyGateMeshRef != null && !_activeDestinyGateMeshRef.Disposed)
+            {
+                return _activeDestinyGateMeshRef;
+            }
+            else if (!chevronsActive && _destinyGateMeshRef != null && !_destinyGateMeshRef.Disposed)
+            {
+                return _destinyGateMeshRef;
+            }
+
+			var baseMesh = GenDestinyGateMesh(capi, chevronsActive);
+			if (baseMesh == null) return null;
+            if (chevronsActive)
+            {
+				_activeDestinyGateMeshRef = capi.Render.UploadMultiTextureMesh(baseMesh);
+				return _activeDestinyGateMeshRef;
+            }
+
+			_destinyGateMeshRef = capi.Render.UploadMultiTextureMesh(baseMesh);
+			return _destinyGateMeshRef;
+        }
+
+		/// <summary>
+		/// Generates a single 0° offset top-side glyph for the given gate type
+		/// </summary>
+		/// <remarks>
+		/// Assumes that a shape called "{gateType}_glyph.json" exists in the
+		/// "shapes/block/gates/" folder
+		/// </remarks>
+		/// <param name="capi"></param>
+		/// <param name="gateType"></param>
+		/// <returns></returns>
+		public static MeshData GenSingleGlyphMesh(ICoreClientAPI capi, string gateType)
 		{
 			MeshData baseMesh = ObjectCacheUtil.GetOrCreate(capi, $"astriaporta{gateType}glyphmesh", () =>
 			{
@@ -164,6 +349,27 @@ namespace AstriaPorta.Util
 
 				return mesh;
 			});
+
+			return baseMesh;
+		}
+
+        public static MeshData GenDestinyGlyphMesh(ICoreClientAPI capi, int[] activeGlyphs)
+		{
+			MeshData baseMesh = new MeshData(1, 1);
+
+			MeshData tempMesh;
+			Matrixf transform = new();
+			for (int i = 0; i < DESTINY_GLYPH_COUNT; i++)
+			{
+				tempMesh = _destinyGlyphMeshData[i].Clone();
+
+				if (activeGlyphs != null && activeGlyphs.Contains(i))
+				{
+					tempMesh.SetVertexFlags(255);
+				}
+
+				baseMesh.AddMeshData(tempMesh);
+            }
 
 			return baseMesh;
 		}

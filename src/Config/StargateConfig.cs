@@ -20,17 +20,25 @@ namespace AstriaPorta.Config
         [JsonIgnore]
         private int _minRangeChunksPegasus = 10;
         [JsonIgnore]
+        private int _minRangeChunksDestiny = 10;
+        [JsonIgnore]
         private int _maxRangeChunksMilkyway = 262144;
         [JsonIgnore]
         private int _maxRangeChunksPegasus = 262144;
+        [JsonIgnore]
+        private int _maxRangeChunksDestiny = 262144;
         [JsonIgnore]
         private float _maxConnectionDurationSecondsMilkyway = 60f;
         [JsonIgnore]
         private float _maxConnectionDurationSecondsPegasus = 60f;
         [JsonIgnore]
+        private float _maxConnectionDurationSecondsDestiny = 60f;
+        [JsonIgnore]
         private float _dialSpeedDegreesPerSecondMilkyway = 80f;
         [JsonIgnore]
         private float _dialSpeedDegreesPerSecondPegasus = 120f;
+        [JsonIgnore]
+        private float _dialSpeedDegreesPerSecondDestiny = 60f;
         [JsonIgnore]
         private int _minDistanceSurfaceGates = 1000;
         [JsonIgnore]
@@ -122,13 +130,25 @@ namespace AstriaPorta.Config
             get => _minRangeChunksPegasus;
             set
             {
-                if (value < _minRangeChunksPegasus) value = _minRangeChunksPegasus - 1;
+                if (value > _maxRangeChunksPegasus) value = _maxRangeChunksPegasus - 1;
                 if (value < 0) value = 0;
                 if (value > 262144) value = 262144;
-                _maxRangeChunksPegasus = value;
+                _minRangeChunksPegasus = value;
             }
         }
-        [ProtoMember(10), DefaultValue(262144)]
+        [ProtoMember(10), DefaultValue(10)]
+        public int MinRangeChunksDestiny
+        {
+            get => _minRangeChunksDestiny;
+            set
+            {
+                if (value < _maxRangeChunksDestiny) value = _maxRangeChunksDestiny - 1;
+                if (value < 0) value = 0;
+                if (value > 262144) value = 262144;
+                _minRangeChunksDestiny = value;
+            }
+        }
+        [ProtoMember(11), DefaultValue(262144)]
         public int MaxRangeChunksMilkyway
         {
             get => _maxRangeChunksMilkyway;
@@ -140,7 +160,7 @@ namespace AstriaPorta.Config
                 _maxRangeChunksMilkyway = value;
             }
         }
-        [ProtoMember(11), DefaultValue(262144)]
+        [ProtoMember(12), DefaultValue(262144)]
         public int MaxRangeChunksPegasus
         {
             get => _maxRangeChunksPegasus;
@@ -152,7 +172,19 @@ namespace AstriaPorta.Config
                 _maxRangeChunksPegasus = value;
             }
         }
-        [ProtoMember(12), DefaultValue(60f)]
+        [ProtoMember(13), DefaultValue(262144)]
+        public int MaxRangeChunksDestiny
+        {
+            get => _maxRangeChunksDestiny;
+            set
+            {
+                if (value < _minRangeChunksDestiny) value = _minRangeChunksDestiny + 1;
+                if (value < 0) value = 0;
+                if (value > 262144) value = 262144;
+                _maxRangeChunksDestiny = value;
+            }
+        }
+        [ProtoMember(14), DefaultValue(60f)]
         public float MaxConnectionDurationSecondsMilkyway
         {
             get => _maxConnectionDurationSecondsMilkyway;
@@ -163,7 +195,7 @@ namespace AstriaPorta.Config
                 _maxConnectionDurationSecondsMilkyway = value;
             }
         }
-        [ProtoMember(13), DefaultValue(60f)]
+        [ProtoMember(15), DefaultValue(60f)]
         public float MaxConnectionDurationSecondsPegasus
         {
             get => _maxConnectionDurationSecondsPegasus;
@@ -174,7 +206,18 @@ namespace AstriaPorta.Config
                 _maxConnectionDurationSecondsPegasus = value;
             }
         }
-        [ProtoMember(14), DefaultValue(80f)]
+        [ProtoMember(16), DefaultValue(60f)]
+        public float MaxConnectionDurationSecondsDestiny
+        {
+            get => _maxConnectionDurationSecondsDestiny;
+            set
+            {
+                if (value < 10f) value = 10f;
+                if (value > 180f) value = 180f;
+                _maxConnectionDurationSecondsDestiny = value;
+            }
+        }
+        [ProtoMember(17), DefaultValue(80f)]
         public float DialSpeedDegreesPerSecondMilkyway
         {
             get => _dialSpeedDegreesPerSecondMilkyway;
@@ -185,7 +228,7 @@ namespace AstriaPorta.Config
                 _dialSpeedDegreesPerSecondMilkyway = value;
             }
         }
-        [ProtoMember(15), DefaultValue(120f)]
+        [ProtoMember(18), DefaultValue(120f)]
         public float DialSpeedDegreesPerSecondPegasus
         {
             get => _dialSpeedDegreesPerSecondPegasus;
@@ -196,10 +239,21 @@ namespace AstriaPorta.Config
                 _dialSpeedDegreesPerSecondPegasus = value;
             }
         }
-        [ProtoMember(16), DefaultValue(true)]
+        [ProtoMember(19), DefaultValue(60f)]
+        public float DialSpeedDegreesPerSecondDestiny
+        {
+            get => _dialSpeedDegreesPerSecondDestiny;
+            set
+            {
+                if (value < 20f) value = 20f;
+                if (value > 180f) value = 180f;
+                _dialSpeedDegreesPerSecondDestiny = value;
+            }
+        }
+        [ProtoMember(20), DefaultValue(true)]
         public bool AllowQuickDial { get; set; } = true;
 
-        [ProtoMember(17)]
+        [ProtoMember(21)]
         public int MinDistanceSurfaceGates
         {
             get => _minDistanceSurfaceGates;
@@ -210,7 +264,7 @@ namespace AstriaPorta.Config
             }
         }
 
-        [ProtoMember(18)]
+        [ProtoMember(22)]
         public int MinDistanceUndergroundGates
         {
             get => _minDistanceUndergroundGates;
@@ -221,22 +275,22 @@ namespace AstriaPorta.Config
             }
         }
 
-        [ProtoMember(19), DefaultValue(true)]
+        [ProtoMember(23), DefaultValue(true)]
         public bool EnableWorldGenGates { get; set; } = true;
 
-        [ProtoMember(20), DefaultValue(true)]
+        [ProtoMember(24), DefaultValue(true)]
         public bool EnableCartoucheGates { get; set; } = true;
 
-        [ProtoMember(21), DefaultValue(false)]
+        [ProtoMember(25), DefaultValue(false)]
         public bool LogInfo { get; set; } = false;
 
-        [ProtoMember(22), DefaultValue(false)]
+        [ProtoMember(26), DefaultValue(false)]
         public bool LogDebug { get; set; } = false;
 
-        [ProtoMember(23), DefaultValue(false)]
+        [ProtoMember(27), DefaultValue(false)]
         public bool LogWarning { get; set; } = false;
 
-        [ProtoMember(24), DefaultValue(false)]
+        [ProtoMember(28), DefaultValue(false)]
         public bool LogError { get; set; } = false;
     }
 }

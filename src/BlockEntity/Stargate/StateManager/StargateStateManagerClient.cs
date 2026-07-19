@@ -152,7 +152,7 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
         State = newState;
         if (shouldUpdateChevronGlow)
         {
-            Gate.VisualManager.UpdateChevronGlow(ActiveChevrons);
+            Gate.VisualManager.UpdateChevronGlow(ActiveChevrons, State != EnumStargateState.Idle);
         }
         Gate.VisualManager.UpdateRendererState(CurrentAngle);
     }
@@ -202,9 +202,9 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
     /// <summary>
     /// Manages transitions into the dialingIncoming state
     /// </summary>
-    protected void TransitionToDialingIncoming()
+    protected virtual void TransitionToDialingIncoming()
     {
-        Gate.VisualManager.UpdateChevronGlow(ActiveChevrons);
+        Gate.VisualManager.UpdateChevronGlow(ActiveChevrons, true);
     }
 
     /// <summary>
@@ -227,7 +227,7 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
     /// <summary>
     /// Manages transitions into the connectedIncoming state
     /// </summary>
-    protected void TransitionToConnectedIncoming()
+    protected virtual void TransitionToConnectedIncoming()
     {
         if (State == EnumStargateState.ConnectedIncoming) return;
 
@@ -241,7 +241,7 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
     /// <summary>
     /// Manages transitions into the connectedOutgoing state
     /// </summary>
-    protected void TransitionToConnectedOutgoing()
+    protected virtual void TransitionToConnectedOutgoing()
     {
         if (State == EnumStargateState.ConnectedOutgoing) return;
 
@@ -260,7 +260,7 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
     /// <summary>
     /// Manages transitions into the idle state
     /// </summary>
-    protected void TransitionToIdle()
+    protected virtual void TransitionToIdle()
     {
         if (State == EnumStargateState.Idle) return;
         ICoreClientAPI capi = Gate.Api as ICoreClientAPI;
@@ -285,14 +285,14 @@ public abstract class StargateStateManagerClient : StargateStateManagerBase
         {
             Gate.RegisterDelayedCallback((t) => Gate.VisualManager.SpawnDeactivationParticles(), 1500);
             Gate.RegisterDelayedCallback((t) => Gate.VisualManager.DeactivateHorizon(), 2000);
-            Gate.RegisterDelayedCallback((t) => Gate.VisualManager.UpdateChevronGlow(0), 2000);
+            Gate.RegisterDelayedCallback((t) => Gate.VisualManager.UpdateChevronGlow(0, false), 2000);
         }
         else
         {
-            Gate.VisualManager.UpdateChevronGlow(0);
+            Gate.VisualManager.UpdateChevronGlow(0, false);
         }
 
-            UnregisterTickListener();
+        UnregisterTickListener();
         UnregisterDelayedCallback();
     }
 

@@ -18,12 +18,12 @@ public class MilkywayVisualManager : StargateVisualManager
     {
         InitializeGateRenderer();
 
-        EventHorizonLight = new LightiningPointLight(new Vec3f(0.9f, 0.5f, 0.5f), Gate.Pos.AddCopy(0, 3, 0).ToVec3d());
+        EventHorizonLight = new LightiningPointLight(new Vec3f(29f, 16f, 16f), Gate.Pos.AddCopy(0, 3, 0).ToVec3d());
 
         AnimUtil.InitializeAnimator("milkyway_chevron_animation", null, null, new Vec3f(0, Gate.Block.Shape.rotateY, 0));
 
         UpdateRendererState(Gate.StateManager.CurrentAngle);
-        UpdateChevronGlow(Gate.StateManager.ActiveChevrons);
+        UpdateChevronGlow(Gate.StateManager.ActiveChevrons, false);
 
         InitializeHorizonRenderer();
     }

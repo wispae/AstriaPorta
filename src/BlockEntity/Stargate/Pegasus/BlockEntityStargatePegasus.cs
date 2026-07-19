@@ -34,6 +34,11 @@ public class BlockEntityStargatePegasus : StargateBase
         StateManager.RotationDegPerSecond = StargateConfig.Loaded.DialSpeedDegreesPerSecondPegasus;
     }
 
+    public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+    {
+        return base.OnTesselation(mesher, tessThreadTesselator);
+    }
+
     public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldAccessForResolve)
     {
         if (worldAccessForResolve is IClientWorldAccessor)
