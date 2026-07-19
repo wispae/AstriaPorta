@@ -129,6 +129,7 @@ public class DestinyStateManagerServer : StargateStateManagerServer
         TryRegisterDelayedCallback((_) =>
         {
             TryRegisterTickListener(OnTick, 20);
+            SyncStateToClients();
         }, 1000);
 
         SyncStateToClients();

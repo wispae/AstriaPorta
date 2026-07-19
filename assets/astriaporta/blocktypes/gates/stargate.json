@@ -1,7 +1,6 @@
 ﻿{
   "code": "stargate",
   "class": "BlockStargate",
-  // "entityClass": "BEStargate",
   "entityClassByType": {
     "stargate-milkyway-*": "BEStargateMilkyway",
     "stargate-pegasus-*": "BEStargatePegasus",
@@ -129,6 +128,7 @@
       "rotateY": 270
     }
   },
+  "shapeinventory": { "base": "item/stargate/{gatetype}_chevron" },
   "texture": { "base": "block/gates/{gatetype}_sheet" },
   "sidesolid": {
     "all": false
@@ -137,30 +137,29 @@
     "all": false
   },
   "guiTransform": {
-    "translation": {
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
     "rotation": {
       "x": 0,
       "y": -180,
       "z": 0
     },
-    "scale": 0.25
+    "scalebytype": {
+      "stargate-milkyway-*": 2,
+      "stargate-pegasus-*": 2.5,
+      "stargate-destiny-*": 2
+    }
   },
   "tpHandTransform": {
     "translation": {
-      "x": -11.1,
-      "y": -7.8,
-      "z": -10.1
+      "x": -1.4,
+      "y": -0.9,
+      "z": -1.1
     },
     "rotation": {
       "x": 0,
-      "y": 0,
-      "z": -135
+      "y": 180,
+      "z": 90
     },
-    "scale": 0.05
+    "scale": 0.5
   },
   "faceCullMode": "NeverCull",
   "rainPermeable": true,

@@ -91,15 +91,6 @@ public class GuiElementPhysicalTextInput : GuiElementTextInput
         base.RenderInteractiveElements(deltaTime);
     }
 
-    public override void OnFocusGained()
-    {
-        base.OnFocusGained();
-    }
-
-    public override void OnFocusLost()
-    {
-        base.OnFocusLost();
-    }
 
     [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "RecomposeText")]
     private extern static void CallRecomposeText(GuiElementEditableTextBase element);

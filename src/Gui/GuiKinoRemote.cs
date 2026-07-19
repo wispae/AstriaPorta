@@ -79,8 +79,8 @@ public class GuiKinoRemote : GuiDialogGeneric
     private string _detectedGateAddress = Lang.Get("astriaporta:gui-kino-no-gate-detected");
     private bool _editingAddress = false;
     private string _gateStatus = StateToText(EnumStargateState.Idle);
-    private string _inputGateAddress = string.Empty;
     private ItemKinoRemote _kinoItem;
+    private bool _setCaretToEnd = false;
     private KinoRemoteState _state;
 
     private const int _height = 200;
@@ -109,8 +109,6 @@ public class GuiKinoRemote : GuiDialogGeneric
 
     public void Compose()
     {
-        float originalScale = RuntimeEnv.GUIScale;
-        RuntimeEnv.GUIScale = 1;
 
         var dialogBounds = ElementBounds.FixedSize(_width, _height);
         if (SingleComposer == null)
@@ -144,7 +142,6 @@ public class GuiKinoRemote : GuiDialogGeneric
         SingleComposer.EndChildElements();
 
         SingleComposer.Compose();
-        RuntimeEnv.GUIScale = originalScale;
 
         SingleComposer.FocusElement(_state.NavigationStack[_state.NavigationStack.Count - 1].ElementId);
 
@@ -169,28 +166,35 @@ public class GuiKinoRemote : GuiDialogGeneric
         var xOffset = (b + x) * _padding + itemWidth;
         var addressInputBounds = ElementBounds.Fixed(xOffset, _padding, itemWidth, itemHeight).WithAlignment(EnumDialogArea.FixedTop);
         var descriptionInputBounds = ElementBounds.FixedSize(itemWidth, itemHeight).FixedUnder(addressInputBounds, _padding).WithFixedX(xOffset);
-        var copyButtonBounds = ElementBounds.FixedSize(itemWidth, itemHeight).FixedUnder(descriptionInputBounds, _padding).WithFixedX(xOffset);
-        var dialButtonBounds = ElementBounds.FixedSize(itemWidth, itemHeight).FixedUnder(copyButtonBounds, _padding).WithFixedX(xOffset);
+        var dialButtonBounds = ElementBounds.FixedSize(itemWidth, itemHeight).FixedUnder(descriptionInputBounds, _padding).WithFixedX(xOffset);
+        var copyButtonBounds = ElementBounds.FixedSize(itemWidth, itemHeight).FixedUnder(dialButtonBounds, _padding).WithFixedX(xOffset);
 
         composer.AddDynamicText(TopAddressDisplay, CairoFont.WhiteSmallishText().WithColor(GuiStyle.DisabledTextColor), topAddressBounds, "addressmenu.topaddress")
                 .AddDynamicText(MiddleAddressDisplay, CairoFont.WhiteSmallishText().WithColor(GuiStyle.ActiveButtonTextColor), middleAddressBounds, "addressmenu.middleaddress")
                 .AddDynamicText(BottomAddressDisplay, CairoFont.WhiteSmallishText().WithColor(GuiStyle.DisabledTextColor), bottomAddressBounds, "addressmenu.bottomaddress")
                 .AddPhysicalTextInput(addressInputBounds, (string _) => { }, CairoFont.TextInput(), "addressmenu.addressinput")
                 .AddPhysicalTextInput(descriptionInputBounds, (string _) => { }, CairoFont.TextInput(), "addressmenu.descriptioninput")
-                .AddButton(Lang.Get("astriaporta:gui-kino-button-copy"), OnClickCopy, copyButtonBounds, EnumButtonStyle.Normal, "addressmenu.copybutton")
-                .AddButton(Lang.Get("astriaporta:gui-kino-button-dial"), OnClickDialAddressBook, dialButtonBounds, EnumButtonStyle.Normal, "addressmenu.dialbutton");
+                .AddButton(Lang.Get("astriaporta:gui-kino-button-dial"), OnClickDialAddressBook, dialButtonBounds, EnumButtonStyle.Normal, "addressmenu.dialbutton")
+                .AddButton(Lang.Get("astriaporta:gui-kino-button-copy"), OnClickCopy, copyButtonBounds, EnumButtonStyle.Normal, "addressmenu.copybutton");
 
-        composer.GetPhysicalTextInput("addressmenu.addressinput").SetPlaceHolderText(Lang.Get("astriaporta:gui-kino-placeholder-address"));
-        composer.GetPhysicalTextInput("addressmenu.descriptioninput").SetPlaceHolderText(Lang.Get("astriaporta:gui-kino-placeholder-description"));
+        var addressInput = composer.GetPhysicalTextInput("addressmenu.addressinput");
+        var descriptionInput = composer.GetPhysicalTextInput("addressmenu.descriptioninput");
+
+        addressInput.SetPlaceHolderText(Lang.Get("astriaporta:gui-kino-placeholder-address"));
         if (!string.IsNullOrEmpty(_state.Addresses[_state.CurrentAddressBookIndex].Address))
-            composer.GetPhysicalTextInput("addressmenu.addressinput").SetValue(_state.Addresses[_state.CurrentAddressBookIndex].Address);
-        if (!string.IsNullOrEmpty(_state.Addresses[_state.CurrentAddressBookIndex].Label))
-            composer.GetPhysicalTextInput("addressmenu.descriptioninput").SetValue(_state.Addresses[_state.CurrentAddressBookIndex].Label);
+            addressInput.SetValue(_state.Addresses[_state.CurrentAddressBookIndex].Address);
+        addressInput.OnTryTextChangeText = OnTryChangeAddressBookText;
+        addressInput.OnTextChanged = OnAddressBookTextChanged;
 
-        composer.GetPhysicalTextInput("addressmenu.addressinput").TabIndex = 0;
-        composer.GetPhysicalTextInput("addressmenu.descriptioninput").TabIndex = 1;
-        composer.GetButton("addressmenu.copybutton").TabIndex = 2;
-        composer.GetButton("addressmenu.dialbutton").TabIndex = 3;
+        descriptionInput.SetPlaceHolderText(Lang.Get("astriaporta:gui-kino-placeholder-description"));
+        if (!string.IsNullOrEmpty(_state.Addresses[_state.CurrentAddressBookIndex].Label))
+            descriptionInput.SetValue(_state.Addresses[_state.CurrentAddressBookIndex].Label);
+        descriptionInput.OnTryTextChangeText = OnTryChangeAddressBookLabel;
+
+        addressInput.TabIndex = 0;
+        descriptionInput.TabIndex = 1;
+        composer.GetButton("addressmenu.dialbutton").TabIndex = 2;
+        composer.GetButton("addressmenu.copybutton").TabIndex = 3;
 
         _addressBookTextDirty = true;
     }
@@ -210,7 +214,6 @@ public class GuiKinoRemote : GuiDialogGeneric
         var localAddressBounds = ElementBounds.FixedSize(itemWidth, itemHeight).FixedUnder(gateInputBounds, _padding).WithFixedX(xOffset);
         var gateStatusBounds = ElementBounds.FixedSize(itemWidth, itemHeight).FixedUnder(localAddressBounds, _padding).WithFixedX(xOffset);
 
-        // composer.AddTextInput(gateInputBounds, (string _) => { }, CairoFont.TextInput(), "mainmenu.gateinputaddress")
         composer.AddPhysicalTextInput(gateInputBounds, (string _) => { }, CairoFont.TextInput(), "mainmenu.gateinputaddress")
                 .AddButton(Lang.Get("astriaporta:gui-kino-button-dial"), OnClickConnect, dialButtonBounds, EnumButtonStyle.Normal, "mainmenu.dialbutton")
                 .AddButton(Lang.Get("astriaporta:gui-kino-button-addresses"), OnClickAddressBook, addressBookButtonBounds, EnumButtonStyle.Normal, "mainmenu.addressbookbutton")
@@ -219,13 +222,19 @@ public class GuiKinoRemote : GuiDialogGeneric
                 .AddDynamicText(_gateStatus, CairoFont.WhiteSmallText(), gateStatusBounds, "mainmenu.gatestatus");
 
         var gateAddressInput = composer.GetPhysicalTextInput("mainmenu.gateinputaddress");
-        gateAddressInput.Text = _inputGateAddress;
+        gateAddressInput.SetValue(_state.InputGateAddress);
+        gateAddressInput.Enabled = _state.LocalStatus == EnumStargateState.Idle;
         gateAddressInput.OnTryTextChangeText = OnTryChangeAddressText;
+        gateAddressInput.OnTextChanged = OnAddressTextChanged;
+
+        var statusButton = composer.GetButton("mainmenu.statusbutton");
+        statusButton.Enabled = false;
 
         gateAddressInput.TabIndex = 0;
         composer.GetButton("mainmenu.dialbutton").TabIndex = 1;
         composer.GetButton("mainmenu.addressbookbutton").TabIndex = 2;
-        composer.GetButton("mainmenu.statusbutton").TabIndex = 3;
+        statusButton.TabIndex = 3;
+
     }
 
     private void CreateGuiTexture()
@@ -254,20 +263,14 @@ public class GuiKinoRemote : GuiDialogGeneric
         {
             if (_editingAddress)
             {
-                var physicalAddress = SingleComposer.GetPhysicalTextInput("addressmenu.addressinput");
-                var physicalLabel = SingleComposer.GetPhysicalTextInput("addressmenu.descriptioninput");
-                _state.Addresses[_state.CurrentAddressBookIndex].Address = physicalAddress.GetLines()[0];
-                _state.Addresses[_state.CurrentAddressBookIndex].Label = physicalLabel.GetLines()[0];
                 _addressBookTextDirty = true;
                 _editingAddress = false;
                 SingleComposer.UnfocusOwnElements();
                 args.Handled = true;
-                _kinoItem.OnGuiStateUpdated(_state);
             }
             else
             {
                 PopNavigation();
-                Recompose();
                 args.Handled = true;
             }
         }
@@ -298,9 +301,9 @@ public class GuiKinoRemote : GuiDialogGeneric
     // TODO: when dialing switch the "DIAL" button to "ABORT", swap action to cancel dial as well
     private bool OnClickConnect()
     {
-        var gateAddressInput = SingleComposer.GetPhysicalTextInput("mainmenu.gateinputaddress");
-        string s = AddressUtils.SanitizeAddressString(gateAddressInput.Text);
-        if (s.Length < 7) return false;
+        string s = AddressUtils.SanitizeAddressString(_state.InputGateAddress);
+        if (!AddressUtils.IsValidAddressString(s))
+            return false;
 
         StargateAddress a = new StargateAddress();
         a.FromGlyphs(AddressUtils.StringAddressToBytes(s), capi);
@@ -320,14 +323,18 @@ public class GuiKinoRemote : GuiDialogGeneric
 
     private bool OnClickDialAddressBook()
     {
-        var addressText = SingleComposer.GetPhysicalTextInput("addressmenu.addressinput")?.GetLines()[0] ?? string.Empty;
-        string s = AddressUtils.SanitizeAddressString(addressText);
+        string s = AddressUtils.SanitizeAddressString(_state.Addresses[_state.CurrentAddressBookIndex].Address);
 
-        if (s.Length < 7) return false;
+        if (!AddressUtils.IsValidAddressString(s))
+            return false;
+
+        _state.InputGateAddress = AddressUtils.FormatAddressString(s);
 
         StargateAddress a = new StargateAddress();
         a.FromGlyphs(AddressUtils.StringAddressToBytes(s), capi);
         _kinoItem.TryDial(a);
+
+        PopNavigation();
 
         return true;
     }
@@ -346,13 +353,8 @@ public class GuiKinoRemote : GuiDialogGeneric
 
     public override void OnKeyDown(KeyEvent args)
     {
-        float originalScale = RuntimeEnv.GUIScale;
-        RuntimeEnv.GUIScale = 1;
-
-        if ((GlKeys)args.KeyCode != GlKeys.Enter || SingleComposer.CurrentTabIndexElement is not GuiElementPhysicalTextInput)
+        if ((GlKeys)args.KeyCode != GlKeys.Enter || SingleComposer.CurrentTabIndexElement is not GuiElementTextInput)
             base.OnKeyDown(args);
-
-        RuntimeEnv.GUIScale = originalScale;
 
         if (args.Handled)
             return;
@@ -366,26 +368,6 @@ public class GuiKinoRemote : GuiDialogGeneric
                 HandleKeyDownAddressBook(args);
                 break;
         }
-    }
-
-    public override void OnKeyPress(KeyEvent args)
-    {
-        float originalScale = RuntimeEnv.GUIScale;
-        RuntimeEnv.GUIScale = 1;
-
-        base.OnKeyPress(args);
-
-        RuntimeEnv.GUIScale = originalScale;
-    }
-
-    public override void OnKeyUp(KeyEvent args)
-    {
-        float originalScale = RuntimeEnv.GUIScale;
-        RuntimeEnv.GUIScale = 1;
-
-        base.OnKeyUp(args);
-
-        RuntimeEnv.GUIScale = originalScale;
     }
 
     public override void OnMouseDown(MouseEvent args)
@@ -436,16 +418,12 @@ public class GuiKinoRemote : GuiDialogGeneric
         {
             if (_state.CurrentTabIndex == 1)
             {
-                float originalScale = RuntimeEnv.GUIScale;
-                RuntimeEnv.GUIScale = 1;
 
                 _addressBookTextDirty = false;
 
                 SingleComposer.GetDynamicText("addressmenu.topaddress").RecomposeText();
                 SingleComposer.GetDynamicText("addressmenu.middleaddress").RecomposeText();
                 SingleComposer.GetDynamicText("addressmenu.bottomaddress").RecomposeText();
-
-                RuntimeEnv.GUIScale = originalScale;
             }
             else
             {
@@ -460,9 +438,20 @@ public class GuiKinoRemote : GuiDialogGeneric
     {
         if (sl.Count == 0) return false;
 
+        var input = SingleComposer.GetTextInput("mainmenu.gateinputaddress");
+
         string s = sl[0];
-        s = AddressUtils.SanitizeAddressString(s);
-        SingleComposer.GetPhysicalTextInput("mainmenu.gateinputaddress").Text = s;
+
+        s = AddressUtils.FormatAddressString(s);
+        
+        int lengthDelta = s.Length - input.Text.Length;
+        input.Text = s;
+        var caretPos = input.CaretPosInLine;
+
+        if (lengthDelta > 1)
+        {
+            _setCaretToEnd = true;
+        }
 
         sl.Clear();
         sl.Add(s);
@@ -470,17 +459,79 @@ public class GuiKinoRemote : GuiDialogGeneric
         return true;
     }
 
+    private void OnAddressTextChanged(string s)
+    {
+        if (!_setCaretToEnd)
+            return;
+
+        SingleComposer.GetTextInput("mainmenu.gateinputaddress").SetCaretPos(s.Length);
+        _setCaretToEnd = false;
+    }
+
+    private bool OnTryChangeAddressBookLabel(List<string> sl)
+    {
+        if (sl.Count == 0) return false;
+
+        _state.Addresses[_state.CurrentAddressBookIndex].Label = sl[0];
+        _kinoItem.OnGuiStateUpdated(_state);
+
+        return true;
+    }
+
+    private bool OnTryChangeAddressBookText(List<string> sl)
+    {
+        if (sl.Count == 0) return false;
+
+        var input = SingleComposer.GetTextInput("addressmenu.addressinput");
+
+        string s = sl[0];
+        s = AddressUtils.FormatAddressString(s);
+
+        int lengthDelta = s.Length - input.Text.Length;
+        input.Text = s;
+
+        var caretPos = input.CaretPosInLine;
+
+        if (lengthDelta > 1)
+        {
+            _setCaretToEnd = true;
+        }
+
+        sl.Clear();
+        sl.Add(s);
+
+        _state.Addresses[_state.CurrentAddressBookIndex].Address = s;
+        _kinoItem.OnGuiStateUpdated(_state);
+
+        return true;
+    }
+
+    private void OnAddressBookTextChanged(string s)
+    {
+        var dialButton = SingleComposer.GetButton("addressmenu.dialbutton");
+        dialButton.Enabled = AddressUtils.IsValidAddressString(s);
+
+        if (!_setCaretToEnd)
+            return;
+
+        SingleComposer.GetTextInput("addressmenu.addressinput").SetCaretPos(s.Length);
+        _setCaretToEnd = false;
+    }
+
     /// <summary>
     /// Returns to the previous navigation entry
     /// </summary>
     /// <returns>The current navigation entry, or null if at the bottom of the stack</returns>
-    public TabNavigation? PopNavigation()
+    public TabNavigation? PopNavigation(bool recompose = true)
     {
         if (_state.NavigationStack.Count == 1)
             return null;
 
         _state.NavigationStack.PopLast();
         _kinoItem.OnGuiTabChanged(_state.NavigationStack[_state.NavigationStack.Count - 1].TabIndex);
+
+        if (recompose)
+            Recompose();
 
         return _state.NavigationStack[_state.NavigationStack.Count - 1];
     }
@@ -545,9 +596,6 @@ public class GuiKinoRemote : GuiDialogGeneric
         else if (_state.CurrentAddressBookIndex >= _state.Addresses.Length)
             _state.CurrentAddressBookIndex = 0;
 
-        float originalScale = RuntimeEnv.GUIScale;
-        RuntimeEnv.GUIScale = 1;
-
         SingleComposer.GetDynamicText("addressmenu.topaddress").Text = TopAddressDisplay;
         SingleComposer.GetDynamicText("addressmenu.middleaddress").Text = MiddleAddressDisplay;
         SingleComposer.GetDynamicText("addressmenu.bottomaddress").Text = BottomAddressDisplay;
@@ -556,8 +604,6 @@ public class GuiKinoRemote : GuiDialogGeneric
         SingleComposer.GetTextInput("addressmenu.descriptioninput").SetValue(MiddleAddress.Label);
 
         _addressBookTextDirty = true;
-
-        RuntimeEnv.GUIScale = originalScale;
     }
 
     public override bool ShouldReceiveMouseEvents()
@@ -592,9 +638,6 @@ public class GuiKinoRemote : GuiDialogGeneric
         if (_state.CurrentTabIndex != 1)
             return;
 
-        float originalScale = RuntimeEnv.GUIScale;
-        RuntimeEnv.GUIScale = 1;
-
         SingleComposer.GetDynamicText("addressmenu.topaddress").Text = TopAddressDisplay;
         SingleComposer.GetDynamicText("addressmenu.middleaddress").Text = MiddleAddressDisplay;
         SingleComposer.GetDynamicText("addressmenu.bottomaddress").Text = BottomAddressDisplay;
@@ -603,8 +646,6 @@ public class GuiKinoRemote : GuiDialogGeneric
         SingleComposer.GetTextInput("addressmenu.descriptioninput").SetValue(MiddleAddress.Label);
 
         _addressBookTextDirty = true;
-
-        RuntimeEnv.GUIScale = originalScale;
     }
 
     public void UpdateAddressBook(ITreeAttribute? addressAttributeTree)
@@ -618,9 +659,6 @@ public class GuiKinoRemote : GuiDialogGeneric
         if (_state.CurrentTabIndex != 1)
             return;
 
-        float originalScale = RuntimeEnv.GUIScale;
-        RuntimeEnv.GUIScale = 1;
-
         SingleComposer.GetDynamicText("addressmenu.topaddress").Text = TopAddressDisplay;
         SingleComposer.GetDynamicText("addressmenu.middleaddress").Text = MiddleAddressDisplay;
         SingleComposer.GetDynamicText("addressmenu.bottomaddress").Text = BottomAddressDisplay;
@@ -629,8 +667,6 @@ public class GuiKinoRemote : GuiDialogGeneric
         SingleComposer.GetTextInput("addressmenu.descriptioninput").SetValue(MiddleAddress.Label);
 
         _addressBookTextDirty = true;
-
-        RuntimeEnv.GUIScale = originalScale;
     }
 
     public void UpdateGateAddress(string displayAddress)
@@ -646,6 +682,7 @@ public class GuiKinoRemote : GuiDialogGeneric
     public void UpdateLocalGateState(EnumStargateState state)
     {
         var stateText = StateToText(state);
+        _state.LocalStatus = state;
         _gateStatus = stateText;
 
         if (_state.CurrentTabIndex == 0)
@@ -653,6 +690,9 @@ public class GuiKinoRemote : GuiDialogGeneric
             var gateStateElement = SingleComposer.GetDynamicText("mainmenu.gatestatus");
             gateStateElement.Text = stateText;
             gateStateElement.RecomposeText(true);
+
+            var addressInputElement = SingleComposer.GetPhysicalTextInput("mainmenu.gateinputaddress");
+            addressInputElement.Enabled = state == EnumStargateState.Idle;
         }
     }
 }
