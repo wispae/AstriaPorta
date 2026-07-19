@@ -112,6 +112,7 @@
   "gui-kino-label-empty": "< vide >",
   "gui-kino-label-empty-index": "< {0}. vide >",
   "gui-kino-button-dial": "COMPOSER",
+  "gui-kino-button-disconnect": "ARRÊT",
   "gui-kino-button-addresses": "Adresses",
   "gui-kino-button-status": "Statut",
   "gui-kino-button-copy": "COPIER",

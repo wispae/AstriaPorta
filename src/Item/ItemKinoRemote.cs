@@ -7,7 +7,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
@@ -37,52 +36,6 @@ public class ItemKinoRemote : Item, IInputInterceptor
             MouseButton = EnumMouseButton.None
         },
     ];
-
-    /// <summary>
-    /// Finds the closest gate to this DHD<br/>
-    /// Expensive, use as little as possible
-    /// </summary>
-    /// <returns></returns>
-    protected IStargate? FindClosestGate(ICoreClientAPI capi, Entity nearEntity)
-    {
-        // Might be a good idea to put this into a static utility class?
-        // (also used by the DHD)
-        if (_gateSearchArea == null)
-            return null;
-
-        var searchPos = nearEntity.Pos.AsBlockPos;
-
-        Cuboidi searchOffsets = _gateSearchArea;
-
-        List<IStargate> targetBlocks = new List<IStargate>();
-        IStargate? foundGate = null;
-
-        for (int x = searchOffsets.MinX; x <= searchOffsets.MaxX; x++)
-        {
-            for (int z = searchOffsets.MinZ; z <= searchOffsets.MaxZ; z++)
-            {
-                for (int y = searchOffsets.MinY; y <= searchOffsets.MaxY; y++)
-                {
-                    foundGate = capi.World.BlockAccessor.GetBlockEntity<StargateBase>(searchPos.AddCopy(x, y, z));
-                    if (foundGate != null)
-                    {
-                        targetBlocks.Add(foundGate);
-                    }
-                }
-            }
-        }
-
-        foundGate = targetBlocks.Count > 0 ? targetBlocks[0] : null;
-        foreach (var be in targetBlocks)
-        {
-            if (searchPos.ManhattanDistance(be.Pos) < searchPos.ManhattanDistance(foundGate!.Pos))
-            {
-                foundGate = be;
-            }
-        }
-
-        return foundGate;
-    }
 
     public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot)
     {
@@ -138,6 +91,9 @@ public class ItemKinoRemote : Item, IInputInterceptor
         if (_meshIsStale)
         {
             _displayMesh?.Dispose();
+            if (_displayMeshRef != null)
+                _displayMeshRef.Dispose();
+
             _displayMesh = CreateUIEnabledMesh(capi, itemstack);
 
             _displayMeshRef = capi.Render.UploadMultiTextureMesh(_displayMesh);
@@ -245,8 +201,9 @@ public class ItemKinoRemote : Item, IInputInterceptor
 
         if (_capi == null)
             return;
-        if (_capi.World.ElapsedMilliseconds - _lastCheckTime < 3000)
+        if (_capi.ElapsedMilliseconds - _lastCheckTime < 3000)
             return;
+        _lastCheckTime = _capi.ElapsedMilliseconds;
 
         if (byEntity != _capi.World.Player.Entity)
             return;
@@ -254,18 +211,21 @@ public class ItemKinoRemote : Item, IInputInterceptor
         if (!(slot.Itemstack?.TempAttributes.GetAsBool("gui_active") ?? false))
             return;
 
-        var nearestGate = FindClosestGate(_capi, byEntity);
+        if (_kinoGui == null)
+            return;
+
+        var nearestGate = GateUtils.FindClosestGate(_capi.World.BlockAccessor, byEntity.Pos.AsBlockPos, _gateSearchArea);
         if (nearestGate == null)
         {
             _closestGateText = Lang.Get("astriaporta:gui-kino-no-gate-detected");
             _kinoGui?.UpdateGateAddress(_closestGateText);
-            _kinoGui?.UpdateLocalGateState(EnumStargateState.Idle);
+            _kinoGui?.UpdateLocalGateState(EnumStargateState.Idle, nearestGate.DialingAddress.ToString());
         }
         else
         {
             _closestGateText = nearestGate.Address.ToString();
             _kinoGui?.UpdateGateAddress(_closestGateText);
-            _kinoGui?.UpdateLocalGateState(nearestGate.State);
+            _kinoGui?.UpdateLocalGateState(nearestGate.State, nearestGate.DialingAddress.ToString());
         }
     }
 
@@ -287,12 +247,10 @@ public class ItemKinoRemote : Item, IInputInterceptor
 
             if (_kinoGui != null)
             {
-                // _kinoGui.Focus();
-
                 var addressesElement = stack.Attributes.GetTreeAttribute("addresses");
                 _kinoGui.UpdateAddressBook(addressesElement);
 
-                var closestGate = FindClosestGate(_capi, byEntity);
+                var closestGate = GateUtils.FindClosestGate(_capi.World.BlockAccessor, byEntity.Pos.AsBlockPos, _gateSearchArea);
                 if (closestGate != null)
                 {
                     _kinoGui.UpdateGateAddress(closestGate?.Address.ToString() ?? string.Empty);
@@ -305,6 +263,8 @@ public class ItemKinoRemote : Item, IInputInterceptor
                 UpdateStateFromAttributes(stack);
                 _kinoGui.TryOpen();
                 _guiStale = true;
+
+                OnGuiTabChanged(_kinoGui.State.CurrentTabIndex);
             }
         }
 
@@ -315,23 +275,35 @@ public class ItemKinoRemote : Item, IInputInterceptor
     {
         base.OnLoaded(api);
 
-        _gateSearchArea = new Cuboidi(-7, -2, -7, 7, 2, 7);
+        _gateSearchArea = new Cuboidi(-10, -2, -10, 10, 3, 10);
         if (api.Side == EnumAppSide.Client)
         {
             _capi = api as ICoreClientAPI;
         }
     }
 
-    public void TryDial(IStargateAddress address)
+    public void TryCancelDial()
     {
-        var closestGate = FindClosestGate(_capi, _capi.World.Player.Entity);
+        var closestGate = GateUtils.FindClosestGate(_capi.World.BlockAccessor, _capi.World.Player.Entity.Pos.AsBlockPos, _gateSearchArea);
         if (closestGate == null) return;
 
-        closestGate.TryDial(address);
+        closestGate.TryDisconnect();
 
         _closestGateText = closestGate.Address.ToString();
         _kinoGui?.UpdateGateAddress(_closestGateText);
-        _kinoGui?.UpdateLocalGateState(EnumStargateState.Idle);
+        _kinoGui?.UpdateLocalGateState(closestGate.State, closestGate.DialingAddress?.ToString() ?? string.Empty);
+    }
+
+    public void TryDial(IStargateAddress address)
+    {
+        var closestGate = GateUtils.FindClosestGate(_capi.World.BlockAccessor, _capi.World.Player.Entity.Pos.AsBlockPos, _gateSearchArea);
+        if (closestGate == null) return;
+
+        var success = closestGate.TryDial(address);
+
+        _closestGateText = closestGate.Address.ToString();
+        _kinoGui?.UpdateGateAddress(_closestGateText);
+        _kinoGui?.UpdateLocalGateState(success ? EnumStargateState.DialingOutgoing : closestGate.State, closestGate.DialingAddress?.ToString() ?? string.Empty);
     }
 
     private void UpdateStateFromAttributes(ItemStack kinoStack)

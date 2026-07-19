@@ -230,7 +230,7 @@ public class BlockEntityDialHomeDevice : BlockEntity, IBlockEntityInteractable, 
 
     public string CoupleDhd()
     {
-        IStargate cgate = FindClosestGate();
+        IStargate cgate = GateUtils.FindClosestGate(Api.World.BlockAccessor, Pos, SearchArea);
         if (cgate != null)
         {
             if (!RegisterToGate(cgate)) return "";
@@ -255,7 +255,7 @@ public class BlockEntityDialHomeDevice : BlockEntity, IBlockEntityInteractable, 
         if (connectedPos == null) return;
         if (connectedGate == null)
         {
-            connectedGate = FindClosestGate();
+            connectedGate = GateUtils.FindClosestGate(Api.World.BlockAccessor, Pos, SearchArea);
             if (connectedGate == null)
             {
                 connectedPos = null;
@@ -311,7 +311,7 @@ public class BlockEntityDialHomeDevice : BlockEntity, IBlockEntityInteractable, 
         base.OnPlacementBySchematic(api, blockAccessor, pos, replaceBlocks, centerrockblockid, layerBlock, resolveImports);
         this.Api = api;
 
-        IStargate connectedGate = FindClosestGate();
+        IStargate connectedGate = GateUtils.FindClosestGate(Api.World.BlockAccessor, Pos, SearchArea);
         if (connectedGate != null && connectedGate.AttemptDhdRegistration(this))
         {
             this.connectedGate = connectedGate;

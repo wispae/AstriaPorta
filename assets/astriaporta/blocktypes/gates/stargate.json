@@ -67,7 +67,8 @@
         "rotateSound": "game:sounds/block/quern.ogg",
         "vortexSound": "game:sounds/environment/largesplash2.ogg",
         "warningSound": "game:sounds/block/hopperopen.ogg",
-        "vortexSoundDelay": 750
+        "vortexSoundDelay": 750,
+        "activeSoundVolume": 0.05
       },
       "stargate-pegasus-*": {
         "activeSound": "game:sounds/environment/underwater.ogg",
@@ -76,7 +77,8 @@
         "releaseSound": "game:sounds/block/charcoal3.ogg",
         "rotateSound": "game:sounds/effect/translocate-active.ogg",
         "vortexSound": "game:sounds/environment/largesplash2.ogg",
-        "warningSound": "game:sounds/block/hopperopen.ogg"
+        "warningSound": "game:sounds/block/hopperopen.ogg",
+        "activeSoundVolume": 0.05
       },
       "stargate-destiny-*": {
         "activeSound": "game:sounds/environment/underwater.ogg",
@@ -86,7 +88,8 @@
         "rotateSound": "game:sounds/block/quern.ogg",
         "vortexSound": "game:sounds/environment/largesplash2.ogg",
         "warningSound": "game:sounds/block/hopperopen.ogg",
-        "vortexSoundDelay": 750
+        "vortexSoundDelay": 750,
+        "activeSoundVolume": 0.05
       }
     }
   },

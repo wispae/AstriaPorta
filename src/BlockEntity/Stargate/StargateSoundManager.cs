@@ -46,6 +46,9 @@ namespace AstriaPorta.Content
 
         [JsonProperty("vortexSoundDelay")]
         public int? VortexSoundDelay = 750;
+
+        [JsonProperty("activeSoundVolume")]
+        public float ActiveSoundVolume = 1.0f;
     }
 
     public abstract class StargateSoundManagerBase
@@ -209,7 +212,7 @@ namespace AstriaPorta.Content
                     ShouldLoop = true,
                     Position = _gatePos.ToVec3f().Add(0.5f, 2f, 0.5f),
                     DisposeOnFinish = false,
-                    Volume = 0.05f
+                    Volume = SoundLocations[_gateType].ActiveSoundVolume
                 });
                 _activeSound.Start();
             }

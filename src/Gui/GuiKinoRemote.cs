@@ -16,6 +16,7 @@ namespace AstriaPorta.Gui;
 public class KinoRemoteState
 {
     public string LocalGateAddress = string.Empty;
+    public string RemoteGateAddress = string.Empty;
     public string InputGateAddress = string.Empty;
     public string LocalStatusString = string.Empty;
     public EnumStargateState LocalStatus = EnumStargateState.Idle;
@@ -77,6 +78,7 @@ public class GuiKinoRemote : GuiDialogGeneric
 
     private bool _addressBookTextDirty = false;
     private string _detectedGateAddress = Lang.Get("astriaporta:gui-kino-no-gate-detected");
+    private bool _dialButtonDirty = false;
     private bool _editingAddress = false;
     private string _gateStatus = StateToText(EnumStargateState.Idle);
     private ItemKinoRemote _kinoItem;
@@ -214,12 +216,13 @@ public class GuiKinoRemote : GuiDialogGeneric
         var localAddressBounds = ElementBounds.FixedSize(itemWidth, itemHeight).FixedUnder(gateInputBounds, _padding).WithFixedX(xOffset);
         var gateStatusBounds = ElementBounds.FixedSize(itemWidth, itemHeight).FixedUnder(localAddressBounds, _padding).WithFixedX(xOffset);
 
+        var showDisconnect = _state.LocalStatus != EnumStargateState.Idle;
         composer.AddPhysicalTextInput(gateInputBounds, (string _) => { }, CairoFont.TextInput(), "mainmenu.gateinputaddress")
-                .AddButton(Lang.Get("astriaporta:gui-kino-button-dial"), OnClickConnect, dialButtonBounds, EnumButtonStyle.Normal, "mainmenu.dialbutton")
+                .AddButton(showDisconnect ? Lang.Get("astriaporta:gui-kino-button-disconnect") : Lang.Get("astriaporta:gui-kino-button-dial"), OnClickConnect, dialButtonBounds, EnumButtonStyle.Normal, "mainmenu.dialbutton")
                 .AddButton(Lang.Get("astriaporta:gui-kino-button-addresses"), OnClickAddressBook, addressBookButtonBounds, EnumButtonStyle.Normal, "mainmenu.addressbookbutton")
                 .AddButton(Lang.Get("astriaporta:gui-kino-button-status"), () => { return true; }, statusButtonBounds, EnumButtonStyle.Normal, "mainmenu.statusbutton")
-                .AddDynamicText(_detectedGateAddress, CairoFont.WhiteSmallText(), localAddressBounds, "mainmenu.localaddress")
-                .AddDynamicText(_gateStatus, CairoFont.WhiteSmallText(), gateStatusBounds, "mainmenu.gatestatus");
+                .AddDynamicText(_detectedGateAddress, CairoFont.WhiteSmallText().WithOrientation(EnumTextOrientation.Center), localAddressBounds, "mainmenu.localaddress")
+                .AddDynamicText(_gateStatus, CairoFont.WhiteSmallText().WithOrientation(EnumTextOrientation.Center), gateStatusBounds, "mainmenu.gatestatus");
 
         var gateAddressInput = composer.GetPhysicalTextInput("mainmenu.gateinputaddress");
         gateAddressInput.SetValue(_state.InputGateAddress);
@@ -230,10 +233,10 @@ public class GuiKinoRemote : GuiDialogGeneric
         var statusButton = composer.GetButton("mainmenu.statusbutton");
         statusButton.Enabled = false;
 
-        gateAddressInput.TabIndex = 0;
-        composer.GetButton("mainmenu.dialbutton").TabIndex = 1;
-        composer.GetButton("mainmenu.addressbookbutton").TabIndex = 2;
-        statusButton.TabIndex = 3;
+        gateAddressInput.TabIndex = 3;
+        composer.GetButton("mainmenu.dialbutton").TabIndex = 0;
+        composer.GetButton("mainmenu.addressbookbutton").TabIndex = 1;
+        statusButton.TabIndex = 2;
 
     }
 
@@ -298,9 +301,14 @@ public class GuiKinoRemote : GuiDialogGeneric
         return true;
     }
 
-    // TODO: when dialing switch the "DIAL" button to "ABORT", swap action to cancel dial as well
     private bool OnClickConnect()
     {
+        if (_state.LocalStatus != EnumStargateState.Idle)
+        {
+            _kinoItem.TryCancelDial();
+            return true;
+        }
+
         string s = AddressUtils.SanitizeAddressString(_state.InputGateAddress);
         if (!AddressUtils.IsValidAddressString(s))
             return false;
@@ -418,17 +426,12 @@ public class GuiKinoRemote : GuiDialogGeneric
         {
             if (_state.CurrentTabIndex == 1)
             {
-
-                _addressBookTextDirty = false;
-
                 SingleComposer.GetDynamicText("addressmenu.topaddress").RecomposeText();
                 SingleComposer.GetDynamicText("addressmenu.middleaddress").RecomposeText();
                 SingleComposer.GetDynamicText("addressmenu.bottomaddress").RecomposeText();
             }
-            else
-            {
-                _addressBookTextDirty = false;
-            }
+
+            _addressBookTextDirty = false;
         }
 
         RenderGuiToTexture(deltaTime);
@@ -675,14 +678,14 @@ public class GuiKinoRemote : GuiDialogGeneric
         if (_state.CurrentTabIndex != 0)
             return;
         var gateAddressElement = SingleComposer.GetDynamicText("mainmenu.localaddress");
+        _state.LocalGateAddress = displayAddress;
         gateAddressElement.Text = displayAddress;
         gateAddressElement.RecomposeText(true);
     }
 
-    public void UpdateLocalGateState(EnumStargateState state)
+    public void UpdateLocalGateState(EnumStargateState state, string remoteAddress)
     {
         var stateText = StateToText(state);
-        _state.LocalStatus = state;
         _gateStatus = stateText;
 
         if (_state.CurrentTabIndex == 0)
@@ -693,6 +696,32 @@ public class GuiKinoRemote : GuiDialogGeneric
 
             var addressInputElement = SingleComposer.GetPhysicalTextInput("mainmenu.gateinputaddress");
             addressInputElement.Enabled = state == EnumStargateState.Idle;
+            if (state != EnumStargateState.Idle)
+            {
+                _state.RemoteGateAddress = remoteAddress;
+                addressInputElement.Text = remoteAddress;
+                addressInputElement.SetValue(remoteAddress);
+            }
+            else
+            {
+                _state.RemoteGateAddress = string.Empty;
+            }
+
+            var dialButton = SingleComposer.GetButton("mainmenu.dialbutton");
+            dialButton.Enabled = state != EnumStargateState.DialingIncoming;
+            if (state == EnumStargateState.Idle)
+            {
+                dialButton.Text = Lang.Get("astriaporta:gui-kino-button-connect");
+            }
+            else
+            {
+                dialButton.Text = Lang.Get("astriaporta:gui-kino-button-disconnect");
+            }
+        }
+
+        if (_state.LocalStatus != state)
+        {
+            _state.LocalStatus = state;
         }
     }
 }
