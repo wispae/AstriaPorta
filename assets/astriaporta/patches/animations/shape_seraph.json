@@ -1,0 +1,230 @@
+[
+  {
+    "op": "add",
+    "path": "/animations/-",
+    "value": {
+      "name": "Holding Kino",
+      "code": "astriaporta.holdbothhandskino",
+      "quantityframes": 30,
+      "onActivityStopped": "EaseOut",
+      "onAnimationEnd": "Repeat",
+      "keyframes": [
+        {
+          "frame": 0,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 0.0,
+              "offsetY": -0.4,
+              "offsetZ": 0.4,
+              "rotationX": 6.0,
+              "rotationY": -20.0,
+              "rotationZ": -33.0
+            },
+            "LowerArmR": {
+              "offsetX": 0.4,
+              "offsetY": 0.6,
+              "offsetZ": 0.0,
+              "rotationX": -26.0,
+              "rotationY": 13.0,
+              "rotationZ": -75.0
+            },
+            "UpperArmL": {
+              "offsetX": 0.0,
+              "offsetY": -0.4,
+              "offsetZ": -0.2,
+              "rotationX": -4.0,
+              "rotationY": 20.0,
+              "rotationZ": -33.0
+            },
+            "LowerArmL": {
+              "offsetX": 0.4,
+              "offsetY": 0.6,
+              "offsetZ": 0.0,
+              "rotationX": 30.0,
+              "rotationY": -13.0,
+              "rotationZ": -75.0
+            },
+            "ItemAnchor": {
+              "rotationX": 0.0,
+              "rotationY": 0.0,
+              "rotationZ": 30.0
+            }
+          }
+        }
+      ]
+    },
+    "file": "game:shapes/entity/humanoid/seraph.json",
+    "side": "client"
+  },
+  {
+    "op": "add",
+    "path": "/animations/-",
+    "value": {
+      "name": "Holding Kino-fp",
+      "code": "astriaporta.holdbothhandskino-fp",
+      "quantityframes": 30,
+      "onActivityStopped": "EaseOut",
+      "onAnimationEnd": "Repeat",
+      "keyframes": [
+        {
+          "frame": 0,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 0.0,
+              "offsetY": -0.4,
+              "offsetZ": 0.4,
+              "rotationX": 6.0,
+              "rotationY": -20.0,
+              "rotationZ": -33.0
+            },
+            "LowerArmR": {
+              "offsetX": 0.4,
+              "offsetY": 0.6,
+              "offsetZ": 0.0,
+              "rotationX": -26.0,
+              "rotationY": 13.0,
+              "rotationZ": -75.0
+            },
+            "UpperArmL": {
+              "offsetX": 0.0,
+              "offsetY": -0.4,
+              "offsetZ": -0.2,
+              "rotationX": -4.0,
+              "rotationY": 20.0,
+              "rotationZ": -33.0
+            },
+            "LowerArmL": {
+              "offsetX": 0.4,
+              "offsetY": 0.6,
+              "offsetZ": 0.0,
+              "rotationX": 30.0,
+              "rotationY": -13.0,
+              "rotationZ": -75.0
+            },
+            "ItemAnchor": {
+              "rotationX": 0.0,
+              "rotationY": 0.0,
+              "rotationZ": 30.0
+            }
+          }
+        }
+      ]
+    },
+    "file": "game:shapes/entity/humanoid/seraph.json",
+    "side": "client"
+  },
+  {
+    "op": "add",
+    "path": "/animations/-",
+    "value": {
+      "name": "Holding Kino",
+      "code": "astriaporta.holdbothhandskino",
+      "quantityframes": 30,
+      "onActivityStopped": "EaseOut",
+      "onAnimationEnd": "Repeat",
+      "keyframes": [
+        {
+          "frame": 0,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 0.0,
+              "offsetY": -0.4,
+              "offsetZ": 0.4,
+              "rotationX": 6.0,
+              "rotationY": -20.0,
+              "rotationZ": -33.0
+            },
+            "LowerArmR": {
+              "offsetX": 0.4,
+              "offsetY": 0.6,
+              "offsetZ": 0.0,
+              "rotationX": -26.0,
+              "rotationY": 13.0,
+              "rotationZ": -75.0
+            },
+            "UpperArmL": {
+              "offsetX": 0.0,
+              "offsetY": -0.4,
+              "offsetZ": -0.2,
+              "rotationX": -4.0,
+              "rotationY": 20.0,
+              "rotationZ": -33.0
+            },
+            "LowerArmL": {
+              "offsetX": 0.4,
+              "offsetY": 0.6,
+              "offsetZ": 0.0,
+              "rotationX": 30.0,
+              "rotationY": -13.0,
+              "rotationZ": -75.0
+            },
+            "ItemAnchor": {
+              "rotationX": 0.0,
+              "rotationY": 0.0,
+              "rotationZ": 30.0
+            }
+          }
+        }
+      ]
+    },
+    "file": "game:shapes/entity/humanoid/seraph-faceless.json",
+    "side": "client"
+  },
+  {
+    "op": "add",
+    "path": "/animations/-",
+    "value": {
+      "name": "Holding Kino-fp",
+      "code": "astriaporta.holdbothhandskino-fp",
+      "quantityframes": 30,
+      "onActivityStopped": "EaseOut",
+      "onAnimationEnd": "Repeat",
+      "keyframes": [
+        {
+          "frame": 0,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 0.0,
+              "offsetY": -0.4,
+              "offsetZ": 0.4,
+              "rotationX": 6.0,
+              "rotationY": -20.0,
+              "rotationZ": -33.0
+            },
+            "LowerArmR": {
+              "offsetX": 0.4,
+              "offsetY": 0.6,
+              "offsetZ": 0.0,
+              "rotationX": -26.0,
+              "rotationY": 13.0,
+              "rotationZ": -75.0
+            },
+            "UpperArmL": {
+              "offsetX": 0.0,
+              "offsetY": -0.4,
+              "offsetZ": -0.2,
+              "rotationX": -4.0,
+              "rotationY": 20.0,
+              "rotationZ": -33.0
+            },
+            "LowerArmL": {
+              "offsetX": 0.4,
+              "offsetY": 0.6,
+              "offsetZ": 0.0,
+              "rotationX": 30.0,
+              "rotationY": -13.0,
+              "rotationZ": -75.0
+            },
+            "ItemAnchor": {
+              "rotationX": 0.0,
+              "rotationY": 0.0,
+              "rotationZ": 30.0
+            }
+          }
+        }
+      ]
+    },
+    "file": "game:shapes/entity/humanoid/seraph-faceless.json",
+    "side": "client"
+  }
+]

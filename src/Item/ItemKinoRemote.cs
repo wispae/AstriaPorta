@@ -219,19 +219,22 @@ public class ItemKinoRemote : Item, IInputInterceptor
         {
             _closestGateText = Lang.Get("astriaporta:gui-kino-no-gate-detected");
             _kinoGui?.UpdateGateAddress(_closestGateText);
-            _kinoGui?.UpdateLocalGateState(EnumStargateState.Idle, nearestGate.DialingAddress.ToString());
+            _kinoGui?.UpdateLocalGateState(EnumStargateState.Idle, string.Empty);
         }
         else
         {
             _closestGateText = nearestGate.Address.ToString();
             _kinoGui?.UpdateGateAddress(_closestGateText);
-            _kinoGui?.UpdateLocalGateState(nearestGate.State, nearestGate.DialingAddress.ToString());
+            _kinoGui?.UpdateLocalGateState(nearestGate.State, nearestGate.DialingAddress?.ToString());
         }
     }
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
         base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+        if (handling != EnumHandHandling.NotHandled)
+            return;
+
         var stack = slot.Itemstack;
         if (stack == null)
             return;

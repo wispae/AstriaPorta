@@ -52,6 +52,8 @@ namespace AstriaPorta.Config
                     return _minRangeChunksMilkyway;
                 case EnumStargateType.Pegasus:
                     return _minRangeChunksPegasus;
+                case EnumStargateType.Destiny:
+                    return _minRangeChunksDestiny;
                 default:
                     return _minRangeChunksMilkyway;
             }
@@ -65,6 +67,8 @@ namespace AstriaPorta.Config
                     return _maxRangeChunksMilkyway;
                 case EnumStargateType.Pegasus:
                     return _maxRangeChunksPegasus;
+                case EnumStargateType.Destiny:
+                    return _maxRangeChunksDestiny;
                 default:
                     return _maxRangeChunksMilkyway;
             }
@@ -78,6 +82,8 @@ namespace AstriaPorta.Config
                     return _maxConnectionDurationSecondsMilkyway;
                 case EnumStargateType.Pegasus:
                     return _maxConnectionDurationSecondsPegasus;
+                case EnumStargateType.Destiny:
+                    return _maxConnectionDurationSecondsDestiny;
                 default:
                     return _maxConnectionDurationSecondsMilkyway;
             }
@@ -91,6 +97,8 @@ namespace AstriaPorta.Config
                     return _dialSpeedDegreesPerSecondMilkyway;
                 case EnumStargateType.Pegasus:
                     return _dialSpeedDegreesPerSecondPegasus;
+                case EnumStargateType.Destiny:
+                    return _dialSpeedDegreesPerSecondDestiny;
                 default:
                     return _dialSpeedDegreesPerSecondMilkyway;
             }
@@ -142,7 +150,7 @@ namespace AstriaPorta.Config
             get => _minRangeChunksDestiny;
             set
             {
-                if (value < _maxRangeChunksDestiny) value = _maxRangeChunksDestiny - 1;
+                if (value > _maxRangeChunksDestiny) value = _maxRangeChunksDestiny - 1;
                 if (value < 0) value = 0;
                 if (value > 262144) value = 262144;
                 _minRangeChunksDestiny = value;

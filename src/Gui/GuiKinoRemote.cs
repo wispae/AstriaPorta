@@ -476,6 +476,8 @@ public class GuiKinoRemote : GuiDialogGeneric
         if (sl.Count == 0) return false;
 
         _state.Addresses[_state.CurrentAddressBookIndex].Label = sl[0];
+        SingleComposer.GetDynamicText("addressmenu.middleaddress").Text = MiddleAddressDisplay;
+        _addressBookTextDirty = true;
         _kinoItem.OnGuiStateUpdated(_state);
 
         return true;
@@ -511,9 +513,6 @@ public class GuiKinoRemote : GuiDialogGeneric
 
     private void OnAddressBookTextChanged(string s)
     {
-        var dialButton = SingleComposer.GetButton("addressmenu.dialbutton");
-        dialButton.Enabled = AddressUtils.IsValidAddressString(s);
-
         if (!_setCaretToEnd)
             return;
 
