@@ -721,6 +721,7 @@ public class GuiKinoRemote : GuiDialogGeneric
         if (_state.LocalStatus != state)
         {
             _state.LocalStatus = state;
+            Recompose();
         }
     }
 }
