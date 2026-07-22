@@ -55,27 +55,6 @@ namespace AstriaPorta.Content
             dsc.AppendLine($"<i>{baseInfo ?? Lang.Get("astriaporta:astriaporta-no-address-associated")}</i>");
         }
 
-        private byte[] StringAddressToBytes(string s)
-        {
-            s = s.Replace("-", "");
-            string validGlyphs = "0123456789abcdefghijklmnopqrstuvwxyz";
-            byte[] glyphs = new byte[s.Length];
-
-            for (byte i = 0; i < s.Length; i++)
-            {
-                for (byte j = 0; j < validGlyphs.Length; j++)
-                {
-                    if (s[i] == validGlyphs[j])
-                    {
-                        glyphs[i] = j;
-                        break;
-                    }
-                }
-            }
-
-            return glyphs;
-        }
-
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handHandling, ref EnumHandling handling)
         {
             ItemStack currentStack = slot.Itemstack;
@@ -112,7 +91,8 @@ namespace AstriaPorta.Content
                 if (!b && s != string.Empty)
                 {
                     StargateAddress a = new StargateAddress();
-                    a.FromGlyphs(StringAddressToBytes(s), api);
+                    s = AddressUtils.SanitizeAddressString(s);
+                    a.FromGlyphs(AddressUtils.StringAddressToBytes(s), api);
 
                     blockSel.Block.GetBlockEntity<BlockEntityDialHomeDevice>(blockSel)?.DialDhd(a);
                     handHandling = EnumHandHandling.Handled;
