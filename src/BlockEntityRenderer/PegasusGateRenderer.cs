@@ -18,8 +18,6 @@ public class PegasusGateRenderer : GateRenderer
 
     public Matrixf ModelMat = new Matrixf();
 
-    private LoadedTexture _tex;
-
     public bool[] VisibleGlyphs = new bool[GLYPH_COUNT];
     public int[] VisibleGlyphIndices =
     [
@@ -42,7 +40,6 @@ public class PegasusGateRenderer : GateRenderer
     {
         _api = api;
         _pos = pos;
-        _tex = new(_api);
         _rapi = _api.Render;
         _camPos = _api.World.Player.Entity.CameraPos;
 

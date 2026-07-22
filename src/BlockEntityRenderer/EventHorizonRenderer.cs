@@ -14,8 +14,10 @@ namespace AstriaPorta.Content
 	{
 		private ICoreClientAPI api;
 		private BlockPos pos;
-		private MeshRef horizonMeshRef;
+        private Vec4f _horizonColor;
+        private MeshRef horizonMeshRef;
 		private MultiTextureMeshRef horizonMultiMeshRef;
+
 		public bool shouldRender = true;
 		public bool activating = true;
 		public BlockFacing blockFacing = BlockFacing.SOUTH;
@@ -28,11 +30,18 @@ namespace AstriaPorta.Content
 		public Matrixf ModelMat = new Matrixf();
 		private Matrixf precalc;
 
-		public EventHorizonRenderer(ICoreClientAPI api, BlockPos pos, TextureAtlasPosition texPos, bool activating)
+		public EventHorizonRenderer(ICoreClientAPI api, BlockPos pos, TextureAtlasPosition texPos, bool activating, Vec4f horizonColor = null)
 		{
 			this.api = api;
 			this.pos = pos;
 			this.activating = activating;
+
+			if (horizonColor == null)
+			{
+				horizonColor = new Vec4f(0.2f, 0.2f, 0.8f, 0.5f);
+            }
+			_horizonColor = horizonColor;
+
 			// thanks to ImNuts42 for solving the MultiTextureMeshRef problem
 			MeshData mesh = StargateMeshHelper.GenDefaultHorizonMesh(api);
 			horizonMeshRef = api.Render.UploadMesh(mesh);
@@ -102,7 +111,7 @@ namespace AstriaPorta.Content
 			prog.UniformMatrix("projectionMatrix", rpi.CurrentProjectionMatrix);
 			prog.UniformMatrix("modelMatrix", baseModel.Values);
 
-			prog.Uniform("rgbaTint", new Vec4f(0.2f, 0.2f, 0.8f, 0.5f));
+			prog.Uniform("rgbaTint", _horizonColor);
 			prog.Uniform("tIn", t);
 			prog.Uniform("noiseOffset", noiseOffset);
 			prog.Uniform("normalIn", blockFacing.Normalf);

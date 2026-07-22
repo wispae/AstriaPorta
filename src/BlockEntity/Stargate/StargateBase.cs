@@ -10,6 +10,7 @@ using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 namespace AstriaPorta.Content
 {
@@ -21,6 +22,7 @@ namespace AstriaPorta.Content
             InitializeInventory();
         }
 
+        protected CamoMeshEntry[] CamoMicroMeshes = new CamoMeshEntry[5];
         protected IDialHomeDevice ControllingDhd;
         protected GuiDialogStargate GateDialog;
         protected InventoryGeneric inventory;
@@ -60,7 +62,8 @@ namespace AstriaPorta.Content
         {
             EnumStargateType.Milkyway => 39,
             EnumStargateType.Pegasus => 36,
-            EnumStargateType.Destiny => 36,
+            // We need to account for the 9 empty glyph locations in the destiny gate
+            EnumStargateType.Destiny => 45,
             _ => 36
         };
 
@@ -526,7 +529,42 @@ namespace AstriaPorta.Content
 
         protected void OnCamoSlotModified(int slotId)
         {
+            UpdateCamoMicroMesh(slotId);
             MarkDirty(true);
+        }
+
+        private void UpdateCamoMicroMesh(int slotId)
+        {
+            var stack = Inventory[slotId]?.Itemstack;
+
+            if (stack == null || !stack.Attributes.HasAttribute("meshId"))
+            {
+                if (CamoMicroMeshes[slotId] != null)
+                    CamoMicroMeshes[slotId].Mesh?.Dispose();
+
+                CamoMicroMeshes[slotId] = null;
+                return;
+            }
+
+            var meshId = stack.Attributes.GetLong("meshId");
+            if (CamoMicroMeshes[slotId] == null || CamoMicroMeshes[slotId].MeshId != meshId)
+            {
+                var blockIds = BlockEntityMicroBlock.MaterialIdsFromAttributes(stack.Attributes, Api.World);
+                var decorIds = (stack.Attributes["decorIds"] as IntArrayAttribute)?.value;
+                var decorRotations = stack.Attributes.GetInt("decorRot", 0);
+
+                var voxelCuboids = new List<uint>(BlockEntityMicroBlock.GetVoxelCuboids(stack.Attributes));
+                var originalCuboids = new uint[] { BlockEntityMicroBlock.ToUint(0, 0, 0, 16, 16, 16, 0) };
+
+                var mesh = BlockEntityMicroBlock.CreateMesh(Api as ICoreClientAPI, voxelCuboids, blockIds, decorIds, decorRotations, originalCuboids, Pos);
+                CamoMicroMeshes[slotId] = new()
+                {
+                    Mesh = mesh,
+                    MeshId = meshId
+                };
+            }
+
+            return;
         }
 
         protected void OnInventoryChanged(int slotId)
@@ -632,6 +670,7 @@ namespace AstriaPorta.Content
 
             float offsetY;
 
+            MeshData mesh = null;
             for (int i = 0; i < inventory.Count; i++)
             {
                 offsetY = (i == 0 || i == Inventory.Count - 1) ? 1 : 0;
@@ -639,12 +678,25 @@ namespace AstriaPorta.Content
 
                 if (!slot.Empty && slot.Itemstack.Block != null)
                 {
-                    MeshData mesh = capi.TesselatorManager.GetDefaultBlockMesh(
-                        slot.Itemstack.Block).Clone()
-                        .Translate(((i - 2) * camoDirection).Add(0, offsetY, 0));
+                    if (slot.Itemstack.Attributes.HasAttribute("meshId"))
+                        UpdateCamoMicroMesh(i);
 
+                    if (CamoMicroMeshes[i] != null)
+                    {
+                        mesh = CamoMicroMeshes[i].Mesh;
+                    }
+                    else
+                    {
+                        mesh = capi.TesselatorManager.GetDefaultBlockMesh(slot.Itemstack.Block);
+                    }
+                }
+
+                if (mesh != null)
+                {
+                    mesh = mesh.Clone().Translate(((i - 2) * camoDirection).Add(0, offsetY, 0));
                     mesher.AddMeshData(mesh);
                 }
+                mesh = null;
             }
 
             return base.OnTesselation(mesher, tessThreadTesselator);

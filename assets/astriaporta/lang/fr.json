@@ -60,6 +60,8 @@
   "itemdesc-coordinatecartouche-*": "Une tablette de pierre avec une étrange séquence de symboles",
   "itemhelp-cartouche-generate": "<hk>rightmouse</hk> : générer l'adresse",
 
+  "item-kinoremote": "Kino Remote",
+
   "item-debugtablet": "Tablette de débogage de porte",
   "debugtabletmodename-showgateiris": "Afficher l'iris de la porte",
   "debugtabletmodename-showgatevortex": "Afficher le vortex de la porte",
@@ -87,7 +89,7 @@
   "astriaporta-cartouche-unlinked": "Adresse non générée",
   "astriaporta-cartouche-generating": "Recherche de porte des étoiles...",
   "astriaporta-no-address-associated": "Aucune adresse trouvée",
-  "astriaporta-dhd-no-gate-linked": "Aucune porte li�e",
+  "astriaporta-dhd-no-gate-linked": "Aucune porte liée",
   "astriaporta-cartouche-failed": "Échec de la localisation de la porte",
 
   "blockhelp-dhd-notedial": "Composer l'adresse de la note",
@@ -99,5 +101,21 @@
 
   "stargate-gui-quickdialtoggletext": "Utiliser la composition rapide",
 
-  "DhdGuiTitleText": "Dispositif de commande (DHD)"
+  "DhdGuiTitleText": "Dispositif de commande (DHD)",
+
+  "heldhelp-kino": "Fermer: clic droit | Naviguer: défilement | Interagir: clic gauche",
+
+  "gui-kino-no-gate-detected": "< aucune porte détectée >",
+  "gui-kino-gate-status-idle": "INACTIF",
+  "gui-kino-gate-status-dialing": "NUMÉROTATION",
+  "gui-kino-gate-status-connected": "CONNECTÉ",
+  "gui-kino-label-empty": "< vide >",
+  "gui-kino-label-empty-index": "< {0}. vide >",
+  "gui-kino-button-dial": "COMPOSER",
+  "gui-kino-button-disconnect": "ARRÊT",
+  "gui-kino-button-addresses": "Adresses",
+  "gui-kino-button-status": "Statut",
+  "gui-kino-button-copy": "COPIER",
+  "gui-kino-placeholder-address": "Addresse...",
+  "gui-kino-placeholder-description": "Description..."
 }

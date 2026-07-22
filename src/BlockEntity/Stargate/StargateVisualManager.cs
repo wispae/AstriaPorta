@@ -2,7 +2,10 @@
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
+using Vintagestory.Client.NoObf;
 using Vintagestory.GameContent;
+
+#nullable enable
 
 namespace AstriaPorta.Content;
 
@@ -27,8 +30,12 @@ public abstract class StargateVisualManager
     protected LightiningPointLight EventHorizonLight;
     protected bool HorizonLightAdded = false;
 
-    public BlockEntityAnimationUtil AnimUtil => Gate.GetBehavior<BEBehaviorAnimatable>().animUtil;
+    public BlockEntityAnimationUtil? AnimUtil => Gate.GetBehavior<BEBehaviorAnimatable>()?.animUtil;
 
+    /// <summary>
+    /// Initializes and registers the main gate renderer. Should also call the
+    /// event horizon renderer initializer
+    /// </summary>
     public abstract void Initialize();
 
     /// <summary>
@@ -68,6 +75,8 @@ public abstract class StargateVisualManager
             HorizonRendererRegistered = true;
         }
 
+        var clientMain = (Capi.World as ClientMain);
+
         if (!HorizonLightAdded)
         {
             Capi.Render.AddPointLight(EventHorizonLight);
@@ -85,6 +94,8 @@ public abstract class StargateVisualManager
         if (GateRenderer == null) return;
 
         GateRenderer.chevronGlow[8] = 200;
+        if (AnimUtil == null)
+            return;
 
         AnimationMetaData metaData = new()
         {
@@ -152,7 +163,7 @@ public abstract class StargateVisualManager
     /// Initializes the event horizon renderer. Registers the renderer
     /// if the gate is connected
     /// </summary>
-    protected void InitializeHorizonRenderer()
+    protected virtual void InitializeHorizonRenderer()
     {
         if (HorizonRendererInitialized) return;
 
@@ -175,7 +186,7 @@ public abstract class StargateVisualManager
         if (EventHorizonRenderer != null && !HorizonRendererRegistered)
         {
             ActivateHorizon();
-            UpdateChevronGlow(activeChevrons);
+            UpdateChevronGlow(activeChevrons, true);
             UpdateRendererState(currentAngle);
         }
     }
@@ -187,15 +198,17 @@ public abstract class StargateVisualManager
     /// active chevrons and the length of the address being dialed
     /// </summary>
     /// <param name="activeChevrons"></param>
-    public void UpdateChevronGlow(int activeChevrons)
+    public void UpdateChevronGlow(int activeChevrons, bool activeDialingState)
     {
+        activeDialingState = activeDialingState || activeChevrons > 0;
+
         if (Gate.DialingAddress == null)
         {
-            UpdateChevronGlow(activeChevrons, EnumAddressLength.Short);
+            UpdateChevronGlow(activeChevrons, EnumAddressLength.Short, activeDialingState);
         }
         else
         {
-            UpdateChevronGlow(activeChevrons, Gate.DialingAddress.AddressLength);
+            UpdateChevronGlow(activeChevrons, Gate.DialingAddress.AddressLength, activeDialingState);
         }
     }
 
@@ -205,7 +218,7 @@ public abstract class StargateVisualManager
     /// </summary>
     /// <param name="activeChevrons"></param>
     /// <param name="length"></param>
-    protected virtual void UpdateChevronGlow(int activeChevrons, EnumAddressLength length)
+    protected virtual void UpdateChevronGlow(int activeChevrons, EnumAddressLength length, bool activeDialingState = false)
     {
         if (GateRenderer == null) return;
 

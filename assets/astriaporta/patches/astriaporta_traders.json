@@ -22,6 +22,25 @@
     "op": "add",
     "path": "/selling/list/-",
     "value": {
+      "code": "astriaporta:kinoremote",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 0.7,
+        "var": 0.5
+      },
+      "price": {
+        "avg": 25,
+        "var": 3
+      }
+    },
+    "file": "game:config/tradelists/trader-treasurehunter",
+    "side": "server"
+  },
+  {
+    "op": "add",
+    "path": "/selling/list/-",
+    "value": {
       "code": "astriaporta:sgcgatedisplay-north",
       "type": "block",
       "stacksize": 1,

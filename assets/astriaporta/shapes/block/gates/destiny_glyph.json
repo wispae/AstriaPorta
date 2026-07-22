@@ -1,0 +1,23 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"glyph_sheet": "glyph_sheet"
+	},
+	"elements": [
+		{
+			"name": "overlay_1",
+			"from": [ 6.7852, 48.8734, 8.8999 ],
+			"to": [ 8.7852, 54.705, 8.9999 ],
+			"rotationOrigin": [ 8.0052, 8.0, 8.0999 ],
+			"faces": {
+				"south": { "texture": "#glyph_sheet", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "autoUv": false, "windMode": [-1,-1,-1,-1], "windData": [5,5,6,6] }
+			}
+		}
+	]}

@@ -1,0 +1,25 @@
+[
+  {
+    "op": "add",
+    "path": "/client/animations/-",
+    "value": {
+      "code": "astriaporta.holdbothhandskino",
+      "animation": "astriaporta.holdbothhandskino",
+      "blendMode": "Add",
+      "elementWeight": {
+        "UpperArmR": 20,
+        "LowerArmR": 20,
+        "UpperArmL": 20,
+        "LowerArmL": 20
+      },
+      "elementBlendMode": {
+        "UpperArmR": "AddAverage",
+        "LowerArmR": "AddAverage",
+        "UpperArmL": "AddAverage",
+        "LowerArmL": "AddAverage"
+      }
+    },
+    "file": "game:entities/humanoid/player",
+    "side": "server"
+  }
+]

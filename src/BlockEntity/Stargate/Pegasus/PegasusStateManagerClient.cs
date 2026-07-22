@@ -91,7 +91,7 @@ public class PegasusStateManagerClient : StargateStateManagerClient
 
         if (CurrentDialSpeed == EnumDialSpeed.Slow)
         {
-            Gate.VisualManager.UpdateChevronGlow(ActiveChevrons + 1);
+            Gate.VisualManager.UpdateChevronGlow(ActiveChevrons + 1, true);
         }
         Gate.VisualManager.DeactivateLockChevron();
     }
@@ -139,7 +139,7 @@ public class PegasusStateManagerClient : StargateStateManagerClient
         Gate.SoundManager.Play(EnumGateSoundLocation.Lock);
 
         Gate.VisualManager.ActivateLockChevron();
-        Gate.VisualManager.UpdateChevronGlow(ActiveChevrons + 1);
+        Gate.VisualManager.UpdateChevronGlow(ActiveChevrons + 1, true);
         Gate.RegisterDelayedCallback((t) =>
         {
             Gate.SoundManager.Play(EnumGateSoundLocation.Release);

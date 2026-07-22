@@ -1,0 +1,70 @@
+{
+  "code": "kinoremote",
+  "class": "AstriaPorta.ItemKinoRemote",
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": { "layout": "SingleCenter" }
+    }
+  ],
+  "maxstacksize": 1,
+  "creativeinventory": {
+    "general": [ "*" ],
+    "astriaporta": [ "*" ]
+  },
+  "attributes": {
+    "displaycaseable": true,
+    "onDisplayTransform": {
+      "translation": {
+        "x": 0,
+        "y": -0.17,
+        "z": 0.05
+      },
+      "scale": 0.65
+    },
+    "groundStorageTransform": {
+      "rotation": {
+        "x": 0,
+        "y": 45,
+        "z": 0
+      }
+    }
+  },
+  "shape": {
+    "base": "item/utility/kinoremote",
+    "ignoreElements": [
+      "gui"
+    ]
+  },
+  "textures": {
+    "molybdochalkos1": { "base": "game:block/metal/sheet/molybdochalkos1" }
+  },
+  "HeldRightReadyAnimation": "astriaporta.holdbothhandskino",
+  "HeldRightTpIdleAnimation": "astriaporta.holdbothhandskino",
+  "tpHandTransform": {
+    "translation": {
+      "x": -0.7,
+      "y": -0.1,
+      "z": 1
+    },
+    "rotation": {
+      "x": 0,
+      "y": -82,
+      "z": 7
+    },
+    "origin": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 0.8
+  },
+  "guiTransform": {
+    "rotation": {
+      "x": 90,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 1.5
+  }
+}

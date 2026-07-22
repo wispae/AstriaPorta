@@ -23,6 +23,10 @@
       "cobbleskull-granite": "cobbleskull-{rock}",
       "cobblestoneslab-granite-up-free": "cobblestoneslab-{rock}-up-free",
       "loosestones-granite-free": "loosestones-{rock}-free",
+      "cobblestonefan-granite-north": "cobblestonefan-{rock}-north",
+      "cobblestonefan-granite-east": "cobblestonefan-{rock}-east",
+      "cobblestonefan-granite-south": "cobblestonefan-{rock}-south",
+      "cobblestonefan-granite-west": "cobblestonefan-{rock}-west",
       "cobblestoneslab-granite-east-free": "cobblestoneslab-{rock}-east-free",
       "cobblestoneslab-granite-south-free": "cobblestoneslab-{rock}-south-free",
       "looseflints-granite-free": "looseflints-{rock}-free",
@@ -95,6 +99,25 @@
     },
     "file": "game:worldgen/structures.json",
     "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "surfacedestiny",
+      "group": "stargatesurface",
+      "minGroupDistance": 600,
+      "chance": 10,
+      "placement": "surface",
+      "schematics": [
+        "astriaporta:surface/gates/destiny/*"
+      ],
+      "suppressTrees": true,
+      "postPass": true,
+      "rockTypeRemapGroup": "astriaportastandard"
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "server"
   },
   {
     "op": "add",
@@ -188,6 +211,25 @@
     },
     "file": "game:worldgen/structures.json",
     "side": "Server"
+  },
+  {
+    "op": "add",
+    "path": "/structures/-",
+    "value": {
+      "code": "ruindestinyrare",
+      "group": "destinyruinsurface",
+      "minGroupDistance": 1000,
+      "chance": 0.3,
+      "placement": "surfaceruin",
+      "offsetY": -6,
+      "schematics": [
+        "astriaporta:surface/destiny/surfaceruindestiny-1"
+      ],
+      "rockTypeRemapGroup": "astriaportastandard",
+      "postPass": true
+    },
+    "file": "game:worldgen/structures.json",
+    "side": "server"
   },
   {
     "op": "add",
