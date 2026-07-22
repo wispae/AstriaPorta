@@ -256,16 +256,19 @@ public class ItemKinoRemote : Item, IInputInterceptor
                 var closestGate = GateUtils.FindClosestGate(_capi.World.BlockAccessor, byEntity.Pos.AsBlockPos, _gateSearchArea);
                 if (closestGate != null)
                 {
-                    _kinoGui.UpdateGateAddress(closestGate?.Address.ToString() ?? string.Empty);
+                    _kinoGui.UpdateGateAddress(closestGate.Address.ToString() ?? string.Empty);
+                    _kinoGui.UpdateLocalGateState(closestGate.State, closestGate.DialingAddress?.ToString() ?? string.Empty);
                     _closestGateText = closestGate?.Address.ToString() ?? string.Empty;
                 } else
                 {
                     _kinoGui.UpdateGateAddress(Lang.Get("astriaporta:gui-kino-no-gate-detected"));
+                    _kinoGui.UpdateLocalGateState(EnumStargateState.Idle, string.Empty);
                     _closestGateText = Lang.Get("astriaporta:gui-kino-no-gate-detected");
                 }
                 UpdateStateFromAttributes(stack);
                 _kinoGui.TryOpen();
                 _guiStale = true;
+                _lastCheckTime = _capi.ElapsedMilliseconds - 2990;
 
                 OnGuiTabChanged(_kinoGui.State.CurrentTabIndex);
             }
