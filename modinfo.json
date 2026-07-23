@@ -6,8 +6,8 @@
     "Nanotect"
   ],
   "description": "Use ancient artifacts of a long lost race to explore distant lands",
-  "networkVersion": "0.2.0",
-  "version": "0.2.0",
+  "networkVersion": "0.2.1",
+  "version": "0.2.1",
   "dependencies": {
   },
   "requiredOnClient": true,
