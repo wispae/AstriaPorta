@@ -103,7 +103,7 @@
 
   "DhdGuiTitleText": "Dispositif de commande (DHD)",
 
-  "heldhelp-kino": "Fermer: clic droit | Naviguer: défilement | Interagir: clic gauche",
+  "heldhelp-kino": "Fermer: clic droit | Naviguer: défilement | Interagir: clic gauche | Retour:  touche Échap",
 
   "gui-kino-no-gate-detected": "< aucune porte détectée >",
   "gui-kino-gate-status-idle": "INACTIF",

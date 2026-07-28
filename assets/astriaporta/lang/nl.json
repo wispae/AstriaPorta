@@ -101,7 +101,7 @@
 
   "DhdGuiTitleText": "Dial Home Device",
 
-  "heldhelp-kino": "Sluiten: rechtermuisknop | Navigeren: scroll | Interactie: linkermuisknop",
+  "heldhelp-kino": "Sluiten: rechtermuisknop | Navigeren: scroll | Interactie: linkermuisknop | Terug: Escape",
 
   "gui-kino-no-gate-detected": "< geen gate getecteerd >",
   "gui-kino-gate-status-idle": "INACTIEF",

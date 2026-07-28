@@ -101,7 +101,7 @@
 
   "DhdGuiTitleText": "Dial Home Device",
 
-  "heldhelp-kino": "Close: rightmouse | Navigate: scroll | Interact: leftmouse",
+  "heldhelp-kino": "Close: rightmouse | Navigate: scroll | Interact: leftmouse | Back: Escape",
 
   "gui-kino-no-gate-detected": "< no gate detected >",
   "gui-kino-gate-status-idle": "IDLE",

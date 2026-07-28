@@ -17,10 +17,6 @@ public static class AddressUtils
             return string.Empty;
 
         int length = sanitized.Length;
-        while (length > 0 && sanitized[length - 1] == '0')
-        {
-            length--;
-        }
 
         if (length == 0)
             return string.Empty;
@@ -46,10 +42,6 @@ public static class AddressUtils
             return string.Empty;
 
         int length = glyphs.Length;
-        while (length > 0 && glyphs[length - 1] == 0)
-        {
-            length--;
-        }
 
         if (length == 0)
             return string.Empty;
@@ -102,9 +94,9 @@ public static class AddressUtils
             if (ValidGlyphsLowercase.Contains(s2[i])) output += s2[i];
         }
 
-        if (s2.Length > 9)
+        if (output.Length > 9)
         {
-            s2 = s2.Substring(0, 9);
+            output = output.Substring(0, 9);
         }
 
         return output;
