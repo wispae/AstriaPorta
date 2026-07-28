@@ -508,6 +508,12 @@ namespace AstriaPorta.Content
         {
             base.OnBlockBroken(byPlayer);
 
+            if (GateDialog != null)
+            {
+                GateDialog?.TryClose();
+                GateDialog?.Dispose();
+            }
+
             DestroyGate();
         }
 

@@ -15,7 +15,8 @@ namespace AstriaPorta.Gui;
 
 public class KinoRemoteState
 {
-    public string LocalGateAddress = string.Empty;
+    public IStargateAddress? LocalGateAddress = null;
+    public string LocalGateAddressString = string.Empty;
     public string RemoteGateAddress = string.Empty;
     public string InputGateAddress = string.Empty;
     public string LocalStatusString = string.Empty;
@@ -322,8 +323,10 @@ public class GuiKinoRemote : GuiDialogGeneric
 
     private bool OnClickCopy()
     {
-        // todo: verify it's a valid stargate address before doing this
-        var cleanAddress = _detectedGateAddress.Replace("-", string.Empty).Replace(" ", string.Empty);
+        var cleanAddress = string.Empty;
+        if (_state.LocalGateAddress != null)
+            cleanAddress = _state.LocalGateAddress.ToString();
+
         SingleComposer.GetPhysicalTextInput("addressmenu.addressinput").SetValue(cleanAddress);
 
         return true;
@@ -671,14 +674,23 @@ public class GuiKinoRemote : GuiDialogGeneric
         _addressBookTextDirty = true;
     }
 
-    public void UpdateGateAddress(string displayAddress)
+    public void UpdateGateAddress(IStargateAddress? address)
     {
-        _detectedGateAddress = displayAddress;
+        _state.LocalGateAddress = address;
+        if (address == null)
+        {
+            _detectedGateAddress = Lang.Get("astriaporta:gui-kino-no-gate-detected");
+        }
+        else
+        {
+            _detectedGateAddress = address.ToString();
+        }
+        _state.LocalGateAddressString = _detectedGateAddress;
+
         if (_state.CurrentTabIndex != 0)
             return;
         var gateAddressElement = SingleComposer.GetDynamicText("mainmenu.localaddress");
-        _state.LocalGateAddress = displayAddress;
-        gateAddressElement.Text = displayAddress;
+        gateAddressElement.Text = _detectedGateAddress;
         gateAddressElement.RecomposeText(true);
     }
 
