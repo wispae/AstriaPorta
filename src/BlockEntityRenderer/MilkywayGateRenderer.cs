@@ -31,7 +31,8 @@ namespace AstriaPorta.Content
 			ringMeshRef = api.Render.UploadMultiTextureMesh(StargateMeshHelper.GenRingMesh(api, "milkyway"));
 
 			glyphAngle = 360f / glyphCount;
-			glowColor = new Vec4f(255, 102, 0, 0);
+			// glowColor = new Vec4f(255, 102, 0, 0);
+			glowColor = new Vec4f(1f, 0.4f, 0, 0);
 
 			AssetLocation loc = new AssetLocation("astriaporta", "block/gates/milkyway_sheet");
 			api.Render.GetOrLoadTexture(loc, ref tex);
@@ -61,6 +62,7 @@ namespace AstriaPorta.Content
 			prog.ViewMatrix = rpi.CameraMatrixOriginf;
 			prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
 			prog.RgbaGlowIn = glowColor;
+			prog.TempGlowMode = 0;
 
             // TODO: refactor to use instanced rendering???
             for (int i = 1; i <= 9; i++)

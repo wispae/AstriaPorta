@@ -43,7 +43,8 @@ public class DestinyGateRenderer : GateRenderer
         UpdateGateMesh();
 
         glyphAngle = 360f / glyphCount;
-        glowColor = new Vec4f(200, 200, 200, 128);
+        //glowColor = new Vec4f(0.784f, 0.784f, 0.784f, 0.5f);
+        glowColor = new Vec4f(0, 0, 0, 0);
     }
 
     public void UpdateGateMesh()
@@ -83,6 +84,9 @@ public class DestinyGateRenderer : GateRenderer
 
         prog.ViewMatrix = rpi.CameraMatrixOriginf;
         prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
+        prog.TempGlowMode = 0;
+        prog.ExtraGlow = 0;
+        prog.RgbaGlowIn = glowColor;
         // prog.RgbaGlowIn = glowColor;
 
         prog.ModelMatrix = ModelMat.Identity()
