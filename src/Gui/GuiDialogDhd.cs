@@ -10,10 +10,11 @@ namespace AstriaPorta.Gui
 {
 	public class GuiDialogDhd : GuiDialogGeneric
 	{
-		private GuiElementTextInput addressInputElement;
-		private GuiElementDynamicText connectedGateElement;
-		private GuiElementTextButton dialbutton;
-		private bool isDialing = false;
+		private GuiElementTextInput _addressInputElement;
+		private GuiElementDynamicText _connectedGateElement;
+		private GuiElementTextButton _dialbutton;
+		private bool _isDialing = false;
+		private bool _setCaretToEnd = false;
 
 		public BlockPos bePosition;
 
@@ -23,7 +24,7 @@ namespace AstriaPorta.Gui
 		public GuiDialogDhd(string dialogTitle, ICoreClientAPI capi, BlockEntityDialHomeDevice owner, bool isDialing) : base(dialogTitle, capi)
 		{
 			bePosition = owner.Pos.Copy();
-			this.isDialing = isDialing;
+			this._isDialing = isDialing;
 
 			ElementBounds line = ElementBounds.Fixed(0, 0, 150, 20);
 			ElementBounds input = ElementBounds.Fixed(0, 20, 150, 25);
@@ -49,9 +50,10 @@ namespace AstriaPorta.Gui
 				.EndChildElements()
 				.Compose();
 
-			addressInputElement = SingleComposer.GetTextInput("addressInput");
-			addressInputElement.OnTryTextChangeText = OnTryChangeAddressText;
-			connectedGateElement = SingleComposer.GetDynamicText("linkedGate");
+			_addressInputElement = SingleComposer.GetTextInput("addressInput");
+			_addressInputElement.OnTryTextChangeText = OnTryChangeAddressText;
+			_addressInputElement.OnTextChanged = OnAddressTextChanged;
+			_connectedGateElement = SingleComposer.GetDynamicText("linkedGate");
 		}
 
 		public override void OnGuiOpened()
@@ -80,8 +82,15 @@ namespace AstriaPorta.Gui
 			if (sl.Count == 0) return false;
 
 			string s = sl[0];
-			s = AddressUtils.SanitizeAddressString(s);
-			addressInputElement.Text = s;
+			s = AddressUtils.FormatAddressString(s);
+
+			int lengthDelta = s.Length - _addressInputElement.Text.Length;
+			_addressInputElement.Text = s;
+
+			if (lengthDelta > 1)
+			{
+				_setCaretToEnd = true;
+			}
 
 			sl.Clear();
 			sl.Add(s);
@@ -89,9 +98,18 @@ namespace AstriaPorta.Gui
 			return true;
 		}
 
+		private void OnAddressTextChanged(string s)
+		{
+			if (!_setCaretToEnd)
+				return;
+
+			_addressInputElement.SetCaretPos(s.Length);
+			_setCaretToEnd = false;
+		}
+
 		private bool OnClickConnect()
 		{
-			string s = AddressUtils.SanitizeAddressString(addressInputElement.Text);
+			string s = AddressUtils.SanitizeAddressString(_addressInputElement.Text);
 			if (s.Length < 7) return false;
 
 			StargateAddress a = new StargateAddress();
@@ -127,7 +145,7 @@ namespace AstriaPorta.Gui
 			dhd = capi.World.BlockAccessor.GetBlockEntity<BlockEntityDialHomeDevice>(bePosition);
 			if (dhd != null && dhd is BlockEntityDialHomeDevice)
 			{
-				connectedGateElement.SetNewText(dhd.CoupleDhd());
+				_connectedGateElement.SetNewText(dhd.CoupleDhd());
 			}
 
 			return true;
@@ -135,7 +153,7 @@ namespace AstriaPorta.Gui
 
 		private bool OnClickGateControlButton()
 		{
-			if (isDialing)
+			if (_isDialing)
 			{
 				return OnClickDisconnect();
 			}

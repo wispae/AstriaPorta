@@ -47,7 +47,8 @@ public class PegasusGateRenderer : GateRenderer
         _glyphMeshRefs = new MultiTextureMeshRef[GLYPH_COUNT];
 
         glyphAngle = 360f / glyphCount;
-        glowColor = new Vec4f(0, 128, 255, 0);
+        // glowColor = new Vec4f(0, 128, 255, 0);
+        glowColor = new Vec4f(0, 0.5f, 1f, 0);
 
         UpdateVisibleGlyphs();
     }
@@ -85,6 +86,7 @@ public class PegasusGateRenderer : GateRenderer
         prog.ProjectionMatrix = _rapi.CurrentProjectionMatrix;
         prog.RgbaGlowIn = glowColor;
         prog.ExtraGlow = 64;
+        prog.TempGlowMode = 0;
 
         // Chevrons
         for (var i = 1; i <= 9; i++)
